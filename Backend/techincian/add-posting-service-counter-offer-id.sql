@@ -5,6 +5,5 @@ ALTER TABLE tech_counter_offers ADD COLUMN posting_service_counter_offer_id BIGI
 CREATE INDEX idx_posting_service_counter_offer_id ON tech_counter_offers(posting_service_counter_offer_id);
 
 -- Drop legacy unique constraint that blocked multiple REJECTED records per post/technician
--- MySQL: unique index names are used for constraints; drop if present
--- Note: IF EXISTS supported in MySQL 8.0.13+
-ALTER TABLE tech_counter_offers DROP INDEX IF EXISTS unique_active_counter_offer;
+-- PostgreSQL: drop index by name if exists
+DROP INDEX IF EXISTS unique_active_counter_offer;

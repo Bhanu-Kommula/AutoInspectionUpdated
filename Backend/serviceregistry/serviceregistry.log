@@ -12,15 +12,13 @@
 [INFO] Copying 0 resource from src/main/resources to target/classes
 [INFO] 
 [INFO] --- compiler:3.14.0:compile (default-compile) @ serviceregistry ---
-[INFO] Recompiling the module because of changed source code.
-[INFO] Compiling 1 source file with javac [debug parameters release 17] to target/classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO] 
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ serviceregistry ---
 [INFO] skip non existing resourceDirectory /Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/serviceregistry/src/test/resources
 [INFO] 
 [INFO] --- compiler:3.14.0:testCompile (default-testCompile) @ serviceregistry ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 1 source file with javac [debug parameters release 17] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO] 
 [INFO] <<< spring-boot:3.5.3:run (default-cli) < test-compile @ serviceregistry <<<
 [INFO] 
@@ -37,48 +35,48 @@
 
  :: Spring Boot ::                (v3.5.3)
 
-2025-08-18T10:06:53.302-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] c.a.s.ServiceregistryApplication         : Starting ServiceregistryApplication using Java 17.0.16 with PID 61126 (/Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/serviceregistry/target/classes started by bhanuprasadkommula in /Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/serviceregistry)
-2025-08-18T10:06:53.304-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] c.a.s.ServiceregistryApplication         : No active profile set, falling back to 1 default profile: "default"
-2025-08-18T10:06:53.327-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-08-18T10:06:53.327-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-08-18T10:06:53.838-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=62f5d2e0-0f69-334c-87ff-ad1f7a08d10d
-2025-08-18T10:06:54.050-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8761 (http)
-2025-08-18T10:06:54.060-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-08-18T10:06:54.060-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
-2025-08-18T10:06:54.085-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-08-18T10:06:54.085-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 758 ms
-2025-08-18T10:06:54.541-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
-2025-08-18T10:06:54.542-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
-2025-08-18T10:06:54.618-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
-2025-08-18T10:06:54.618-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
-2025-08-18T10:06:54.699-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
-2025-08-18T10:06:55.004-05:00  WARN 61126 --- [serviceregistry] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
-2025-08-18T10:06:55.030-05:00  WARN 61126 --- [serviceregistry] [  restartedMain] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-2025-08-18T10:06:55.036-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
-2025-08-18T10:06:55.047-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
-2025-08-18T10:06:55.047-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Client configured to neither register nor query for data.
-2025-08-18T10:06:55.048-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1755529615047 with initial instances count: 0
-2025-08-18T10:06:55.068-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] c.n.eureka.DefaultEurekaServerContext    : Initializing ...
-2025-08-18T10:06:55.069-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] c.n.eureka.cluster.PeerEurekaNodes       : Adding new peer nodes [http://localhost:8761/eureka/]
-2025-08-18T10:06:55.136-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
-2025-08-18T10:06:55.136-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
-2025-08-18T10:06:55.136-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
-2025-08-18T10:06:55.136-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
-2025-08-18T10:06:55.162-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] c.n.eureka.cluster.PeerEurekaNodes       : Replica node URL:  http://localhost:8761/eureka/
-2025-08-18T10:06:55.167-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] c.n.e.registry.AbstractInstanceRegistry  : Finished initializing remote region registries. All known remote regions: []
-2025-08-18T10:06:55.167-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] c.n.eureka.DefaultEurekaServerContext    : Initialized
-2025-08-18T10:06:55.171-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2025-08-18T10:06:55.196-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application SERVICEREGISTRY with eureka with status UP
-2025-08-18T10:06:55.200-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application SERVICEREGISTRY with eureka with status DOWN
-2025-08-18T10:06:55.200-05:00  WARN 61126 --- [serviceregistry] [  restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
-2025-08-18T10:06:55.201-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] c.n.eureka.DefaultEurekaServerContext    : Shutting down ...
-2025-08-18T10:06:55.202-05:00  INFO 61126 --- [serviceregistry] [      Thread-13] o.s.c.n.e.server.EurekaServerBootstrap   : isAws returned false
-2025-08-18T10:06:55.202-05:00  INFO 61126 --- [serviceregistry] [      Thread-13] o.s.c.n.e.server.EurekaServerBootstrap   : Initialized server context
-2025-08-18T10:06:55.202-05:00  INFO 61126 --- [serviceregistry] [      Thread-13] c.n.e.r.PeerAwareInstanceRegistryImpl    : Got 1 instances from neighboring DS node
-2025-08-18T10:06:55.202-05:00  INFO 61126 --- [serviceregistry] [      Thread-13] c.n.e.r.PeerAwareInstanceRegistryImpl    : Renew threshold is: 1
-2025-08-18T10:06:55.202-05:00  INFO 61126 --- [serviceregistry] [      Thread-13] c.n.e.r.PeerAwareInstanceRegistryImpl    : Changing status to UP
-2025-08-18T10:06:55.202-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] c.n.eureka.DefaultEurekaServerContext    : Shut down
-2025-08-18T10:06:55.202-05:00 ERROR 61126 --- [serviceregistry] [      Thread-13] o.s.c.n.e.server.EurekaServerBootstrap   : Cannot bootstrap eureka server :
+2025-08-18T15:39:53.797-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] c.a.s.ServiceregistryApplication         : Starting ServiceregistryApplication using Java 17.0.16 with PID 38813 (/Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/serviceregistry/target/classes started by bhanuprasadkommula in /Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/serviceregistry)
+2025-08-18T15:39:53.799-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] c.a.s.ServiceregistryApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-08-18T15:39:53.820-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-18T15:39:53.820-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-18T15:39:54.297-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=62f5d2e0-0f69-334c-87ff-ad1f7a08d10d
+2025-08-18T15:39:54.500-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8761 (http)
+2025-08-18T15:39:54.508-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-18T15:39:54.508-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-08-18T15:39:54.530-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-18T15:39:54.531-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 710 ms
+2025-08-18T15:39:54.960-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2025-08-18T15:39:54.961-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2025-08-18T15:39:55.034-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2025-08-18T15:39:55.034-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2025-08-18T15:39:55.107-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-08-18T15:39:55.394-05:00  WARN 38813 --- [serviceregistry] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2025-08-18T15:39:55.418-05:00  WARN 38813 --- [serviceregistry] [  restartedMain] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2025-08-18T15:39:55.425-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2025-08-18T15:39:55.434-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2025-08-18T15:39:55.434-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Client configured to neither register nor query for data.
+2025-08-18T15:39:55.435-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1755549595434 with initial instances count: 0
+2025-08-18T15:39:55.454-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] c.n.eureka.DefaultEurekaServerContext    : Initializing ...
+2025-08-18T15:39:55.455-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] c.n.eureka.cluster.PeerEurekaNodes       : Adding new peer nodes [http://localhost:8761/eureka/]
+2025-08-18T15:39:55.514-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2025-08-18T15:39:55.514-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2025-08-18T15:39:55.514-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2025-08-18T15:39:55.514-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2025-08-18T15:39:55.533-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] c.n.eureka.cluster.PeerEurekaNodes       : Replica node URL:  http://localhost:8761/eureka/
+2025-08-18T15:39:55.537-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] c.n.e.registry.AbstractInstanceRegistry  : Finished initializing remote region registries. All known remote regions: []
+2025-08-18T15:39:55.538-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] c.n.eureka.DefaultEurekaServerContext    : Initialized
+2025-08-18T15:39:55.541-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2025-08-18T15:39:55.565-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application SERVICEREGISTRY with eureka with status UP
+2025-08-18T15:39:55.568-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application SERVICEREGISTRY with eureka with status DOWN
+2025-08-18T15:39:55.568-05:00  WARN 38813 --- [serviceregistry] [  restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-08-18T15:39:55.568-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] c.n.eureka.DefaultEurekaServerContext    : Shutting down ...
+2025-08-18T15:39:55.570-05:00  INFO 38813 --- [serviceregistry] [      Thread-13] o.s.c.n.e.server.EurekaServerBootstrap   : isAws returned false
+2025-08-18T15:39:55.570-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] c.n.eureka.DefaultEurekaServerContext    : Shut down
+2025-08-18T15:39:55.570-05:00  INFO 38813 --- [serviceregistry] [      Thread-13] o.s.c.n.e.server.EurekaServerBootstrap   : Initialized server context
+2025-08-18T15:39:55.570-05:00  INFO 38813 --- [serviceregistry] [      Thread-13] c.n.e.r.PeerAwareInstanceRegistryImpl    : Got 1 instances from neighboring DS node
+2025-08-18T15:39:55.570-05:00  INFO 38813 --- [serviceregistry] [      Thread-13] c.n.e.r.PeerAwareInstanceRegistryImpl    : Renew threshold is: 1
+2025-08-18T15:39:55.570-05:00  INFO 38813 --- [serviceregistry] [      Thread-13] c.n.e.r.PeerAwareInstanceRegistryImpl    : Changing status to UP
+2025-08-18T15:39:55.570-05:00 ERROR 38813 --- [serviceregistry] [      Thread-13] o.s.c.n.e.server.EurekaServerBootstrap   : Cannot bootstrap eureka server :
 
 java.lang.IllegalStateException: Timer already cancelled.
 	at java.base/java.util.Timer.sched(Timer.java:409) ~[na:na]
@@ -91,7 +89,7 @@ java.lang.IllegalStateException: Timer already cancelled.
 	at org.springframework.cloud.netflix.eureka.server.EurekaServerInitializerConfiguration.lambda$start$0(EurekaServerInitializerConfiguration.java:67) ~[spring-cloud-netflix-eureka-server-4.3.0.jar:4.3.0]
 	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
 
-2025-08-18T10:06:55.201-05:00 ERROR 61126 --- [serviceregistry] [t-Conn-Cleaner2] c.n.d.s.t.j.EurekaJersey3ClientImpl      : Cannot clean connections
+2025-08-18T15:39:55.569-05:00 ERROR 38813 --- [serviceregistry] [t-Conn-Cleaner2] c.n.d.s.t.j.EurekaJersey3ClientImpl      : Cannot clean connections
 
 java.lang.IllegalStateException: Client instance has been closed.
 	at org.glassfish.jersey.internal.guava.Preconditions.checkState(Preconditions.java:169) ~[jersey-common-3.1.10.jar:na]
@@ -106,7 +104,7 @@ java.lang.IllegalStateException: Client instance has been closed.
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
 	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
 
-2025-08-18T10:06:55.203-05:00 ERROR 61126 --- [serviceregistry] [      Thread-13] e.s.EurekaServerInitializerConfiguration : Could not initialize Eureka servlet context
+2025-08-18T15:39:55.571-05:00 ERROR 38813 --- [serviceregistry] [      Thread-13] e.s.EurekaServerInitializerConfiguration : Could not initialize Eureka servlet context
 
 java.lang.RuntimeException: Cannot bootstrap eureka server :
 	at org.springframework.cloud.netflix.eureka.server.EurekaServerBootstrap.contextInitialized(EurekaServerBootstrap.java:76) ~[spring-cloud-netflix-eureka-server-4.3.0.jar:4.3.0]
@@ -122,12 +120,12 @@ Caused by: java.lang.IllegalStateException: Timer already cancelled.
 	at org.springframework.cloud.netflix.eureka.server.EurekaServerBootstrap.contextInitialized(EurekaServerBootstrap.java:70) ~[spring-cloud-netflix-eureka-server-4.3.0.jar:4.3.0]
 	... 2 common frames omitted
 
-2025-08-18T10:06:55.204-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
-2025-08-18T10:06:55.204-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient
-2025-08-18T10:06:55.220-05:00  INFO 61126 --- [serviceregistry] [  restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+2025-08-18T15:39:55.572-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2025-08-18T15:39:55.572-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient
+2025-08-18T15:39:55.588-05:00  INFO 38813 --- [serviceregistry] [  restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2025-08-18T10:06:55.230-05:00 ERROR 61126 --- [serviceregistry] [  restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+2025-08-18T15:39:55.597-05:00 ERROR 38813 --- [serviceregistry] [  restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
 
 ***************************
 APPLICATION FAILED TO START
@@ -144,6 +142,6 @@ Identify and stop the process that's listening on port 8761 or configure this ap
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.091 s
-[INFO] Finished at: 2025-08-18T10:06:55-05:00
+[INFO] Total time:  3.274 s
+[INFO] Finished at: 2025-08-18T15:39:55-05:00
 [INFO] ------------------------------------------------------------------------

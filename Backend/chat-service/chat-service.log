@@ -2,22 +2,28 @@
 > chat-service@1.0.0 start
 > node server.js
 
-❌ Database initialization failed: Error: Access denied for user 'root'@'localhost' (using password: YES)
-    at PromisePool.execute (/Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/chat-service/node_modules/mysql2/lib/promise/pool.js:54:22)
-    at initializeDatabase (/Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/chat-service/server.js:52:26)
-    at Object.<anonymous> (/Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/chat-service/server.js:809:1)
-    at Module._compile (node:internal/modules/cjs/loader:1692:14)
-    at Object..js (node:internal/modules/cjs/loader:1824:10)
-    at Module.load (node:internal/modules/cjs/loader:1427:32)
-    at Module._load (node:internal/modules/cjs/loader:1250:12)
-    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
-    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:152:5) {
-  code: 'ER_ACCESS_DENIED_ERROR',
-  errno: 1045,
-  sql: undefined,
-  sqlState: '28000',
-  sqlMessage: "Access denied for user 'root'@'localhost' (using password: YES)"
+❌ Database initialization failed: error: database "chat_db" does not exist
+    at /Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/chat-service/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async createTables (/Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/chat-service/server.js:100:3)
+    at async initializeDatabase (/Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/chat-service/server.js:46:5) {
+  length: 92,
+  severity: 'FATAL',
+  code: '3D000',
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'postinit.c',
+  line: '950',
+  routine: 'InitPostgres'
 }
 node:events:485
       throw er; // Unhandled 'error' event
@@ -27,7 +33,7 @@ Error: listen EADDRINUSE: address already in use :::8089
     at Server.setupListenHandle [as _listen2] (node:net:1940:16)
     at listenInCluster (node:net:1997:12)
     at Server.listen (node:net:2102:7)
-    at /Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/chat-service/server.js:810:10
+    at /Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/chat-service/server.js:807:10
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
 Emitted 'error' event on Server instance at:
     at emitErrorNT (node:net:1976:8)

@@ -5,8 +5,7 @@
 -- =====================================================
 
 -- Create database if not exists
-CREATE DATABASE IF NOT EXISTS inspection;
-USE inspection;
+-- PostgreSQL: databases are created outside migrations; connect to 'inspection' before running
 
 -- Drop existing tables for clean recreation
 DROP TABLE IF EXISTS inspection_files;
@@ -17,8 +16,8 @@ DROP TABLE IF EXISTS inspection_reports;
 -- =====================================================
 -- 1. MAIN INSPECTION REPORTS TABLE
 -- =====================================================
-CREATE TABLE inspection_reports (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS inspection_reports (
+    id BIGSERIAL PRIMARY KEY,
     
     -- Core identifiers (OPTIMIZED FOR FETCHING)
     post_id BIGINT NOT NULL,
@@ -29,23 +28,17 @@ CREATE TABLE inspection_reports (
     report_number VARCHAR(50) UNIQUE, -- Auto-generated unique report number
     
     -- Timing information
-    inspection_date DATE NOT NULL DEFAULT (CURRENT_DATE),
+    inspection_date DATE NOT NULL DEFAULT CURRENT_DATE,
     inspection_start_time TIME,
     inspection_end_time TIME,
-    inspection_duration_minutes INT GENERATED ALWAYS AS (
-        CASE 
-            WHEN inspection_start_time IS NOT NULL AND inspection_end_time IS NOT NULL 
-            THEN TIMESTAMPDIFF(MINUTE, inspection_start_time, inspection_end_time)
-            ELSE NULL 
-        END
-    ) STORED,
+    inspection_duration_minutes INT,
     
     -- Status tracking with detailed workflow
-    status ENUM('DRAFT', 'IN_PROGRESS', 'COMPLETED', 'SUBMITTED', 'APPROVED', 'REJECTED') NOT NULL DEFAULT 'DRAFT',
+    status TEXT CHECK (status IN ('DRAFT','IN_PROGRESS','COMPLETED','SUBMITTED','APPROVED','REJECTED')) NOT NULL DEFAULT 'DRAFT',
     
     -- Overall assessment (REQUIRED FOR COMPLETE REPORTS)
-    overall_condition ENUM('EXCELLENT', 'GOOD', 'FAIR', 'POOR', 'CRITICAL') DEFAULT 'GOOD',
-    safety_rating ENUM('SAFE', 'NEEDS_ATTENTION', 'UNSAFE', 'CRITICAL') DEFAULT 'SAFE',
+    overall_condition TEXT CHECK (overall_condition IN ('EXCELLENT','GOOD','FAIR','POOR','CRITICAL')) DEFAULT 'GOOD',
+    safety_rating TEXT CHECK (safety_rating IN ('SAFE','NEEDS_ATTENTION','UNSAFE','CRITICAL')) DEFAULT 'SAFE',
     
     -- Financial information
     estimated_repair_cost DECIMAL(10,2) DEFAULT 0.00,
@@ -66,18 +59,18 @@ CREATE TABLE inspection_reports (
     completion_percentage DECIMAL(5,2) GENERATED ALWAYS AS (
         CASE 
             WHEN total_checklist_items > 0 
-            THEN ROUND((completed_checklist_items / total_checklist_items) * 100, 2)
+            THEN ROUND((completed_checklist_items::numeric / NULLIF(total_checklist_items,0)::numeric) * 100, 2)
             ELSE 0 
         END
     ) STORED,
     
     -- Timestamps (CRITICAL FOR AUDIT TRAIL)
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    started_at DATETIME, -- When inspection actually started
-    completed_at DATETIME, -- When inspection was completed
-    submitted_at DATETIME, -- When report was submitted
-    approved_at DATETIME, -- When report was approved
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    started_at TIMESTAMP, -- When inspection actually started
+    completed_at TIMESTAMP, -- When inspection was completed
+    submitted_at TIMESTAMP, -- When report was submitted
+    approved_at TIMESTAMP, -- When report was approved
     
     -- Audit fields
     created_by VARCHAR(100),
@@ -85,14 +78,7 @@ CREATE TABLE inspection_reports (
     version INT DEFAULT 1,
     
     -- OPTIMIZED INDEXES FOR FAST RETRIEVAL
-    INDEX idx_post_id (post_id),
-    INDEX idx_technician_id (technician_id),
-    INDEX idx_status (status),
-    INDEX idx_inspection_date (inspection_date),
-    INDEX idx_created_at (created_at),
-    INDEX idx_tech_post_composite (technician_id, post_id), -- COMPOSITE INDEX FOR FAST LOOKUP
-    INDEX idx_status_tech (status, technician_id), -- FOR FILTERING BY STATUS AND TECH
-    INDEX idx_completion (completion_percentage),
+    
     
     -- Constraints
     CONSTRAINT chk_repair_cost CHECK (estimated_repair_cost >= 0),
@@ -103,8 +89,8 @@ CREATE TABLE inspection_reports (
 -- =====================================================
 -- 2. VEHICLE DETAILS TABLE (NORMALIZED)
 -- =====================================================
-CREATE TABLE inspection_vehicle_details (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS inspection_vehicle_details (
+    id BIGSERIAL PRIMARY KEY,
     inspection_report_id BIGINT NOT NULL,
     
     -- Vehicle identification
@@ -126,7 +112,7 @@ CREATE TABLE inspection_vehicle_details (
     color_interior VARCHAR(30),
     
     -- Vehicle history
-    accident_history ENUM('NONE', 'MINOR', 'MAJOR', 'UNKNOWN') DEFAULT 'UNKNOWN',
+    accident_history TEXT CHECK (accident_history IN ('NONE','MINOR','MAJOR','UNKNOWN')) DEFAULT 'UNKNOWN',
     service_history_available BOOLEAN DEFAULT FALSE,
     previous_owner_count INT,
     
@@ -134,46 +120,32 @@ CREATE TABLE inspection_vehicle_details (
     inspection_location VARCHAR(255),
     weather_conditions VARCHAR(100),
     
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     
-    FOREIGN KEY (inspection_report_id) REFERENCES inspection_reports(id) ON DELETE CASCADE,
-    INDEX idx_inspection_report_id (inspection_report_id),
-    INDEX idx_vin (vin_number),
-    INDEX idx_make_model_year (make, model, year)
+    FOREIGN KEY (inspection_report_id) REFERENCES inspection_reports(id) ON DELETE CASCADE
 );
 
 -- =====================================================
 -- 3. ENHANCED CHECKLIST ITEMS TABLE
 -- Stores ALL 66 inspection items with complete data
 -- =====================================================
-CREATE TABLE inspection_checklist_items (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS inspection_checklist_items (
+    id BIGSERIAL PRIMARY KEY,
     inspection_report_id BIGINT NOT NULL,
     
     -- Item identification (STRUCTURED FOR ALL 66 ITEMS)
-    category ENUM(
-        'EXTERIOR', 'INTERIOR', 'ENGINE', 'TRANSMISSION', 
-        'BRAKES', 'SUSPENSION', 'ELECTRICAL', 'SAFETY', 
-        'UNDERCARRIAGE', 'TEST_DRIVE'
-    ) NOT NULL,
+    category TEXT CHECK (category IN ('EXTERIOR','INTERIOR','ENGINE','TRANSMISSION','BRAKES','SUSPENSION','ELECTRICAL','SAFETY','UNDERCARRIAGE','TEST_DRIVE')) NOT NULL,
     item_name VARCHAR(255) NOT NULL,
     item_order INT NOT NULL, -- Order within category (1-8 for most categories)
     
     -- Inspection results
     is_checked BOOLEAN NOT NULL DEFAULT FALSE,
-    condition_rating ENUM(
-        'EXCELLENT',    -- Like New
-        'GOOD',         -- Serviceable  
-        'FAIR',         -- Marginal
-        'POOR',         -- Requires Repair
-        'FAILED',       -- Not Accessible
-        'NOT_INSPECTED' -- Skipped
-    ),
+    condition_rating TEXT CHECK (condition_rating IN ('EXCELLENT','GOOD','FAIR','POOR','FAILED','NOT_INSPECTED')),
     
     -- Detailed assessment
-    working_status ENUM('WORKING', 'NEEDS_ATTENTION', 'NOT_WORKING', 'NOT_APPLICABLE'),
-    priority_level ENUM('LOW', 'MEDIUM', 'HIGH', 'CRITICAL'),
+    working_status TEXT CHECK (working_status IN ('WORKING','NEEDS_ATTENTION','NOT_WORKING','NOT_APPLICABLE')),
+    priority_level TEXT CHECK (priority_level IN ('LOW','MEDIUM','HIGH','CRITICAL')),
     
     -- Cost and repair information
     repair_cost DECIMAL(10,2) DEFAULT 0.00,
@@ -190,22 +162,15 @@ CREATE TABLE inspection_checklist_items (
     photo_count INT DEFAULT 0,
     
     -- Timestamps
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    inspected_at DATETIME, -- When this specific item was inspected
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    inspected_at TIMESTAMP, -- When this specific item was inspected
     
     -- OPTIMIZED INDEXES
     FOREIGN KEY (inspection_report_id) REFERENCES inspection_reports(id) ON DELETE CASCADE,
-    INDEX idx_inspection_report_id (inspection_report_id),
-    INDEX idx_category (category),
-    INDEX idx_category_order (category, item_order),
-    INDEX idx_is_checked (is_checked),
-    INDEX idx_condition_rating (condition_rating),
-    INDEX idx_priority_level (priority_level),
-    INDEX idx_report_category_composite (inspection_report_id, category), -- FAST CATEGORY LOOKUP
     
     -- Ensure uniqueness of items per report
-    UNIQUE KEY uk_report_category_item (inspection_report_id, category, item_name),
+    UNIQUE (inspection_report_id, category, item_name),
     
     -- Constraints
     CONSTRAINT chk_repair_cost_item CHECK (repair_cost >= 0),
@@ -216,8 +181,8 @@ CREATE TABLE inspection_checklist_items (
 -- =====================================================
 -- 4. INSPECTION FILES TABLE (ENHANCED)
 -- =====================================================
-CREATE TABLE inspection_files (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS inspection_files (
+    id BIGSERIAL PRIMARY KEY,
     inspection_report_id BIGINT NOT NULL,
     checklist_item_id BIGINT NULL, -- Link to specific checklist item
     
@@ -229,11 +194,11 @@ CREATE TABLE inspection_files (
     content_type VARCHAR(100) NOT NULL,
     
     -- File categorization
-    file_category ENUM('IMAGE', 'VIDEO', 'AUDIO', 'DOCUMENT', 'OTHER') NOT NULL,
-    inspection_category ENUM(
-        'EXTERIOR', 'INTERIOR', 'ENGINE', 'TRANSMISSION', 
-        'BRAKES', 'SUSPENSION', 'ELECTRICAL', 'SAFETY', 
-        'UNDERCARRIAGE', 'TEST_DRIVE', 'GENERAL'
+    file_category TEXT CHECK (file_category IN ('IMAGE','VIDEO','AUDIO','DOCUMENT','OTHER')) NOT NULL,
+    inspection_category TEXT CHECK (
+        inspection_category IN (
+            'EXTERIOR','INTERIOR','ENGINE','TRANSMISSION','BRAKES','SUSPENSION','ELECTRICAL','SAFETY','UNDERCARRIAGE','TEST_DRIVE','GENERAL'
+        )
     ),
     
     -- File metadata
@@ -248,20 +213,12 @@ CREATE TABLE inspection_files (
     thumbnail_path VARCHAR(500), -- For images/videos
     
     -- Timestamps
-    uploaded_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    processed_at DATETIME,
+    uploaded_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    processed_at TIMESTAMP,
     
     -- OPTIMIZED INDEXES
     FOREIGN KEY (inspection_report_id) REFERENCES inspection_reports(id) ON DELETE CASCADE,
     FOREIGN KEY (checklist_item_id) REFERENCES inspection_checklist_items(id) ON DELETE SET NULL,
-    INDEX idx_inspection_report_id (inspection_report_id),
-    INDEX idx_checklist_item_id (checklist_item_id),
-    INDEX idx_file_category (file_category),
-    INDEX idx_inspection_category (inspection_category),
-    INDEX idx_uploaded_at (uploaded_at),
-    INDEX idx_stored_filename (stored_filename),
-    INDEX idx_file_hash (file_hash),
-    INDEX idx_report_category_files (inspection_report_id, inspection_category), -- FAST FILE LOOKUP BY CATEGORY
     
     -- Constraints
     CONSTRAINT chk_file_size CHECK (file_size > 0)
@@ -272,7 +229,7 @@ CREATE TABLE inspection_files (
 -- =====================================================
 
 -- View for complete inspection report data
-CREATE VIEW v_complete_inspection_reports AS
+CREATE OR REPLACE VIEW v_complete_inspection_reports AS
 SELECT 
     ir.id,
     ir.post_id,
@@ -315,7 +272,7 @@ LEFT JOIN inspection_files f ON ir.id = f.inspection_report_id
 GROUP BY ir.id, vd.id;
 
 -- View for technician dashboard summary
-CREATE VIEW v_technician_dashboard_summary AS
+CREATE OR REPLACE VIEW v_technician_dashboard_summary AS
 SELECT 
     technician_id,
     COUNT(*) as total_reports,
@@ -337,9 +294,9 @@ GROUP BY technician_id;
 -- =====================================================
 
 -- Create a stored procedure to initialize checklist for a report
-DELIMITER $$
-
-CREATE PROCEDURE InitializeInspectionChecklist(IN report_id BIGINT)
+-- Stored procedures and triggers need PL/pgSQL in PostgreSQL
+CREATE OR REPLACE FUNCTION InitializeInspectionChecklist(report_id BIGINT)
+RETURNS void AS $$
 BEGIN
     -- EXTERIOR (8 items)
     INSERT INTO inspection_checklist_items (inspection_report_id, category, item_name, item_order) VALUES
@@ -445,20 +402,17 @@ BEGIN
     )
     WHERE id = report_id;
     
-END$$
-
-DELIMITER ;
+END;
+$$ LANGUAGE plpgsql;
 
 -- =====================================================
 -- 7. CREATE TRIGGERS FOR DATA CONSISTENCY
 -- =====================================================
 
 -- Trigger to update completion percentage when checklist items change
-DELIMITER $$
-
-CREATE TRIGGER tr_update_completion_after_checklist_update
-AFTER UPDATE ON inspection_checklist_items
-FOR EACH ROW
+-- Triggers in PostgreSQL
+CREATE OR REPLACE FUNCTION tr_update_completion_after_checklist_update()
+RETURNS trigger AS $$
 BEGIN
     UPDATE inspection_reports 
     SET 
@@ -470,19 +424,29 @@ BEGIN
         ),
         updated_at = CURRENT_TIMESTAMP
     WHERE id = NEW.inspection_report_id;
-END$$
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
--- Trigger to generate unique report number
-CREATE TRIGGER tr_generate_report_number
-BEFORE INSERT ON inspection_reports
-FOR EACH ROW
+DROP TRIGGER IF EXISTS tr_update_completion_after_checklist_update ON inspection_checklist_items;
+CREATE TRIGGER tr_update_completion_after_checklist_update
+AFTER UPDATE ON inspection_checklist_items
+FOR EACH ROW EXECUTE FUNCTION tr_update_completion_after_checklist_update();
+
+CREATE OR REPLACE FUNCTION tr_generate_report_number()
+RETURNS trigger AS $$
 BEGIN
     IF NEW.report_number IS NULL THEN
-        SET NEW.report_number = CONCAT('RPT-', YEAR(CURDATE()), '-', LPAD(MONTH(CURDATE()), 2, '0'), '-', LPAD(NEW.technician_id, 4, '0'), '-', UNIX_TIMESTAMP());
+        NEW.report_number := 'RPT-' || TO_CHAR(CURRENT_DATE, 'YYYY-MM') || '-' || LPAD(NEW.technician_id::text, 4, '0') || '-' || EXTRACT(EPOCH FROM NOW())::bigint;
     END IF;
-END$$
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
-DELIMITER ;
+DROP TRIGGER IF EXISTS tr_generate_report_number ON inspection_reports;
+CREATE TRIGGER tr_generate_report_number
+BEFORE INSERT ON inspection_reports
+FOR EACH ROW EXECUTE FUNCTION tr_generate_report_number();
 
 -- =====================================================
 -- 8. CREATE INDEXES FOR OPTIMAL PERFORMANCE
@@ -494,6 +458,31 @@ CREATE INDEX idx_reports_tech_status_date ON inspection_reports(technician_id, s
 CREATE INDEX idx_checklist_report_checked ON inspection_checklist_items(inspection_report_id, is_checked);
 CREATE INDEX idx_files_report_category ON inspection_files(inspection_report_id, inspection_category);
 
+-- Indexes previously defined inline (PostgreSQL requires separate CREATE INDEX)
+-- Vehicle details
+CREATE INDEX IF NOT EXISTS idx_vehicle_details_report_id ON inspection_vehicle_details(inspection_report_id);
+CREATE INDEX IF NOT EXISTS idx_vin ON inspection_vehicle_details(vin_number);
+CREATE INDEX IF NOT EXISTS idx_make_model_year ON inspection_vehicle_details(make, model, year);
+
+-- Checklist items
+CREATE INDEX IF NOT EXISTS idx_checklist_report_id ON inspection_checklist_items(inspection_report_id);
+CREATE INDEX IF NOT EXISTS idx_checklist_category ON inspection_checklist_items(category);
+CREATE INDEX IF NOT EXISTS idx_checklist_category_order ON inspection_checklist_items(category, item_order);
+CREATE INDEX IF NOT EXISTS idx_checklist_is_checked ON inspection_checklist_items(is_checked);
+CREATE INDEX IF NOT EXISTS idx_checklist_condition_rating ON inspection_checklist_items(condition_rating);
+CREATE INDEX IF NOT EXISTS idx_checklist_priority_level ON inspection_checklist_items(priority_level);
+CREATE INDEX IF NOT EXISTS idx_checklist_report_category ON inspection_checklist_items(inspection_report_id, category);
+
+-- Files
+CREATE INDEX IF NOT EXISTS idx_files_report_id ON inspection_files(inspection_report_id);
+CREATE INDEX IF NOT EXISTS idx_files_checklist_item_id ON inspection_files(checklist_item_id);
+CREATE INDEX IF NOT EXISTS idx_files_file_category ON inspection_files(file_category);
+CREATE INDEX IF NOT EXISTS idx_files_inspection_category ON inspection_files(inspection_category);
+CREATE INDEX IF NOT EXISTS idx_files_uploaded_at ON inspection_files(uploaded_at);
+CREATE INDEX IF NOT EXISTS idx_files_stored_filename ON inspection_files(stored_filename);
+CREATE INDEX IF NOT EXISTS idx_files_file_hash ON inspection_files(file_hash);
+CREATE INDEX IF NOT EXISTS idx_files_report_category_files ON inspection_files(inspection_report_id, inspection_category);
+
 -- =====================================================
 -- 9. SAMPLE DATA FOR TESTING
 -- =====================================================
@@ -503,17 +492,18 @@ INSERT INTO inspection_reports (post_id, technician_id, status, overall_conditio
 VALUES (1, 1, 'DRAFT', 'GOOD', 'SAFE', 'SYSTEM');
 
 -- Initialize checklist for the sample report
-CALL InitializeInspectionChecklist(LAST_INSERT_ID());
+SELECT InitializeInspectionChecklist(currval(pg_get_serial_sequence('inspection_reports','id')));
 
 -- Insert sample vehicle details
 INSERT INTO inspection_vehicle_details (inspection_report_id, vin_number, make, model, year, mileage, color_exterior)
-VALUES (LAST_INSERT_ID(), '1HGCM82633A123456', 'Honda', 'Civic', 2020, 25000, 'Silver');
+VALUES (currval(pg_get_serial_sequence('inspection_reports','id')), '1HGCM82633A123456', 'Honda', 'Civic', 2020, 25000, 'Silver');
 
 -- Show table structures
-SHOW TABLES;
-DESCRIBE inspection_reports;
-DESCRIBE inspection_checklist_items;
-DESCRIBE inspection_files;
+-- PostgreSQL: use information_schema and pg_catalog instead of SHOW/DESCRIBE
+SELECT tablename FROM pg_tables WHERE schemaname='public';
+SELECT column_name, data_type FROM information_schema.columns WHERE table_name='inspection_reports';
+SELECT column_name, data_type FROM information_schema.columns WHERE table_name='inspection_checklist_items';
+SELECT column_name, data_type FROM information_schema.columns WHERE table_name='inspection_files';
 
 -- Show sample data
 SELECT 'Sample Report Data' as info;

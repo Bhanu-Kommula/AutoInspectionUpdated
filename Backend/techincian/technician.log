@@ -12,17 +12,13 @@
 [INFO] Copying 2 resources from src/main/resources to target/classes
 [INFO] 
 [INFO] --- compiler:3.14.0:compile (default-compile) @ techincian ---
-[INFO] Recompiling the module because of changed source code.
-[INFO] Compiling 44 source files with javac [debug parameters release 17] to target/classes
-[INFO] /Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/techincian/src/main/java/com/auto/tech/model/TechnicianPerformanceMetrics.java: /Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/techincian/src/main/java/com/auto/tech/model/TechnicianPerformanceMetrics.java uses or overrides a deprecated API.
-[INFO] /Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/techincian/src/main/java/com/auto/tech/model/TechnicianPerformanceMetrics.java: Recompile with -Xlint:deprecation for details.
+[INFO] Nothing to compile - all classes are up to date.
 [INFO] 
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ techincian ---
 [INFO] skip non existing resourceDirectory /Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/techincian/src/test/resources
 [INFO] 
 [INFO] --- compiler:3.14.0:testCompile (default-testCompile) @ techincian ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 2 source files with javac [debug parameters release 17] to target/test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO] 
 [INFO] <<< spring-boot:3.5.3:run (default-cli) < test-compile @ techincian <<<
 [INFO] 
@@ -39,78 +35,265 @@
 
  :: Spring Boot ::                (v3.5.3)
 
-2025-08-18T10:07:49.494-05:00  INFO 63599 --- [technician] [  restartedMain] com.auto.tech.DealerApplication          : Starting DealerApplication using Java 17.0.16 with PID 63599 (/Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/techincian/target/classes started by bhanuprasadkommula in /Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/techincian)
-2025-08-18T10:07:49.496-05:00  INFO 63599 --- [technician] [  restartedMain] com.auto.tech.DealerApplication          : No active profile set, falling back to 1 default profile: "default"
-2025-08-18T10:07:49.526-05:00  INFO 63599 --- [technician] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-08-18T10:07:49.526-05:00  INFO 63599 --- [technician] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-08-18T10:07:49.941-05:00  INFO 63599 --- [technician] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-08-18T10:07:50.037-05:00  INFO 63599 --- [technician] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 89 ms. Found 7 JPA repository interfaces.
-2025-08-18T10:07:50.179-05:00  INFO 63599 --- [technician] [  restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=7e199242-fa49-3cf0-b462-e8ec3aa49ace
-2025-08-18T10:07:50.505-05:00  INFO 63599 --- [technician] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
-2025-08-18T10:07:50.514-05:00  INFO 63599 --- [technician] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-08-18T10:07:50.514-05:00  INFO 63599 --- [technician] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
-2025-08-18T10:07:50.539-05:00  INFO 63599 --- [technician] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-08-18T10:07:50.540-05:00  INFO 63599 --- [technician] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1013 ms
-2025-08-18T10:07:50.629-05:00  INFO 63599 --- [technician] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-08-18T10:07:50.657-05:00  INFO 63599 --- [technician] [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
-2025-08-18T10:07:50.674-05:00  INFO 63599 --- [technician] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-08-18T10:07:50.806-05:00  INFO 63599 --- [technician] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-08-18T10:07:50.822-05:00  INFO 63599 --- [technician] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-08-18T10:07:50.996-05:00  INFO 63599 --- [technician] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@50098e7c
-2025-08-18T10:07:50.997-05:00  INFO 63599 --- [technician] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-08-18T10:07:51.051-05:00  INFO 63599 --- [technician] [  restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-08-18T15:40:48.571-05:00  INFO 39831 --- [technician] [  restartedMain] com.auto.tech.DealerApplication          : Starting DealerApplication using Java 17.0.16 with PID 39831 (/Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/techincian/target/classes started by bhanuprasadkommula in /Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/techincian)
+2025-08-18T15:40:48.572-05:00  INFO 39831 --- [technician] [  restartedMain] com.auto.tech.DealerApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-08-18T15:40:48.595-05:00  INFO 39831 --- [technician] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-18T15:40:48.596-05:00  INFO 39831 --- [technician] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-18T15:40:48.973-05:00  INFO 39831 --- [technician] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-18T15:40:49.058-05:00  INFO 39831 --- [technician] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 81 ms. Found 7 JPA repository interfaces.
+2025-08-18T15:40:49.190-05:00  INFO 39831 --- [technician] [  restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=7e199242-fa49-3cf0-b462-e8ec3aa49ace
+2025-08-18T15:40:49.485-05:00  INFO 39831 --- [technician] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2025-08-18T15:40:49.492-05:00  INFO 39831 --- [technician] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-18T15:40:49.492-05:00  INFO 39831 --- [technician] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-08-18T15:40:49.515-05:00  INFO 39831 --- [technician] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-18T15:40:49.516-05:00  INFO 39831 --- [technician] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 919 ms
+2025-08-18T15:40:49.595-05:00  INFO 39831 --- [technician] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-18T15:40:49.618-05:00  INFO 39831 --- [technician] [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-08-18T15:40:49.632-05:00  INFO 39831 --- [technician] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-08-18T15:40:49.747-05:00  INFO 39831 --- [technician] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-18T15:40:49.760-05:00  INFO 39831 --- [technician] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-18T15:40:49.815-05:00  INFO 39831 --- [technician] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@73cf2895
+2025-08-18T15:40:49.816-05:00  INFO 39831 --- [technician] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-18T15:40:49.831-05:00  WARN 39831 --- [technician] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-18T15:40:49.841-05:00  INFO 39831 --- [technician] [  restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
-	Database version: 9.4
+	Database version: 15.13
 	Autocommit mode: undefined/unknown
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-08-18T10:07:51.579-05:00  INFO 63599 --- [technician] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-08-18T10:07:51.628-05:00  INFO 63599 --- [technician] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-08-18T10:07:51.865-05:00  INFO 63599 --- [technician] [  restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-08-18T10:07:53.352-05:00  INFO 63599 --- [technician] [  restartedMain] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestTemplate.
-2025-08-18T10:07:53.364-05:00  WARN 63599 --- [technician] [  restartedMain] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-2025-08-18T10:07:53.377-05:00  INFO 63599 --- [technician] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-2025-08-18T10:07:53.377-05:00  INFO 63599 --- [technician] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@25fa19d2]]
-2025-08-18T10:07:53.377-05:00  INFO 63599 --- [technician] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2025-08-18T10:07:53.382-05:00  INFO 63599 --- [technician] [  restartedMain] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
-2025-08-18T10:07:53.396-05:00  INFO 63599 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
-2025-08-18T10:07:53.398-05:00  INFO 63599 --- [technician] [  restartedMain] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2025-08-18T10:07:53.402-05:00  INFO 63599 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
-2025-08-18T10:07:53.402-05:00  INFO 63599 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
-2025-08-18T10:07:53.402-05:00  INFO 63599 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
-2025-08-18T10:07:53.402-05:00  INFO 63599 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Application is null : false
-2025-08-18T10:07:53.402-05:00  INFO 63599 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
-2025-08-18T10:07:53.402-05:00  INFO 63599 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
-2025-08-18T10:07:53.402-05:00  INFO 63599 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
-2025-08-18T10:07:53.578-05:00  INFO 63599 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : The response status is 200
-2025-08-18T10:07:53.579-05:00  INFO 63599 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
-2025-08-18T10:07:53.579-05:00  INFO 63599 --- [technician] [  restartedMain] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
-2025-08-18T10:07:53.580-05:00  INFO 63599 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1755529673580 with initial instances count: 4
-2025-08-18T10:07:53.582-05:00  INFO 63599 --- [technician] [  restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application TECHNICIAN with eureka with status UP
-2025-08-18T10:07:53.582-05:00  INFO 63599 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1755529673582, current=UP, previous=STARTING]
-2025-08-18T10:07:53.583-05:00  INFO 63599 --- [technician] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TECHNICIAN/192.168.1.192:technician:8082: registering service...
-2025-08-18T10:07:53.586-05:00  INFO 63599 --- [technician] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
-2025-08-18T10:07:53.586-05:00  INFO 63599 --- [technician] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@25fa19d2]]
-2025-08-18T10:07:53.587-05:00  INFO 63599 --- [technician] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
-2025-08-18T10:07:53.587-05:00  INFO 63599 --- [technician] [  restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application TECHNICIAN with eureka with status DOWN
-2025-08-18T10:07:53.587-05:00  INFO 63599 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1755529673587, current=DOWN, previous=UP]
-2025-08-18T10:07:53.587-05:00  WARN 63599 --- [technician] [  restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
-2025-08-18T10:07:53.590-05:00  INFO 63599 --- [technician] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-08-18T10:07:53.592-05:00  INFO 63599 --- [technician] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-08-18T10:07:53.595-05:00  INFO 63599 --- [technician] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-08-18T10:07:53.595-05:00  INFO 63599 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
-2025-08-18T10:07:53.601-05:00  INFO 63599 --- [technician] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TECHNICIAN/192.168.1.192:technician:8082 - registration status: 204
-2025-08-18T10:07:53.601-05:00  INFO 63599 --- [technician] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TECHNICIAN/192.168.1.192:technician:8082: registering service...
-2025-08-18T10:07:53.603-05:00  INFO 63599 --- [technician] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TECHNICIAN/192.168.1.192:technician:8082 - registration status: 204
-2025-08-18T10:07:53.604-05:00  INFO 63599 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Unregistering ...
-2025-08-18T10:07:53.606-05:00  INFO 63599 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TECHNICIAN/192.168.1.192:technician:8082 - deregister  status: 200
-2025-08-18T10:07:53.606-05:00  INFO 63599 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient
-2025-08-18T10:07:53.617-05:00  INFO 63599 --- [technician] [  restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+2025-08-18T15:40:50.325-05:00  INFO 39831 --- [technician] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: alter table if exists tech_declined_posts add column created_at timestamp(6) not null
+2025-08-18T15:40:50.368-05:00  WARN 39831 --- [technician] [  restartedMain] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "alter table if exists tech_declined_posts add column created_at timestamp(6) not null" via JDBC [ERROR: column "created_at" of relation "tech_declined_posts" contains null values]
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "alter table if exists tech_declined_posts add column created_at timestamp(6) not null" via JDBC [ERROR: column "created_at" of relation "tech_declined_posts" contains null values]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:94) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:576) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:516) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.migrateTable(AbstractSchemaMigrator.java:334) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:84) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:233) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:112) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:280) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:144) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:141) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:324) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:463) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1517) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-6.2.8.jar:6.2.8]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.2.8.jar:6.2.8]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419) ~[spring-orm-6.2.8.jar:6.2.8]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400) ~[spring-orm-6.2.8.jar:6.2.8]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:970) ~[spring-context-6.2.8.jar:6.2.8]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627) ~[spring-context-6.2.8.jar:6.2.8]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.5.3.jar:3.5.3]
+	at com.auto.tech.DealerApplication.main(DealerApplication.java:18) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.5.3.jar:3.5.3]
+Caused by: org.postgresql.util.PSQLException: ERROR: column "created_at" of relation "tech_declined_posts" contains null values
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2734) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2421) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:518) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:435) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:357) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:342) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:318) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:313) ~[postgresql-42.7.7.jar:42.7.7]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-6.3.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-6.3.0.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	... 42 common frames omitted
+
+Hibernate: alter table if exists technicians add column created_at timestamp(6) not null
+2025-08-18T15:40:50.373-05:00  WARN 39831 --- [technician] [  restartedMain] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "alter table if exists technicians add column created_at timestamp(6) not null" via JDBC [ERROR: column "created_at" of relation "technicians" contains null values]
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "alter table if exists technicians add column created_at timestamp(6) not null" via JDBC [ERROR: column "created_at" of relation "technicians" contains null values]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:94) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:576) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:516) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.migrateTable(AbstractSchemaMigrator.java:334) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:84) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:233) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:112) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:280) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:144) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:141) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:324) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:463) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1517) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-6.2.8.jar:6.2.8]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.2.8.jar:6.2.8]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419) ~[spring-orm-6.2.8.jar:6.2.8]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400) ~[spring-orm-6.2.8.jar:6.2.8]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:970) ~[spring-context-6.2.8.jar:6.2.8]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627) ~[spring-context-6.2.8.jar:6.2.8]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.5.3.jar:3.5.3]
+	at com.auto.tech.DealerApplication.main(DealerApplication.java:18) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.5.3.jar:3.5.3]
+Caused by: org.postgresql.util.PSQLException: ERROR: column "created_at" of relation "technicians" contains null values
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2734) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2421) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:518) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:435) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:357) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:342) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:318) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:313) ~[postgresql-42.7.7.jar:42.7.7]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-6.3.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-6.3.0.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	... 42 common frames omitted
+
+Hibernate: alter table if exists technicians add column status varchar(255) not null
+2025-08-18T15:40:50.374-05:00  WARN 39831 --- [technician] [  restartedMain] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "alter table if exists technicians add column status varchar(255) not null" via JDBC [ERROR: column "status" of relation "technicians" contains null values]
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "alter table if exists technicians add column status varchar(255) not null" via JDBC [ERROR: column "status" of relation "technicians" contains null values]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:94) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:576) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:516) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.migrateTable(AbstractSchemaMigrator.java:334) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:84) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:233) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:112) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:280) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:144) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:141) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:324) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:463) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1517) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-6.2.8.jar:6.2.8]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.2.8.jar:6.2.8]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419) ~[spring-orm-6.2.8.jar:6.2.8]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400) ~[spring-orm-6.2.8.jar:6.2.8]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:970) ~[spring-context-6.2.8.jar:6.2.8]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627) ~[spring-context-6.2.8.jar:6.2.8]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.5.3.jar:3.5.3]
+	at com.auto.tech.DealerApplication.main(DealerApplication.java:18) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.5.3.jar:3.5.3]
+Caused by: org.postgresql.util.PSQLException: ERROR: column "status" of relation "technicians" contains null values
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2734) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2421) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:518) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:435) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:357) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:342) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:318) ~[postgresql-42.7.7.jar:42.7.7]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:313) ~[postgresql-42.7.7.jar:42.7.7]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-6.3.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-6.3.0.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.6.18.Final.jar:6.6.18.Final]
+	... 42 common frames omitted
+
+2025-08-18T15:40:50.380-05:00  INFO 39831 --- [technician] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-18T15:40:50.602-05:00  INFO 39831 --- [technician] [  restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-18T15:40:52.019-05:00  INFO 39831 --- [technician] [  restartedMain] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestTemplate.
+2025-08-18T15:40:52.029-05:00  WARN 39831 --- [technician] [  restartedMain] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2025-08-18T15:40:52.039-05:00  INFO 39831 --- [technician] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2025-08-18T15:40:52.040-05:00  INFO 39831 --- [technician] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2f7ee6c]]
+2025-08-18T15:40:52.040-05:00  INFO 39831 --- [technician] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2025-08-18T15:40:52.043-05:00  INFO 39831 --- [technician] [  restartedMain] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2025-08-18T15:40:52.054-05:00  INFO 39831 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2025-08-18T15:40:52.056-05:00  INFO 39831 --- [technician] [  restartedMain] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-18T15:40:52.060-05:00  INFO 39831 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2025-08-18T15:40:52.060-05:00  INFO 39831 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2025-08-18T15:40:52.060-05:00  INFO 39831 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2025-08-18T15:40:52.060-05:00  INFO 39831 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2025-08-18T15:40:52.060-05:00  INFO 39831 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2025-08-18T15:40:52.060-05:00  INFO 39831 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2025-08-18T15:40:52.060-05:00  INFO 39831 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2025-08-18T15:40:52.258-05:00  INFO 39831 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2025-08-18T15:40:52.259-05:00  INFO 39831 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2025-08-18T15:40:52.260-05:00  INFO 39831 --- [technician] [  restartedMain] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2025-08-18T15:40:52.260-05:00  INFO 39831 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1755549652260 with initial instances count: 3
+2025-08-18T15:40:52.263-05:00  INFO 39831 --- [technician] [  restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application TECHNICIAN with eureka with status UP
+2025-08-18T15:40:52.263-05:00  INFO 39831 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1755549652263, current=UP, previous=STARTING]
+2025-08-18T15:40:52.263-05:00  INFO 39831 --- [technician] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TECHNICIAN/192.168.1.192:technician:8082: registering service...
+2025-08-18T15:40:52.267-05:00  INFO 39831 --- [technician] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2025-08-18T15:40:52.267-05:00  INFO 39831 --- [technician] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2f7ee6c]]
+2025-08-18T15:40:52.267-05:00  INFO 39831 --- [technician] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2025-08-18T15:40:52.267-05:00  INFO 39831 --- [technician] [  restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application TECHNICIAN with eureka with status DOWN
+2025-08-18T15:40:52.267-05:00  INFO 39831 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1755549652267, current=DOWN, previous=UP]
+2025-08-18T15:40:52.267-05:00  WARN 39831 --- [technician] [  restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-08-18T15:40:52.271-05:00  INFO 39831 --- [technician] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-18T15:40:52.272-05:00  INFO 39831 --- [technician] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-18T15:40:52.273-05:00  INFO 39831 --- [technician] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-18T15:40:52.273-05:00  INFO 39831 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2025-08-18T15:40:52.280-05:00  INFO 39831 --- [technician] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TECHNICIAN/192.168.1.192:technician:8082 - registration status: 204
+2025-08-18T15:40:52.281-05:00  INFO 39831 --- [technician] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TECHNICIAN/192.168.1.192:technician:8082: registering service...
+2025-08-18T15:40:52.282-05:00  INFO 39831 --- [technician] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TECHNICIAN/192.168.1.192:technician:8082 - registration status: 204
+2025-08-18T15:40:52.282-05:00  INFO 39831 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Unregistering ...
+2025-08-18T15:40:52.283-05:00  INFO 39831 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TECHNICIAN/192.168.1.192:technician:8082 - deregister  status: 200
+2025-08-18T15:40:52.283-05:00  INFO 39831 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient
+2025-08-18T15:40:52.292-05:00  INFO 39831 --- [technician] [  restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2025-08-18T10:07:53.629-05:00 ERROR 63599 --- [technician] [  restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+2025-08-18T15:40:52.301-05:00 ERROR 39831 --- [technician] [  restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
 
 ***************************
 APPLICATION FAILED TO START
@@ -127,6 +310,6 @@ Identify and stop the process that's listening on port 8082 or configure this ap
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  7.760 s
-[INFO] Finished at: 2025-08-18T10:07:53-05:00
+[INFO] Total time:  4.897 s
+[INFO] Finished at: 2025-08-18T15:40:52-05:00
 [INFO] ------------------------------------------------------------------------

@@ -609,6 +609,22 @@ const PostCard = ({
             {/* This block is now moved to the top of the status section */}
 
             <div className="position-absolute bottom-0 end-0 p-2 d-flex gap-2">
+              {/* Chat Button for all non-pending, non-accepted statuses (to avoid duplicate in accepted section) */}
+              {post.status?.toUpperCase() !== "PENDING" &&
+                post.status?.toUpperCase() !== "ACCEPTED" &&
+                (post.assignedTechnicianEmail || post.technicianEmail) && (
+                  <ChatButton
+                    dealerEmail={dealerInfo?.email}
+                    technicianEmail={
+                      post.assignedTechnicianEmail || post.technicianEmail
+                    }
+                    userType="DEALER"
+                    size="sm"
+                    variant="outline-primary"
+                    postId={post.id}
+                    postTitle={`${post.carMake} ${post.carModel} Inspection`}
+                  />
+                )}
               {/* View Report Button - Only for completed posts */}
               {post.status === "COMPLETED" && (
                 <button

@@ -2,7 +2,7 @@ const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
 const cors = require("cors");
-const mysql = require("mysql2/promise");
+const { Pool } = require("pg");
 require("dotenv").config();
 
 const app = express();
@@ -25,15 +25,14 @@ app.use(
 );
 app.use(express.json());
 
-// MySQL connection - Using same credentials as other services
+// PostgreSQL connection - Using same credentials as other services
 const dbConfig = {
   host: process.env.DB_HOST || "localhost",
-  user: process.env.DB_USER || "root",
-  password: process.env.DB_PASSWORD || "Aa123123@", // Same password as other services
-  database: process.env.DB_NAME || "inspection", // Use the same database as other services
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
+  user: process.env.DB_USER || "postgres",
+  password: process.env.DB_PASSWORD || "Aa123123@",
+  database: process.env.DB_NAME || "inspection",
+  port: parseInt(process.env.DB_PORT || "5432", 10),
+  max: 10,
 };
 
 let db;
@@ -41,77 +40,130 @@ let db;
 // Initialize database connection
 async function initializeDatabase() {
   try {
-    db = mysql.createPool(dbConfig);
-
-    // Create database if it doesn't exist
-    const tempConnection = mysql.createPool({
-      ...dbConfig,
-      database: undefined,
-    });
-
-    await tempConnection.execute(
-      `CREATE DATABASE IF NOT EXISTS ${dbConfig.database}`
-    );
-    await tempConnection.end();
+    db = new Pool(dbConfig);
 
     // Create tables
     await createTables();
     console.log("✅ Database initialized successfully");
   } catch (error) {
     console.error("❌ Database initialization failed:", error);
+    // Exit so orchestrator/systemd can restart after DB is fixed; prevents running without DB
+    process.exit(1);
   }
 }
 
 async function createTables() {
   const createRoomsTable = `
     CREATE TABLE IF NOT EXISTS chat_rooms (
-      room_id VARCHAR(255) PRIMARY KEY,
+      room_id VARCHAR(255),
       dealer_email VARCHAR(255) NOT NULL,
       technician_email VARCHAR(255) NOT NULL,
       post_id INT NULL,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      last_activity TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-      INDEX idx_dealer_email (dealer_email),
-      INDEX idx_technician_email (technician_email),
-      INDEX idx_post_id (post_id)
-    )
+      last_activity TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
   `;
 
   const createMessagesTable = `
     CREATE TABLE IF NOT EXISTS chat_messages (
-      id BIGINT AUTO_INCREMENT PRIMARY KEY,
+      id BIGSERIAL PRIMARY KEY,
       room_id VARCHAR(255) NOT NULL,
       sender_email VARCHAR(255) NOT NULL,
-      sender_type ENUM('DEALER', 'TECHNICIAN') NOT NULL,
+      sender_type TEXT CHECK (sender_type IN ('DEALER','TECHNICIAN')) NOT NULL,
       message_content TEXT NOT NULL,
       sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       read_status BOOLEAN DEFAULT FALSE,
-      FOREIGN KEY (room_id) REFERENCES chat_rooms(room_id) ON DELETE CASCADE,
-      INDEX idx_room_id_sent_at (room_id, sent_at),
-      INDEX idx_sender_email (sender_email)
-    )
+      FOREIGN KEY (room_id) REFERENCES chat_rooms(room_id) ON DELETE CASCADE
+    );
   `;
 
   const createCallLogsTable = `
     CREATE TABLE IF NOT EXISTS call_logs (
-      id BIGINT AUTO_INCREMENT PRIMARY KEY,
+      id BIGSERIAL PRIMARY KEY,
       room_id VARCHAR(255) NOT NULL,
       caller_email VARCHAR(255) NOT NULL,
-      caller_type ENUM('DEALER', 'TECHNICIAN') NOT NULL,
-      call_type ENUM('AUDIO', 'VIDEO') NOT NULL,
-      call_status ENUM('INITIATED', 'ANSWERED', 'REJECTED', 'ENDED', 'MISSED') NOT NULL,
+      caller_type TEXT CHECK (caller_type IN ('DEALER','TECHNICIAN')) NOT NULL,
+      call_type TEXT CHECK (call_type IN ('AUDIO','VIDEO')) NOT NULL,
+      call_status TEXT CHECK (call_status IN ('INITIATED','ANSWERED','REJECTED','ENDED','MISSED')) NOT NULL,
       started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       ended_at TIMESTAMP NULL,
       duration_seconds INT DEFAULT 0,
-      FOREIGN KEY (room_id) REFERENCES chat_rooms(room_id) ON DELETE CASCADE,
-      INDEX idx_room_id_started_at (room_id, started_at),
-      INDEX idx_caller_email (caller_email)
-    )
+      FOREIGN KEY (room_id) REFERENCES chat_rooms(room_id) ON DELETE CASCADE
+    );
   `;
 
-  await db.execute(createRoomsTable);
-  await db.execute(createMessagesTable);
-  await db.execute(createCallLogsTable);
+  // Create base table (no PK to avoid conflicts if legacy table exists)
+  await db.query(createRoomsTable);
+  // Ensure required columns exist
+  await db.query(`
+    ALTER TABLE IF EXISTS chat_rooms
+      ADD COLUMN IF NOT EXISTS room_id VARCHAR(255),
+      ADD COLUMN IF NOT EXISTS dealer_email VARCHAR(255),
+      ADD COLUMN IF NOT EXISTS technician_email VARCHAR(255),
+      ADD COLUMN IF NOT EXISTS post_id INT NULL,
+      ADD COLUMN IF NOT EXISTS created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      ADD COLUMN IF NOT EXISTS last_activity TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+  `);
+  // Ensure primary key on room_id
+  await db.query(`
+    DO $$
+    BEGIN
+      IF NOT EXISTS (
+        SELECT 1 FROM pg_constraint 
+        WHERE conrelid = 'chat_rooms'::regclass AND contype = 'p'
+      ) THEN
+        ALTER TABLE chat_rooms ADD CONSTRAINT chat_rooms_pkey PRIMARY KEY (room_id);
+      END IF;
+    END $$;
+  `);
+  // Ensure indexes exist
+  await db.query(
+    `CREATE INDEX IF NOT EXISTS idx_dealer_email ON chat_rooms (dealer_email);`
+  );
+  await db.query(
+    `CREATE INDEX IF NOT EXISTS idx_technician_email ON chat_rooms (technician_email);`
+  );
+  await db.query(
+    `CREATE INDEX IF NOT EXISTS idx_post_id ON chat_rooms (post_id);`
+  );
+
+  await db.query(createMessagesTable);
+  await db.query(`
+    ALTER TABLE IF EXISTS chat_messages
+      ADD COLUMN IF NOT EXISTS room_id VARCHAR(255),
+      ADD COLUMN IF NOT EXISTS sender_email VARCHAR(255),
+      ADD COLUMN IF NOT EXISTS sender_type TEXT,
+      ADD COLUMN IF NOT EXISTS message_content TEXT,
+      ADD COLUMN IF NOT EXISTS sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      ADD COLUMN IF NOT EXISTS read_status BOOLEAN DEFAULT FALSE;
+  `);
+  // Ensure indexes after columns exist
+  await db.query(
+    `CREATE INDEX IF NOT EXISTS idx_room_id_sent_at ON chat_messages (room_id, sent_at);`
+  );
+  await db.query(
+    `CREATE INDEX IF NOT EXISTS idx_sender_email ON chat_messages (sender_email);`
+  );
+
+  await db.query(createCallLogsTable);
+  await db.query(`
+    ALTER TABLE IF EXISTS call_logs
+      ADD COLUMN IF NOT EXISTS room_id VARCHAR(255),
+      ADD COLUMN IF NOT EXISTS caller_email VARCHAR(255),
+      ADD COLUMN IF NOT EXISTS caller_type TEXT,
+      ADD COLUMN IF NOT EXISTS call_type TEXT,
+      ADD COLUMN IF NOT EXISTS call_status TEXT,
+      ADD COLUMN IF NOT EXISTS started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      ADD COLUMN IF NOT EXISTS ended_at TIMESTAMP NULL,
+      ADD COLUMN IF NOT EXISTS duration_seconds INT DEFAULT 0;
+  `);
+  // Ensure indexes after columns exist
+  await db.query(
+    `CREATE INDEX IF NOT EXISTS idx_room_id_started_at ON call_logs (room_id, started_at);`
+  );
+  await db.query(
+    `CREATE INDEX IF NOT EXISTS idx_caller_email ON call_logs (caller_email);`
+  );
 }
 
 // Helper function to create room ID
@@ -132,16 +184,16 @@ app.get("/api/chat/room/:dealerEmail/:technicianEmail", async (req, res) => {
     const roomId = createRoomId(dealerEmail, technicianEmail, postId);
 
     // Check if room exists
-    const [rooms] = await db.execute(
-      "SELECT * FROM chat_rooms WHERE room_id = ?",
+    const { rows: rooms } = await db.query(
+      "SELECT * FROM chat_rooms WHERE room_id = $1",
       [roomId]
     );
 
     let room;
     if (rooms.length === 0) {
       // Create new room
-      await db.execute(
-        "INSERT INTO chat_rooms (room_id, dealer_email, technician_email, post_id) VALUES (?, ?, ?, ?)",
+      await db.query(
+        "INSERT INTO chat_rooms (room_id, dealer_email, technician_email, post_id) VALUES ($1, $2, $3, $4)",
         [roomId, dealerEmail, technicianEmail, postId || null]
       );
       room = {
@@ -183,12 +235,12 @@ app.get("/api/chat/messages", async (req, res) => {
     const limit = parseInt(req.query.limit) || 50;
     const offset = parseInt(req.query.offset) || 0;
 
-    const [messages] = await db.execute(
+    const { rows: messages } = await db.query(
       `SELECT * FROM chat_messages 
-       WHERE room_id = ? 
+       WHERE room_id = $1 
        ORDER BY sent_at DESC 
-       LIMIT ${limit} OFFSET ${offset}`,
-      [roomId]
+       LIMIT $2 OFFSET $3`,
+      [roomId, limit, offset]
     );
 
     console.log("💬 Found messages:", messages.length);
@@ -206,12 +258,12 @@ app.get("/api/chat/room/:roomId/messages", async (req, res) => {
     const limit = parseInt(req.query.limit) || 50;
     const offset = parseInt(req.query.offset) || 0;
 
-    const [messages] = await db.execute(
+    const { rows: messages } = await db.query(
       `SELECT * FROM chat_messages 
-       WHERE room_id = ? 
+       WHERE room_id = $1 
        ORDER BY sent_at DESC 
-       LIMIT ${limit} OFFSET ${offset}`,
-      [roomId]
+       LIMIT $2 OFFSET $3`,
+      [roomId, limit, offset]
     );
 
     res.json(messages.reverse()); // Return in chronological order
@@ -226,17 +278,17 @@ app.get("/api/chat/unread-count/:userEmail", async (req, res) => {
   try {
     const userEmail = decodeURIComponent(req.params.userEmail);
 
-    const [unreadMessages] = await db.execute(
-      `SELECT COUNT(*) as unread_count 
+    const { rows } = await db.query(
+      `SELECT COUNT(*)::int as unread_count 
        FROM chat_messages cm
        JOIN chat_rooms cr ON cm.room_id = cr.room_id
-       WHERE (cr.dealer_email = ? OR cr.technician_email = ?)
-       AND cm.sender_email != ?
+       WHERE (cr.dealer_email = $1 OR cr.technician_email = $1)
+       AND cm.sender_email != $1
        AND cm.read_status = FALSE`,
-      [userEmail, userEmail, userEmail]
+      [userEmail]
     );
 
-    res.json({ unreadCount: unreadMessages[0].unread_count });
+    res.json({ unreadCount: rows[0]?.unread_count || 0 });
   } catch (error) {
     console.error("Error getting unread count:", error);
     res.status(500).json({ error: "Failed to get unread count" });
@@ -248,12 +300,12 @@ app.get("/api/chat/rooms/:userEmail", async (req, res) => {
   try {
     const userEmail = decodeURIComponent(req.params.userEmail);
 
-    const [rooms] = await db.execute(
+    const { rows } = await db.query(
       `SELECT 
         cr.*,
-        (SELECT COUNT(*) FROM chat_messages 
+        (SELECT COUNT(*)::int FROM chat_messages 
          WHERE room_id = cr.room_id 
-         AND sender_email != ? 
+         AND sender_email != $1 
          AND read_status = FALSE) as unread_count,
         (SELECT message_content FROM chat_messages 
          WHERE room_id = cr.room_id 
@@ -265,12 +317,12 @@ app.get("/api/chat/rooms/:userEmail", async (req, res) => {
          WHERE room_id = cr.room_id 
          ORDER BY sent_at DESC LIMIT 1) as last_message_sender
        FROM chat_rooms cr 
-       WHERE cr.dealer_email = ? OR cr.technician_email = ?
+       WHERE cr.dealer_email = $1 OR cr.technician_email = $1
        ORDER BY last_activity DESC`,
-      [userEmail, userEmail, userEmail]
+      [userEmail]
     );
 
-    res.json(rooms);
+    res.json(rows);
   } catch (error) {
     console.error("Error getting chat rooms:", error);
     res.status(500).json({ error: "Failed to get chat rooms" });
@@ -329,15 +381,15 @@ io.on("connection", (socket) => {
       // Ensure the room exists in the database
       try {
         // Check if room exists
-        const [rooms] = await db.execute(
-          "SELECT * FROM chat_rooms WHERE room_id = ?",
+        const { rows: rooms } = await db.query(
+          "SELECT * FROM chat_rooms WHERE room_id = $1",
           [roomId]
         );
 
         if (rooms.length === 0) {
           // Create new room
-          await db.execute(
-            "INSERT INTO chat_rooms (room_id, dealer_email, technician_email, post_id) VALUES (?, ?, ?, ?)",
+          await db.query(
+            "INSERT INTO chat_rooms (room_id, dealer_email, technician_email, post_id) VALUES ($1, $2, $3, $4)",
             [roomId, dealerEmail, technicianEmail, postId || null]
           );
           console.log(`🆕 Created new chat room: ${roomId}`);
@@ -416,10 +468,11 @@ io.on("connection", (socket) => {
       }
 
       // Ensure the room exists before sending message
-      let [rooms] = await db.execute(
-        "SELECT * FROM chat_rooms WHERE room_id = ?",
+      const { rows: roomsInitial } = await db.query(
+        "SELECT * FROM chat_rooms WHERE room_id = $1",
         [roomId]
       );
+      let rooms = roomsInitial;
 
       if (rooms.length === 0) {
         console.log("🆕 Room doesn't exist, creating it:", roomId);
@@ -430,34 +483,42 @@ io.on("connection", (socket) => {
         const [dealerEmail, technicianEmail] = roomId.split(":");
 
         // Create the room
-        await db.execute(
-          "INSERT INTO chat_rooms (room_id, dealer_email, technician_email, post_id) VALUES (?, ?, ?, ?)",
+        await db.query(
+          "INSERT INTO chat_rooms (room_id, dealer_email, technician_email, post_id) VALUES ($1, $2, $3, $4)",
           [roomId, dealerEmail, technicianEmail, postId]
         );
         console.log("✅ Room created successfully:", roomId);
 
         // Re-fetch the room after creation
-        [rooms] = await db.execute(
-          "SELECT * FROM chat_rooms WHERE room_id = ?",
+        const { rows: roomsRefetch } = await db.query(
+          "SELECT * FROM chat_rooms WHERE room_id = $1",
           [roomId]
         );
+        rooms = roomsRefetch;
       }
 
       console.log("💾 Saving message to database...");
       // Save message to database
-      const [result] = await db.execute(
-        "INSERT INTO chat_messages (room_id, sender_email, sender_type, message_content) VALUES (?, ?, ?, ?)",
+      const { rows: insertRows } = await db.query(
+        "INSERT INTO chat_messages (room_id, sender_email, sender_type, message_content) VALUES ($1, $2, $3, $4) RETURNING id, sent_at",
         [roomId, senderEmail, senderType, message]
       );
-      console.log("✅ Message saved successfully:", result.insertId);
+      const inserted = insertRows[0];
+      console.log("✅ Message saved successfully:", inserted.id);
+
+      // Update last_activity for the room
+      await db.query(
+        "UPDATE chat_rooms SET last_activity = CURRENT_TIMESTAMP WHERE room_id = $1",
+        [roomId]
+      );
 
       const messageData = {
-        id: result.insertId,
+        id: inserted.id,
         room_id: roomId,
         sender_email: senderEmail,
         sender_type: senderType,
         message_content: message,
-        sent_at: new Date().toISOString(),
+        sent_at: inserted.sent_at,
         read_status: false,
       };
 
@@ -515,8 +576,8 @@ io.on("connection", (socket) => {
   socket.on("mark_read", async (data) => {
     try {
       const { messageId } = data;
-      await db.execute(
-        "UPDATE chat_messages SET read_status = TRUE WHERE id = ?",
+      await db.query(
+        "UPDATE chat_messages SET read_status = TRUE WHERE id = $1",
         [messageId]
       );
 
@@ -538,10 +599,10 @@ io.on("connection", (socket) => {
       }
 
       // Mark all messages in this room as read for this user (except messages sent by this user)
-      await db.execute(
+      await db.query(
         `UPDATE chat_messages 
          SET read_status = TRUE 
-         WHERE room_id = ? AND sender_email != ?`,
+         WHERE room_id = $1 AND sender_email != $2`,
         [roomId, userEmail]
       );
 
@@ -584,8 +645,8 @@ io.on("connection", (socket) => {
       );
 
       // Ensure the room exists before initiating call
-      const [rooms] = await db.execute(
-        "SELECT * FROM chat_rooms WHERE room_id = ?",
+      const { rows: rooms } = await db.query(
+        "SELECT * FROM chat_rooms WHERE room_id = $1",
         [roomId]
       );
 
@@ -598,8 +659,8 @@ io.on("connection", (socket) => {
         const [dealerEmail, technicianEmail] = roomId.split(":");
 
         // Create the room
-        await db.execute(
-          "INSERT INTO chat_rooms (room_id, dealer_email, technician_email, post_id) VALUES (?, ?, ?, ?)",
+        await db.query(
+          "INSERT INTO chat_rooms (room_id, dealer_email, technician_email, post_id) VALUES ($1, $2, $3, $4)",
           [roomId, dealerEmail, technicianEmail, postId]
         );
         console.log("✅ Room created successfully for call:", roomId);
@@ -615,12 +676,12 @@ io.on("connection", (socket) => {
       }
 
       // Log call initiation in database
-      const [result] = await db.execute(
-        "INSERT INTO call_logs (room_id, caller_email, caller_type, call_type, call_status) VALUES (?, ?, ?, ?, 'INITIATED')",
+      const { rows: callRows } = await db.query(
+        "INSERT INTO call_logs (room_id, caller_email, caller_type, call_type, call_status) VALUES ($1, $2, $3, $4, 'INITIATED') RETURNING id",
         [roomId, callerEmail, callerType, callType.toUpperCase()]
       );
 
-      const callId = result.insertId;
+      const callId = callRows[0].id;
 
       // Find target user's socket
       const allSockets = await io.fetchSockets();
@@ -646,12 +707,23 @@ io.on("connection", (socket) => {
       } else {
         // Target user not online
         socket.emit("call_failed", { reason: "User not available" });
-
-        // Update call status to missed
-        await db.execute(
-          "UPDATE call_logs SET call_status = 'MISSED', ended_at = NOW() WHERE id = ?",
-          [callId]
-        );
+        // Do not mark MISSED immediately; allow peer to connect within 30s
+        setTimeout(async () => {
+          try {
+            const { rows: check } = await db.query(
+              "SELECT call_status FROM call_logs WHERE id = $1",
+              [callId]
+            );
+            if (check?.[0]?.call_status === "INITIATED") {
+              await db.query(
+                "UPDATE call_logs SET call_status = 'MISSED', ended_at = NOW() WHERE id = $1",
+                [callId]
+              );
+            }
+          } catch (e) {
+            console.error("Error marking missed call:", e);
+          }
+        }, 30000);
       }
     } catch (error) {
       console.error("Error initiating call:", error);
@@ -675,8 +747,8 @@ io.on("connection", (socket) => {
       }
 
       // Update call status in database
-      await db.execute(
-        "UPDATE call_logs SET call_status = 'ANSWERED' WHERE id = ?",
+      await db.query(
+        "UPDATE call_logs SET call_status = 'ANSWERED' WHERE id = $1",
         [callId]
       );
 
@@ -703,8 +775,8 @@ io.on("connection", (socket) => {
       }
 
       // Update call status in database
-      await db.execute(
-        "UPDATE call_logs SET call_status = 'REJECTED', ended_at = NOW() WHERE id = ?",
+      await db.query(
+        "UPDATE call_logs SET call_status = 'REJECTED', ended_at = NOW() WHERE id = $1",
         [callId]
       );
 
@@ -729,8 +801,8 @@ io.on("connection", (socket) => {
       console.log(`📴 Call ended: ${callId}`);
 
       // Calculate duration and update call status
-      const [rows] = await db.execute(
-        "SELECT started_at FROM call_logs WHERE id = ?",
+      const { rows } = await db.query(
+        "SELECT started_at FROM call_logs WHERE id = $1",
         [callId]
       );
 
@@ -742,8 +814,8 @@ io.on("connection", (socket) => {
         ? Math.max(0, Math.floor((endTime - startTime) / 1000))
         : 0;
 
-      await db.execute(
-        "UPDATE call_logs SET call_status = 'ENDED', ended_at = NOW(), duration_seconds = ? WHERE id = ?",
+      await db.query(
+        "UPDATE call_logs SET call_status = 'ENDED', ended_at = NOW(), duration_seconds = $1 WHERE id = $2",
         [duration, callId]
       );
 

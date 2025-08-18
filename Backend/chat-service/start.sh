@@ -6,9 +6,9 @@ echo "🚀 Starting Chat Service..."
 # Set environment variables
 export PORT=8089
 export DB_HOST=localhost
-export DB_USER=root
-export DB_PASSWORD=root
-export DB_NAME=chat_db
+export DB_USER=postgres
+export DB_PASSWORD=Aa123123@
+export DB_NAME=inspection
 
 # Start the Node.js chat service
 npm start

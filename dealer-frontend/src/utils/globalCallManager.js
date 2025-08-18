@@ -375,6 +375,13 @@ class GlobalCallManager {
 
     // Start WebRTC call after a brief delay to ensure socket event is sent
     setTimeout(() => {
+      // If server already failed the call (target offline) or call was cancelled, abort
+      if (!this.activeCall || this.activeCall.status !== "calling") {
+        console.log(
+          "⛔ Skipping WebRTC start: call no longer active or not in calling state"
+        );
+        return;
+      }
       console.log("🔄 Starting WebRTC call...");
       this.webrtcService
         .startCall(callType.toLowerCase(), targetEmail)
