@@ -8,18 +8,18 @@ const ChatButton = ({
   dealerEmail,
   technicianEmail,
   userType = "DEALER",
-  variant = "primary",
+  variant = "outline-primary",
   size = "sm",
   className = "",
   showText = true,
   postId = null,
   postTitle = null,
+  shape = "pill", // pill | square
 }) => {
   const [showChat, setShowChat] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
 
   useEffect(() => {
-    // Lightweight unread count fetch without opening sockets
     const currentUserEmail =
       userType === "DEALER" ? dealerEmail : technicianEmail;
     let isCancelled = false;
@@ -47,23 +47,23 @@ const ChatButton = ({
     };
   }, [dealerEmail, technicianEmail, userType]);
 
-  const handleChatOpen = () => {
-    setShowChat(true);
-  };
+  const handleChatOpen = () => setShowChat(true);
+  const handleChatClose = () => setShowChat(false);
 
-  const handleChatClose = () => {
-    setShowChat(false);
-  };
-
-  // Don't render if missing required props
-  if (!dealerEmail || !technicianEmail) {
-    return null;
-  }
+  if (!dealerEmail || !technicianEmail) return null;
 
   const getOtherUserName = () => {
     const email = userType === "DEALER" ? technicianEmail : dealerEmail;
-    return email.split("@")[0]; // Simple name extraction
+    return email.split("@")[0];
   };
+
+  const btnClasses = [
+    "chat-button-modern",
+    shape === "pill" ? "rounded-pill" : "",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <>
@@ -71,15 +71,21 @@ const ChatButton = ({
         variant={variant}
         size={size}
         onClick={handleChatOpen}
-        className={`chat-button ${className}`}
+        className={btnClasses}
         title={`Chat with ${getOtherUserName()}`}
       >
-        <div className="d-flex align-items-center">
-          {showText ? <FaComments className="me-1" /> : <FaComment />}
-          {showText && <span className="chat-button-text">Chat</span>}
+        <div className="d-flex align-items-center justify-content-center position-relative w-100 text-center">
+          {showText ? <FaComments className="me-2" /> : <FaComment />}
+          {showText && <span className="fw-semibold">Chat</span>}
           {unreadCount > 0 && (
-            <Badge bg="danger" pill className="ms-1 unread-badge">
-              {unreadCount > 99 ? "99+" : unreadCount}
+            <Badge
+              bg="danger"
+              pill
+              className="position-absolute top-0 start-100 translate-middle p-1 px-2"
+            >
+              <span style={{ fontSize: "0.65rem" }}>
+                {unreadCount > 99 ? "99+" : unreadCount}
+              </span>
             </Badge>
           )}
         </div>

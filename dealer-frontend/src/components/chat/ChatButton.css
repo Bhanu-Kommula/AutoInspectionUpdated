@@ -57,3 +57,15 @@
   right: -5px;
   transform: none;
 }
+
+/* Modernized button */
+.chat-button-modern {
+  border-width: 2px;
+  font-weight: 600;
+  padding: 0.45rem 0.9rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.chat-button-modern:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}

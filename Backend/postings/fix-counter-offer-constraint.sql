@@ -3,7 +3,8 @@
 -- multiple counter offers with different statuses for the same post-technician combination
 
 -- Drop the existing unique constraint
-ALTER TABLE counter_offers DROP INDEX unique_active_request;
+-- Use IF EXISTS for idempotency on MySQL 8+
+ALTER TABLE counter_offers DROP INDEX IF EXISTS unique_active_request;
 
 -- Add an index for better performance on status-based queries
 -- This allows multiple statuses per post-technician combination

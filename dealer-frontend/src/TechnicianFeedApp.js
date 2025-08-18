@@ -1625,29 +1625,6 @@ const TechnicianFeedApp = () => {
         technicianId={technician?.email}
         onNewNotification={handleCounterOfferStatusRefresh}
       />
-      {/* Debug info */}
-      {showCounterOfferStatusModal && (
-        <div
-          style={{
-            position: "fixed",
-            top: "10px",
-            right: "10px",
-            background: "white",
-            padding: "10px",
-            border: "1px solid black",
-            zIndex: 9999,
-          }}
-        >
-          <strong>Debug Info:</strong>
-          <br />
-          Modal Show: {showCounterOfferStatusModal.toString()}
-          <br />
-          Technician: {JSON.stringify(technician)}
-          <br />
-          Technician Email: {technician?.email}
-          <br />
-        </div>
-      )}
 
       {/* Decline Confirmation Modal */}
       <DeclineConfirmationModal

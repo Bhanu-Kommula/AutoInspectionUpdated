@@ -17,6 +17,8 @@ const CounterOfferButton = ({
   hideInfo = false,
 }) => {
   const [localEligibility, setLocalEligibility] = useState(eligibility);
+  // Hide attempt/counter/max-attempt banners on feed UI while keeping logic intact
+  const showAttemptMeta = false;
 
   // Callback when countdown completes
   const onCountdownComplete = useCallback(() => {
@@ -189,8 +191,9 @@ const CounterOfferButton = ({
 
   return (
     <div style={hideInfo ? { fontSize: 0 } : undefined}>
-      {/* Attempt counter display */}
-      {isReCounterOffer && !hideInfo && (
+      {/* Attempt counter display (hidden when hideInfo=true or showAttemptMeta=false) */}
+      {((!hideInfo && isReCounterOffer) ||
+        (showAttemptMeta && isReCounterOffer)) && (
         <div
           style={{
             fontSize: "0.75rem",
@@ -208,7 +211,7 @@ const CounterOfferButton = ({
         </div>
       )}
 
-      {/* Counter offer attempts label - only show when there are actual attempts */}
+      {/* Counter offer attempts label - only show when there are actual attempts and not hidden */}
       {isReCounterOffer && eligibility?.attemptNumber > 0 && !hideInfo && (
         <div
           style={{

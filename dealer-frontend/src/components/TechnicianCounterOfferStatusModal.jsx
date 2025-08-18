@@ -110,11 +110,6 @@ const TechnicianCounterOfferStatusModal = ({
     }
   }, [show, technicianId]);
 
-  // Add manual refresh function
-  const handleManualRefresh = () => {
-    fetchCounterOfferStatus();
-  };
-
   const fetchCounterOfferStatus = useCallback(async () => {
     if (!technicianId) {
       setError("Technician information not available");
@@ -135,7 +130,46 @@ const TechnicianCounterOfferStatusModal = ({
       );
 
       if (response.data && response.data.success) {
-        setCounterOffers(response.data.counterOffers || []);
+        // Map backend fields to UI schema (no mock data)
+        const rawOffers = response.data.counterOffers || [];
+        const mappedOffers = rawOffers.map((co) => ({
+          id: co.id,
+          postId: co.postId,
+          // Amount fields (support multiple naming variants)
+          originalOfferAmount:
+            co.originalOfferAmount ??
+            co.originalAmount ??
+            co.original_offer_amount ??
+            null,
+          requestedOfferAmount:
+            co.requestedOfferAmount ??
+            co.requestedAmount ??
+            co.requested_offer_amount ??
+            null,
+          // Dates
+          requestedAt: co.requestedAt || co.requested_at || null,
+          expiresAt: co.expiresAt || co.expires_at || null,
+          dealerResponseAt:
+            co.dealerResponseAt || co.dealer_response_at || null,
+          // Notes / reasons
+          requestReason: co.requestReason || null,
+          technicianNotes: co.technicianNotes || null,
+          dealerResponseNotes: co.dealerResponseNotes || null,
+          // Status
+          status: co.status,
+          statusDisplay: co.statusDisplay || null,
+          // Timing helpers
+          hoursUntilExpiry: co.hoursUntilExpiry,
+          isExpired: co.isExpired,
+          remainingCooldownSeconds: co.remainingCooldownSeconds ?? 0,
+          // Optional post/loc fields (if backend supplies)
+          postTitle: co.postTitle,
+          postContent: co.postContent,
+          postLocation: co.postLocation,
+          technicianLocation: co.technicianLocation,
+        }));
+
+        setCounterOffers(mappedOffers);
 
         // Check for recent rejections and show notification
         const recentRejections =

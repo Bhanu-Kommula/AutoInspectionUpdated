@@ -25,10 +25,6 @@ import java.time.LocalDateTime;
            @Index(name = "idx_status", columnList = "status"),
            @Index(name = "idx_requested_at", columnList = "requested_at"),
            @Index(name = "idx_expires_at", columnList = "expires_at")
-       },
-       uniqueConstraints = {
-           @UniqueConstraint(name = "unique_active_request", 
-                           columnNames = {"post_id", "technician_email", "status"})
        })
 @EntityListeners(AuditingEntityListener.class)
 @Data
