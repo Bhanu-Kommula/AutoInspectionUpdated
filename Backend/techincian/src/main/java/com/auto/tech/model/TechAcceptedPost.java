@@ -1,0 +1,45 @@
+package com.auto.tech.model;
+
+import java.util.Date;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "accepted_posts")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
+@EntityListeners(AuditingEntityListener.class)
+public class TechAcceptedPost {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	
+	@Column(name = "technician_email")
+	private String email;
+	
+	private long postId;
+	
+	private Date acceptedAt;
+	
+	@CreatedDate
+	@Column(name = "created_at", nullable = false, updatable = false)
+	private LocalDateTime createdAt;
+}
+

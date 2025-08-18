@@ -1,0 +1,1033 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.auto.tech:techincian >----------------------
+[INFO] Building techincian 1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.5.3:run (default-cli) > test-compile @ techincian >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ techincian ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.0:compile (default-compile) @ techincian ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ techincian ---
+[INFO] skip non existing resourceDirectory /Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/techincian/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.0:testCompile (default-testCompile) @ techincian ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-boot:3.5.3:run (default-cli) < test-compile @ techincian <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.5.3:run (default-cli) @ techincian ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.3)
+
+2025-08-16T21:02:30.270-05:00  INFO 43990 --- [technician] [  restartedMain] com.auto.tech.DealerApplication          : Starting DealerApplication using Java 17.0.16 with PID 43990 (/Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/techincian/target/classes started by bhanuprasadkommula in /Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/techincian)
+2025-08-16T21:02:30.271-05:00  INFO 43990 --- [technician] [  restartedMain] com.auto.tech.DealerApplication          : No active profile set, falling back to 1 default profile: "default"
+2025-08-16T21:02:30.291-05:00  INFO 43990 --- [technician] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-16T21:02:30.291-05:00  INFO 43990 --- [technician] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-16T21:02:30.605-05:00  INFO 43990 --- [technician] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-16T21:02:30.674-05:00  INFO 43990 --- [technician] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 65 ms. Found 7 JPA repository interfaces.
+2025-08-16T21:02:30.782-05:00  INFO 43990 --- [technician] [  restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=7e199242-fa49-3cf0-b462-e8ec3aa49ace
+2025-08-16T21:02:31.017-05:00  INFO 43990 --- [technician] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8082 (http)
+2025-08-16T21:02:31.022-05:00  INFO 43990 --- [technician] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-16T21:02:31.023-05:00  INFO 43990 --- [technician] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-08-16T21:02:31.040-05:00  INFO 43990 --- [technician] [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-16T21:02:31.040-05:00  INFO 43990 --- [technician] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 749 ms
+2025-08-16T21:02:31.100-05:00  INFO 43990 --- [technician] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-16T21:02:31.117-05:00  INFO 43990 --- [technician] [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-08-16T21:02:31.127-05:00  INFO 43990 --- [technician] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-08-16T21:02:31.217-05:00  INFO 43990 --- [technician] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-16T21:02:31.227-05:00  INFO 43990 --- [technician] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-16T21:02:31.350-05:00  INFO 43990 --- [technician] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@eb21489
+2025-08-16T21:02:31.350-05:00  INFO 43990 --- [technician] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-16T21:02:31.385-05:00  INFO 43990 --- [technician] [  restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 9.4
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-16T21:02:31.775-05:00  INFO 43990 --- [technician] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-16T21:02:31.817-05:00  INFO 43990 --- [technician] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-16T21:02:31.991-05:00  INFO 43990 --- [technician] [  restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-16T21:02:33.103-05:00  INFO 43990 --- [technician] [  restartedMain] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestTemplate.
+2025-08-16T21:02:33.114-05:00  WARN 43990 --- [technician] [  restartedMain] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2025-08-16T21:02:33.123-05:00  INFO 43990 --- [technician] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2025-08-16T21:02:33.124-05:00  INFO 43990 --- [technician] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2fe7f046]]
+2025-08-16T21:02:33.124-05:00  INFO 43990 --- [technician] [  restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2025-08-16T21:02:33.128-05:00  INFO 43990 --- [technician] [  restartedMain] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2025-08-16T21:02:33.138-05:00  INFO 43990 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2025-08-16T21:02:33.139-05:00  INFO 43990 --- [technician] [  restartedMain] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-16T21:02:33.142-05:00  INFO 43990 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2025-08-16T21:02:33.143-05:00  INFO 43990 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2025-08-16T21:02:33.143-05:00  INFO 43990 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2025-08-16T21:02:33.143-05:00  INFO 43990 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2025-08-16T21:02:33.143-05:00  INFO 43990 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2025-08-16T21:02:33.143-05:00  INFO 43990 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2025-08-16T21:02:33.143-05:00  INFO 43990 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2025-08-16T21:02:33.284-05:00  INFO 43990 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2025-08-16T21:02:33.285-05:00  INFO 43990 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2025-08-16T21:02:33.286-05:00  INFO 43990 --- [technician] [  restartedMain] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2025-08-16T21:02:33.287-05:00  INFO 43990 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1755396153286 with initial instances count: 2
+2025-08-16T21:02:33.289-05:00  INFO 43990 --- [technician] [  restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application TECHNICIAN with eureka with status UP
+2025-08-16T21:02:33.289-05:00  INFO 43990 --- [technician] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1755396153289, current=UP, previous=STARTING]
+2025-08-16T21:02:33.290-05:00  INFO 43990 --- [technician] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TECHNICIAN/192.168.1.192:technician:8082: registering service...
+2025-08-16T21:02:33.296-05:00  INFO 43990 --- [technician] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8082 (http) with context path '/'
+2025-08-16T21:02:33.297-05:00  INFO 43990 --- [technician] [  restartedMain] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8082
+2025-08-16T21:02:33.306-05:00  INFO 43990 --- [technician] [MessageBroker-2] c.a.t.s.CounterOfferSchedulerService     : Running scheduled task to mark expired counter offers
+2025-08-16T21:02:33.306-05:00  INFO 43990 --- [technician] [  restartedMain] com.auto.tech.DealerApplication          : Started DealerApplication in 3.216 seconds (process running for 3.462)
+2025-08-16T21:02:33.306-05:00  INFO 43990 --- [technician] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TECHNICIAN/192.168.1.192:technician:8082 - registration status: 204
+2025-08-16T21:02:33.309-05:00  INFO 43990 --- [technician] [MessageBroker-2] c.auto.tech.service.CounterOfferService  : Marking expired counter offers
+Hibernate: update tech_counter_offers tco1_0 set status='EXPIRED',updated_at=? where tco1_0.status='PENDING' and tco1_0.expires_at is not null and tco1_0.expires_at<=?
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0
+2025-08-16T21:02:33.332-05:00  INFO 43990 --- [technician] [MessageBroker-2] c.auto.tech.service.CounterOfferService  : Marked 0 counter offers as expired
+Counter offer cleanup completed
+2025-08-16T21:03:27.976-05:00  INFO 43990 --- [technician] [nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-16T21:03:27.978-05:00  INFO 43990 --- [technician] [nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-16T21:03:27.983-05:00  INFO 43990 --- [technician] [nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.technician_email=? order by tco1_0.requested_at desc
+Counter Offer Debug - ID: 24, Status: REJECTED, ExpiresAt: 2025-08-18T20:38:30.980912, IsExpired: false, HoursUntilExpiry: 47, DealerResponseAt: 2025-08-16T20:38:39.037633
+Counter Offer Debug - ID: 23, Status: PENDING, ExpiresAt: 2025-08-17T12:00:11.914729, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 22, Status: PENDING, ExpiresAt: 2025-08-17T11:54:12.493287, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 21, Status: REJECTED, ExpiresAt: 2025-08-17T11:50:53.637371, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: 2025-08-15T11:51:01.223055
+Counter Offer Debug - ID: 20, Status: WITHDRAWN, ExpiresAt: 2025-08-17T11:42:31.098460, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 19, Status: REJECTED, ExpiresAt: 2025-08-17T11:38:58.141078, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: 2025-08-15T11:39:05.840578
+Counter Offer Debug - ID: 18, Status: WITHDRAWN, ExpiresAt: 2025-08-17T11:29:48.920785, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 17, Status: REJECTED, ExpiresAt: 2025-08-17T11:26:31.654970, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: 2025-08-15T11:26:38.966856
+Counter Offer Debug - ID: 16, Status: WITHDRAWN, ExpiresAt: 2025-08-17T10:19:22.143960, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: null
+Counter Offer Debug - ID: 15, Status: REJECTED, ExpiresAt: 2025-08-17T10:13:38.237234, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: 2025-08-15T10:13:46.202930
+Counter Offer Debug - ID: 14, Status: WITHDRAWN, ExpiresAt: 2025-08-17T10:12:08.214069, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: null
+Counter Offer Debug - ID: 13, Status: REJECTED, ExpiresAt: 2025-08-17T10:07:51.910981, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: 2025-08-15T10:08:02.376276
+Counter Offer Debug - ID: 12, Status: REJECTED, ExpiresAt: 2025-08-15T10:51:42.657726, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:52:03.396539
+Counter Offer Debug - ID: 11, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:47:31.633855, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:48:32.812765
+Counter Offer Debug - ID: 10, Status: REJECTED, ExpiresAt: 2025-08-15T10:43:03.522334, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:43:12.167554
+Counter Offer Debug - ID: 9, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:41:04.051324, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:41:13.558588
+Counter Offer Debug - ID: 8, Status: REJECTED, ExpiresAt: 2025-08-15T10:37:16.229321, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:37:22.335356
+Counter Offer Debug - ID: 7, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:36:51.936137, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:37:02.443599
+Counter Offer Debug - ID: 6, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:36:48.463889, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:37:00.841207
+Counter Offer Debug - ID: 5, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:32:46.032057, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:36:58.813786
+Counter Offer Debug - ID: 4, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:26:54.843100, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:35:14.615633
+Counter Offer Debug - ID: 3, Status: REJECTED, ExpiresAt: 2025-08-15T10:20:27.387508, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:20:32.210694
+Counter Offer Debug - ID: 2, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:19:16.058723, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:19:26.228607
+Counter Offer Debug - ID: 1, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:12:11.060142, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:18:05.945479
+2025-08-16T21:03:33.132-05:00  INFO 43990 --- [technician] [MessageBroker-3] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 6, active threads = 1, queued tasks = 3, completed tasks = 2]
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.technician_email=? order by tco1_0.requested_at desc
+Counter Offer Debug - ID: 24, Status: REJECTED, ExpiresAt: 2025-08-18T20:38:30.980912, IsExpired: false, HoursUntilExpiry: 47, DealerResponseAt: 2025-08-16T20:38:39.037633
+Counter Offer Debug - ID: 23, Status: PENDING, ExpiresAt: 2025-08-17T12:00:11.914729, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 22, Status: PENDING, ExpiresAt: 2025-08-17T11:54:12.493287, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 21, Status: REJECTED, ExpiresAt: 2025-08-17T11:50:53.637371, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: 2025-08-15T11:51:01.223055
+Counter Offer Debug - ID: 20, Status: WITHDRAWN, ExpiresAt: 2025-08-17T11:42:31.098460, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 19, Status: REJECTED, ExpiresAt: 2025-08-17T11:38:58.141078, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: 2025-08-15T11:39:05.840578
+Counter Offer Debug - ID: 18, Status: WITHDRAWN, ExpiresAt: 2025-08-17T11:29:48.920785, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 17, Status: REJECTED, ExpiresAt: 2025-08-17T11:26:31.654970, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: 2025-08-15T11:26:38.966856
+Counter Offer Debug - ID: 16, Status: WITHDRAWN, ExpiresAt: 2025-08-17T10:19:22.143960, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: null
+Counter Offer Debug - ID: 15, Status: REJECTED, ExpiresAt: 2025-08-17T10:13:38.237234, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: 2025-08-15T10:13:46.202930
+Counter Offer Debug - ID: 14, Status: WITHDRAWN, ExpiresAt: 2025-08-17T10:12:08.214069, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: null
+Counter Offer Debug - ID: 13, Status: REJECTED, ExpiresAt: 2025-08-17T10:07:51.910981, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: 2025-08-15T10:08:02.376276
+Counter Offer Debug - ID: 12, Status: REJECTED, ExpiresAt: 2025-08-15T10:51:42.657726, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:52:03.396539
+Counter Offer Debug - ID: 11, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:47:31.633855, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:48:32.812765
+Counter Offer Debug - ID: 10, Status: REJECTED, ExpiresAt: 2025-08-15T10:43:03.522334, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:43:12.167554
+Counter Offer Debug - ID: 9, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:41:04.051324, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:41:13.558588
+Counter Offer Debug - ID: 8, Status: REJECTED, ExpiresAt: 2025-08-15T10:37:16.229321, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:37:22.335356
+Counter Offer Debug - ID: 7, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:36:51.936137, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:37:02.443599
+Counter Offer Debug - ID: 6, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:36:48.463889, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:37:00.841207
+Counter Offer Debug - ID: 5, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:32:46.032057, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:36:58.813786
+Counter Offer Debug - ID: 4, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:26:54.843100, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:35:14.615633
+Counter Offer Debug - ID: 3, Status: REJECTED, ExpiresAt: 2025-08-15T10:20:27.387508, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:20:32.210694
+Counter Offer Debug - ID: 2, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:19:16.058723, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:19:26.228607
+Counter Offer Debug - ID: 1, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:12:11.060142, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:18:05.945479
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where upper(t1_0.email)=upper(?)
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where upper(t1_0.email)=upper(?)
+Hibernate: select tdp1_0.post_id from tech_declined_posts tdp1_0 where tdp1_0.email=?
+Hibernate: select tdp1_0.post_id from tech_declined_posts tdp1_0 where tdp1_0.email=?
+Hibernate: select tap1_0.post_id from accepted_posts tap1_0
+Hibernate: select tap1_0.post_id from accepted_posts tap1_0
+🔍 Filtering feed for technician: kommula@gmail.com
+🔍 Technician location: Dallas, Texas
+🔍 Declined post IDs: [10, 13, 14, 16]
+🔍 Declined post IDs count: 4
+🔍 Accepted post IDs (global): [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 19, 20, 22, 23, 24]
+🔍 Filtering feed for technician: kommula@gmail.com
+🔍 Technician location: Dallas, Texas
+🔍 Declined post IDs: [10, 13, 14, 16]
+🔍 Declined post IDs count: 4
+🔍 Accepted post IDs (global): [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 19, 20, 22, 23, 24]
+🔍 Total posts from posting service: 9
+🔍 Total posts from posting service: 9
+❌ Post 2 already accepted by someone
+❌ Post 2 already accepted by someone
+❌ Post 10 declined by technician
+❌ Post 13 declined by technician
+❌ Post 14 declined by technician
+❌ Post 10 declined by technician
+❌ Post 13 declined by technician
+❌ Post 14 declined by technician
+❌ Post 16 declined by technician
+❌ Post 16 declined by technician
+✅ Filtered posts count: 4
+✅ Filtered posts count: 4
+2025-08-16T21:03:45.208-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Checking counter offer eligibility for post 18 by technician kommula@gmail.com
+2025-08-16T21:03:45.208-05:00  INFO 43990 --- [technician] [nio-8082-exec-5] c.auto.tech.service.CounterOfferService  : Checking counter offer eligibility for post 25 by technician kommula@gmail.com
+2025-08-16T21:03:45.208-05:00  INFO 43990 --- [technician] [nio-8082-exec-6] c.auto.tech.service.CounterOfferService  : Checking counter offer eligibility for post 21 by technician kommula@gmail.com
+2025-08-16T21:03:45.209-05:00  INFO 43990 --- [technician] [nio-8082-exec-8] c.auto.tech.service.CounterOfferService  : Checking counter offer eligibility for post 17 by technician kommula@gmail.com
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where upper(t1_0.email)=upper(?)
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where upper(t1_0.email)=upper(?)
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where upper(t1_0.email)=upper(?)
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where upper(t1_0.email)=upper(?)
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.post_id=? and tco1_0.technician_email=? order by tco1_0.requested_at desc
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.post_id=? and tco1_0.technician_email=? order by tco1_0.requested_at desc
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.post_id=? and tco1_0.technician_email=? order by tco1_0.requested_at desc
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.post_id=? and tco1_0.technician_email=? order by tco1_0.requested_at desc
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-5] c.auto.tech.service.CounterOfferService  : Found 1 counter offers for post 25 by technician kommula@gmail.com
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-6] c.auto.tech.service.CounterOfferService  : Found 0 counter offers for post 21 by technician kommula@gmail.com
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Found 1 counter offers for post 18 by technician kommula@gmail.com
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-8] c.auto.tech.service.CounterOfferService  : Found 2 counter offers for post 17 by technician kommula@gmail.com
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-5] c.auto.tech.service.CounterOfferService  : Attempt count calculation - Total offers: 1, Attempt count: 1
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Attempt count calculation - Total offers: 1, Attempt count: 1
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-6] c.auto.tech.service.CounterOfferService  : Attempt count calculation - Total offers: 0, Attempt count: 0
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-8] c.auto.tech.service.CounterOfferService  : Attempt count calculation - Total offers: 2, Attempt count: 2
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-6] c.auto.tech.service.CounterOfferService  : Fresh post - no previous attempts, buttonText: Submit Counter Offer
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-5] c.auto.tech.service.CounterOfferService  : Most recent counter offer - ID: 24, Status: REJECTED, RequestedAt: 2025-08-16T20:38:30.980901, DealerResponseAt: 2025-08-16T20:38:39.037633 for post 25 by technician kommula@gmail.com
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Most recent counter offer - ID: 23, Status: PENDING, RequestedAt: 2025-08-15T12:00:11.914721, DealerResponseAt: null for post 18 by technician kommula@gmail.com
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-8] c.auto.tech.service.CounterOfferService  : Most recent counter offer - ID: 22, Status: PENDING, RequestedAt: 2025-08-15T11:54:12.493276, DealerResponseAt: null for post 17 by technician kommula@gmail.com
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Checking cooldown for most recent offer - Status: PENDING, DealerResponseAt: null, RequestedAt: 2025-08-15T12:00:11.914721
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-8] c.auto.tech.service.CounterOfferService  : Checking cooldown for most recent offer - Status: PENDING, DealerResponseAt: null, RequestedAt: 2025-08-15T11:54:12.493276
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-6] c.auto.tech.service.CounterOfferService  : Counter offer eligibility check - Post: 21, Technician: kommula@gmail.com, CanSubmit: true, Attempts: 0/3, InCooldown: false, RemainingSeconds: 0
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-8] c.auto.tech.service.CounterOfferService  : Most recent offer is PENDING - using 48-hour cooldown: 2025-08-17T11:54:12.493276
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-5] c.auto.tech.service.CounterOfferService  : Checking cooldown for most recent offer - Status: REJECTED, DealerResponseAt: 2025-08-16T20:38:39.037633, RequestedAt: 2025-08-16T20:38:30.980901
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-6] c.auto.tech.service.CounterOfferService  : Button text: Submit Counter Offer, Hover text: Click to submit a counter offer for this post, Most recent status: NONE
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-8] c.auto.tech.service.CounterOfferService  : In cooldown - remaining seconds: 53427, cooldown end time: 2025-08-17T11:54:12.493276
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Most recent offer is PENDING - using 48-hour cooldown: 2025-08-17T12:00:11.914721
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-5] c.auto.tech.service.CounterOfferService  : Most recent offer is REJECTED - dealerResponseAt: 2025-08-16T20:38:39.037633, rejectionTime: 2025-08-16T20:38:39.037633
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : In cooldown - remaining seconds: 53786, cooldown end time: 2025-08-17T12:00:11.914721
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-5] c.auto.tech.service.CounterOfferService  : Using dealer response time for 3-minute cooldown: 2025-08-16T20:41:39.037633
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-5] c.auto.tech.service.CounterOfferService  : Not in cooldown - current time: 2025-08-16T21:03:45.232381, cooldown end time: 2025-08-16T20:41:39.037633
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-5] c.auto.tech.service.CounterOfferService  : Rejected post - most recent status: REJECTED, buttonText: Submit Re-Counter Offer
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-5] c.auto.tech.service.CounterOfferService  : Counter offer eligibility check - Post: 25, Technician: kommula@gmail.com, CanSubmit: true, Attempts: 1/3, InCooldown: false, RemainingSeconds: 0
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-5] c.auto.tech.service.CounterOfferService  : Button text: Submit Re-Counter Offer, Hover text: Click to submit a re-counter offer after rejection, Most recent status: REJECTED
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Counter offer eligibility check - Post: 18, Technician: kommula@gmail.com, CanSubmit: false, Attempts: 1/3, InCooldown: true, RemainingSeconds: 53786
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-8] c.auto.tech.service.CounterOfferService  : Counter offer eligibility check - Post: 17, Technician: kommula@gmail.com, CanSubmit: false, Attempts: 2/3, InCooldown: true, RemainingSeconds: 53427
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Button text: Counter Offer Request in 14:56:26, Hover text: You can submit a new counter offer in 14:56:26 after your last request, Most recent status: PENDING
+2025-08-16T21:03:45.232-05:00  INFO 43990 --- [technician] [nio-8082-exec-8] c.auto.tech.service.CounterOfferService  : Button text: Counter Offer Request in 14:50:27, Hover text: You can submit a new counter offer in 14:50:27 after your last request, Most recent status: PENDING
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.technician_email=? order by tco1_0.requested_at desc
+Counter Offer Debug - ID: 24, Status: REJECTED, ExpiresAt: 2025-08-18T20:38:30.980912, IsExpired: false, HoursUntilExpiry: 47, DealerResponseAt: 2025-08-16T20:38:39.037633
+Counter Offer Debug - ID: 23, Status: PENDING, ExpiresAt: 2025-08-17T12:00:11.914729, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 22, Status: PENDING, ExpiresAt: 2025-08-17T11:54:12.493287, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 21, Status: REJECTED, ExpiresAt: 2025-08-17T11:50:53.637371, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: 2025-08-15T11:51:01.223055
+Counter Offer Debug - ID: 20, Status: WITHDRAWN, ExpiresAt: 2025-08-17T11:42:31.098460, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 19, Status: REJECTED, ExpiresAt: 2025-08-17T11:38:58.141078, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: 2025-08-15T11:39:05.840578
+Counter Offer Debug - ID: 18, Status: WITHDRAWN, ExpiresAt: 2025-08-17T11:29:48.920785, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 17, Status: REJECTED, ExpiresAt: 2025-08-17T11:26:31.654970, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: 2025-08-15T11:26:38.966856
+Counter Offer Debug - ID: 16, Status: WITHDRAWN, ExpiresAt: 2025-08-17T10:19:22.143960, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: null
+Counter Offer Debug - ID: 15, Status: REJECTED, ExpiresAt: 2025-08-17T10:13:38.237234, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: 2025-08-15T10:13:46.202930
+Counter Offer Debug - ID: 14, Status: WITHDRAWN, ExpiresAt: 2025-08-17T10:12:08.214069, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: null
+Counter Offer Debug - ID: 13, Status: REJECTED, ExpiresAt: 2025-08-17T10:07:51.910981, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: 2025-08-15T10:08:02.376276
+Counter Offer Debug - ID: 12, Status: REJECTED, ExpiresAt: 2025-08-15T10:51:42.657726, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:52:03.396539
+Counter Offer Debug - ID: 11, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:47:31.633855, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:48:32.812765
+Counter Offer Debug - ID: 10, Status: REJECTED, ExpiresAt: 2025-08-15T10:43:03.522334, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:43:12.167554
+Counter Offer Debug - ID: 9, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:41:04.051324, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:41:13.558588
+Counter Offer Debug - ID: 8, Status: REJECTED, ExpiresAt: 2025-08-15T10:37:16.229321, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:37:22.335356
+Counter Offer Debug - ID: 7, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:36:51.936137, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:37:02.443599
+Counter Offer Debug - ID: 6, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:36:48.463889, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:37:00.841207
+Counter Offer Debug - ID: 5, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:32:46.032057, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:36:58.813786
+Counter Offer Debug - ID: 4, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:26:54.843100, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:35:14.615633
+Counter Offer Debug - ID: 3, Status: REJECTED, ExpiresAt: 2025-08-15T10:20:27.387508, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:20:32.210694
+Counter Offer Debug - ID: 2, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:19:16.058723, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:19:26.228607
+Counter Offer Debug - ID: 1, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:12:11.060142, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:18:05.945479
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where t1_0.id=?
+Hibernate: select tap1_0.id,tap1_0.accepted_at,tap1_0.created_at,tap1_0.technician_email,tap1_0.post_id from accepted_posts tap1_0 where tap1_0.technician_email=?
+Hibernate: select tap1_0.id,tap1_0.accepted_at,tap1_0.created_at,tap1_0.technician_email,tap1_0.post_id from accepted_posts tap1_0 where tap1_0.technician_email=?
+Hibernate: select tdp1_0.post_id from tech_declined_posts tdp1_0 where tdp1_0.email=?
+Hibernate: select tdp1_0.post_id from tech_declined_posts tdp1_0 where tdp1_0.email=?
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.technician_email=? order by tco1_0.requested_at desc
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.technician_email=? order by tco1_0.requested_at desc
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where upper(t1_0.email)=upper(?)
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.technician_email=? order by tco1_0.requested_at desc
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where upper(t1_0.email)=upper(?)
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where upper(t1_0.email)=upper(?)
+Hibernate: select tdp1_0.post_id from tech_declined_posts tdp1_0 where tdp1_0.email=?
+Hibernate: select tdp1_0.post_id from tech_declined_posts tdp1_0 where tdp1_0.email=?
+Hibernate: select tap1_0.post_id from accepted_posts tap1_0
+Counter Offer Debug - ID: 24, Status: REJECTED, ExpiresAt: 2025-08-18T20:38:30.980912, IsExpired: false, HoursUntilExpiry: 47, DealerResponseAt: 2025-08-16T20:38:39.037633
+Counter Offer Debug - ID: 23, Status: PENDING, ExpiresAt: 2025-08-17T12:00:11.914729, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 22, Status: PENDING, ExpiresAt: 2025-08-17T11:54:12.493287, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 21, Status: REJECTED, ExpiresAt: 2025-08-17T11:50:53.637371, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: 2025-08-15T11:51:01.223055
+Counter Offer Debug - ID: 20, Status: WITHDRAWN, ExpiresAt: 2025-08-17T11:42:31.098460, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 19, Status: REJECTED, ExpiresAt: 2025-08-17T11:38:58.141078, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: 2025-08-15T11:39:05.840578
+Counter Offer Debug - ID: 18, Status: WITHDRAWN, ExpiresAt: 2025-08-17T11:29:48.920785, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 17, Status: REJECTED, ExpiresAt: 2025-08-17T11:26:31.654970, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: 2025-08-15T11:26:38.966856
+Counter Offer Debug - ID: 16, Status: WITHDRAWN, ExpiresAt: 2025-08-17T10:19:22.143960, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: null
+Counter Offer Debug - ID: 15, Status: REJECTED, ExpiresAt: 2025-08-17T10:13:38.237234, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: 2025-08-15T10:13:46.202930
+Counter Offer Debug - ID: 14, Status: WITHDRAWN, ExpiresAt: 2025-08-17T10:12:08.214069, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: null
+Counter Offer Debug - ID: 13, Status: REJECTED, ExpiresAt: 2025-08-17T10:07:51.910981, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: 2025-08-15T10:08:02.376276
+Counter Offer Debug - ID: 12, Status: REJECTED, ExpiresAt: 2025-08-15T10:51:42.657726, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:52:03.396539
+Hibernate: select tap1_0.post_id from accepted_posts tap1_0
+Counter Offer Debug - ID: 11, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:47:31.633855, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:48:32.812765
+Counter Offer Debug - ID: 10, Status: REJECTED, ExpiresAt: 2025-08-15T10:43:03.522334, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:43:12.167554
+Counter Offer Debug - ID: 9, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:41:04.051324, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:41:13.558588
+Counter Offer Debug - ID: 8, Status: REJECTED, ExpiresAt: 2025-08-15T10:37:16.229321, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:37:22.335356
+Counter Offer Debug - ID: 7, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:36:51.936137, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:37:02.443599
+🔍 Filtering feed for technician: kommula@gmail.com
+🔍 Technician location: Dallas, Texas
+🔍 Declined post IDs: [10, 13, 14, 16]
+Counter Offer Debug - ID: 6, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:36:48.463889, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:37:00.841207
+🔍 Declined post IDs count: 4
+Counter Offer Debug - ID: 5, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:32:46.032057, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:36:58.813786
+🔍 Accepted post IDs (global): [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 19, 20, 22, 23, 24]
+Counter Offer Debug - ID: 4, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:26:54.843100, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:35:14.615633
+Counter Offer Debug - ID: 3, Status: REJECTED, ExpiresAt: 2025-08-15T10:20:27.387508, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:20:32.210694
+Counter Offer Debug - ID: 2, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:19:16.058723, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:19:26.228607
+Counter Offer Debug - ID: 1, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:12:11.060142, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:18:05.945479
+🔍 Filtering feed for technician: kommula@gmail.com
+🔍 Technician location: Dallas, Texas
+🔍 Declined post IDs: [10, 13, 14, 16]
+🔍 Declined post IDs count: 4
+🔍 Accepted post IDs (global): [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 19, 20, 22, 23, 24]
+🔍 Total posts from posting service: 9
+❌ Post 2 already accepted by someone
+❌ Post 10 declined by technician
+❌ Post 13 declined by technician
+❌ Post 14 declined by technician
+❌ Post 16 declined by technician
+✅ Filtered posts count: 4
+🔍 Total posts from posting service: 9
+❌ Post 2 already accepted by someone
+❌ Post 10 declined by technician
+❌ Post 13 declined by technician
+❌ Post 14 declined by technician
+❌ Post 16 declined by technician
+✅ Filtered posts count: 4
+2025-08-16T21:03:54.883-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Checking counter offer eligibility for post 25 by technician kommula@gmail.com
+2025-08-16T21:03:54.883-05:00  INFO 43990 --- [technician] [nio-8082-exec-6] c.auto.tech.service.CounterOfferService  : Checking counter offer eligibility for post 21 by technician kommula@gmail.com
+2025-08-16T21:03:54.883-05:00  INFO 43990 --- [technician] [nio-8082-exec-8] c.auto.tech.service.CounterOfferService  : Checking counter offer eligibility for post 18 by technician kommula@gmail.com
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where upper(t1_0.email)=upper(?)
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where upper(t1_0.email)=upper(?)
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where upper(t1_0.email)=upper(?)
+2025-08-16T21:03:54.884-05:00  INFO 43990 --- [technician] [nio-8082-exec-9] c.auto.tech.service.CounterOfferService  : Checking counter offer eligibility for post 17 by technician kommula@gmail.com
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where upper(t1_0.email)=upper(?)
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.post_id=? and tco1_0.technician_email=? order by tco1_0.requested_at desc
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.post_id=? and tco1_0.technician_email=? order by tco1_0.requested_at desc
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.post_id=? and tco1_0.technician_email=? order by tco1_0.requested_at desc
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-8] c.auto.tech.service.CounterOfferService  : Found 1 counter offers for post 18 by technician kommula@gmail.com
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Found 1 counter offers for post 25 by technician kommula@gmail.com
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.post_id=? and tco1_0.technician_email=? order by tco1_0.requested_at desc
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-6] c.auto.tech.service.CounterOfferService  : Found 0 counter offers for post 21 by technician kommula@gmail.com
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Attempt count calculation - Total offers: 1, Attempt count: 1
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-8] c.auto.tech.service.CounterOfferService  : Attempt count calculation - Total offers: 1, Attempt count: 1
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-6] c.auto.tech.service.CounterOfferService  : Attempt count calculation - Total offers: 0, Attempt count: 0
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Most recent counter offer - ID: 24, Status: REJECTED, RequestedAt: 2025-08-16T20:38:30.980901, DealerResponseAt: 2025-08-16T20:38:39.037633 for post 25 by technician kommula@gmail.com
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-6] c.auto.tech.service.CounterOfferService  : Fresh post - no previous attempts, buttonText: Submit Counter Offer
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-8] c.auto.tech.service.CounterOfferService  : Most recent counter offer - ID: 23, Status: PENDING, RequestedAt: 2025-08-15T12:00:11.914721, DealerResponseAt: null for post 18 by technician kommula@gmail.com
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Checking cooldown for most recent offer - Status: REJECTED, DealerResponseAt: 2025-08-16T20:38:39.037633, RequestedAt: 2025-08-16T20:38:30.980901
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-6] c.auto.tech.service.CounterOfferService  : Counter offer eligibility check - Post: 21, Technician: kommula@gmail.com, CanSubmit: true, Attempts: 0/3, InCooldown: false, RemainingSeconds: 0
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Most recent offer is REJECTED - dealerResponseAt: 2025-08-16T20:38:39.037633, rejectionTime: 2025-08-16T20:38:39.037633
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-8] c.auto.tech.service.CounterOfferService  : Checking cooldown for most recent offer - Status: PENDING, DealerResponseAt: null, RequestedAt: 2025-08-15T12:00:11.914721
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Using dealer response time for 3-minute cooldown: 2025-08-16T20:41:39.037633
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-6] c.auto.tech.service.CounterOfferService  : Button text: Submit Counter Offer, Hover text: Click to submit a counter offer for this post, Most recent status: NONE
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Not in cooldown - current time: 2025-08-16T21:03:54.891449, cooldown end time: 2025-08-16T20:41:39.037633
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-8] c.auto.tech.service.CounterOfferService  : Most recent offer is PENDING - using 48-hour cooldown: 2025-08-17T12:00:11.914721
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Rejected post - most recent status: REJECTED, buttonText: Submit Re-Counter Offer
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Counter offer eligibility check - Post: 25, Technician: kommula@gmail.com, CanSubmit: true, Attempts: 1/3, InCooldown: false, RemainingSeconds: 0
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-8] c.auto.tech.service.CounterOfferService  : In cooldown - remaining seconds: 53777, cooldown end time: 2025-08-17T12:00:11.914721
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-7] c.auto.tech.service.CounterOfferService  : Button text: Submit Re-Counter Offer, Hover text: Click to submit a re-counter offer after rejection, Most recent status: REJECTED
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-8] c.auto.tech.service.CounterOfferService  : Counter offer eligibility check - Post: 18, Technician: kommula@gmail.com, CanSubmit: false, Attempts: 1/3, InCooldown: true, RemainingSeconds: 53777
+2025-08-16T21:03:54.891-05:00  INFO 43990 --- [technician] [nio-8082-exec-8] c.auto.tech.service.CounterOfferService  : Button text: Counter Offer Request in 14:56:17, Hover text: You can submit a new counter offer in 14:56:17 after your last request, Most recent status: PENDING
+2025-08-16T21:03:54.892-05:00  INFO 43990 --- [technician] [nio-8082-exec-9] c.auto.tech.service.CounterOfferService  : Found 2 counter offers for post 17 by technician kommula@gmail.com
+2025-08-16T21:03:54.892-05:00  INFO 43990 --- [technician] [nio-8082-exec-9] c.auto.tech.service.CounterOfferService  : Attempt count calculation - Total offers: 2, Attempt count: 2
+2025-08-16T21:03:54.892-05:00  INFO 43990 --- [technician] [nio-8082-exec-9] c.auto.tech.service.CounterOfferService  : Most recent counter offer - ID: 22, Status: PENDING, RequestedAt: 2025-08-15T11:54:12.493276, DealerResponseAt: null for post 17 by technician kommula@gmail.com
+2025-08-16T21:03:54.892-05:00  INFO 43990 --- [technician] [nio-8082-exec-9] c.auto.tech.service.CounterOfferService  : Checking cooldown for most recent offer - Status: PENDING, DealerResponseAt: null, RequestedAt: 2025-08-15T11:54:12.493276
+2025-08-16T21:03:54.892-05:00  INFO 43990 --- [technician] [nio-8082-exec-9] c.auto.tech.service.CounterOfferService  : Most recent offer is PENDING - using 48-hour cooldown: 2025-08-17T11:54:12.493276
+2025-08-16T21:03:54.892-05:00  INFO 43990 --- [technician] [nio-8082-exec-9] c.auto.tech.service.CounterOfferService  : In cooldown - remaining seconds: 53417, cooldown end time: 2025-08-17T11:54:12.493276
+2025-08-16T21:03:54.892-05:00  INFO 43990 --- [technician] [nio-8082-exec-9] c.auto.tech.service.CounterOfferService  : Counter offer eligibility check - Post: 17, Technician: kommula@gmail.com, CanSubmit: false, Attempts: 2/3, InCooldown: true, RemainingSeconds: 53417
+2025-08-16T21:03:54.892-05:00  INFO 43990 --- [technician] [nio-8082-exec-9] c.auto.tech.service.CounterOfferService  : Button text: Counter Offer Request in 14:50:17, Hover text: You can submit a new counter offer in 14:50:17 after your last request, Most recent status: PENDING
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.technician_email=? order by tco1_0.requested_at desc
+Counter Offer Debug - ID: 24, Status: REJECTED, ExpiresAt: 2025-08-18T20:38:30.980912, IsExpired: false, HoursUntilExpiry: 47, DealerResponseAt: 2025-08-16T20:38:39.037633
+Counter Offer Debug - ID: 23, Status: PENDING, ExpiresAt: 2025-08-17T12:00:11.914729, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 22, Status: PENDING, ExpiresAt: 2025-08-17T11:54:12.493287, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 21, Status: REJECTED, ExpiresAt: 2025-08-17T11:50:53.637371, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: 2025-08-15T11:51:01.223055
+Counter Offer Debug - ID: 20, Status: WITHDRAWN, ExpiresAt: 2025-08-17T11:42:31.098460, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 19, Status: REJECTED, ExpiresAt: 2025-08-17T11:38:58.141078, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: 2025-08-15T11:39:05.840578
+Counter Offer Debug - ID: 18, Status: WITHDRAWN, ExpiresAt: 2025-08-17T11:29:48.920785, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 17, Status: REJECTED, ExpiresAt: 2025-08-17T11:26:31.654970, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: 2025-08-15T11:26:38.966856
+Counter Offer Debug - ID: 16, Status: WITHDRAWN, ExpiresAt: 2025-08-17T10:19:22.143960, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: null
+Counter Offer Debug - ID: 15, Status: REJECTED, ExpiresAt: 2025-08-17T10:13:38.237234, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: 2025-08-15T10:13:46.202930
+Counter Offer Debug - ID: 14, Status: WITHDRAWN, ExpiresAt: 2025-08-17T10:12:08.214069, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: null
+Counter Offer Debug - ID: 13, Status: REJECTED, ExpiresAt: 2025-08-17T10:07:51.910981, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: 2025-08-15T10:08:02.376276
+Counter Offer Debug - ID: 12, Status: REJECTED, ExpiresAt: 2025-08-15T10:51:42.657726, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:52:03.396539
+Counter Offer Debug - ID: 11, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:47:31.633855, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:48:32.812765
+Counter Offer Debug - ID: 10, Status: REJECTED, ExpiresAt: 2025-08-15T10:43:03.522334, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:43:12.167554
+Counter Offer Debug - ID: 9, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:41:04.051324, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:41:13.558588
+Counter Offer Debug - ID: 8, Status: REJECTED, ExpiresAt: 2025-08-15T10:37:16.229321, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:37:22.335356
+Counter Offer Debug - ID: 7, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:36:51.936137, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:37:02.443599
+Counter Offer Debug - ID: 6, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:36:48.463889, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:37:00.841207
+Counter Offer Debug - ID: 5, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:32:46.032057, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:36:58.813786
+Counter Offer Debug - ID: 4, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:26:54.843100, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:35:14.615633
+Counter Offer Debug - ID: 3, Status: REJECTED, ExpiresAt: 2025-08-15T10:20:27.387508, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:20:32.210694
+Counter Offer Debug - ID: 2, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:19:16.058723, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:19:26.228607
+Counter Offer Debug - ID: 1, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:12:11.060142, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:18:05.945479
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where t1_0.id=?
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where t1_0.id=?
+Hibernate: select tap1_0.id,tap1_0.accepted_at,tap1_0.created_at,tap1_0.technician_email,tap1_0.post_id from accepted_posts tap1_0 where tap1_0.technician_email=?
+Hibernate: select tap1_0.id,tap1_0.accepted_at,tap1_0.created_at,tap1_0.technician_email,tap1_0.post_id from accepted_posts tap1_0 where tap1_0.technician_email=?
+Hibernate: select tdp1_0.post_id from tech_declined_posts tdp1_0 where tdp1_0.email=?
+Hibernate: select tdp1_0.post_id from tech_declined_posts tdp1_0 where tdp1_0.email=?
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.technician_email=? order by tco1_0.requested_at desc
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.technician_email=? order by tco1_0.requested_at desc
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where upper(t1_0.email)=upper(?)
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where upper(t1_0.email)=upper(?)
+Hibernate: select tap1_0.post_id from accepted_posts tap1_0 where trim(BOTH from lower(tap1_0.technician_email))=trim(BOTH from lower(?))
+Hibernate: select tap1_0.post_id from accepted_posts tap1_0 where trim(BOTH from lower(tap1_0.technician_email))=trim(BOTH from lower(?))
+Hibernate: select tdp1_0.post_id from tech_declined_posts tdp1_0 where tdp1_0.email=?
+Hibernate: select tdp1_0.post_id from tech_declined_posts tdp1_0 where tdp1_0.email=?
+Hibernate: select tap1_0.post_id from accepted_posts tap1_0
+Hibernate: select tap1_0.post_id from accepted_posts tap1_0
+2025-08-16T21:04:14.441-05:00 ERROR 43990 --- [technician] [nio-8082-exec-4] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: feign.FeignException$NotFound: [404 Not Found] during [GET] to [http://localhost:8088/postings/post] [PostingClient#getAllPostings()]: [{"timestamp":"2025-08-17T02:04:14.422+00:00","path":"/postings/post","status":404,"error":"Not Found","requestId":"c6219871-100","message":"No static resource postings/post.","trace":"org.springframew... (11565 bytes)]] with root cause
+
+feign.FeignException$NotFound: [404 Not Found] during [GET] to [http://localhost:8088/postings/post] [PostingClient#getAllPostings()]: [{"timestamp":"2025-08-17T02:04:14.422+00:00","path":"/postings/post","status":404,"error":"Not Found","requestId":"c6219871-100","message":"No static resource postings/post.","trace":"org.springframew... (11565 bytes)]
+	at feign.FeignException.clientErrorStatus(FeignException.java:249) ~[feign-core-13.6.jar:na]
+	at feign.FeignException.errorStatus(FeignException.java:223) ~[feign-core-13.6.jar:na]
+	at feign.FeignException.errorStatus(FeignException.java:213) ~[feign-core-13.6.jar:na]
+	at feign.codec.ErrorDecoder$Default.decode(ErrorDecoder.java:103) ~[feign-core-13.6.jar:na]
+	at feign.InvocationContext.decodeError(InvocationContext.java:133) ~[feign-core-13.6.jar:na]
+	at feign.InvocationContext.proceed(InvocationContext.java:80) ~[feign-core-13.6.jar:na]
+	at feign.ResponseHandler.handleResponse(ResponseHandler.java:69) ~[feign-core-13.6.jar:na]
+	at feign.SynchronousMethodHandler.executeAndDecode(SynchronousMethodHandler.java:109) ~[feign-core-13.6.jar:na]
+	at feign.SynchronousMethodHandler.invoke(SynchronousMethodHandler.java:53) ~[feign-core-13.6.jar:na]
+	at feign.ReflectiveFeign$FeignInvocationHandler.invoke(ReflectiveFeign.java:104) ~[feign-core-13.6.jar:na]
+	at jdk.proxy4/jdk.proxy4.$Proxy177.getAllPostings(Unknown Source) ~[na:na]
+	at com.auto.tech.service.TechnicianService.fetchAllPostings(TechnicianService.java:87) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-6.2.8.jar:6.2.8]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:724) ~[spring-aop-6.2.8.jar:6.2.8]
+	at com.auto.tech.service.TechnicianService$$SpringCGLIB$$0.fetchAllPostings(<generated>) ~[classes/:na]
+	at com.auto.tech.controller.TechnicianController.getAllPostingsFromPostingsService(TechnicianController.java:118) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.42.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.42.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2025-08-16T21:04:14.441-05:00 ERROR 43990 --- [technician] [nio-8082-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: feign.FeignException$NotFound: [404 Not Found] during [GET] to [http://localhost:8088/postings/post] [PostingClient#getAllPostings()]: [{"timestamp":"2025-08-17T02:04:14.422+00:00","path":"/postings/post","status":404,"error":"Not Found","requestId":"3ac8611c-101","message":"No static resource postings/post.","trace":"org.springframew... (11565 bytes)]] with root cause
+
+feign.FeignException$NotFound: [404 Not Found] during [GET] to [http://localhost:8088/postings/post] [PostingClient#getAllPostings()]: [{"timestamp":"2025-08-17T02:04:14.422+00:00","path":"/postings/post","status":404,"error":"Not Found","requestId":"3ac8611c-101","message":"No static resource postings/post.","trace":"org.springframew... (11565 bytes)]
+	at feign.FeignException.clientErrorStatus(FeignException.java:249) ~[feign-core-13.6.jar:na]
+	at feign.FeignException.errorStatus(FeignException.java:223) ~[feign-core-13.6.jar:na]
+	at feign.FeignException.errorStatus(FeignException.java:213) ~[feign-core-13.6.jar:na]
+	at feign.codec.ErrorDecoder$Default.decode(ErrorDecoder.java:103) ~[feign-core-13.6.jar:na]
+	at feign.InvocationContext.decodeError(InvocationContext.java:133) ~[feign-core-13.6.jar:na]
+	at feign.InvocationContext.proceed(InvocationContext.java:80) ~[feign-core-13.6.jar:na]
+	at feign.ResponseHandler.handleResponse(ResponseHandler.java:69) ~[feign-core-13.6.jar:na]
+	at feign.SynchronousMethodHandler.executeAndDecode(SynchronousMethodHandler.java:109) ~[feign-core-13.6.jar:na]
+	at feign.SynchronousMethodHandler.invoke(SynchronousMethodHandler.java:53) ~[feign-core-13.6.jar:na]
+	at feign.ReflectiveFeign$FeignInvocationHandler.invoke(ReflectiveFeign.java:104) ~[feign-core-13.6.jar:na]
+	at jdk.proxy4/jdk.proxy4.$Proxy177.getAllPostings(Unknown Source) ~[na:na]
+	at com.auto.tech.service.TechnicianService.fetchAllPostings(TechnicianService.java:87) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-6.2.8.jar:6.2.8]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:724) ~[spring-aop-6.2.8.jar:6.2.8]
+	at com.auto.tech.service.TechnicianService$$SpringCGLIB$$0.fetchAllPostings(<generated>) ~[classes/:na]
+	at com.auto.tech.controller.TechnicianController.getAllPostingsFromPostingsService(TechnicianController.java:118) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.42.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.42.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where t1_0.id=?
+Hibernate: select tap1_0.id,tap1_0.accepted_at,tap1_0.created_at,tap1_0.technician_email,tap1_0.post_id from accepted_posts tap1_0 where tap1_0.technician_email=?
+Hibernate: select tdp1_0.post_id from tech_declined_posts tdp1_0 where tdp1_0.email=?
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.technician_email=? order by tco1_0.requested_at desc
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where t1_0.id=?
+Hibernate: select tap1_0.id,tap1_0.accepted_at,tap1_0.created_at,tap1_0.technician_email,tap1_0.post_id from accepted_posts tap1_0 where tap1_0.technician_email=?
+Hibernate: select tdp1_0.post_id from tech_declined_posts tdp1_0 where tdp1_0.email=?
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.technician_email=? order by tco1_0.requested_at desc
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where upper(t1_0.email)=upper(?)
+Hibernate: select tap1_0.post_id from accepted_posts tap1_0 where trim(BOTH from lower(tap1_0.technician_email))=trim(BOTH from lower(?))
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where upper(t1_0.email)=upper(?)
+Hibernate: select tdp1_0.post_id from tech_declined_posts tdp1_0 where tdp1_0.email=?
+Hibernate: select tap1_0.post_id from accepted_posts tap1_0 where trim(BOTH from lower(tap1_0.technician_email))=trim(BOTH from lower(?))
+Hibernate: select tap1_0.post_id from accepted_posts tap1_0
+Hibernate: select tdp1_0.post_id from tech_declined_posts tdp1_0 where tdp1_0.email=?
+Hibernate: select tap1_0.post_id from accepted_posts tap1_0
+2025-08-16T21:04:15.773-05:00 ERROR 43990 --- [technician] [nio-8082-exec-9] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: feign.FeignException$NotFound: [404 Not Found] during [GET] to [http://localhost:8088/postings/post] [PostingClient#getAllPostings()]: [{"timestamp":"2025-08-17T02:04:15.771+00:00","path":"/postings/post","status":404,"error":"Not Found","requestId":"3ac8611c-142","message":"No static resource postings/post.","trace":"org.springframew... (11565 bytes)]] with root cause
+
+feign.FeignException$NotFound: [404 Not Found] during [GET] to [http://localhost:8088/postings/post] [PostingClient#getAllPostings()]: [{"timestamp":"2025-08-17T02:04:15.771+00:00","path":"/postings/post","status":404,"error":"Not Found","requestId":"3ac8611c-142","message":"No static resource postings/post.","trace":"org.springframew... (11565 bytes)]
+	at feign.FeignException.clientErrorStatus(FeignException.java:249) ~[feign-core-13.6.jar:na]
+	at feign.FeignException.errorStatus(FeignException.java:223) ~[feign-core-13.6.jar:na]
+	at feign.FeignException.errorStatus(FeignException.java:213) ~[feign-core-13.6.jar:na]
+	at feign.codec.ErrorDecoder$Default.decode(ErrorDecoder.java:103) ~[feign-core-13.6.jar:na]
+	at feign.InvocationContext.decodeError(InvocationContext.java:133) ~[feign-core-13.6.jar:na]
+	at feign.InvocationContext.proceed(InvocationContext.java:80) ~[feign-core-13.6.jar:na]
+	at feign.ResponseHandler.handleResponse(ResponseHandler.java:69) ~[feign-core-13.6.jar:na]
+	at feign.SynchronousMethodHandler.executeAndDecode(SynchronousMethodHandler.java:109) ~[feign-core-13.6.jar:na]
+	at feign.SynchronousMethodHandler.invoke(SynchronousMethodHandler.java:53) ~[feign-core-13.6.jar:na]
+	at feign.ReflectiveFeign$FeignInvocationHandler.invoke(ReflectiveFeign.java:104) ~[feign-core-13.6.jar:na]
+	at jdk.proxy4/jdk.proxy4.$Proxy177.getAllPostings(Unknown Source) ~[na:na]
+	at com.auto.tech.service.TechnicianService.fetchAllPostings(TechnicianService.java:87) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-6.2.8.jar:6.2.8]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:724) ~[spring-aop-6.2.8.jar:6.2.8]
+	at com.auto.tech.service.TechnicianService$$SpringCGLIB$$0.fetchAllPostings(<generated>) ~[classes/:na]
+	at com.auto.tech.controller.TechnicianController.getAllPostingsFromPostingsService(TechnicianController.java:118) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.42.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.42.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2025-08-16T21:04:15.774-05:00 ERROR 43990 --- [technician] [nio-8082-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: feign.FeignException$NotFound: [404 Not Found] during [GET] to [http://localhost:8088/postings/post] [PostingClient#getAllPostings()]: [{"timestamp":"2025-08-17T02:04:15.772+00:00","path":"/postings/post","status":404,"error":"Not Found","requestId":"c6219871-143","message":"No static resource postings/post.","trace":"org.springframew... (11565 bytes)]] with root cause
+
+feign.FeignException$NotFound: [404 Not Found] during [GET] to [http://localhost:8088/postings/post] [PostingClient#getAllPostings()]: [{"timestamp":"2025-08-17T02:04:15.772+00:00","path":"/postings/post","status":404,"error":"Not Found","requestId":"c6219871-143","message":"No static resource postings/post.","trace":"org.springframew... (11565 bytes)]
+	at feign.FeignException.clientErrorStatus(FeignException.java:249) ~[feign-core-13.6.jar:na]
+	at feign.FeignException.errorStatus(FeignException.java:223) ~[feign-core-13.6.jar:na]
+	at feign.FeignException.errorStatus(FeignException.java:213) ~[feign-core-13.6.jar:na]
+	at feign.codec.ErrorDecoder$Default.decode(ErrorDecoder.java:103) ~[feign-core-13.6.jar:na]
+	at feign.InvocationContext.decodeError(InvocationContext.java:133) ~[feign-core-13.6.jar:na]
+	at feign.InvocationContext.proceed(InvocationContext.java:80) ~[feign-core-13.6.jar:na]
+	at feign.ResponseHandler.handleResponse(ResponseHandler.java:69) ~[feign-core-13.6.jar:na]
+	at feign.SynchronousMethodHandler.executeAndDecode(SynchronousMethodHandler.java:109) ~[feign-core-13.6.jar:na]
+	at feign.SynchronousMethodHandler.invoke(SynchronousMethodHandler.java:53) ~[feign-core-13.6.jar:na]
+	at feign.ReflectiveFeign$FeignInvocationHandler.invoke(ReflectiveFeign.java:104) ~[feign-core-13.6.jar:na]
+	at jdk.proxy4/jdk.proxy4.$Proxy177.getAllPostings(Unknown Source) ~[na:na]
+	at com.auto.tech.service.TechnicianService.fetchAllPostings(TechnicianService.java:87) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-6.2.8.jar:6.2.8]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:724) ~[spring-aop-6.2.8.jar:6.2.8]
+	at com.auto.tech.service.TechnicianService$$SpringCGLIB$$0.fetchAllPostings(<generated>) ~[classes/:na]
+	at com.auto.tech.controller.TechnicianController.getAllPostingsFromPostingsService(TechnicianController.java:118) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.42.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.8.jar:6.2.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.42.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.8.jar:6.2.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.42.jar:10.1.42]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where t1_0.id=?
+Hibernate: select tap1_0.id,tap1_0.accepted_at,tap1_0.created_at,tap1_0.technician_email,tap1_0.post_id from accepted_posts tap1_0 where tap1_0.technician_email=?
+Hibernate: select tdp1_0.post_id from tech_declined_posts tdp1_0 where tdp1_0.email=?
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.technician_email=? order by tco1_0.requested_at desc
+Hibernate: select t1_0.id,t1_0.created_at,t1_0.delearship_name,t1_0.email,t1_0.last_activity_at,t1_0.location,t1_0.name,t1_0.password,t1_0.status,t1_0.updated_at,t1_0.years_of_experience,t1_0.zipcode from technicians t1_0 where t1_0.id=?
+Hibernate: select tap1_0.id,tap1_0.accepted_at,tap1_0.created_at,tap1_0.technician_email,tap1_0.post_id from accepted_posts tap1_0 where tap1_0.technician_email=?
+Hibernate: select tdp1_0.post_id from tech_declined_posts tdp1_0 where tdp1_0.email=?
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.technician_email=? order by tco1_0.requested_at desc
+Hibernate: select tco1_0.id,tco1_0.created_at,tco1_0.dealer_response_at,tco1_0.dealer_response_notes,tco1_0.expires_at,tco1_0.original_offer_amount,tco1_0.post_id,tco1_0.posting_service_counter_offer_id,tco1_0.request_reason,tco1_0.requested_at,tco1_0.requested_offer_amount,tco1_0.status,tco1_0.technician_email,tco1_0.technician_location,tco1_0.technician_notes,tco1_0.updated_at from tech_counter_offers tco1_0 where tco1_0.technician_email=? order by tco1_0.requested_at desc
+Counter Offer Debug - ID: 24, Status: REJECTED, ExpiresAt: 2025-08-18T20:38:30.980912, IsExpired: false, HoursUntilExpiry: 47, DealerResponseAt: 2025-08-16T20:38:39.037633
+Counter Offer Debug - ID: 23, Status: PENDING, ExpiresAt: 2025-08-17T12:00:11.914729, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 22, Status: PENDING, ExpiresAt: 2025-08-17T11:54:12.493287, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 21, Status: REJECTED, ExpiresAt: 2025-08-17T11:50:53.637371, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: 2025-08-15T11:51:01.223055
+Counter Offer Debug - ID: 20, Status: WITHDRAWN, ExpiresAt: 2025-08-17T11:42:31.098460, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 19, Status: REJECTED, ExpiresAt: 2025-08-17T11:38:58.141078, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: 2025-08-15T11:39:05.840578
+Counter Offer Debug - ID: 18, Status: WITHDRAWN, ExpiresAt: 2025-08-17T11:29:48.920785, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: null
+Counter Offer Debug - ID: 17, Status: REJECTED, ExpiresAt: 2025-08-17T11:26:31.654970, IsExpired: false, HoursUntilExpiry: 14, DealerResponseAt: 2025-08-15T11:26:38.966856
+Counter Offer Debug - ID: 16, Status: WITHDRAWN, ExpiresAt: 2025-08-17T10:19:22.143960, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: null
+Counter Offer Debug - ID: 15, Status: REJECTED, ExpiresAt: 2025-08-17T10:13:38.237234, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: 2025-08-15T10:13:46.202930
+Counter Offer Debug - ID: 14, Status: WITHDRAWN, ExpiresAt: 2025-08-17T10:12:08.214069, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: null
+Counter Offer Debug - ID: 13, Status: REJECTED, ExpiresAt: 2025-08-17T10:07:51.910981, IsExpired: false, HoursUntilExpiry: 13, DealerResponseAt: 2025-08-15T10:08:02.376276
+Counter Offer Debug - ID: 12, Status: REJECTED, ExpiresAt: 2025-08-15T10:51:42.657726, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:52:03.396539
+Counter Offer Debug - ID: 11, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:47:31.633855, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:48:32.812765
+Counter Offer Debug - ID: 10, Status: REJECTED, ExpiresAt: 2025-08-15T10:43:03.522334, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:43:12.167554
+Counter Offer Debug - ID: 9, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:41:04.051324, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:41:13.558588
+Counter Offer Debug - ID: 8, Status: REJECTED, ExpiresAt: 2025-08-15T10:37:16.229321, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:37:22.335356
+Counter Offer Debug - ID: 7, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:36:51.936137, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:37:02.443599
+Counter Offer Debug - ID: 6, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:36:48.463889, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:37:00.841207
+Counter Offer Debug - ID: 5, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:32:46.032057, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:36:58.813786
+Counter Offer Debug - ID: 4, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:26:54.843100, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:35:14.615633
+Counter Offer Debug - ID: 3, Status: REJECTED, ExpiresAt: 2025-08-15T10:20:27.387508, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:20:32.210694
+Counter Offer Debug - ID: 2, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:19:16.058723, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:19:26.228607
+Counter Offer Debug - ID: 1, Status: ACCEPTED, ExpiresAt: 2025-08-15T10:12:11.060142, IsExpired: false, HoursUntilExpiry: -34, DealerResponseAt: 2025-08-13T10:18:05.945479
+2025-08-16T21:04:39.557-05:00  INFO 43990 --- [technician] [ionShutdownHook] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application TECHNICIAN with eureka with status DOWN
+2025-08-16T21:04:39.559-05:00  INFO 43990 --- [technician] [ionShutdownHook] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1755396279559, current=DOWN, previous=UP]
+2025-08-16T21:04:39.559-05:00  INFO 43990 --- [technician] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TECHNICIAN/192.168.1.192:technician:8082: registering service...
+2025-08-16T21:04:39.568-05:00  INFO 43990 --- [technician] [ionShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-16T21:04:39.572-05:00  INFO 43990 --- [technician] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-08-16T21:04:39.573-05:00  INFO 43990 --- [technician] [foReplicator-%d] c.n.d.s.t.d.RedirectingEurekaHttpClient  : Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/} exception=I/O error on POST request for "http://localhost:8761/eureka/apps/TECHNICIAN": localhost:8761 failed to respond stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://localhost:8761/eureka/apps/TECHNICIAN": localhost:8761 failed to respond
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:926)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:906)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:841)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:702)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.register(RestTemplateEurekaHttpClient.java:87)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:91)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
+	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: org.apache.hc.core5.http.NoHttpResponseException: localhost:8761 failed to respond
+	at org.apache.hc.core5.http.impl.io.DefaultBHttpClientConnection.receiveResponseHeader(DefaultBHttpClientConnection.java:333)
+	at org.apache.hc.core5.http.impl.io.HttpRequestExecutor.execute(HttpRequestExecutor.java:196)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.lambda$execute$0(InternalExecRuntime.java:236)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager$InternalConnectionEndpoint.execute(PoolingHttpClientConnectionManager.java:791)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.execute(InternalExecRuntime.java:233)
+	at org.apache.hc.client5.http.impl.classic.MainClientExec.execute(MainClientExec.java:120)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:200)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:195)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:150)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:110)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:185)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:71)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:81)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:117)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$2(RestTemplateTransportClientFactory.java:145)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:81)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:900)
+	... 21 more
+
+2025-08-16T21:04:39.573-05:00  WARN 43990 --- [technician] [foReplicator-%d] c.n.d.s.t.d.RetryableEurekaHttpClient    : Request execution failed with message: I/O error on POST request for "http://localhost:8761/eureka/apps/TECHNICIAN": localhost:8761 failed to respond
+2025-08-16T21:04:39.578-05:00  INFO 43990 --- [technician] [ionShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2025-08-16T21:04:39.579-05:00  INFO 43990 --- [technician] [ionShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2fe7f046]]
+2025-08-16T21:04:39.579-05:00  INFO 43990 --- [technician] [ionShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2025-08-16T21:04:39.586-05:00  INFO 43990 --- [technician] [foReplicator-%d] c.n.d.s.t.d.RedirectingEurekaHttpClient  : Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/}, exception=I/O error on POST request for "http://localhost:8761/eureka/apps/TECHNICIAN": Connect to http://localhost:8761 failed: Connection refused stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://localhost:8761/eureka/apps/TECHNICIAN": Connect to http://localhost:8761 failed: Connection refused
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:926)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:906)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:841)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:702)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.register(RestTemplateEurekaHttpClient.java:87)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:121)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:80)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56)
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828)
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125)
+	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: org.apache.hc.client5.http.HttpHostConnectException: Connect to http://localhost:8761 failed: Connection refused
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:554)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:602)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:633)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:205)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:490)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:164)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:174)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:144)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:195)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:150)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:110)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:185)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:71)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:81)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:117)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$2(RestTemplateTransportClientFactory.java:145)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:81)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:900)
+	... 22 more
+
+2025-08-16T21:04:39.586-05:00  WARN 43990 --- [technician] [foReplicator-%d] c.n.d.s.t.d.RetryableEurekaHttpClient    : Request execution failed with message: I/O error on POST request for "http://localhost:8761/eureka/apps/TECHNICIAN": Connect to http://localhost:8761 failed: Connection refused
+2025-08-16T21:04:39.586-05:00  INFO 43990 --- [technician] [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-16T21:04:39.586-05:00  WARN 43990 --- [technician] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TECHNICIAN/192.168.1.192:technician:8082 - registration failed Cannot execute request on any known server
+
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105) ~[eureka-client-2.0.4.jar:2.0.4]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2025-08-16T21:04:39.587-05:00  WARN 43990 --- [technician] [foReplicator-%d] c.n.discovery.InstanceInfoReplicator     : There was a problem with the instance info replicator
+
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:828) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:125) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.InstanceInfoReplicator$2.run(InstanceInfoReplicator.java:105) ~[eureka-client-2.0.4.jar:2.0.4]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2025-08-16T21:04:39.590-05:00  INFO 43990 --- [technician] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-16T21:04:39.595-05:00  INFO 43990 --- [technician] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-16T21:04:39.595-05:00  INFO 43990 --- [technician] [ionShutdownHook] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2025-08-16T21:04:42.600-05:00  INFO 43990 --- [technician] [ionShutdownHook] com.netflix.discovery.DiscoveryClient    : Unregistering ...
+2025-08-16T21:04:42.606-05:00  INFO 43990 --- [technician] [ionShutdownHook] c.n.d.s.t.d.RedirectingEurekaHttpClient  : Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/}, exception=I/O error on DELETE request for "http://localhost:8761/eureka/apps/TECHNICIAN/192.168.1.192:technician:8082": Connect to http://localhost:8761 failed: Connection refused stacktrace=org.springframework.web.client.ResourceAccessException: I/O error on DELETE request for "http://localhost:8761/eureka/apps/TECHNICIAN/192.168.1.192:technician:8082": Connect to http://localhost:8761 failed: Connection refused
+	at org.springframework.web.client.RestTemplate.createResourceAccessException(RestTemplate.java:926)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:906)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:841)
+	at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:702)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateEurekaHttpClient.cancel(RestTemplateEurekaHttpClient.java:100)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:121)
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:80)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74)
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76)
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71)
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919)
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415)
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195)
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:387)
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:134)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:798)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:748)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1474)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:707)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1467)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1219)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1180)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:179)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1126)
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:147)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:116)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: org.apache.hc.client5.http.HttpHostConnectException: Connect to http://localhost:8761 failed: Connection refused
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:554)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:602)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:633)
+	at org.apache.hc.client5.http.impl.io.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:205)
+	at org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:490)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:164)
+	at org.apache.hc.client5.http.impl.classic.InternalExecRuntime.connectEndpoint(InternalExecRuntime.java:174)
+	at org.apache.hc.client5.http.impl.classic.ConnectExec.execute(ConnectExec.java:144)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ProtocolExec.execute(ProtocolExec.java:195)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.ContentCompressionExec.execute(ContentCompressionExec.java:150)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec.execute(HttpRequestRetryExec.java:113)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.RedirectExec.execute(RedirectExec.java:110)
+	at org.apache.hc.client5.http.impl.classic.ExecChainElement.execute(ExecChainElement.java:51)
+	at org.apache.hc.client5.http.impl.classic.InternalHttpClient.doExecute(InternalHttpClient.java:185)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:87)
+	at org.apache.hc.client5.http.impl.classic.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.hc.client5.http.classic.HttpClient.executeOpen(HttpClient.java:183)
+	at org.springframework.http.client.HttpComponentsClientHttpRequest.executeInternal(HttpComponentsClientHttpRequest.java:99)
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:71)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:81)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:117)
+	at org.springframework.cloud.netflix.eureka.http.RestTemplateTransportClientFactory.lambda$restTemplate$2(RestTemplateTransportClientFactory.java:145)
+	at org.springframework.http.client.InterceptingClientHttpRequest$InterceptingRequestExecution.execute(InterceptingClientHttpRequest.java:88)
+	at org.springframework.http.client.InterceptingClientHttpRequest.executeInternal(InterceptingClientHttpRequest.java:72)
+	at org.springframework.http.client.AbstractBufferingClientHttpRequest.executeInternal(AbstractBufferingClientHttpRequest.java:48)
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:81)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:900)
+	... 40 more
+
+2025-08-16T21:04:42.606-05:00  WARN 43990 --- [technician] [ionShutdownHook] c.n.d.s.t.d.RetryableEurekaHttpClient    : Request execution failed with message: I/O error on DELETE request for "http://localhost:8761/eureka/apps/TECHNICIAN/192.168.1.192:technician:8082": Connect to http://localhost:8761 failed: Connection refused
+2025-08-16T21:04:42.606-05:00 ERROR 43990 --- [technician] [ionShutdownHook] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TECHNICIAN/192.168.1.192:technician:8082 - de-registration failedCannot execute request on any known server
+
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:76) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:919) ~[eureka-client-2.0.4.jar:2.0.4]
+	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:900) ~[eureka-client-2.0.4.jar:2.0.4]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMethod.invoke(InitDestroyAnnotationBeanPostProcessor.java:457) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:415) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:239) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:202) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:195) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:387) ~[spring-cloud-context-4.3.0.jar:4.3.0]
+	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:134) ~[spring-cloud-context-4.3.0.jar:4.3.0]
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:211) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:798) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:748) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1474) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:707) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1467) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1219) ~[spring-context-6.2.8.jar:6.2.8]
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1180) ~[spring-context-6.2.8.jar:6.2.8]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:179) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1126) ~[spring-context-6.2.8.jar:6.2.8]
+	at org.springframework.boot.SpringApplicationShutdownHook.closeAndWait(SpringApplicationShutdownHook.java:147) ~[spring-boot-3.5.3.jar:3.5.3]
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
+	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:116) ~[spring-boot-3.5.3.jar:3.5.3]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2025-08-16T21:04:42.607-05:00  INFO 43990 --- [technician] [ionShutdownHook] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient

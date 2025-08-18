@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dealer Registration</title>
+    <link rel="stylesheet" th:href="@{/css/dealer-register.css}">
+</head>
+<body>
+<div class="form-container">
+    <h2>Dealer Registration</h2>
+
+    <form th:action="@{/dealer/register}" th:object="${dealer}" method="post">
+
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" th:field="*{name}" placeholder="Enter Name" required>
+            <p class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" th:field="*{email}" placeholder="Enter Email" required>
+            <p class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</p>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" th:field="*{password}" placeholder="Minimum 8 Characters" required>
+            <p class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>
+        </div>
+
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" th:field="*{city}" placeholder="Enter City" required>
+            <p class="error" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City Error</p>
+        </div>
+
+        <div class="form-group">
+            <label for="state">State:</label>
+            <input type="text" th:field="*{state}" placeholder="Enter State" required>
+            <p class="error" th:if="${#fields.hasErrors('state')}" th:errors="*{state}">State Error</p>
+        </div>
+
+        <div class="form-group">
+            <label for="zipcode">Zipcode:</label>
+            <input type="text" th:field="*{zipcode}" placeholder="Enter Zipcode" required>
+            <p class="error" th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}">Zipcode Error</p>
+        </div>
+
+        <button type="submit" class="submit-btn">Register Dealer</button>
+    </form>
+</div>
+</body>
+</html>

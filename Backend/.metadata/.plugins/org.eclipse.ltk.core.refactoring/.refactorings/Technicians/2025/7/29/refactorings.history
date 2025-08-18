@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move package &apos;com.auto.tech.client&apos; to &apos;techincian/src/main/java&apos;&#x0A;- Original project: &apos;Technicians&apos;&#x0A;- Destination element: &apos;techincian/src/main/java&apos;&#x0A;- Original element: &apos;Technicians/src/main/java/com.auto.tech.client&apos;&#x0A;- Update references to refactored element" description="Move package" destination="=techincian/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.auto.tech.client" flags="589830" fragments="1" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.movePackages" stamp="1752692616125" version="1.0"/>
+</session>

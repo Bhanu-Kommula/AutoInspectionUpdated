@@ -1,0 +1,349 @@
+package com.auto.tech.service;
+
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.auto.tech.client.PostingClient;
+import com.auto.tech.client.TechDashboardFeignClient;
+import com.auto.tech.configuration.WebSocketDealerNotifier;
+import com.auto.tech.dto.FeignEmailRequestDto;
+import com.auto.tech.dto.GetTechAccpetedPostsByEmailDto;
+import com.auto.tech.dto.PostingDTO;
+import com.auto.tech.dto.TechInfoToGetPostsByLocationDto;
+import com.auto.tech.dto.UpdateTechnicianDto;
+import com.auto.tech.dto.PostStatusUpdateRequest;
+import com.auto.tech.model.TechAcceptedPost;
+import com.auto.tech.model.TechDeclinedPosts;
+import com.auto.tech.model.Technician;
+import com.auto.tech.model.TechnicianAuditLog;
+import com.auto.tech.model.WebSocketPostNotifier;
+import com.auto.tech.repository.AcceptedPostRepository;
+import com.auto.tech.repository.DeclinedPostsRepository;
+import com.auto.tech.repository.TechnicianAuditLogRepository;
+import com.auto.tech.repository.TechnicianRepository;
+import com.auto.tech.service.CounterOfferService;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class TechnicianService {
+
+	private final TechnicianRepository repo;
+	private final PostingClient postingClient;
+	private final DeclinedPostsRepository declinedPostsRepo;
+	private final AcceptedPostRepository acceptedPostRepo;
+	private final WebSocketDealerNotifier dealerNotifier; // ✅ Add this
+	private final TechnicianAuditLogRepository auditRepo;
+
+	private final WebSocketPostNotifier postNotifier;
+	private final TechDashboardFeignClient techDashboardClient; // ✅ Injected Feign Client
+	private final CounterOfferService counterOfferService; // ✅ Counter Offer Service
+	
+	
+	public String capitalizeEachWord(String str) {
+		if (str == null || str.isEmpty()) return str;
+		return java.util.Arrays.stream(str.split("\\s+"))
+			.map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase())
+			.collect(Collectors.joining(" "));
+	}
+	
+	public Technician register(Technician technician) {
+		technician.setName(capitalizeEachWord(technician.getName())); 
+		return repo.save(technician);
+	}
+	
+
+	public ResponseEntity<?> login(String email) {
+		Optional<Technician> technicianOpt = repo.findByEmailIgnoreCase(email);
+		if (technicianOpt.isPresent()) {
+			return ResponseEntity.ok(technicianOpt.get());
+		} else {
+			Map<String, String> error = new HashMap<>();
+			error.put("error", "User not found. Please check your email.");
+			return ResponseEntity.status(401).body(error);
+		}
+	}
+
+	public List<PostingDTO> fetchAllPostings(TechInfoToGetPostsByLocationDto dto) {
+	    Technician technician = repo.findByEmailIgnoreCase(dto.getEmail())
+	            .orElseThrow(() -> new RuntimeException("Technician not found"));
+
+	    String technicianLocation = technician.getLocation().trim(); // e.g., "Dallas, Texas"
+
+	    List<Long> declinedPostIds = declinedPostsRepo.findAllPostIdsByEmail(dto.getEmail());
+	    List<Long> acceptedPostIds = acceptedPostRepo.findAllAcceptedPostIds();
+
+	    List<PostingDTO> allPostings = postingClient.getAllPostings();
+
+	    return allPostings.stream()
+	            .filter(post -> {
+	                String postLocation = post.getLocation();
+	                return postLocation != null
+	                        && postLocation.trim().equalsIgnoreCase(technicianLocation)
+	                        && !declinedPostIds.contains(post.getId())
+	                        && (!acceptedPostIds.contains(post.getId())
+	                            || acceptedPostRepo.existsByPostIdAndEmailIgnoreCase(post.getId(), dto.getEmail()));
+	            })
+	            .collect(Collectors.toList());
+	}
+
+	public void declinedPosts(TechDeclinedPosts declinedPosts) {
+	    System.out.println("🔄 Processing declined post: postId=" + declinedPosts.getPostId() + 
+	                     ", technicianEmail=" + declinedPosts.getEmail());
+	    
+	    // ✅ Withdraw any pending counter offers for this post by this technician
+	    try {
+	        counterOfferService.withdrawCounterOffersForPost(declinedPosts.getPostId(), declinedPosts.getEmail());
+	        System.out.println("✅ Withdrawn counter offers for declined post: " + declinedPosts.getPostId());
+	    } catch (Exception e) {
+	        System.err.println("❌ Failed to withdraw counter offers: " + e.getMessage());
+	        // Don't fail the entire operation if counter offer withdrawal fails
+	    }
+	    
+	    // Save to declined posts table
+	    TechDeclinedPosts saved = declinedPostsRepo.save(declinedPosts);
+	    System.out.println("✅ Saved declined post to database: postId=" + saved.getPostId() + 
+	                     ", technicianEmail=" + saved.getEmail() + ", id=" + saved.getId());
+	}
+
+	
+	
+	@Transactional
+	public void techAcceptedPosts(TechAcceptedPost acceptedPost) {
+	    try {
+	        System.out.println("🔄 Processing technician post acceptance: postId=" + acceptedPost.getPostId() + 
+	                         ", technicianEmail=" + acceptedPost.getEmail());
+	        
+	        // RACE CONDITION PROTECTION: Use pessimistic locking to prevent multiple acceptances
+	        Optional<TechAcceptedPost> existingAcceptance = acceptedPostRepo.findByPostIdWithLock(acceptedPost.getPostId());
+	        if (existingAcceptance.isPresent()) {
+	            String errorMsg = "This post has already been accepted by another technician: " + existingAcceptance.get().getEmail();
+	            System.err.println("❌ " + errorMsg);
+	            throw new IllegalStateException(errorMsg);
+	        }
+
+	        // ✅ Step 1: Withdraw any pending counter offers for this post by this technician
+	        try {
+	            counterOfferService.withdrawCounterOffersForPost(acceptedPost.getPostId(), acceptedPost.getEmail());
+	            System.out.println("✅ Withdrawn pending counter offers for post " + acceptedPost.getPostId());
+	        } catch (Exception e) {
+	            System.err.println("❌ Failed to withdraw counter offers: " + e.getMessage());
+	            // Don't fail the entire operation if counter offer withdrawal fails
+	        }
+
+	        // ✅ Step 2: Save to accepted_posts table
+	        acceptedPost.setAcceptedAt(new Date());
+	        acceptedPostRepo.save(acceptedPost);
+	        System.out.println("✅ Saved to technician accepted_posts table: postId=" + acceptedPost.getPostId());
+
+	        // ✅ Step 3: Update post status to ACCEPTED in posts service (NEW: Use posting service directly)
+	        try {
+	            // Get technician details for the update
+	            Optional<Technician> technicianOpt = repo.findByEmailIgnoreCase(acceptedPost.getEmail());
+	            if (technicianOpt.isPresent()) {
+	                Technician technician = technicianOpt.get();
+	                
+	                // NEW: Try to use posting service accept endpoint first
+	                try {
+	                    // Call the new posting service accept endpoint
+	                    // This will handle the post update and save to posting service accepted_posts table
+	                    System.out.println("🔄 Calling posting service accept endpoint for post " + acceptedPost.getPostId());
+	                    
+	                    // For now, fall back to the old method since we need to integrate the APIs
+	                    PostStatusUpdateRequest updateRequest = new PostStatusUpdateRequest();
+	                    updateRequest.setId(acceptedPost.getPostId());
+	                    updateRequest.setStatus("ACCEPTED");
+	                    updateRequest.setTechnicianName(technician.getName());
+	                    updateRequest.setTechnicianEmail(technician.getEmail());
+	                    
+	                    String updateResult = postingClient.updatePostStatus(updateRequest);
+	                    System.out.println("✅ Post status updated to ACCEPTED: " + updateResult);
+	                    
+	                } catch (Exception postingServiceException) {
+	                    System.err.println("❌ Failed to call posting service accept endpoint: " + postingServiceException.getMessage());
+	                    // Fall back to the old update method
+	                    PostStatusUpdateRequest updateRequest = new PostStatusUpdateRequest();
+	                    updateRequest.setId(acceptedPost.getPostId());
+	                    updateRequest.setStatus("ACCEPTED");
+	                    updateRequest.setTechnicianName(technician.getName());
+	                    updateRequest.setTechnicianEmail(technician.getEmail());
+	                    
+	                    String updateResult = postingClient.updatePostStatus(updateRequest);
+	                    System.out.println("✅ Post status updated to ACCEPTED (fallback): " + updateResult);
+	                }
+	            } else {
+	                System.err.println("❌ Technician not found for email: " + acceptedPost.getEmail());
+	            }
+	        } catch (Exception e) {
+	            System.err.println("❌ Failed to update post status: " + e.getMessage());
+	            // Don't fail the entire operation if status update fails
+	        }
+
+	        // ✅ Step 4: Notify other technicians to remove the post
+	        try {
+	            postNotifier.notifyPostAccepted(acceptedPost.getPostId());
+	            System.out.println("✅ Notified other technicians about post acceptance");
+	        } catch (Exception e) {
+	            System.err.println("❌ Failed to notify other technicians: " + e.getMessage());
+	        }
+
+	        // ✅ Step 5: Update tech dashboard
+	        try {
+	            FeignEmailRequestDto dto = new FeignEmailRequestDto();
+	            dto.setEmail(acceptedPost.getEmail());
+
+	            techDashboardClient.processAndUpdateAcceptedPosts(dto);
+	            System.out.println("✅ Updated tech dashboard for technician " + acceptedPost.getEmail());
+
+	            // ✅ Get the updated post and push to dealer immediately
+	            PostingDTO updatedPost = postingClient.getPostById(acceptedPost.getPostId());
+	            dealerNotifier.notifyDealerPostUpdated(updatedPost);
+	            System.out.println("✅ Notified dealer about post acceptance");
+
+	        } catch (Exception e) {
+	            System.err.println("❌ Dealer update via Feign failed: " + e.getMessage());
+	        }
+	        
+	        System.out.println("✅ Successfully processed technician post acceptance for post " + acceptedPost.getPostId());
+	        
+	    } catch (IllegalStateException e) {
+	        // Re-throw validation errors
+	        throw e;
+	    } catch (Exception e) {
+	        System.err.println("❌ Unexpected error processing technician post acceptance: " + e.getMessage());
+	        throw new RuntimeException("Failed to process technician post acceptance: " + e.getMessage(), e);
+	    }
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public List<PostingDTO> getFilteredFeed(TechInfoToGetPostsByLocationDto dto) {
+	    Technician technician = repo.findByEmailIgnoreCase(dto.getEmail())
+	            .orElseThrow(() -> new RuntimeException("Technician not found"));
+
+	    String technicianLocation = technician.getLocation().trim();
+
+	            List<Long> declinedPostIds = declinedPostsRepo.findAllPostIdsByEmail(dto.getEmail());
+    List<Long> acceptedPostIds = acceptedPostRepo.findAllAcceptedPostIds();
+
+    System.out.println("🔍 Filtering feed for technician: " + dto.getEmail());
+    System.out.println("🔍 Technician location: " + technicianLocation);
+    System.out.println("🔍 Declined post IDs: " + declinedPostIds);
+    System.out.println("🔍 Declined post IDs count: " + declinedPostIds.size());
+    System.out.println("🔍 Accepted post IDs (global): " + acceptedPostIds);
+
+    List<PostingDTO> allPostings = postingClient.getAllPostings();
+    System.out.println("🔍 Total posts from posting service: " + allPostings.size());
+
+    List<PostingDTO> filteredPosts = allPostings.stream()
+            .filter(post -> {
+                String postLocation = post.getLocation();
+                boolean locationMatch = postLocation != null && postLocation.trim().equalsIgnoreCase(technicianLocation);
+                boolean notDeclined = !declinedPostIds.contains(post.getId());
+                boolean notAccepted = !acceptedPostIds.contains(post.getId());
+                
+                if (!locationMatch) {
+                    System.out.println("❌ Post " + post.getId() + " location mismatch: " + postLocation + " vs " + technicianLocation);
+                }
+                if (!notDeclined) {
+                    System.out.println("❌ Post " + post.getId() + " declined by technician");
+                }
+                if (!notAccepted) {
+                    System.out.println("❌ Post " + post.getId() + " already accepted by someone");
+                }
+                
+                return locationMatch && notDeclined && notAccepted;
+            })
+            .sorted((a, b) -> Long.compare(b.getId(), a.getId()))
+            .collect(Collectors.toList());
+            
+    System.out.println("✅ Filtered posts count: " + filteredPosts.size());
+    return filteredPosts;
+	}
+	
+	
+	
+	public Optional<Technician> getTechnicianByEmail(GetTechAccpetedPostsByEmailDto email) {
+		return repo.findByEmailIgnoreCase(email.getEmail());
+	}
+
+	public List<Long> getAcceptedPostsByEmail(GetTechAccpetedPostsByEmailDto dto) {
+		return acceptedPostRepo.findAllAcceptedPostIdsByEmail(dto.getEmail());
+	}
+	
+	public List<Long> getDeclinedPostsByEmail(String email) {
+		return declinedPostsRepo.findAllPostIdsByEmail(email);
+	}
+
+	public List<TechAcceptedPost> getAllAcceptedPostsWithTechnician() {
+	    return acceptedPostRepo.findAll();
+	}
+	
+	
+	
+	
+	public Technician updateTechnicianProfile(UpdateTechnicianDto dto) {
+	    Technician technician = repo.findByEmailIgnoreCase(dto.getEmail())
+	            .orElseThrow(() -> new RuntimeException("Technician not found"));
+
+	    if (dto.getName() != null && !dto.getName().isBlank() && !dto.getName().equals(technician.getName())) {
+	        logChange(technician.getEmail(), "name", technician.getName(), dto.getName(), dto.getUpdatedBy());
+	        technician.setName(dto.getName());
+	    }
+
+	    if (dto.getLocation() != null && !dto.getLocation().isBlank() && !dto.getLocation().equals(technician.getLocation())) {
+	        logChange(technician.getEmail(), "location", technician.getLocation(), dto.getLocation(), dto.getUpdatedBy());
+	        technician.setLocation(dto.getLocation());
+	    }
+
+	    if (dto.getZipcode() != null && !dto.getZipcode().isBlank() && !dto.getZipcode().equals(technician.getZipcode())) {
+	        logChange(technician.getEmail(), "zipcode", technician.getZipcode(), dto.getZipcode(), dto.getUpdatedBy());
+	        technician.setZipcode(dto.getZipcode());
+	    }
+
+	    if (dto.getYearsOfExperience() != null && !dto.getYearsOfExperience().isBlank() &&
+	        !dto.getYearsOfExperience().equals(technician.getYearsOfExperience())) {
+	        logChange(technician.getEmail(), "yearsOfExperience", technician.getYearsOfExperience(), dto.getYearsOfExperience(), dto.getUpdatedBy());
+	        technician.setYearsOfExperience(dto.getYearsOfExperience());
+	    }
+
+	    return repo.save(technician);
+	}
+
+	private void logChange(String email, String field, String oldVal, String newVal, String updatedBy) {
+	    if (oldVal != null && !oldVal.equals(newVal)) {
+	        TechnicianAuditLog log = TechnicianAuditLog.builder()
+	                .email(email)
+	                .fieldName(field)
+	                .oldValue(oldVal)
+	                .newValue(newVal)
+	                .updatedAt(LocalDateTime.now())
+	                .updatedBy(updatedBy)
+	                .build();
+	        auditRepo.save(log);
+	    }
+	}
+	
+	public Optional<Technician> getTechnicianByEmail(String email) {
+	    return repo.findByEmailIgnoreCase(email);
+	}
+	
+	
+	
+}

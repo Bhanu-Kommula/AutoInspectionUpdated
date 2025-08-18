@@ -1,0 +1,120 @@
+/* Shared, lightweight, Bootstrap-friendly styles for confirmation modals */
+
+.pro-modal .modal-content {
+  border: 0;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.pro-modal .modal-header {
+  padding: 14px 18px;
+  border: 0;
+  color: #fff;
+}
+
+.pro-modal-accept .modal-header {
+  background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+}
+
+.pro-modal-decline .modal-header {
+  background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
+}
+
+.pro-modal .modal-title {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.pro-icon-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.2);
+}
+
+.pro-card {
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.pro-card .card-header {
+  background: transparent;
+  border-bottom: 1px solid #f1f3f5;
+  font-weight: 600;
+  padding: 12px 16px;
+}
+
+.pro-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.pro-kv {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pro-kv .pro-kv-label {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.pro-kv .pro-kv-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.pro-badge {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.pro-content-box {
+  background: #fff;
+  border: 1px solid #eef2f7;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.pro-alert {
+  border-left: 4px solid transparent;
+  border-radius: 10px;
+}
+
+.pro-alert-warning {
+  background: #fff7ed;
+  border-left-color: #f59e0b;
+}
+
+.pro-alert-success {
+  background: #f0fdf4;
+  border-left-color: #22c55e;
+}
+
+.pro-alert-danger {
+  background: #fef2f2;
+  border-left-color: #ef4444;
+}
+
+.pro-footer {
+  background: #f8fafc;
+  border-top: 1px solid #eef2f7;
+}
+
+.pro-btn-primary {
+  background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+  border: 0;
+}
+
+.pro-btn-danger {
+  background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
+  border: 0;
+}

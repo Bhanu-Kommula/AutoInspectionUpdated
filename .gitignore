@@ -1,0 +1,16 @@
+# Node.js
+dealer-frontend/node_modules/
+dealer-frontend/build/
+
+# Java
+Backend/target/
+*.class
+
+# System files
+.DS_Store
+
+# IDEs
+*.iml
+.idea/
+.vscode/
+/.metadata/
