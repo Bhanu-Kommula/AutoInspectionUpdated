@@ -166,3 +166,161 @@ Each configuration key has been temporarily mapped to its replacement for your c
 2025-08-18T12:03:39.776-05:00  INFO 62999 --- [api-gateway] [beatExecutor-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_API-GATEWAY/192.168.1.192:api-gateway:8088 - registration status: 204
 2025-08-18T12:06:07.984-05:00  INFO 62999 --- [api-gateway] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
 2025-08-18T12:11:08.000-05:00  INFO 62999 --- [api-gateway] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-18T12:16:08.014-05:00  INFO 62999 --- [api-gateway] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-18T12:21:08.028-05:00  INFO 62999 --- [api-gateway] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-18T12:26:08.040-05:00  INFO 62999 --- [api-gateway] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-18T12:29:26.479-05:00  INFO 62999 --- [api-gateway] [   File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-08-18T12:29:26.481-05:00  INFO 62999 --- [api-gateway] [       Thread-1] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application API-GATEWAY with eureka with status DOWN
+2025-08-18T12:29:26.481-05:00  INFO 62999 --- [api-gateway] [       Thread-1] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1755538166481, current=DOWN, previous=UP]
+2025-08-18T12:29:26.482-05:00  INFO 62999 --- [api-gateway] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_API-GATEWAY/192.168.1.192:api-gateway:8088: registering service...
+2025-08-18T12:29:26.485-05:00  INFO 62999 --- [api-gateway] [       Thread-1] o.s.b.w.embedded.netty.GracefulShutdown  : Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-18T12:29:26.488-05:00  INFO 62999 --- [api-gateway] [ netty-shutdown] o.s.b.w.embedded.netty.GracefulShutdown  : Graceful shutdown complete
+2025-08-18T12:29:26.491-05:00  INFO 62999 --- [api-gateway] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_API-GATEWAY/192.168.1.192:api-gateway:8088 - registration status: 204
+2025-08-18T12:29:26.500-05:00  INFO 62999 --- [api-gateway] [       Thread-1] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2025-08-18T12:29:29.504-05:00  INFO 62999 --- [api-gateway] [       Thread-1] com.netflix.discovery.DiscoveryClient    : Unregistering ...
+2025-08-18T12:29:29.509-05:00  INFO 62999 --- [api-gateway] [       Thread-1] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_API-GATEWAY/192.168.1.192:api-gateway:8088 - deregister  status: 200
+2025-08-18T12:29:29.509-05:00  INFO 62999 --- [api-gateway] [       Thread-1] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.3)
+
+2025-08-18T12:29:29.569-05:00  INFO 62999 --- [api-gateway] [  restartedMain] c.a.gateway.GatewayApplication           : Starting GatewayApplication using Java 17.0.16 with PID 62999 (/Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/gateway/target/classes started by bhanuprasadkommula in /Users/bhanuprasadkommula/Downloads/Inspectioproject/Backend/gateway)
+2025-08-18T12:29:29.569-05:00  INFO 62999 --- [api-gateway] [  restartedMain] c.a.gateway.GatewayApplication           : No active profile set, falling back to 1 default profile: "default"
+2025-08-18T12:29:29.728-05:00  INFO 62999 --- [api-gateway] [  restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=94a8aaa1-87c7-3680-9298-b20fd8aaa6d4
+2025-08-18T12:29:29.768-05:00  WARN 62999 --- [api-gateway] [  restartedMain] GatewayClassPathWarningAutoConfiguration : 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2025-08-18T12:29:29.807-05:00  INFO 62999 --- [api-gateway] [  restartedMain] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [After]
+2025-08-18T12:29:29.807-05:00  INFO 62999 --- [api-gateway] [  restartedMain] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Before]
+2025-08-18T12:29:29.807-05:00  INFO 62999 --- [api-gateway] [  restartedMain] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Between]
+2025-08-18T12:29:29.807-05:00  INFO 62999 --- [api-gateway] [  restartedMain] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Cookie]
+2025-08-18T12:29:29.807-05:00  INFO 62999 --- [api-gateway] [  restartedMain] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Header]
+2025-08-18T12:29:29.807-05:00  INFO 62999 --- [api-gateway] [  restartedMain] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Host]
+2025-08-18T12:29:29.807-05:00  INFO 62999 --- [api-gateway] [  restartedMain] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Method]
+2025-08-18T12:29:29.807-05:00  INFO 62999 --- [api-gateway] [  restartedMain] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Path]
+2025-08-18T12:29:29.807-05:00  INFO 62999 --- [api-gateway] [  restartedMain] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Query]
+2025-08-18T12:29:29.807-05:00  INFO 62999 --- [api-gateway] [  restartedMain] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [ReadBody]
+2025-08-18T12:29:29.807-05:00  INFO 62999 --- [api-gateway] [  restartedMain] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [RemoteAddr]
+2025-08-18T12:29:29.807-05:00  INFO 62999 --- [api-gateway] [  restartedMain] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2025-08-18T12:29:29.807-05:00  INFO 62999 --- [api-gateway] [  restartedMain] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Weight]
+2025-08-18T12:29:29.807-05:00  INFO 62999 --- [api-gateway] [  restartedMain] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2025-08-18T12:29:29.829-05:00  WARN 62999 --- [api-gateway] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2025-08-18T12:29:29.835-05:00  INFO 62999 --- [api-gateway] [  restartedMain] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestTemplate.
+2025-08-18T12:29:29.838-05:00  WARN 62999 --- [api-gateway] [  restartedMain] s.w.s.StarterDeprecatedAutoConfiguration : 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2025-08-18T12:29:29.839-05:00  WARN 62999 --- [api-gateway] [  restartedMain] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2025-08-18T12:29:29.843-05:00  INFO 62999 --- [api-gateway] [  restartedMain] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2025-08-18T12:29:29.844-05:00  INFO 62999 --- [api-gateway] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2025-08-18T12:29:29.844-05:00  INFO 62999 --- [api-gateway] [  restartedMain] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-18T12:29:29.844-05:00  INFO 62999 --- [api-gateway] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2025-08-18T12:29:29.844-05:00  INFO 62999 --- [api-gateway] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2025-08-18T12:29:29.844-05:00  INFO 62999 --- [api-gateway] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2025-08-18T12:29:29.844-05:00  INFO 62999 --- [api-gateway] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2025-08-18T12:29:29.845-05:00  INFO 62999 --- [api-gateway] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2025-08-18T12:29:29.845-05:00  INFO 62999 --- [api-gateway] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2025-08-18T12:29:29.845-05:00  INFO 62999 --- [api-gateway] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2025-08-18T12:29:29.852-05:00  INFO 62999 --- [api-gateway] [  restartedMain] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2025-08-18T12:29:29.852-05:00  INFO 62999 --- [api-gateway] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2025-08-18T12:29:29.852-05:00  INFO 62999 --- [api-gateway] [  restartedMain] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2025-08-18T12:29:29.853-05:00  INFO 62999 --- [api-gateway] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1755538169853 with initial instances count: 5
+2025-08-18T12:29:29.853-05:00  INFO 62999 --- [api-gateway] [  restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application API-GATEWAY with eureka with status UP
+2025-08-18T12:29:29.853-05:00  INFO 62999 --- [api-gateway] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1755538169853, current=UP, previous=STARTING]
+2025-08-18T12:29:29.853-05:00  INFO 62999 --- [api-gateway] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_API-GATEWAY/192.168.1.192:api-gateway:8088: registering service...
+2025-08-18T12:29:29.857-05:00  INFO 62999 --- [api-gateway] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_API-GATEWAY/192.168.1.192:api-gateway:8088 - registration status: 204
+2025-08-18T12:29:29.865-05:00  INFO 62999 --- [api-gateway] [  restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application API-GATEWAY with eureka with status DOWN
+2025-08-18T12:29:29.865-05:00  INFO 62999 --- [api-gateway] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1755538169865, current=DOWN, previous=UP]
+2025-08-18T12:29:29.865-05:00  INFO 62999 --- [api-gateway] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_API-GATEWAY/192.168.1.192:api-gateway:8088: registering service...
+2025-08-18T12:29:29.865-05:00  WARN 62999 --- [api-gateway] [  restartedMain] onfigReactiveWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-08-18T12:29:29.867-05:00  INFO 62999 --- [api-gateway] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_API-GATEWAY/192.168.1.192:api-gateway:8088 - registration status: 204
+2025-08-18T12:29:29.867-05:00  INFO 62999 --- [api-gateway] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2025-08-18T12:29:32.867-05:00  INFO 62999 --- [api-gateway] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Unregistering ...
+2025-08-18T12:29:32.874-05:00  INFO 62999 --- [api-gateway] [  restartedMain] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_API-GATEWAY/192.168.1.192:api-gateway:8088 - deregister  status: 200
+2025-08-18T12:29:32.874-05:00  INFO 62999 --- [api-gateway] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient
+2025-08-18T12:29:32.878-05:00  WARN 62999 --- [api-gateway] [  restartedMain] ServerWebfluxPropertiesMigrationListener : 
+The use of configuration keys that have been renamed was found in the environment:
+
+Property source 'Config resource 'class path resource [application.properties]' via location 'optional:classpath:/'':
+	Key: spring.cloud.gateway.routes[0].id
+		Line: 17
+		Replacement: spring.cloud.gateway.server.webflux.routes[0].id
+	Key: spring.cloud.gateway.routes[0].uri
+		Line: 18
+		Replacement: spring.cloud.gateway.server.webflux.routes[0].uri
+	Key: spring.cloud.gateway.routes[0].predicates[0]
+		Line: 19
+		Replacement: spring.cloud.gateway.server.webflux.routes[0].predicates[0]
+	Key: spring.cloud.gateway.routes[0].filters[0]
+		Line: 20
+		Replacement: spring.cloud.gateway.server.webflux.routes[0].filters[0]
+	Key: spring.cloud.gateway.routes[1].id
+		Line: 23
+		Replacement: spring.cloud.gateway.server.webflux.routes[1].id
+	Key: spring.cloud.gateway.routes[1].uri
+		Line: 24
+		Replacement: spring.cloud.gateway.server.webflux.routes[1].uri
+	Key: spring.cloud.gateway.routes[1].predicates[0]
+		Line: 25
+		Replacement: spring.cloud.gateway.server.webflux.routes[1].predicates[0]
+	Key: spring.cloud.gateway.routes[1].filters[0]
+		Line: 26
+		Replacement: spring.cloud.gateway.server.webflux.routes[1].filters[0]
+
+
+Each configuration key has been temporarily mapped to its replacement for your convenience. To silence this warning, please update your configuration to use the new keys.
+
+2025-08-18T12:29:32.879-05:00  WARN 62999 --- [api-gateway] [  restartedMain] o.s.b.c.p.m.PropertiesMigrationListener  : 
+The use of configuration keys that have been renamed was found in the environment:
+
+Property source 'Config resource 'class path resource [application.properties]' via location 'optional:classpath:/'':
+	Key: spring.cloud.gateway.globalcors.cors-configurations[/**].allowed-origins
+		Line: 29
+		Replacement: spring.cloud.gateway.server.webflux.globalcors.cors-configurations[/**].allowed-origins
+	Key: spring.cloud.gateway.globalcors.cors-configurations[/**].allowed-methods
+		Line: 30
+		Replacement: spring.cloud.gateway.server.webflux.globalcors.cors-configurations[/**].allowed-methods
+	Key: spring.cloud.gateway.globalcors.cors-configurations[/**].allowed-headers
+		Line: 31
+		Replacement: spring.cloud.gateway.server.webflux.globalcors.cors-configurations[/**].allowed-headers
+	Key: spring.cloud.gateway.globalcors.cors-configurations[/**].allow-credentials
+		Line: 32
+		Replacement: spring.cloud.gateway.server.webflux.globalcors.cors-configurations[/**].allow-credentials
+
+
+Each configuration key has been temporarily mapped to its replacement for your convenience. To silence this warning, please update your configuration to use the new keys.
+
+2025-08-18T12:29:32.885-05:00  INFO 62999 --- [api-gateway] [  restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-08-18T12:29:32.901-05:00 ERROR 62999 --- [api-gateway] [  restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8088 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8088 or configure this application to listen on another port.
+

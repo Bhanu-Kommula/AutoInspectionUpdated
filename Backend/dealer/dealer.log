@@ -126,3 +126,15 @@
 2025-08-18T12:03:54.507-05:00  WARN 63298 --- [dealer] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=41m10s598ms).
 2025-08-18T12:06:25.664-05:00  INFO 63298 --- [dealer] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
 2025-08-18T12:11:25.680-05:00  INFO 63298 --- [dealer] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-18T12:16:25.693-05:00  INFO 63298 --- [dealer] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-18T12:21:25.706-05:00  INFO 63298 --- [dealer] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-18T12:26:25.722-05:00  INFO 63298 --- [dealer] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-18T12:29:19.474-05:00  WARN 63298 --- [dealer] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=54s776ms).
+2025-08-18T12:31:50.501-05:00  INFO 63298 --- [dealer] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-18T12:36:50.515-05:00  INFO 63298 --- [dealer] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-18T12:41:50.527-05:00  INFO 63298 --- [dealer] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-18T12:46:50.539-05:00  INFO 63298 --- [dealer] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-18T12:51:50.552-05:00  INFO 63298 --- [dealer] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-18T12:56:50.567-05:00  INFO 63298 --- [dealer] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-18T13:01:50.583-05:00  INFO 63298 --- [dealer] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-18T13:06:50.596-05:00  INFO 63298 --- [dealer] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration

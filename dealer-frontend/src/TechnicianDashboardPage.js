@@ -7,6 +7,8 @@ import { Spinner, Modal, Button, Badge, Card, Row, Col } from "react-bootstrap";
 import TechnicianHeader from "./components/TechnicianHeader";
 import ChatButton from "./components/chat/ChatButton";
 import InspectionInterface from "./components/InspectionInterface";
+import InspectionReportViewer from "./components/InspectionReportViewer";
+import { toast } from "react-toastify";
 import {
   FaMapMarkerAlt,
   FaClock,
@@ -38,14 +40,17 @@ import "./technician.css";
 // Modern professional styles
 const modernStyles = `
   :root {
-    --total-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --accepted-gradient: linear-gradient(135deg, #00b09b 0%, #96c93d 100%);
-    --inprogress-gradient: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
-    --completed-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    /* Professional, modern palette */
+    --total-gradient: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    --available-gradient: linear-gradient(135deg, #2563eb 0%, #60a5fa 100%);   /* Blue */
+    --accepted-gradient: linear-gradient(135deg, #0891b2 0%, #67e8f9 100%);  /* Cyan (swapped) */
+    --inprogress-gradient: linear-gradient(135deg, #f59e0b 0%, #fcd34d 100%); /* Amber */
+    --completed-gradient: linear-gradient(135deg, #16a34a 0%, #86efac 100%);   /* Emerald (swapped) */
     --card-shadow: 0 2px 20px rgba(0,0,0,0.08);
     --card-hover-shadow: 0 8px 30px rgba(0,0,0,0.12);
     --border-radius: 12px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --text-strong: #111827; /* near-black for excellent contrast */
   }
 
   .modern-dashboard {
@@ -79,9 +84,7 @@ const modernStyles = `
     text-shadow: 0 1px 3px rgba(0,0,0,0.3);
   }
 
-  .gradient-card.available {
-    background: var(--accepted-gradient);
-  }
+  .gradient-card.available { background: var(--available-gradient); }
 
   .gradient-card.accepted {
     background: var(--accepted-gradient);
@@ -100,21 +103,13 @@ const modernStyles = `
     box-shadow: var(--card-hover-shadow);
   }
 
-  .gradient-card.available:hover {
-    background: linear-gradient(135deg, #00c4a8 0%, #a8d94a 100%);
-  }
+  .gradient-card.available:hover { background: linear-gradient(135deg, #1d4ed8 0%, #60a5fa 100%); }
 
-  .gradient-card.accepted:hover {
-    background: linear-gradient(135deg, #00c4a8 0%, #a8d94a 100%);
-  }
+  .gradient-card.accepted:hover { background: linear-gradient(135deg, #0e7490 0%, #67e8f9 100%); }
 
-  .gradient-card.inprogress:hover {
-    background: linear-gradient(135deg, #f8a825 0%, #ffe033 100%);
-  }
+  .gradient-card.inprogress:hover { background: linear-gradient(135deg, #d97706 0%, #fde68a 100%); }
 
-  .gradient-card.completed:hover {
-    background: linear-gradient(135deg, #13a99a 0%, #42f58a 100%);
-  }
+  .gradient-card.completed:hover { background: linear-gradient(135deg, #15803d 0%, #86efac 100%); }
 
   .active-filter {
     transform: translateY(-4px);
@@ -180,6 +175,92 @@ const modernStyles = `
     transform: translateY(-2px);
     box-shadow: var(--card-hover-shadow);
     border-color: rgba(102, 126, 234, 0.3);
+  }
+
+  /* Status-driven professional accents */
+  /* Accepted → light blue */
+  .post-card.status-accepted {
+    border-color: rgba(37, 99, 235, 0.32); /* #2563eb */
+    background-image: linear-gradient(180deg, rgba(37, 99, 235, 0.06), rgba(37, 99, 235, 0.02));
+  }
+  .post-card.status-accepted::before {
+    background: linear-gradient(180deg, #00b09b 0%, #96c93d 100%);
+  }
+
+  .post-card.status-inprogress {
+    border-color: rgba(255, 193, 7, 0.32);
+    background-image: linear-gradient(180deg, rgba(255, 193, 7, 0.06), rgba(255, 193, 7, 0.02));
+  }
+  .post-card.status-inprogress::before {
+    background: linear-gradient(180deg, #f7971e 0%, #ffd200 100%);
+  }
+
+  /* Completed → light green */
+  .post-card.status-completed {
+    border-color: rgba(22, 163, 74, 0.32); /* #16a34a */
+    background-image: linear-gradient(180deg, rgba(22, 163, 74, 0.06), rgba(22, 163, 74, 0.02));
+  }
+  .post-card.status-completed::before {
+    background: linear-gradient(180deg, #4facfe 0%, #00f2fe 100%);
+  }
+
+  .post-card.status-unknown {
+    border-color: rgba(108, 117, 125, 0.25);
+    background-image: linear-gradient(180deg, rgba(108, 117, 125, 0.06), rgba(108, 117, 125, 0.02));
+  }
+  .post-card.status-unknown::before {
+    background: linear-gradient(180deg, #adb5bd 0%, #6c757d 100%);
+  }
+
+  /* Modern enhancements */
+  .post-card-header {
+    gap: 0.75rem;
+  }
+
+  .price-chip {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    border-radius: 999px;
+    padding: 6px 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 6px 16px rgba(79, 172, 254, 0.25);
+    font-weight: 700;
+  }
+
+  .meta-chip {
+    background: #f6f8ff;
+    border: 1px solid rgba(102, 126, 234, 0.18);
+    color: #5a6fd8;
+    border-radius: 999px;
+    padding: 6px 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .post-actions .btn {
+    border-radius: 10px;
+    border-width: 2px;
+  }
+
+  .post-actions .btn-outline-primary {
+    border-color: rgba(102, 126, 234, 0.45);
+  }
+
+  .post-actions .btn-outline-success {
+    border-color: rgba(25, 135, 84, 0.45);
+  }
+
+  .post-actions .btn-outline-info {
+    border-color: rgba(13, 202, 240, 0.45);
+  }
+
+  .post-actions .btn-outline-secondary {
+    border-color: rgba(108, 117, 125, 0.45);
   }
 
   .post-card.accepted::before {
@@ -271,17 +352,18 @@ const modernStyles = `
   }
 
   .action-btn {
-    border-radius: 8px;
-    padding: 0.75rem 1.5rem;
-    font-weight: 600;
+    border-radius: 12px;
+    padding: 0.75rem 1.2rem;
+    font-weight: 700;
     transition: var(--transition);
     border: none;
     text-transform: none;
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.12);
   }
 
   .action-btn:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 22px rgba(102, 126, 234, 0.18);
   }
 
   .empty-state {
@@ -291,6 +373,33 @@ const modernStyles = `
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
   }
+
+  /* Modern button style for post actions */
+  .btn-modern {
+    border-radius: 12px;
+    border-width: 2px;
+    font-weight: 600;
+    padding: 0.6rem 1rem;
+    transition: var(--transition);
+  }
+  .btn-modern:hover, .btn-modern:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+  }
+  /* Dark hover fills with high-contrast text */
+  .btn-outline-primary.btn-modern:hover { color: #ffffff; background: #0d6efd; border-color: #0a58ca; }
+  .btn-outline-success.btn-modern:hover { color: #ffffff; background: #198754; border-color: #146c43; }
+  .btn-outline-info.btn-modern:hover { color: #ffffff; background: #0aa2c0; border-color: #0a8ca8; }
+  .btn-outline-secondary.btn-modern:hover { color: #ffffff; background: #495057; border-color: #3f464b; }
+  .btn-outline-danger.btn-modern:hover { color: #ffffff; background: #dc3545; border-color: #b02a37; }
+
+  /* Organized two-column actions for in-progress */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  .span-2 { grid-column: 1 / -1; }
 
   .empty-state-icon {
     width: 64px;
@@ -335,6 +444,8 @@ const TechnicianDashboardPage = () => {
   const [showInspectionInterface, setShowInspectionInterface] = useState(false);
   const [showCompletionModal, setShowCompletionModal] = useState(false);
   const [inspectionInterfaceTab, setInspectionInterfaceTab] = useState("files");
+  const [showReportViewer, setShowReportViewer] = useState(false);
+  const [reportViewerPost, setReportViewerPost] = useState(null);
 
   // Notification state
   const [notifications, setNotifications] = useState([]);
@@ -699,6 +810,26 @@ const TechnicianDashboardPage = () => {
     setShowCompletionModal(true);
   };
 
+  const handleOpenMyReports = () => {
+    // Prefer completed posts; if none, guide user
+    const completed = acceptedPosts.filter((p) => p.status === "completed");
+    if (completed.length === 0) {
+      toast.info(
+        "No completed reports yet. Complete an inspection to view reports."
+      );
+      setActiveFilter("completed");
+      return;
+    }
+    // Open the latest completed post in the report viewer
+    const latest = [...completed].sort(
+      (a, b) =>
+        new Date(b.updatedAt || b.acceptedAt || 0) -
+        new Date(a.updatedAt || a.acceptedAt || 0)
+    )[0];
+    setReportViewerPost(latest);
+    setShowReportViewer(true);
+  };
+
   const handleViewReport = (post) => {
     console.log("Opening report view for post:", post);
     setSelectedPost(post);
@@ -968,7 +1099,7 @@ const TechnicianDashboardPage = () => {
             </div>
             <Button
               variant="outline-primary"
-              className="action-btn"
+              className="action-btn btn-modern"
               onClick={handleRefresh}
             >
               <FaSync className="me-2" />
@@ -1117,223 +1248,251 @@ const TechnicianDashboardPage = () => {
                     <p className="text-muted">Loading your accepted posts...</p>
                   </div>
                 ) : filteredPosts.length > 0 ? (
-                  <div>
+                  <div
+                    className={`row g-4 ${
+                      filteredPosts.length === 1 ? "justify-content-center" : ""
+                    }`}
+                  >
                     {filteredPosts.map((post, index) => (
                       <div
                         key={post.id || index}
-                        className="post-card accepted mb-4"
+                        className={`${
+                          filteredPosts.length === 1
+                            ? "col-md-8 col-lg-6"
+                            : "col-md-6"
+                        }`}
                       >
-                        <div className="p-4">
-                          <div className="d-flex justify-content-between align-items-start mb-3">
-                            <div className="flex-grow-1">
-                              <h6 className="fw-bold mb-2 text-primary">
-                                {post.name ||
-                                  post.content ||
-                                  `Auto Inspection ${post.id}`}
-                              </h6>
-                              <Badge className="modern-badge bg-primary">
-                                {post.status.toUpperCase()}
-                              </Badge>
-                            </div>
-                            <div className="text-end">
-                              {post.price && (
-                                <div className="price-display">
-                                  <FaDollarSign />
-                                  {post.price}
-                                </div>
-                              )}
-                            </div>
-                          </div>
-
-                          <div className="row g-3">
-                            <div className="col-md-6">
-                              <div className="info-row">
-                                <FaMapMarkerAlt className="info-icon" />
-                                <small className="text-muted">
-                                  <strong>Location:</strong>{" "}
-                                  {post.location || "Not specified"}
-                                </small>
+                        <div
+                          className={`post-card h-100 ${
+                            post.status === "accepted"
+                              ? "status-accepted"
+                              : post.status === "completed"
+                              ? "status-completed"
+                              : post.status === "inprogress" ||
+                                post.status === "in_progress" ||
+                                post.status === "in-progress"
+                              ? "status-inprogress"
+                              : "status-unknown"
+                          }`}
+                        >
+                          <div className="p-4 d-flex flex-column h-100">
+                            <div className="d-flex justify-content-between align-items-start mb-3">
+                              <div className="flex-grow-1">
+                                <h6 className="fw-bold mb-2 text-primary">
+                                  {post.name ||
+                                    post.content ||
+                                    `Auto Inspection ${post.id}`}
+                                </h6>
+                                <Badge className="modern-badge bg-primary">
+                                  {post.status.toUpperCase()}
+                                </Badge>
                               </div>
-                              {post.acceptedAt && (
+                              <div className="text-end">
+                                {post.price && (
+                                  <div className="price-chip">
+                                    <FaDollarSign />
+                                    {post.price}
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="row g-3">
+                              <div className="col-md-6">
                                 <div className="info-row">
-                                  <FaClock className="info-icon" />
+                                  <FaMapMarkerAlt className="info-icon" />
                                   <small className="text-muted">
-                                    <strong>Accepted:</strong>{" "}
-                                    {formatDate(post.acceptedAt)}
+                                    <strong>Location:</strong>{" "}
+                                    {post.location || "Not specified"}
+                                  </small>
+                                </div>
+                                {post.acceptedAt && (
+                                  <div className="info-row">
+                                    <span className="meta-chip">
+                                      <FaClock />
+                                      Accepted {formatDate(post.acceptedAt)}
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+                              <div className="col-md-6">
+                                {post.technicianName && (
+                                  <div className="info-row">
+                                    <span className="meta-chip">
+                                      <FaUser />
+                                      {post.technicianName}
+                                    </span>
+                                  </div>
+                                )}
+                                {post.technicianEmail && (
+                                  <div className="info-row">
+                                    <small className="text-muted">
+                                      <strong>Email:</strong>{" "}
+                                      {post.technicianEmail}
+                                    </small>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+
+                            {post.content &&
+                              post.content !== `Post ${post.id}` && (
+                                <div className="description-box mt-3">
+                                  <small className="text-muted">
+                                    <strong>Description:</strong>{" "}
+                                    {post.content.substring(0, 150)}
+                                    {post.content.length > 150 && "..."}
                                   </small>
                                 </div>
                               )}
-                            </div>
-                            <div className="col-md-6">
-                              {post.technicianName && (
-                                <div className="info-row">
-                                  <FaUser className="info-icon" />
-                                  <small className="text-muted">
-                                    <strong>Technician:</strong>{" "}
-                                    {post.technicianName}
-                                  </small>
-                                </div>
-                              )}
-                              {post.technicianEmail && (
-                                <div className="info-row">
-                                  <small className="text-muted">
-                                    <strong>Email:</strong>{" "}
-                                    {post.technicianEmail}
-                                  </small>
-                                </div>
-                              )}
-                            </div>
-                          </div>
 
-                          {post.content &&
-                            post.content !== `Post ${post.id}` && (
-                              <div className="description-box mt-3">
-                                <small className="text-muted">
-                                  <strong>Description:</strong>{" "}
-                                  {post.content.substring(0, 150)}
-                                  {post.content.length > 150 && "..."}
-                                </small>
-                              </div>
-                            )}
-
-                          {/* Action Buttons Based on Status */}
-                          <div className="mt-3">
-                            {/* Status-specific buttons */}
-                            {post.status === "accepted" && (
-                              <div className="mb-2">
-                                <Button
-                                  variant="outline-success"
-                                  size="sm"
-                                  onClick={() => {
-                                    setSelectedPost(post);
-                                    handleStartInspection();
-                                  }}
-                                  className="w-100"
-                                >
-                                  <FaPlay className="me-1" />
-                                  Start Inspection
-                                </Button>
-                              </div>
-                            )}
-
-                            {/* Show View Details for non-accepted and non-completed posts */}
-                            {post.status !== "accepted" &&
-                              post.status !== "completed" && (
+                            {/* Action Buttons Based on Status */}
+                            <div className="mt-3 post-actions">
+                              {/* Status-specific buttons */}
+                              {post.status === "accepted" && (
                                 <div className="mb-2">
                                   <Button
-                                    variant="outline-primary"
+                                    variant="outline-success"
                                     size="sm"
-                                    onClick={() => viewPostDetails(post)}
-                                    className="w-100"
+                                    className="btn-modern"
+                                    onClick={() => {
+                                      setSelectedPost(post);
+                                      handleStartInspection();
+                                    }}
                                   >
-                                    <FaFileAlt className="me-1" />
-                                    View Details
+                                    <FaPlay className="me-1" />
+                                    Start Inspection
                                   </Button>
                                 </div>
                               )}
 
-                            {/* Show View Report for completed posts */}
-                            {post.status === "completed" && (
-                              <div className="mb-2">
-                                <Button
-                                  variant="outline-info"
-                                  size="sm"
-                                  onClick={() => handleViewReport(post)}
-                                  className="w-100"
-                                >
-                                  <FaFileAlt className="me-1" />
-                                  View Report
-                                </Button>
-                              </div>
-                            )}
-
-                            {/* In-Progress posts show 4 organized buttons */}
-                            {(post.status === "inprogress" ||
-                              post.status === "in_progress" ||
-                              post.status === "in-progress") && (
-                              <>
-                                <div className="row g-2">
-                                  <div className="col-6">
+                              {/* Show View Details for non-accepted and non-completed posts */}
+                              {post.status !== "accepted" &&
+                                post.status !== "completed" && (
+                                  <div className="mb-2">
                                     <Button
-                                      variant="outline-warning"
+                                      variant="outline-primary"
                                       size="sm"
-                                      onClick={() =>
-                                        handleOpenInspectionInterface(
-                                          post,
-                                          "files"
-                                        )
-                                      }
-                                      className="w-100"
-                                    >
-                                      <FaUpload className="me-1" />
-                                      Upload Files
-                                    </Button>
-                                  </div>
-                                  <div className="col-6">
-                                    <Button
-                                      variant="outline-info"
-                                      size="sm"
-                                      onClick={() =>
-                                        handleOpenInspectionInterface(
-                                          post,
-                                          "checklist"
-                                        )
-                                      }
-                                      className="w-100"
-                                    >
-                                      <FaClipboardCheck className="me-1" />
-                                      Inspection
-                                    </Button>
-                                  </div>
-                                  <div className="col-12">
-                                    <Button
-                                      variant="outline-secondary"
-                                      size="sm"
-                                      onClick={() =>
-                                        handleOpenInspectionInterface(
-                                          post,
-                                          "remarks"
-                                        )
-                                      }
-                                      className="w-100"
+                                      className="btn-modern"
+                                      onClick={() => viewPostDetails(post)}
                                     >
                                       <FaFileAlt className="me-1" />
-                                      Remarks
+                                      View Details
                                     </Button>
                                   </div>
-                                </div>
-                              </>
-                            )}
+                                )}
 
-                            {post.status === "completed" && (
-                              <div className="text-center">
-                                <Badge bg="success" className="px-3 py-2 fs-6">
-                                  <FaCheckCircle className="me-1" />
-                                  Inspection Complete
-                                </Badge>
-                              </div>
-                            )}
-
-                            {/* Communication Buttons - Show if dealer email exists */}
-                            {(post.dealerEmail || post.email) && (
-                              <div className="mt-2">
-                                <div className="d-flex gap-2">
-                                  <ChatButton
-                                    dealerEmail={post.dealerEmail || post.email}
-                                    technicianEmail={technician?.email}
-                                    userType="TECHNICIAN"
-                                    variant="outline-primary"
+                              {/* Show View Report for completed posts */}
+                              {post.status === "completed" && (
+                                <div className="mb-2">
+                                  <Button
+                                    variant="outline-info"
                                     size="sm"
-                                    className="flex-fill"
-                                    showText={true}
-                                    postId={post.id}
-                                    postTitle={`${post.carMake || "Vehicle"} ${
-                                      post.carModel || "Inspection"
-                                    }`}
-                                  />
+                                    className="btn-modern"
+                                    onClick={() => handleViewReport(post)}
+                                  >
+                                    <FaFileAlt className="me-1" />
+                                    View Report
+                                  </Button>
                                 </div>
-                              </div>
-                            )}
+                              )}
+
+                              {/* In-Progress posts show 4 organized buttons */}
+                              {(post.status === "inprogress" ||
+                                post.status === "in_progress" ||
+                                post.status === "in-progress") && (
+                                <>
+                                  <div className="two-col">
+                                    <div>
+                                      <Button
+                                        variant="outline-warning"
+                                        size="sm"
+                                        className="btn-modern btn-upload"
+                                        onClick={() =>
+                                          handleOpenInspectionInterface(
+                                            post,
+                                            "files"
+                                          )
+                                        }
+                                        className="w-100 btn-modern"
+                                      >
+                                        <FaUpload className="me-1" />
+                                        Upload Files
+                                      </Button>
+                                    </div>
+                                    <div>
+                                      <Button
+                                        variant="outline-info"
+                                        size="sm"
+                                        className="btn-modern"
+                                        onClick={() =>
+                                          handleOpenInspectionInterface(
+                                            post,
+                                            "checklist"
+                                          )
+                                        }
+                                        className="w-100 btn-modern"
+                                      >
+                                        <FaClipboardCheck className="me-1" />
+                                        Inspection
+                                      </Button>
+                                    </div>
+                                    <div className="span-2">
+                                      <Button
+                                        variant="outline-secondary"
+                                        size="sm"
+                                        className="btn-modern"
+                                        onClick={() =>
+                                          handleOpenInspectionInterface(
+                                            post,
+                                            "remarks"
+                                          )
+                                        }
+                                        className="w-100 btn-modern"
+                                      >
+                                        <FaFileAlt className="me-1" />
+                                        Remarks
+                                      </Button>
+                                    </div>
+                                  </div>
+                                </>
+                              )}
+
+                              {post.status === "completed" && (
+                                <div className="text-center">
+                                  <Badge
+                                    bg="success"
+                                    className="px-3 py-2 fs-6"
+                                  >
+                                    <FaCheckCircle className="me-1" />
+                                    Inspection Complete
+                                  </Badge>
+                                </div>
+                              )}
+
+                              {/* Communication Buttons - Show if dealer email exists */}
+                              {(post.dealerEmail || post.email) && (
+                                <div className="mt-2">
+                                  <div className="d-flex gap-2">
+                                    <ChatButton
+                                      dealerEmail={
+                                        post.dealerEmail || post.email
+                                      }
+                                      technicianEmail={technician?.email}
+                                      userType="TECHNICIAN"
+                                      variant="outline-primary"
+                                      size="sm"
+                                      className="flex-fill"
+                                      showText={true}
+                                      postId={post.id}
+                                      postTitle={`${
+                                        post.carMake || "Vehicle"
+                                      } ${post.carModel || "Inspection"}`}
+                                    />
+                                  </div>
+                                </div>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -1369,73 +1528,7 @@ const TechnicianDashboardPage = () => {
           </Col>
         </Row>
 
-        {/* Quick Actions */}
-        <Row>
-          <Col>
-            <div className="quick-actions">
-              <div className="d-flex align-items-center mb-4">
-                <div className="me-3">
-                  <div className="rounded-circle bg-primary bg-opacity-10 p-2">
-                    <FaListAlt className="text-primary" size={20} />
-                  </div>
-                </div>
-                <div>
-                  <h5 className="mb-1 fw-bold">Quick Actions</h5>
-                  <p className="text-muted mb-0 small">
-                    Frequently used actions and shortcuts
-                  </p>
-                </div>
-              </div>
-              <div className="row g-3">
-                <div className="col-lg-3 col-md-6">
-                  <Button
-                    variant="primary"
-                    className="action-btn w-100"
-                    onClick={() => navigate("/tech-feeds")}
-                  >
-                    <FaListAlt className="me-2" />
-                    Browse All Posts
-                  </Button>
-                </div>
-                <div className="col-lg-3 col-md-6">
-                  <Button
-                    variant="success"
-                    className="action-btn w-100"
-                    disabled={acceptedPosts.length === 0}
-                  >
-                    <FaFileAlt className="me-2" />
-                    My Reports (
-                    {
-                      acceptedPosts.filter((p) => p.status === "completed")
-                        .length
-                    }
-                    )
-                  </Button>
-                </div>
-                <div className="col-lg-3 col-md-6">
-                  <Button
-                    variant="info"
-                    className="action-btn w-100"
-                    onClick={handleRefresh}
-                  >
-                    <FaSync className="me-2" />
-                    Refresh Dashboard
-                  </Button>
-                </div>
-                <div className="col-lg-3 col-md-6">
-                  <Button
-                    variant="outline-danger"
-                    className="action-btn w-100"
-                    onClick={handleLogout}
-                  >
-                    <FaSignOutAlt className="me-2" />
-                    Logout
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </Col>
-        </Row>
+        {/* Quick Actions removed per request */}
       </div>
 
       {/* Post Details Modal */}
@@ -1597,7 +1690,7 @@ const TechnicianDashboardPage = () => {
         <Modal.Footer className="border-0 p-4">
           <Button
             variant="outline-secondary"
-            className="action-btn me-2"
+            className="action-btn btn-modern me-2"
             onClick={() => setShowPostModal(false)}
           >
             {selectedPost && selectedPost.status === "accepted"
@@ -1607,7 +1700,7 @@ const TechnicianDashboardPage = () => {
           {selectedPost && selectedPost.status === "accepted" && (
             <Button
               variant="success"
-              className="action-btn"
+              className="action-btn btn-modern"
               onClick={handleStartInspection}
             >
               <FaPlay className="me-1" />
@@ -1628,6 +1721,14 @@ const TechnicianDashboardPage = () => {
           selectedPost?.status === "completed" ||
           selectedPost?.status === "SUBMITTED"
         }
+      />
+
+      {/* Inspection Report Viewer Modal */}
+      <InspectionReportViewer
+        show={showReportViewer}
+        onHide={() => setShowReportViewer(false)}
+        postId={reportViewerPost?.id}
+        post={reportViewerPost}
       />
 
       {/* Completion Confirmation Modal */}
@@ -1690,6 +1791,7 @@ const TechnicianDashboardPage = () => {
                 <Button
                   variant="outline-primary"
                   size="sm"
+                  className="btn-modern"
                   onClick={() => {
                     setShowCompletionModal(false);
                     // Open in editable mode (not view mode) for in-progress inspections
@@ -1704,6 +1806,7 @@ const TechnicianDashboardPage = () => {
                 <Button
                   variant="outline-info"
                   size="sm"
+                  className="btn-modern"
                   onClick={() => {
                     setShowCompletionModal(false);
                     // Open in editable mode (not view mode) for in-progress inspections
@@ -1721,7 +1824,7 @@ const TechnicianDashboardPage = () => {
         <Modal.Footer className="border-0 p-4">
           <Button
             variant="outline-secondary"
-            className="action-btn me-2"
+            className="action-btn btn-modern me-2"
             onClick={() => setShowCompletionModal(false)}
           >
             <FaEye className="me-1" />
@@ -1729,7 +1832,7 @@ const TechnicianDashboardPage = () => {
           </Button>
           <Button
             variant="success"
-            className="action-btn"
+            className="action-btn btn-modern"
             onClick={handleConfirmCompletion}
           >
             <FaCheckCircle className="me-1" />

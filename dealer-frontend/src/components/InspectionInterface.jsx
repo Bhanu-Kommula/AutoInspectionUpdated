@@ -1442,6 +1442,12 @@ const InspectionInterface = ({
   };
 
   const stats = getCompletionStats();
+  // Treat report as completed when in view mode and post status is completed,
+  // or when computed completion hits 100%
+  const isCompletedReport =
+    (isViewMode &&
+      (post?.status === "COMPLETED" || post?.status === "completed")) ||
+    stats.completionPercentage >= 100;
 
   // No longer needed - replaced with direct state management
 
@@ -1531,7 +1537,7 @@ const InspectionInterface = ({
                     </strong>
                     <Badge
                       bg={
-                        stats.completionPercentage >= 100
+                        isCompletedReport
                           ? "success"
                           : stats.completionPercentage >= 75
                           ? "warning"
@@ -1539,9 +1545,7 @@ const InspectionInterface = ({
                       }
                       className="px-3 py-2 fs-6"
                     >
-                      {stats.completionPercentage >= 100
-                        ? "✅ Complete"
-                        : "🔄 In Progress"}
+                      {isCompletedReport ? "✅ Completed" : "🔄 In Progress"}
                     </Badge>
                   </div>
                   <ProgressBar className="mb-2" style={{ height: "8px" }}>
