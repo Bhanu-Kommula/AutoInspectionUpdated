@@ -55,51 +55,16 @@ const TechnicianNotificationBell = ({ technicianInfo }) => {
         setNotifications(data.notifications || []);
         setUnreadCount(data.unreadCount || 0);
       } else {
-        // Fallback: create some sample notifications for demo
-        createSampleNotifications();
+        // On failure, show empty state (no dummy data)
+        setNotifications([]);
+        setUnreadCount(0);
       }
     } catch (error) {
       console.error("Error loading notifications:", error);
-      // Fallback: create sample notifications
-      createSampleNotifications();
+      // On error, show empty state
+      setNotifications([]);
+      setUnreadCount(0);
     }
-  };
-
-  // Create sample notifications for demo purposes
-  const createSampleNotifications = () => {
-    const sampleNotifications = [
-      {
-        id: 1,
-        message: "New post assigned: Post #11 - Honda Civic inspection",
-        type: "info",
-        read: false,
-        timestamp: new Date(Date.now() - 1000 * 60 * 30).toLocaleString(), // 30 min ago
-      },
-      {
-        id: 2,
-        message: "Counter offer accepted for Post #8 - Toyota Camry",
-        type: "success",
-        read: false,
-        timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2).toLocaleString(), // 2 hours ago
-      },
-      {
-        id: 3,
-        message: "Payment received for completed inspection",
-        type: "success",
-        read: true,
-        timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24).toLocaleString(), // 1 day ago
-      },
-      {
-        id: 4,
-        message: "New message from dealer in Post #11",
-        type: "info",
-        read: false,
-        timestamp: new Date(Date.now() - 1000 * 60 * 5).toLocaleString(), // 5 min ago
-      },
-    ];
-
-    setNotifications(sampleNotifications);
-    setUnreadCount(sampleNotifications.filter((n) => !n.read).length);
   };
 
   // Mark all notifications as read

@@ -27,10 +27,9 @@ function DealerLogin() {
     setError("");
 
     try {
-      // Use hardcoded URL to bypass any axios instance issues
-      const fullUrl = "http://localhost:8088/dealer/api/dealers/login";
-      console.log("API_CONFIG.DEALER_BASE_URL:", API_CONFIG.DEALER_BASE_URL);
-      console.log("Using hardcoded URL:", fullUrl);
+      // Use configured base URL
+      const fullUrl = `${API_CONFIG.DEALER_BASE_URL}/login`;
+      console.log("Dealer Login URL:", fullUrl);
       console.log("Dealer Login - Request data:", formData);
 
       const response = await axios.post(fullUrl, formData, {

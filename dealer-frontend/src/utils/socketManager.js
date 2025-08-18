@@ -1,5 +1,6 @@
 // Singleton Socket Manager to prevent multiple connections
 import io from "socket.io-client";
+// Keep chat connection URL unchanged (do not modify chat system)
 
 class SocketManager {
   constructor() {

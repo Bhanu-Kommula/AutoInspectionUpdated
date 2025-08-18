@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import socketManager from "../utils/socketManager";
+// Do not modify chat API endpoints here
 
 const useChat = (dealerEmail, technicianEmail, userType, postId = null) => {
   const [socket, setSocket] = useState(null);

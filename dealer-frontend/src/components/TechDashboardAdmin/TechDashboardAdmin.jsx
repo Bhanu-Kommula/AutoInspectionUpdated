@@ -71,6 +71,23 @@ const TechDashboardAdmin = () => {
     conditionRating: "",
   });
 
+  // Files state
+  const [files, setFiles] = useState([]);
+  const [filesPagination, setFilesPagination] = useState({
+    currentPage: 0,
+    totalPages: 0,
+    totalElements: 0,
+    size: 50,
+  });
+  const [filesFilters, setFilesFilters] = useState({
+    reportId: "",
+    category: "",
+  });
+
+  // Performance state
+  const [performance, setPerformance] = useState({ metrics: null, top: [] });
+  const [health, setHealth] = useState(null);
+
   // Initialize component
   useEffect(() => {
     loadDashboardOverview();
@@ -84,6 +101,12 @@ const TechDashboardAdmin = () => {
       loadInspectionReports();
     } else if (activeTab === "checklist") {
       loadChecklistItems();
+    } else if (activeTab === "files") {
+      loadFiles();
+    } else if (activeTab === "performance") {
+      loadPerformance();
+    } else if (activeTab === "health") {
+      loadHealth();
     }
   }, [activeTab]);
 
@@ -183,6 +206,62 @@ const TechDashboardAdmin = () => {
       setError("Failed to load checklist items");
       toast.error("Failed to load checklist items");
       console.error("Error loading checklist items:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loadFiles = async () => {
+    try {
+      setLoading(true);
+      const params = {
+        page: filesPagination.currentPage,
+        size: filesPagination.size,
+        ...filesFilters,
+      };
+
+      const response = await techDashboardService.getFiles(params);
+      if (response.success) {
+        setFiles(response.files.items || []);
+        setFilesPagination((prev) => ({
+          ...prev,
+          totalPages: response.files.totalPages || 0,
+          totalElements: response.files.totalCount || 0,
+        }));
+      }
+    } catch (error) {
+      setError("Failed to load files");
+      toast.error("Failed to load files");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loadPerformance = async () => {
+    try {
+      setLoading(true);
+      const metrics = await techDashboardService.getTechnicianPerformance({});
+      const top = await techDashboardService.getTopPerformers({ limit: 10 });
+      setPerformance({
+        metrics: metrics?.data || metrics,
+        top: top?.data || top,
+      });
+    } catch (error) {
+      setError("Failed to load performance data");
+      toast.error("Failed to load performance data");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loadHealth = async () => {
+    try {
+      setLoading(true);
+      const data = await techDashboardService.getSystemHealth();
+      setHealth(data);
+    } catch (error) {
+      setError("Failed to load system health");
+      toast.error("Failed to load system health");
     } finally {
       setLoading(false);
     }
@@ -760,21 +839,167 @@ const TechDashboardAdmin = () => {
               {renderChecklistItems()}
             </Tab>
             <Tab eventKey="files" title="Files">
-              <div className="text-center p-5">
-                <h5>File Management</h5>
-                <p>File management features coming soon...</p>
+              <div className="files-tab p-3">
+                <Row className="mb-3">
+                  <Col md={3}>
+                    <Form.Group>
+                      <Form.Label>Report ID</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter report ID"
+                        value={filesFilters.reportId}
+                        onChange={(e) =>
+                          setFilesFilters((prev) => ({
+                            ...prev,
+                            reportId: e.target.value,
+                          }))
+                        }
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col md={3}>
+                    <Form.Group>
+                      <Form.Label>Category</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="e.g., IMAGE, VIDEO, AUDIO, DOC"
+                        value={filesFilters.category}
+                        onChange={(e) =>
+                          setFilesFilters((prev) => ({
+                            ...prev,
+                            category: e.target.value,
+                          }))
+                        }
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col md={2} className="d-flex align-items-end">
+                    <Button variant="primary" onClick={loadFiles}>
+                      <HiOutlineFilter /> Apply Filters
+                    </Button>
+                  </Col>
+                </Row>
+
+                <Table responsive striped hover>
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Report</th>
+                      <th>Category</th>
+                      <th>Name</th>
+                      <th>Uploaded</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {files.map((f) => (
+                      <tr key={f.id}>
+                        <td>#{f.id}</td>
+                        <td>{f.reportId}</td>
+                        <td>
+                          <Badge bg="info">{f.category}</Badge>
+                        </td>
+                        <td>{f.filename}</td>
+                        <td>{new Date(f.uploadedAt).toLocaleString()}</td>
+                        <td>
+                          <Button
+                            variant="outline-danger"
+                            size="sm"
+                            onClick={async () => {
+                              try {
+                                await techDashboardService.deleteFile(f.id, {
+                                  reason: "Admin action",
+                                  adminEmail: "admin@example.com",
+                                });
+                                toast.success("File deleted");
+                                loadFiles();
+                              } catch (e) {
+                                toast.error("Failed to delete file");
+                              }
+                            }}
+                          >
+                            <HiOutlineTrash />
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
               </div>
             </Tab>
             <Tab eventKey="performance" title="Performance">
-              <div className="text-center p-5">
-                <h5>Technician Performance</h5>
-                <p>Performance monitoring features coming soon...</p>
+              <div className="p-4">
+                {!performance.metrics ? (
+                  <div className="text-center text-muted">No data</div>
+                ) : (
+                  <Row>
+                    <Col md={6}>
+                      <Card>
+                        <Card.Header>Performance Metrics</Card.Header>
+                        <Card.Body>
+                          <div>
+                            Total Earnings: {performance.metrics.totalEarnings}
+                          </div>
+                          <div>
+                            Avg Success Rate:{" "}
+                            {performance.metrics.averageSuccessRate}
+                          </div>
+                          <div>
+                            Avg Response Time:{" "}
+                            {performance.metrics.averageResponseTime}
+                          </div>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                    <Col md={6}>
+                      <Card>
+                        <Card.Header>Top Performers</Card.Header>
+                        <Card.Body>
+                          <Table size="sm" responsive>
+                            <thead>
+                              <tr>
+                                <th>Technician</th>
+                                <th>Metric</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {(
+                                performance.top?.technicians ||
+                                performance.top ||
+                                []
+                              ).map((t, idx) => (
+                                <tr key={idx}>
+                                  <td>{t.name || t.technicianName || t.id}</td>
+                                  <td>
+                                    {t.totalEarnings ||
+                                      t.successRate ||
+                                      t.totalPostsAccepted}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </Table>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  </Row>
+                )}
               </div>
             </Tab>
             <Tab eventKey="health" title="System Health">
-              <div className="text-center p-5">
-                <h5>System Health</h5>
-                <p>System health monitoring features coming soon...</p>
+              <div className="p-4">
+                {!health ? (
+                  <div className="text-center text-muted">No data</div>
+                ) : (
+                  <Card>
+                    <Card.Header>Service Health</Card.Header>
+                    <Card.Body>
+                      <pre className="mb-0" style={{ whiteSpace: "pre-wrap" }}>
+                        {JSON.stringify(health, null, 2)}
+                      </pre>
+                    </Card.Body>
+                  </Card>
+                )}
               </div>
             </Tab>
           </Tabs>

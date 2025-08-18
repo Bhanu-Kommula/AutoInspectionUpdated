@@ -13,6 +13,8 @@ const CounterOfferButton = ({
   onCounterOfferClick,
   onEligibilityRefresh,
   disabled = false,
+  // When true, hides the informational UI boxes (attempts, counters, max attempts)
+  hideInfo = false,
 }) => {
   const [localEligibility, setLocalEligibility] = useState(eligibility);
 
@@ -186,9 +188,9 @@ const CounterOfferButton = ({
   };
 
   return (
-    <div>
+    <div style={hideInfo ? { fontSize: 0 } : undefined}>
       {/* Attempt counter display */}
-      {isReCounterOffer && (
+      {isReCounterOffer && !hideInfo && (
         <div
           style={{
             fontSize: "0.75rem",
@@ -207,7 +209,7 @@ const CounterOfferButton = ({
       )}
 
       {/* Counter offer attempts label - only show when there are actual attempts */}
-      {isReCounterOffer && eligibility?.attemptNumber > 0 && (
+      {isReCounterOffer && eligibility?.attemptNumber > 0 && !hideInfo && (
         <div
           style={{
             fontSize: "0.75rem",
@@ -225,7 +227,7 @@ const CounterOfferButton = ({
       )}
 
       {/* Max attempts warning */}
-      {localEligibility?.maxAttemptsReached && (
+      {localEligibility?.maxAttemptsReached && !hideInfo && (
         <div
           style={{
             fontSize: "0.75rem",

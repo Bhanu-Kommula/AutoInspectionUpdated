@@ -27,9 +27,8 @@ const useWebSocket = (
   }, [fetchPosts]);
 
   useEffect(() => {
-    // All security and authentication validation removed as requested
-    // WebSocket connections disabled
-    console.log("🔌 WebSocket: All connections disabled as requested");
+    // WebSocket connections disabled (per request)
+    console.log("🔌 WebSocket: connections disabled");
     return;
 
     // Performance: Prevent multiple concurrent connections
@@ -42,33 +41,12 @@ const useWebSocket = (
 
     // Security: Get and validate authentication token (skip when security is disabled)
     let accessToken = null;
-    if (!true) {
-      accessToken = localStorage.getItem("accessToken");
-      if (!accessToken || accessToken.split(".").length !== 3) {
-        console.warn("🔒 WebSocket: Invalid or missing access token");
-        return;
-      }
-    } else {
-      accessToken = "dev-mock-token";
-    }
 
     try {
       isConnectingRef.current = true;
 
       // WebSocket connection with security disabled support
       let wsUrl = `${API_CONFIG.WEBSOCKET_BASE_URL}/ws`;
-
-      if (true) {
-        // Connect without auth parameters
-        wsUrl = `${API_CONFIG.WEBSOCKET_BASE_URL}/ws`;
-      } else {
-        // Normal connection with token
-        wsUrl = `${API_CONFIG.WEBSOCKET_BASE_URL}/ws?token=${encodeURIComponent(
-          accessToken
-        )}&technicianId=${encodeURIComponent(
-          dealer.id
-        )}&location=${encodeURIComponent(dealer.location)}`;
-      }
 
       const postingsSocket = new SockJS(wsUrl);
 

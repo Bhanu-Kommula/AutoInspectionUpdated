@@ -1577,10 +1577,11 @@ const TechnicianFeedApp = () => {
                     eligibility={counterOfferEligibility[post.id]}
                     onCounterOfferClick={handleOpenCounterOffer}
                     onEligibilityRefresh={refreshCounterOfferEligibility}
+                    hideInfo={true}
                   />
 
-                  {/* Chat Button */}
-                  {post.email && (
+                  {/* Chat Button - hidden for PENDING posts */}
+                  {post.email && post.status !== "PENDING" && (
                     <div style={{ marginTop: "0.5rem" }}>
                       <ChatButton
                         dealerEmail={post.email}
