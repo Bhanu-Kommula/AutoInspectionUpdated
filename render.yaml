@@ -1,87 +1,123 @@
 services:
   - type: web
     name: gateway
-    env: java
+    runtime: docker
     rootDir: backend-java/gateway
     buildCommand: ./mvnw -DskipTests package
     startCommand: java -jar target/gateway-*.jar
     envVars:
       - key: SPRING_DATASOURCE_URL
-        fromDatabase: postgres
+        fromDatabase:
+          name: postgres
+          property: connectionString
       - key: SPRING_DATASOURCE_USERNAME
-        fromDatabase: postgres
+        fromDatabase:
+          name: postgres
+          property: user
       - key: SPRING_DATASOURCE_PASSWORD
-        fromDatabase: postgres
+        fromDatabase:
+          name: postgres
+          property: password
 
   - type: web
     name: postings
-    env: java
+    runtime: docker
     rootDir: backend-java/postings
     buildCommand: ./mvnw -DskipTests package
     startCommand: java -jar target/postings-*.jar
     envVars:
       - key: SPRING_DATASOURCE_URL
-        fromDatabase: postgres
+        fromDatabase:
+          name: postgres
+          property: connectionString
       - key: SPRING_DATASOURCE_USERNAME
-        fromDatabase: postgres
+        fromDatabase:
+          name: postgres
+          property: user
       - key: SPRING_DATASOURCE_PASSWORD
-        fromDatabase: postgres
+        fromDatabase:
+          name: postgres
+          property: password
 
   - type: web
     name: dealer
-    env: java
+    runtime: docker
     rootDir: backend-java/dealer
     buildCommand: ./mvnw -DskipTests package
     startCommand: java -jar target/dealer-*.jar
     envVars:
       - key: SPRING_DATASOURCE_URL
-        fromDatabase: postgres
+        fromDatabase:
+          name: postgres
+          property: connectionString
       - key: SPRING_DATASOURCE_USERNAME
-        fromDatabase: postgres
+        fromDatabase:
+          name: postgres
+          property: user
       - key: SPRING_DATASOURCE_PASSWORD
-        fromDatabase: postgres
+        fromDatabase:
+          name: postgres
+          property: password
 
   - type: web
     name: technician
-    env: java
+    runtime: docker
     rootDir: backend-java/techincian
     buildCommand: ./mvnw -DskipTests package
     startCommand: java -jar target/techincian-*.jar
     envVars:
       - key: SPRING_DATASOURCE_URL
-        fromDatabase: postgres
+        fromDatabase:
+          name: postgres
+          property: connectionString
       - key: SPRING_DATASOURCE_USERNAME
-        fromDatabase: postgres
+        fromDatabase:
+          name: postgres
+          property: user
       - key: SPRING_DATASOURCE_PASSWORD
-        fromDatabase: postgres
+        fromDatabase:
+          name: postgres
+          property: password
 
   - type: web
     name: tech-dashboard
-    env: java
+    runtime: docker
     rootDir: backend-java/tech-dashboard
     buildCommand: ./mvnw -DskipTests package
     startCommand: java -jar target/tech-dashboard-*.jar
     envVars:
       - key: SPRING_DATASOURCE_URL
-        fromDatabase: postgres
+        fromDatabase:
+          name: postgres
+          property: connectionString
       - key: SPRING_DATASOURCE_USERNAME
-        fromDatabase: postgres
+        fromDatabase:
+          name: postgres
+          property: user
       - key: SPRING_DATASOURCE_PASSWORD
-        fromDatabase: postgres
+        fromDatabase:
+          name: postgres
+          property: password
 
   - type: web
     name: chat-service
-    env: node
+    runtime: node
     rootDir: backend-node/chat-service
     buildCommand: npm install
     startCommand: node server.js
     envVars:
       - key: DB_HOST
-        fromDatabase: postgres
+        fromDatabase:
+          name: postgres
+          property: host
       - key: DB_USER
-        fromDatabase: postgres
+        fromDatabase:
+          name: postgres
+          property: user
       - key: DB_PASSWORD
-        fromDatabase: postgres
+        fromDatabase:
+          name: postgres
+          property: password
       - key: DB_NAME
         value: inspection
       - key: DB_PORT
@@ -89,7 +125,7 @@ services:
 
   - type: web
     name: dealer-frontend
-    env: static
+    runtime: static
     rootDir: frontend/dealer-frontend
     buildCommand: npm ci && npm run build
     staticPublishPath: build
@@ -97,4 +133,3 @@ services:
 databases:
   - name: postgres
     plan: free
-
