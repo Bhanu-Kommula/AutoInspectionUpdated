@@ -167,6 +167,7 @@ public class TechnicianController {
             Map<String, Object> techDto = Map.of(
                 "name", tech.getName(),
                 "email", tech.getEmail(),
+                "phone", tech.getPhone(),
                 "delearshipName", tech.getDelearshipName() != null ? tech.getDelearshipName() : "",
                 "password", tech.getPassword(),
                 "city", tech.getLocation(), // Map location to city for compatibility
@@ -1115,6 +1116,9 @@ public class TechnicianController {
             // Update fields if provided
             if (updateData.getName() != null) {
                 technician.setName(capitalizeEachWord(updateData.getName()));
+            }
+            if (updateData.getPhone() != null) {
+                technician.setPhone(updateData.getPhone());
             }
             if (updateData.getLocation() != null) {
                 technician.setLocation(updateData.getLocation());

@@ -65,6 +65,8 @@ public class PostingController {
             dto.setAcceptedAt(p.getAcceptedAt()); // ✅ updated field
             dto.setTechnicianName(p.getTechnicianName());
             dto.setTechnicianEmail(p.getTechnicianEmail());
+            dto.setTechnicianPhone(p.getTechnicianPhone());
+            dto.setDealerPhone(p.getDealerPhone());
             dto.setExpectedCompletionBy(p.getExpectedCompletionBy());
             return dto;
         }).collect(Collectors.toList());

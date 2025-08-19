@@ -16,6 +16,7 @@ public class TechnicianPostsDTO {
 
     private String technicianEmail;
     private String technicianName;
+    private String technicianPhone;
 
     private Date acceptedAt;           // ✅ Add this
     private Date completeBy;           // ✅ Add this

@@ -16,6 +16,7 @@ public class TechnicianAcceptedPostResponseDto {
 
     private String technicianEmail;
     private String technicianName;
+    private String technicianPhone;
 
     private Date acceptedAt;
     private Date expectedCompletionBy; // for Dealer postpage

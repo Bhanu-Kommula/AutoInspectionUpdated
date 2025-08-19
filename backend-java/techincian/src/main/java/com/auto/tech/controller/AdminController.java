@@ -196,6 +196,7 @@ public class AdminController {
                 
                 // Update fields
                 if (technician.getName() != null) existing.setName(technician.getName());
+                if (technician.getPhone() != null) existing.setPhone(technician.getPhone());
                 if (technician.getLocation() != null) existing.setLocation(technician.getLocation());
                 if (technician.getZipcode() != null) existing.setZipcode(technician.getZipcode());
                 if (technician.getYearsOfExperience() != null) existing.setYearsOfExperience(technician.getYearsOfExperience());

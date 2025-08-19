@@ -557,6 +557,11 @@ const PostCard = ({
                           "N/A"}
                         )
                       </div>
+                      {post.technicianPhone && (
+                        <div className="text-muted small">
+                          📞 {post.technicianPhone}
+                        </div>
+                      )}
                     </div>
                   </div>
                   {/* Communication Buttons */}

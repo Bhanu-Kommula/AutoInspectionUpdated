@@ -46,6 +46,8 @@ private Long id;
     private Date acceptedAt;
     private String technicianName;
     private String technicianEmail;
+    private String technicianPhone;
+    private String dealerPhone;
     private Date expectedCompletionBy;
     
     // New fields for VIN and auction lot

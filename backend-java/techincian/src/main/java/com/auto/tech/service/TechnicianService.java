@@ -160,27 +160,27 @@ public class TechnicianService {
 	                    // This will handle the post update and save to posting service accepted_posts table
 	                    System.out.println("🔄 Calling posting service accept endpoint for post " + acceptedPost.getPostId());
 	                    
-	                    // For now, fall back to the old method since we need to integrate the APIs
-	                    PostStatusUpdateRequest updateRequest = new PostStatusUpdateRequest();
-	                    updateRequest.setId(acceptedPost.getPostId());
-	                    updateRequest.setStatus("ACCEPTED");
-	                    updateRequest.setTechnicianName(technician.getName());
-	                    updateRequest.setTechnicianEmail(technician.getEmail());
-	                    
-	                    String updateResult = postingClient.updatePostStatus(updateRequest);
-	                    System.out.println("✅ Post status updated to ACCEPTED: " + updateResult);
+	                                        // For now, fall back to the old method since we need to integrate the APIs
+                    PostStatusUpdateRequest updateRequest = new PostStatusUpdateRequest();
+                    updateRequest.setId(acceptedPost.getPostId());
+                    updateRequest.setStatus("ACCEPTED");
+                    updateRequest.setTechnicianName(technician.getName());
+                    updateRequest.setTechnicianEmail(technician.getEmail());
+                    
+                    String updateResult = postingClient.updatePostStatus(updateRequest);
+                    System.out.println("✅ Post status updated to ACCEPTED: " + updateResult);
 	                    
 	                } catch (Exception postingServiceException) {
 	                    System.err.println("❌ Failed to call posting service accept endpoint: " + postingServiceException.getMessage());
-	                    // Fall back to the old update method
-	                    PostStatusUpdateRequest updateRequest = new PostStatusUpdateRequest();
-	                    updateRequest.setId(acceptedPost.getPostId());
-	                    updateRequest.setStatus("ACCEPTED");
-	                    updateRequest.setTechnicianName(technician.getName());
-	                    updateRequest.setTechnicianEmail(technician.getEmail());
-	                    
-	                    String updateResult = postingClient.updatePostStatus(updateRequest);
-	                    System.out.println("✅ Post status updated to ACCEPTED (fallback): " + updateResult);
+	                                        // Fall back to the old update method
+                    PostStatusUpdateRequest updateRequest = new PostStatusUpdateRequest();
+                    updateRequest.setId(acceptedPost.getPostId());
+                    updateRequest.setStatus("ACCEPTED");
+                    updateRequest.setTechnicianName(technician.getName());
+                    updateRequest.setTechnicianEmail(technician.getEmail());
+                    
+                    String updateResult = postingClient.updatePostStatus(updateRequest);
+                    System.out.println("✅ Post status updated to ACCEPTED (fallback): " + updateResult);
 	                }
 	            } else {
 	                System.err.println("❌ Technician not found for email: " + acceptedPost.getEmail());
@@ -305,6 +305,11 @@ public class TechnicianService {
 	    if (dto.getName() != null && !dto.getName().isBlank() && !dto.getName().equals(technician.getName())) {
 	        logChange(technician.getEmail(), "name", technician.getName(), dto.getName(), dto.getUpdatedBy());
 	        technician.setName(dto.getName());
+	    }
+
+	    if (dto.getPhone() != null && !dto.getPhone().isBlank() && !dto.getPhone().equals(technician.getPhone())) {
+	        logChange(technician.getEmail(), "phone", technician.getPhone(), dto.getPhone(), dto.getUpdatedBy());
+	        technician.setPhone(dto.getPhone());
 	    }
 
 	    if (dto.getLocation() != null && !dto.getLocation().isBlank() && !dto.getLocation().equals(technician.getLocation())) {

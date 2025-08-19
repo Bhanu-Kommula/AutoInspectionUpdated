@@ -11,4 +11,5 @@ import lombok.NoArgsConstructor;
 public class DealerDTO {
     private String name;
     private String email;
+    private String phone;
 }

@@ -7,6 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 public class UpdateTechnicianDto {
     private String email; // Used to identify technician
+    private String phone;
     private String name;
     private String location;
     private String zipcode;

@@ -5,9 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.auto.postings.dto.DealerDTO;
+import java.util.Map;
 
 // @FeignClient(name = "dealer")
-@FeignClient(name = "dealer", url = "${gateway.url:http://localhost:8088}/dealer")
+@FeignClient(name = "dealer", url = "http://localhost:8080")
 public interface DealerClient {
 
     // @PostMapping("/api/dealers/login")
@@ -15,5 +16,8 @@ public interface DealerClient {
 
     @GetMapping("/api/dealers/profile-lite/{email}")
     DealerDTO getDealerProfileLite(@PathVariable("email") String email);
+    
+    @GetMapping("/api/dealers/profile/{email}")
+    Map<String, Object> getDealerProfile(@PathVariable("email") String email);
 
 }

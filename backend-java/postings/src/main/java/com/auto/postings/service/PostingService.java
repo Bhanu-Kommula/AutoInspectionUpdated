@@ -17,6 +17,7 @@ import com.auto.postings.model.AcceptedPost;
 import com.auto.postings.repository.AcceptedPostRepository;
 
 import com.auto.postings.client.DealerClient;
+import com.auto.postings.client.TechnicianClient;
 import com.auto.postings.dto.DealerAcceptedPostUpdateFromTechDashDto;
 import com.auto.postings.dto.DealerDTO;
 import com.auto.postings.dto.DeletePostRequestByIdDto;
@@ -36,17 +37,33 @@ import lombok.RequiredArgsConstructor;
 public class PostingService {
 
 	 private final DealerClient dealerClient;
+	 private final TechnicianClient technicianClient;
 	    private final PostingRepository repo;
 	    private final WebSocketDealerNotifier webSocketDealerNotifier; // ✅ Inject
 	    private final AcceptedPostRepository acceptedPostRepository;
 
 	    public Posting savePosting(String email, String content, String location, String offerAmount, PostStatus status, String vin, String auctionLot) {
-        // Fetch minimal dealer profile via API Gateway (email + name)
-        DealerDTO dealer = dealerClient.getDealerProfileLite(email);
+        // Fetch full dealer profile to get phone number
+        Map<String, Object> dealerProfile = dealerClient.getDealerProfile(email);
+        String dealerPhone = null;
+        
+        String dealerName = null;
+        if (dealerProfile != null && dealerProfile.containsKey("data")) {
+            Map<String, Object> dealerData = (Map<String, Object>) dealerProfile.get("data");
+            if (dealerData != null) {
+                if (dealerData.containsKey("phone")) {
+                    dealerPhone = (String) dealerData.get("phone");
+                }
+                if (dealerData.containsKey("name")) {
+                    dealerName = (String) dealerData.get("name");
+                }
+            }
+        }
 
 	        Posting posting = new Posting();
-	        posting.setEmail(dealer.getEmail());
-	        posting.setName(dealer.getName());
+	        posting.setEmail(email);
+	        posting.setName(dealerName);
+	        posting.setDealerPhone(dealerPhone); // Add real dealer phone
 	        posting.setContent(content);
 	        posting.setLocation(location);
 	        posting.setOfferAmount(offerAmount);
@@ -75,6 +92,7 @@ public class PostingService {
 	                post.setAcceptedAt(dto.getAcceptedAt());  
 	                post.setTechnicianEmail(dto.getTechnicianEmail());
 	                post.setTechnicianName(dto.getTechnicianName());
+	                post.setTechnicianPhone(dto.getTechnicianPhone());
 	                post.setExpectedCompletionBy(dto.getExpectedCompletionBy());
 	                
 	                // ✅ Save to accepted_posts table if status is ACCEPTED
@@ -231,12 +249,32 @@ public class PostingService {
 	                }
 	            }
 	            
-	            // ✅ Handle technician info updates
-	            if (dto.getTechnicianName() != null) {
-	                post.setTechnicianName(dto.getTechnicianName());
-	            }
-	                        if (dto.getTechnicianEmail() != null) {
+	                        // ✅ Handle technician info updates
+            if (dto.getTechnicianName() != null) {
+                post.setTechnicianName(dto.getTechnicianName());
+            }
+            if (dto.getTechnicianEmail() != null) {
                 post.setTechnicianEmail(dto.getTechnicianEmail());
+                
+                // Fetch technician phone number from technician service
+                if (dto.getTechnicianPhone() == null || dto.getTechnicianPhone().trim().isEmpty()) {
+                    try {
+                        Map<String, String> emailRequest = Map.of("email", dto.getTechnicianEmail());
+                        Map<String, Object> technicianData = technicianClient.getTechnicianByEmail(emailRequest);
+                        if (technicianData != null && technicianData.containsKey("phone")) {
+                            String phone = (String) technicianData.get("phone");
+                            if (phone != null && !phone.trim().isEmpty()) {
+                                post.setTechnicianPhone(phone);
+                                log.info("✅ Fetched technician phone: {} for email: {}", phone, dto.getTechnicianEmail());
+                            }
+                        }
+                    } catch (Exception e) {
+                        log.warn("⚠️ Could not fetch technician phone for email {}: {}", dto.getTechnicianEmail(), e.getMessage());
+                    }
+                }
+            }
+            if (dto.getTechnicianPhone() != null) {
+                post.setTechnicianPhone(dto.getTechnicianPhone());
             }
             
             // Handle inspection report ID updates
@@ -302,27 +340,37 @@ public class PostingService {
 	            return false;
 	        }
 
-	        // Get technician name from technician email if possible
-	        String technicianName = null;
-	        try {
-	            // TODO: Add integration with technician service to get technician name
-	            // For now, we'll extract name from email or use email as name
-	            if (technicianEmail.contains("@")) {
-	                technicianName = technicianEmail.substring(0, technicianEmail.indexOf("@"));
-	            }
-	        } catch (Exception e) {
-	            log.warn("Failed to extract technician name from email {}: {}", technicianEmail, e.getMessage());
-	        }
+	                // Get technician details from technician service
+        String technicianName = null;
+        String technicianPhone = null;
+        try {
+            Map<String, String> emailRequest = Map.of("email", technicianEmail);
+            Map<String, Object> technicianData = technicianClient.getTechnicianByEmail(emailRequest);
+            if (technicianData != null) {
+                technicianName = (String) technicianData.get("name");
+                technicianPhone = (String) technicianData.get("phone");
+                log.info("✅ Fetched technician details: name={}, phone={}", technicianName, technicianPhone);
+            }
+        } catch (Exception e) {
+            log.warn("⚠️ Could not fetch technician details for email {}: {}", technicianEmail, e.getMessage());
+            // Fallback: extract name from email
+            if (technicianEmail.contains("@")) {
+                technicianName = technicianEmail.substring(0, technicianEmail.indexOf("@"));
+            }
+        }
 
-	        // Update post status to ACCEPTED
-	        post.setStatus(PostStatus.ACCEPTED);
-	        post.setAcceptedAt(new Date());
-	        post.setTechnicianEmail(technicianEmail);
-	        
-	        // Set technician name if available
-	        if (technicianName != null && !technicianName.trim().isEmpty()) {
-	            post.setTechnicianName(technicianName);
-	        }
+	                // Update post status to ACCEPTED
+        post.setStatus(PostStatus.ACCEPTED);
+        post.setAcceptedAt(new Date());
+        post.setTechnicianEmail(technicianEmail);
+        
+        // Set technician details if available
+        if (technicianName != null && !technicianName.trim().isEmpty()) {
+            post.setTechnicianName(technicianName);
+        }
+        if (technicianPhone != null && !technicianPhone.trim().isEmpty()) {
+            post.setTechnicianPhone(technicianPhone);
+        }
 	        
 	        // Update offer amount if provided (for counter offers)
 	        if (newOfferAmount != null && !newOfferAmount.trim().isEmpty()) {

@@ -23,6 +23,8 @@ public class TechnicianDto {
 	
  
     private String zipcode;
+    
+    private String phone;
    
        private String yearsOfExperience;
     

@@ -11,6 +11,7 @@ function TechnicianRegister() {
     name: "",
     delearshipName: "", // Note: Backend has typo "delearshipName" - keeping it to match exactly
     email: "",
+    phone: "",
     password: "",
     location: "",
     zipcode: "",
@@ -182,6 +183,30 @@ function TechnicianRegister() {
                   padding: "10px 14px",
                 }}
               />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="phone" className="form-label fw-semibold">
+                Phone Number <span className="text-danger">*</span>
+              </label>
+              <input
+                type="tel"
+                className="form-control"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+                placeholder="Enter your phone number (e.g., +1234567890)"
+                pattern="^[\+]?[1-9]?[0-9]{7,15}$"
+                title="Please provide a valid phone number (7-15 digits, optional + prefix)"
+                style={{
+                  borderRadius: "10px",
+                  border: "2px solid #e3e6ea",
+                  padding: "10px 14px",
+                }}
+              />
+              <small className="text-muted">Include country code if international (e.g., +1 for US)</small>
             </div>
 
             <div className="mb-3">

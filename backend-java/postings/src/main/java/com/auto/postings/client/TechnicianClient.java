@@ -2,13 +2,21 @@ package com.auto.postings.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Map;
 
-@FeignClient(name = "technician", url = "${gateway.url:http://localhost:8088}/technician")
+@FeignClient(name = "technician", url = "http://localhost:8082")
 public interface TechnicianClient {
+
+    /**
+     * Get technician details by email
+     * POST /api/technicians/get-technician-by-email
+     */
+    @PostMapping("/api/technicians/get-technician-by-email")
+    Map<String, Object> getTechnicianByEmail(@RequestBody Map<String, String> emailRequest);
 
     /**
      * Notify technician service about counter offer rejection

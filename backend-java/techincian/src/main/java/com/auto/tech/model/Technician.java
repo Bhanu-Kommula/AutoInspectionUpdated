@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,6 +41,12 @@ public class Technician {
 	@Email(message ="enter a valid email")
 	@Column(unique=true, nullable = false)
 	private String email;
+	
+	@NotBlank(message="Please enter the phone number")
+	@Pattern(regexp = "^[\\+]?[1-9]?[0-9]{7,15}$", message = "Please provide a valid phone number")
+	@Column(nullable = false)
+	private String phone;
+	
 	@NotBlank(message="Please enter the password")
 	@Size(min=8, message = "Please Choose a larger password of characters more than 8")
     @Column(nullable = false)

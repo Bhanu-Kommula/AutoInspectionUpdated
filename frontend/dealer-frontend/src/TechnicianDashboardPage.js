@@ -519,7 +519,7 @@ const TechnicianDashboardPage = () => {
   const fetchAcceptedPosts = async (email = null) => {
     try {
       setAcceptedPostsLoading(true);
-      console.log("=== FETCHING ALL TECHNICIAN POSTS WITH REAL STATUS ===");
+      console.log("=== FETCHING ALL TECHNICIAN POSTS WITH PHONE NUMBERS ===");
 
       const technicianEmail = email || technician?.email;
       if (!technicianEmail) {
@@ -538,7 +538,7 @@ const TechnicianDashboardPage = () => {
       if (response.data && Array.isArray(response.data)) {
         console.log("✅ Technician post IDs loaded:", response.data);
 
-        // Step 2: Fetch full details for each post with real status
+        // Step 2: Fetch full details for each post with real status (now includes phone numbers)
         if (response.data.length > 0) {
           console.log("🔍 Fetching full details for technician posts...");
           addNotification(
@@ -560,6 +560,8 @@ const TechnicianDashboardPage = () => {
                   : "accepted",
                 acceptedAt:
                   postResponse.data.acceptedAt || new Date().toISOString(),
+                // Phone number should now be included from the postings service
+                technicianPhone: postResponse.data.technicianPhone,
               };
             } catch (error) {
               console.error(
@@ -589,7 +591,7 @@ const TechnicianDashboardPage = () => {
           );
           setAcceptedPosts(acceptedPostsWithDetails);
           addNotification(
-            `Loaded ${acceptedPostsWithDetails.length} posts with real status`,
+            `Loaded ${acceptedPostsWithDetails.length} posts with phone numbers`,
             "success"
           );
         } else {
@@ -1329,6 +1331,14 @@ const TechnicianDashboardPage = () => {
                                     <small className="text-muted">
                                       <strong>Email:</strong>{" "}
                                       {post.technicianEmail}
+                                    </small>
+                                  </div>
+                                )}
+                                {post.dealerPhone && (
+                                  <div className="info-row">
+                                    <small className="text-muted">
+                                      <strong>Dealer Phone:</strong>{" "}
+                                      {post.dealerPhone}
                                     </small>
                                   </div>
                                 )}

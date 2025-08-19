@@ -18,4 +18,6 @@ public class DealerAcceptedPostUpdateFromTechDashDto {
 
     private String technicianName;
     private String technicianEmail;
+    private String technicianPhone;
+    private String dealerPhone;
 }

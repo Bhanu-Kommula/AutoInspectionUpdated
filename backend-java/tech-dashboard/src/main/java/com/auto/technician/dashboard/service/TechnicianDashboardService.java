@@ -71,6 +71,7 @@ public class TechnicianDashboardService {
                     // ✅ Always attach technician info
                     p.setTechnicianName(technician.getName());
                     p.setTechnicianEmail(technician.getEmail());
+                    p.setTechnicianPhone(technician.getPhone());
 
                     DealerPostUpdateDto updateDto = new DealerPostUpdateDto();
                     updateDto.setPostId(p.getId());
@@ -79,6 +80,7 @@ public class TechnicianDashboardService {
                     updateDto.setExpectedCompletionBy(p.getCompleteBy());
                     updateDto.setTechnicianName(p.getTechnicianName());
                     updateDto.setTechnicianEmail(p.getTechnicianEmail());
+                    updateDto.setTechnicianPhone(p.getTechnicianPhone());
 
                     return updateDto;
                 })
@@ -107,6 +109,7 @@ public class TechnicianDashboardService {
                 res.setStatus(p.getStatus());
                 res.setTechnicianEmail(p.getTechnicianEmail());
                 res.setTechnicianName(p.getTechnicianName());
+                res.setTechnicianPhone(p.getTechnicianPhone());
                 res.setAcceptedAt(p.getAcceptedAt());
                 res.setExpectedCompletionBy(p.getCompleteBy());
                 res.setCompleteBy(p.getCompleteBy());
@@ -127,6 +130,7 @@ public class TechnicianDashboardService {
                 mockDto.setStatus("ACCEPTED");
                 mockDto.setTechnicianEmail(technician.getEmail());
                 mockDto.setTechnicianName(technician.getName());
+                mockDto.setTechnicianPhone(technician.getPhone());
                 mockDto.setAcceptedAt(new Date());
                 
                 Calendar cal = Calendar.getInstance();

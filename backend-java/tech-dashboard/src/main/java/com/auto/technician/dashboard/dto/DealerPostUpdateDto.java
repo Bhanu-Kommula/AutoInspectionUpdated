@@ -14,6 +14,7 @@ public class DealerPostUpdateDto {
 	 private Date expectedCompletionBy;
 	 private String technicianName;
 	 private String technicianEmail;
+	 private String technicianPhone;
 	
 
 }

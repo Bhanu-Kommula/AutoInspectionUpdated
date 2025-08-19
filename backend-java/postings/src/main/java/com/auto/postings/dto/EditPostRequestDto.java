@@ -24,6 +24,7 @@ public class EditPostRequestDto {
 	private String status;
 	private String technicianName;
 	private String technicianEmail;
+	private String technicianPhone;
 	
 	// Link to inspection report
 	private Long inspectionReportId;
