@@ -275,7 +275,7 @@ public class ChecklistService {
 
             // Update fields based on request
             if (updates.containsKey("isChecked")) {
-                item.setIsChecked((Boolean) updates.get("isChecked"));
+                item.setIsChecked(parseBoolean(updates.get("isChecked")));
             }
 
             if (updates.containsKey("remarks")) {
@@ -283,15 +283,11 @@ public class ChecklistService {
             }
 
             if (updates.containsKey("conditionRating")) {
-                String rating = (String) updates.get("conditionRating");
+                String rating = updates.get("conditionRating") != null ? updates.get("conditionRating").toString() : null;
                 if (rating != null && !rating.trim().isEmpty()) {
                     try {
-                        InspectionChecklistItem.ConditionRating conditionRating = mapConditionRating(rating);
+                        InspectionChecklistItem.ConditionRating conditionRating = parseConditionRating(rating);
                         item.setConditionRating(conditionRating);
-                        // If user chose a condition, consider it checked unless explicitly false
-                        if (!updates.containsKey("isChecked") || Boolean.FALSE.equals(updates.get("isChecked"))) {
-                            item.setIsChecked(true);
-                        }
                         
                         // Auto-set working status based on condition rating if not explicitly provided
                         if (!updates.containsKey("workingStatus")) {
@@ -302,10 +298,11 @@ public class ChecklistService {
                                     workingStatus = InspectionChecklistItem.WorkingStatus.WORKING;
                                     break;
                                 case FAIR:
-                                    workingStatus = InspectionChecklistItem.WorkingStatus.NEEDS_REPAIR;
+                                    workingStatus = InspectionChecklistItem.WorkingStatus.NEEDS_ATTENTION;
                                     break;
                                 case POOR:
                                 case FAILED:
+                                case NOT_INSPECTED:
                                     workingStatus = InspectionChecklistItem.WorkingStatus.NOT_WORKING;
                                     break;
                                 default:
@@ -324,10 +321,10 @@ public class ChecklistService {
             }
 
             if (updates.containsKey("workingStatus")) {
-                String status = (String) updates.get("workingStatus");
+                String status = updates.get("workingStatus") != null ? updates.get("workingStatus").toString() : null;
                 if (status != null && !status.trim().isEmpty()) {
                     try {
-                        item.setWorkingStatus(InspectionChecklistItem.WorkingStatus.valueOf(status));
+                        item.setWorkingStatus(parseWorkingStatus(status));
                         log.info("Updated working status to: {} for item: {}", status, itemId);
                     } catch (IllegalArgumentException e) {
                         log.error("Invalid working status value: {} for item: {}", status, itemId);
@@ -345,13 +342,6 @@ public class ChecklistService {
             // Removed repair cost update logic
 
             InspectionChecklistItem savedItem = checklistItemRepository.save(item);
-            // keep report counters in sync for single-item updates
-            try {
-                Long reportId = savedItem.getInspectionReport() != null ? savedItem.getInspectionReport().getId() : null;
-                if (reportId != null) {
-                    updateReportCompletionCount(reportId);
-                }
-            } catch (Exception ignore) {}
             log.info("Updated checklist item: {}", itemId);
 
             return new InspectionChecklistItemDto(savedItem);
@@ -639,21 +629,17 @@ public class ChecklistService {
                     
                     // Apply updates
                     if (update.containsKey("isChecked")) {
-                        item.setIsChecked((Boolean) update.get("isChecked"));
+                        item.setIsChecked(parseBoolean(update.get("isChecked")));
                     }
                     if (update.containsKey("remarks")) {
                         item.setRemarks((String) update.get("remarks"));
                     }
                     if (update.containsKey("conditionRating")) {
-                        String rating = (String) update.get("conditionRating");
+                        String rating = update.get("conditionRating") != null ? update.get("conditionRating").toString() : null;
                         if (rating != null && !rating.trim().isEmpty()) {
                             try {
-                                InspectionChecklistItem.ConditionRating conditionRating = mapConditionRating(rating);
+                                InspectionChecklistItem.ConditionRating conditionRating = parseConditionRating(rating);
                                 item.setConditionRating(conditionRating);
-                                // If user chose a condition, consider it checked unless explicitly false
-                                if (!update.containsKey("isChecked") || Boolean.FALSE.equals(update.get("isChecked"))) {
-                                    item.setIsChecked(true);
-                                }
                                 
                                 // Auto-set working status based on condition rating if not explicitly provided
                                 if (!update.containsKey("workingStatus")) {
@@ -664,10 +650,11 @@ public class ChecklistService {
                                             workingStatus = InspectionChecklistItem.WorkingStatus.WORKING;
                                             break;
                                         case FAIR:
-                                            workingStatus = InspectionChecklistItem.WorkingStatus.NEEDS_REPAIR;
+                                            workingStatus = InspectionChecklistItem.WorkingStatus.NEEDS_ATTENTION;
                                             break;
                                         case POOR:
                                         case FAILED:
+                                        case NOT_INSPECTED:
                                             workingStatus = InspectionChecklistItem.WorkingStatus.NOT_WORKING;
                                             break;
                                         default:
@@ -685,10 +672,10 @@ public class ChecklistService {
                         }
                     }
                     if (update.containsKey("workingStatus")) {
-                        String status = (String) update.get("workingStatus");
+                        String status = update.get("workingStatus") != null ? update.get("workingStatus").toString() : null;
                         if (status != null && !status.trim().isEmpty()) {
                             try {
-                                item.setWorkingStatus(InspectionChecklistItem.WorkingStatus.valueOf(status));
+                                item.setWorkingStatus(parseWorkingStatus(status));
                                 log.debug("Bulk update: Set working status {} for item {}", status, itemId);
                             } catch (IllegalArgumentException e) {
                                 log.error("Bulk update: Invalid working status {} for item {}", status, itemId);
@@ -719,33 +706,52 @@ public class ChecklistService {
         }
     }
 
-    /**
-     * Normalize UI labels to enum values
-     */
-    private InspectionChecklistItem.ConditionRating mapConditionRating(String label) {
-        if (label == null) throw new IllegalArgumentException("Null rating");
-        String normalized = label.trim().toUpperCase().replace(' ', '_');
+    // ==================== Parsing helpers (robust against different client formats) ====================
+
+    private Boolean parseBoolean(Object value) {
+        if (value == null) return null;
+        if (value instanceof Boolean) return (Boolean) value;
+        String s = value.toString().trim().toLowerCase();
+        if ("true".equals(s) || "1".equals(s) || "yes".equals(s)) return true;
+        if ("false".equals(s) || "0".equals(s) || "no".equals(s)) return false;
+        return null;
+    }
+
+    private InspectionChecklistItem.ConditionRating parseConditionRating(String raw) {
+        if (raw == null) return null;
+        String normalized = raw.trim().toUpperCase().replace(' ', '_');
+        // Map legacy/display labels to enum names
         switch (normalized) {
             case "LIKE_NEW":
-            case "EXCELLENT":
                 return InspectionChecklistItem.ConditionRating.EXCELLENT;
             case "SERVICEABLE":
-            case "GOOD":
                 return InspectionChecklistItem.ConditionRating.GOOD;
             case "MARGINAL":
-            case "FAIR":
                 return InspectionChecklistItem.ConditionRating.FAIR;
             case "REQUIRES_REPAIR":
-            case "POOR":
                 return InspectionChecklistItem.ConditionRating.POOR;
             case "NOT_ACCESSIBLE":
-            case "FAILED":
                 return InspectionChecklistItem.ConditionRating.FAILED;
-            case "NOT_INSPECTED":
-                return InspectionChecklistItem.ConditionRating.NOT_INSPECTED;
             default:
+                // Allow direct enum value
                 return InspectionChecklistItem.ConditionRating.valueOf(normalized);
         }
+    }
+
+    private InspectionChecklistItem.WorkingStatus parseWorkingStatus(String raw) {
+        if (raw == null) return null;
+        String normalized = raw.trim().toUpperCase().replace(' ', '_');
+        // Accept common synonyms
+        if ("OK".equals(normalized) || "GOOD".equals(normalized) || "WORKS".equals(normalized)) {
+            return InspectionChecklistItem.WorkingStatus.WORKING;
+        }
+        if ("REPAIR".equals(normalized) || "NEEDS_FIX".equals(normalized)) {
+            return InspectionChecklistItem.WorkingStatus.NEEDS_ATTENTION;
+        }
+        if ("BROKEN".equals(normalized) || "NOT_WORKING".equals(normalized) || "FAILED".equals(normalized)) {
+            return InspectionChecklistItem.WorkingStatus.NOT_WORKING;
+        }
+        return InspectionChecklistItem.WorkingStatus.valueOf(normalized);
     }
 
     /**

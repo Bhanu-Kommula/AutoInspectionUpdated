@@ -247,7 +247,8 @@ const useChat = (dealerEmail, technicianEmail, userType, postId = null) => {
     if (!dealerEmail || !technicianEmail) return;
 
     try {
-      const url = new URL("http://localhost:8089/api/chat/messages");
+      const { CHAT_BASE_URL } = require("../utils/socketManager");
+      const url = new URL(`${CHAT_BASE_URL}/api/chat/messages`);
       url.searchParams.append("dealerEmail", dealerEmail);
       url.searchParams.append("technicianEmail", technicianEmail);
       if (postId) {
@@ -331,9 +332,9 @@ const useChat = (dealerEmail, technicianEmail, userType, postId = null) => {
 
     try {
       const response = await fetch(
-        `http://localhost:8089/api/chat/unread-count/${encodeURIComponent(
-          userEmail
-        )}`
+        `${
+          require("../utils/socketManager").CHAT_BASE_URL
+        }/api/chat/unread-count/${encodeURIComponent(userEmail)}`
       );
       if (response.ok) {
         const data = await response.json();

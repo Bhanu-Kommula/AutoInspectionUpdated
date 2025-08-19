@@ -72,7 +72,7 @@ public class InspectionChecklistItemDto {
     }
 
     public boolean hasIssues() {
-        return InspectionChecklistItem.WorkingStatus.NEEDS_REPAIR.equals(this.workingStatus) ||
+        return InspectionChecklistItem.WorkingStatus.NEEDS_ATTENTION.equals(this.workingStatus) ||
                InspectionChecklistItem.WorkingStatus.NOT_WORKING.equals(this.workingStatus);
     }
 

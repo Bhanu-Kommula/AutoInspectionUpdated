@@ -1,7 +1,7 @@
 // Singleton Socket Manager to prevent multiple connections
 import io from "socket.io-client";
 // Base URL for chat sockets (configurable for Render/local)
-const CHAT_BASE_URL =
+export const CHAT_BASE_URL =
   process.env.REACT_APP_CHAT_BASE_URL ||
   (typeof window !== "undefined" &&
   window.location &&

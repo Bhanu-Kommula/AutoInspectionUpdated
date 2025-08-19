@@ -8,7 +8,7 @@ import {
   FaCircle,
 } from "react-icons/fa";
 import ChatWindow from "./ChatWindow";
-import io from "socket.io-client";
+import { CHAT_BASE_URL } from "../../utils/socketManager";
 import "./ChatNotificationBell.css";
 
 const ChatNotificationBell = ({ userEmail, userType = "DEALER" }) => {
@@ -30,8 +30,9 @@ const ChatNotificationBell = ({ userEmail, userType = "DEALER" }) => {
     if (!userEmail) return;
 
     try {
+      const { CHAT_BASE_URL } = await import("../../utils/socketManager");
       const response = await fetch(
-        `http://localhost:8089/api/chat/unread-count/${encodeURIComponent(
+        `${CHAT_BASE_URL}/api/chat/unread-count/${encodeURIComponent(
           userEmail
         )}`
       );
@@ -49,8 +50,9 @@ const ChatNotificationBell = ({ userEmail, userType = "DEALER" }) => {
     if (!userEmail) return;
 
     try {
+      const { CHAT_BASE_URL } = await import("../../utils/socketManager");
       const response = await fetch(
-        `http://localhost:8089/api/chat/rooms/${encodeURIComponent(userEmail)}`
+        `${CHAT_BASE_URL}/api/chat/rooms/${encodeURIComponent(userEmail)}`
       );
       if (response.ok) {
         const rooms = await response.json();
@@ -71,67 +73,72 @@ const ChatNotificationBell = ({ userEmail, userType = "DEALER" }) => {
   // Initialize socket connection for real-time notifications
   useEffect(() => {
     if (!userEmail) return;
-
-    const newSocket = io("http://localhost:8089", {
-      transports: ["websocket"],
-      forceNew: false,
-      reconnection: true,
-      reconnectionAttempts: 3,
-      reconnectionDelay: 1000,
-    });
-
-    socketRef.current = newSocket;
-    setSocket(newSocket);
-
-    newSocket.on("connect", () => {
-      console.log("🟢 Connected to chat notification service");
-      setIsConnected(true);
-
-      // Register this socket for global notifications
-      newSocket.emit("register_for_notifications", {
-        userEmail: userEmail,
-        userType: userType,
+    let cleanup;
+    (async () => {
+      const { default: io } = await import("socket.io-client");
+      const newSocket = io(CHAT_BASE_URL, {
+        transports: ["websocket"],
+        forceNew: false,
+        reconnection: true,
+        reconnectionAttempts: 3,
+        reconnectionDelay: 1000,
       });
-    });
 
-    newSocket.on("disconnect", () => {
-      console.log("🔴 Disconnected from chat notification service");
-      setIsConnected(false);
-    });
+      socketRef.current = newSocket;
+      setSocket(newSocket);
 
-    // Listen for new messages globally
-    newSocket.on("new_message", (messageData) => {
-      // Check if this message is for this user
-      if (messageData.sender_email !== userEmail) {
-        // Update count immediately for responsiveness
-        setUnreadCount((prev) => prev + 1);
-        // Also fetch accurate count from server
-        setTimeout(() => fetchUnreadCount(), 100);
+      newSocket.on("connect", () => {
+        console.log("🟢 Connected to chat notification service");
+        setIsConnected(true);
+
+        // Register this socket for global notifications
+        newSocket.emit("register_for_notifications", {
+          userEmail: userEmail,
+          userType: userType,
+        });
+      });
+
+      newSocket.on("disconnect", () => {
+        console.log("🔴 Disconnected from chat notification service");
+        setIsConnected(false);
+      });
+
+      // Listen for new messages globally
+      newSocket.on("new_message", (messageData) => {
+        // Check if this message is for this user
+        if (messageData.sender_email !== userEmail) {
+          // Update count immediately for responsiveness
+          setUnreadCount((prev) => prev + 1);
+          // Also fetch accurate count from server
+          setTimeout(() => fetchUnreadCount(), 100);
+          if (showDropdownRef.current) {
+            fetchChatRooms();
+          }
+        }
+      });
+
+      // Listen for chat notifications (global notifications for this user)
+      newSocket.on("chat_notification", (notificationData) => {
+        console.log("Received chat notification:", notificationData);
+        // Update unread count from server to ensure accuracy
+        fetchUnreadCount();
         if (showDropdownRef.current) {
           fetchChatRooms();
         }
-      }
-    });
+      });
 
-    // Listen for chat notifications (global notifications for this user)
-    newSocket.on("chat_notification", (notificationData) => {
-      console.log("Received chat notification:", notificationData);
-      // Update unread count from server to ensure accuracy
-      fetchUnreadCount();
-      if (showDropdownRef.current) {
-        fetchChatRooms();
-      }
-    });
+      // Listen for room marked as read events
+      newSocket.on("room_marked_read", (data) => {
+        console.log("Room marked as read:", data.roomId);
+        // Refresh unread count when rooms are marked as read
+        fetchUnreadCount();
+      });
 
-    // Listen for room marked as read events
-    newSocket.on("room_marked_read", (data) => {
-      console.log("Room marked as read:", data.roomId);
-      // Refresh unread count when rooms are marked as read
-      fetchUnreadCount();
-    });
+      cleanup = () => newSocket.disconnect();
+    })();
 
     return () => {
-      newSocket.disconnect();
+      if (cleanup) cleanup();
     };
   }, [userEmail, fetchChatRooms, fetchUnreadCount]);
 

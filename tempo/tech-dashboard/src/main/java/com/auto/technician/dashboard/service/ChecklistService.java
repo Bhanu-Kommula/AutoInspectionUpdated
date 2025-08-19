@@ -286,9 +286,12 @@ public class ChecklistService {
                 String rating = (String) updates.get("conditionRating");
                 if (rating != null && !rating.trim().isEmpty()) {
                     try {
-                        InspectionChecklistItem.ConditionRating conditionRating = 
-                            InspectionChecklistItem.ConditionRating.valueOf(rating);
+                        InspectionChecklistItem.ConditionRating conditionRating = mapConditionRating(rating);
                         item.setConditionRating(conditionRating);
+                        // If user chose a condition, consider it checked unless explicitly false
+                        if (!updates.containsKey("isChecked") || Boolean.FALSE.equals(updates.get("isChecked"))) {
+                            item.setIsChecked(true);
+                        }
                         
                         // Auto-set working status based on condition rating if not explicitly provided
                         if (!updates.containsKey("workingStatus")) {
@@ -342,6 +345,13 @@ public class ChecklistService {
             // Removed repair cost update logic
 
             InspectionChecklistItem savedItem = checklistItemRepository.save(item);
+            // keep report counters in sync for single-item updates
+            try {
+                Long reportId = savedItem.getInspectionReport() != null ? savedItem.getInspectionReport().getId() : null;
+                if (reportId != null) {
+                    updateReportCompletionCount(reportId);
+                }
+            } catch (Exception ignore) {}
             log.info("Updated checklist item: {}", itemId);
 
             return new InspectionChecklistItemDto(savedItem);
@@ -638,9 +648,12 @@ public class ChecklistService {
                         String rating = (String) update.get("conditionRating");
                         if (rating != null && !rating.trim().isEmpty()) {
                             try {
-                                InspectionChecklistItem.ConditionRating conditionRating = 
-                                    InspectionChecklistItem.ConditionRating.valueOf(rating);
+                                InspectionChecklistItem.ConditionRating conditionRating = mapConditionRating(rating);
                                 item.setConditionRating(conditionRating);
+                                // If user chose a condition, consider it checked unless explicitly false
+                                if (!update.containsKey("isChecked") || Boolean.FALSE.equals(update.get("isChecked"))) {
+                                    item.setIsChecked(true);
+                                }
                                 
                                 // Auto-set working status based on condition rating if not explicitly provided
                                 if (!update.containsKey("workingStatus")) {
@@ -703,6 +716,35 @@ public class ChecklistService {
         } catch (Exception e) {
             log.error("Error performing bulk update for report {}: {}", reportId, e.getMessage(), e);
             return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Normalize UI labels to enum values
+     */
+    private InspectionChecklistItem.ConditionRating mapConditionRating(String label) {
+        if (label == null) throw new IllegalArgumentException("Null rating");
+        String normalized = label.trim().toUpperCase().replace(' ', '_');
+        switch (normalized) {
+            case "LIKE_NEW":
+            case "EXCELLENT":
+                return InspectionChecklistItem.ConditionRating.EXCELLENT;
+            case "SERVICEABLE":
+            case "GOOD":
+                return InspectionChecklistItem.ConditionRating.GOOD;
+            case "MARGINAL":
+            case "FAIR":
+                return InspectionChecklistItem.ConditionRating.FAIR;
+            case "REQUIRES_REPAIR":
+            case "POOR":
+                return InspectionChecklistItem.ConditionRating.POOR;
+            case "NOT_ACCESSIBLE":
+            case "FAILED":
+                return InspectionChecklistItem.ConditionRating.FAILED;
+            case "NOT_INSPECTED":
+                return InspectionChecklistItem.ConditionRating.NOT_INSPECTED;
+            default:
+                return InspectionChecklistItem.ConditionRating.valueOf(normalized);
         }
     }
 

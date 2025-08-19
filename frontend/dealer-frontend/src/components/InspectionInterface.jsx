@@ -956,6 +956,147 @@ const InspectionInterface = ({
     }
   };
 
+  // ✅ NEW: Save multiple checklist item fields in a single API call to prevent race conditions
+  const saveChecklistItemToDatabaseCombined = async (
+    category,
+    itemName,
+    updateData
+  ) => {
+    const saveKey = `${category}-${itemName}-combined`;
+
+    try {
+      const reportId = post?.inspectionReportId;
+      if (!reportId) {
+        console.warn("⚠️ No report ID available");
+        return;
+      }
+
+      setSavingStates((prev) => ({ ...prev, [saveKey]: true }));
+      setAnySaving(true);
+
+      console.log(`🔍 Starting combined save operation:`, {
+        reportId,
+        category,
+        itemName,
+        updateData,
+        saveKey,
+      });
+
+      // Get checklist items (use cache if available, otherwise load)
+      let checklistItems = checklistItemsCache;
+      if (!checklistItems) {
+        console.log("🔄 Cache miss, loading checklist items...");
+        checklistItems = await loadChecklistItems(reportId);
+        if (!checklistItems) {
+          console.error("❌ Failed to load checklist items");
+          setSavingStates((prev) => ({ ...prev, [saveKey]: false }));
+          return;
+        }
+      }
+
+      // Find the checklist item
+      const checklistItem = checklistItems.find(
+        (item) => item.category === category && item.itemName === itemName
+      );
+
+      if (!checklistItem) {
+        console.error("❌ Checklist item not found:", { category, itemName });
+        setSavingStates((prev) => ({ ...prev, [saveKey]: false }));
+        return;
+      }
+
+      console.log(`📤 Sending combined update to database:`, {
+        itemId: checklistItem.id,
+        itemName: itemName,
+        updateData: updateData,
+        url: `${API_CONFIG.API_GATEWAY_URL}/tech-dashboard/api/v1/dashboard/reports/${reportId}/checklist/${checklistItem.id}`,
+      });
+
+      // Create AbortController for request cancellation
+      const abortController = new AbortController();
+      pendingRequests.current.set(saveKey, abortController);
+
+      // Update the checklist item in database with combined data
+      const doUpdate = async () =>
+        fetch(
+          `${API_CONFIG.API_GATEWAY_URL}/tech-dashboard/api/v1/dashboard/reports/${reportId}/checklist/${checklistItem.id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updateData),
+            signal: abortController.signal,
+          }
+        );
+
+      let updateResponse = await doUpdate();
+      if (updateResponse.status >= 500) {
+        // Retry once on transient server error
+        console.warn(
+          "Server error on combined checklist update, retrying once..."
+        );
+        updateResponse = await doUpdate();
+      }
+
+      if (updateResponse.ok) {
+        const responseData = await updateResponse.json();
+        console.log(
+          `✅ Successfully saved combined update to database for item: ${itemName}`,
+          responseData
+        );
+
+        // Update cache with new data
+        if (responseData.success && responseData.item) {
+          setChecklistItemsCache((prev) =>
+            prev
+              ? prev.map((item) =>
+                  item.id === checklistItem.id ? responseData.item : item
+                )
+              : null
+          );
+        }
+
+        // Show success toast
+        toast.success(`✅ ${itemName} updated successfully`);
+      } else {
+        const errorData = await updateResponse.text();
+        console.error(
+          `❌ Failed to save combined update to database for item: ${itemName}`,
+          {
+            status: updateResponse.status,
+            statusText: updateResponse.statusText,
+            error: errorData,
+          }
+        );
+        toast.error(`❌ Failed to update ${itemName}`);
+      }
+
+      // Cleanup
+      pendingRequests.current.delete(saveKey);
+      setSavingStates((prev) => {
+        const newStates = { ...prev, [saveKey]: false };
+        const stillSaving = Object.values(newStates).some((state) => state);
+        setAnySaving(stillSaving);
+        return newStates;
+      });
+    } catch (error) {
+      if (error.name === "AbortError") {
+        console.log(`🚫 Combined save operation aborted for ${saveKey}`);
+      } else {
+        console.error(
+          `❌ Error in combined save operation for ${saveKey}:`,
+          error
+        );
+        toast.error(`❌ Error updating ${itemName}`);
+      }
+
+      pendingRequests.current.delete(saveKey);
+      setSavingStates((prev) => ({ ...prev, [saveKey]: false }));
+      setAnySaving(false);
+    }
+  };
+
   // Save checklist item to database with improved error handling and request cancellation
   const saveChecklistItemToDatabase = async (
     category,
@@ -1047,17 +1188,25 @@ const InspectionInterface = ({
       pendingRequests.current.set(saveKey, abortController);
 
       // Update the checklist item in database with cancellation support
-      const updateResponse = await fetch(
-        `${API_CONFIG.API_GATEWAY_URL}/tech-dashboard/api/v1/dashboard/reports/${reportId}/checklist/${checklistItem.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updateData),
-          signal: abortController.signal,
-        }
-      );
+      const doUpdate = async () =>
+        fetch(
+          `${API_CONFIG.API_GATEWAY_URL}/tech-dashboard/api/v1/dashboard/reports/${reportId}/checklist/${checklistItem.id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updateData),
+            signal: abortController.signal,
+          }
+        );
+
+      let updateResponse = await doUpdate();
+      if (updateResponse.status >= 500) {
+        // Retry once on transient server error
+        console.warn("Server error on checklist update, retrying once...");
+        updateResponse = await doUpdate();
+      }
 
       if (updateResponse.ok) {
         const responseData = await updateResponse.json();
@@ -1973,7 +2122,7 @@ const InspectionInterface = ({
                                   <div className="item-conditions">
                                     <div className="conditions-grid">
                                       {inspectionConditions.map((condition) => {
-                                        const saveKey = `${categoryKey}-${item}-condition`;
+                                        const saveKey = `${categoryKey}-${item}-combined`;
                                         const isSaving = savingStates[saveKey];
 
                                         return (
@@ -1991,29 +2140,52 @@ const InspectionInterface = ({
                                               isViewMode ? "view-mode" : ""
                                             }`}
                                             onClick={() => {
-                                              const updates = [
-                                                {
-                                                  field: "condition",
-                                                  value: condition.key,
-                                                },
-                                                ...(!itemData.checked
-                                                  ? [
-                                                      {
-                                                        field: "checked",
-                                                        value: true,
-                                                      },
-                                                    ]
-                                                  : []),
-                                              ];
+                                              // ✅ FIXED: Send both updates in a single API call to prevent race conditions
+                                              const updateData = {
+                                                conditionRating: condition.key,
+                                              };
 
-                                              updates.forEach((update) => {
-                                                handleChecklistUpdate(
-                                                  categoryKey,
-                                                  item,
-                                                  update.field,
-                                                  update.value
-                                                );
+                                              // If item is not checked, also check it
+                                              if (!itemData.checked) {
+                                                updateData.isChecked = true;
+                                              }
+
+                                              // Update local state immediately for both fields
+                                              setChecklistData((prev) => {
+                                                const newData = {
+                                                  ...prev,
+                                                  [categoryKey]: {
+                                                    ...prev[categoryKey],
+                                                    [item]: {
+                                                      ...prev[categoryKey][
+                                                        item
+                                                      ],
+                                                      condition: condition.key,
+                                                      ...(updateData.isChecked
+                                                        ? { checked: true }
+                                                        : {}),
+                                                    },
+                                                  },
+                                                };
+
+                                                // Auto-save draft after update
+                                                if (post?.id) {
+                                                  saveDraft(post.id, {
+                                                    checklistData: newData,
+                                                    finalRemarks,
+                                                    uploadedFiles,
+                                                  });
+                                                }
+
+                                                return newData;
                                               });
+
+                                              // Send combined update to database
+                                              saveChecklistItemToDatabaseCombined(
+                                                categoryKey,
+                                                item,
+                                                updateData
+                                              );
                                             }}
                                             disabled={isViewMode || isSaving}
                                             title={

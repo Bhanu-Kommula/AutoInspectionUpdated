@@ -121,8 +121,9 @@ public class InspectionChecklistItem {
 
     public enum WorkingStatus {
         WORKING,
-        NEEDS_REPAIR,
-        NOT_WORKING
+        NEEDS_ATTENTION,
+        NOT_WORKING,
+        NOT_APPLICABLE
     }
 
     public enum PriorityLevel {
@@ -171,7 +172,7 @@ public class InspectionChecklistItem {
         // Set priority based on condition and working status
         if (rating == ConditionRating.FAILED || status == WorkingStatus.NOT_WORKING) {
             this.priorityLevel = PriorityLevel.CRITICAL;
-        } else if (rating == ConditionRating.POOR || status == WorkingStatus.NEEDS_REPAIR) {
+        } else if (rating == ConditionRating.POOR || status == WorkingStatus.NEEDS_ATTENTION) {
             this.priorityLevel = PriorityLevel.HIGH;
         } else if (rating == ConditionRating.FAIR) {
             this.priorityLevel = PriorityLevel.MEDIUM;
@@ -196,7 +197,7 @@ public class InspectionChecklistItem {
         return conditionRating == ConditionRating.POOR || 
                conditionRating == ConditionRating.FAILED ||
                workingStatus == WorkingStatus.NOT_WORKING ||
-               workingStatus == WorkingStatus.NEEDS_REPAIR;
+               workingStatus == WorkingStatus.NEEDS_ATTENTION;
     }
 
     /**

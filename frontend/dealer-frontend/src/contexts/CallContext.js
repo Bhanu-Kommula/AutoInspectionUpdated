@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { CHAT_BASE_URL } from "../utils/socketManager";
 import io from "socket.io-client";
 // Note: Using direct socket connection for this context
 // Note: Now using GlobalCallInterface instead of individual call components
@@ -79,7 +80,7 @@ export const CallProvider = ({ children }) => {
       });
 
       // Create global socket connection for call notifications
-      const socket = io("http://localhost:8089", {
+      const socket = io(CHAT_BASE_URL, {
         transports: ["websocket", "polling"],
         forceNew: true,
         reconnection: true,

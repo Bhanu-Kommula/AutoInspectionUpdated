@@ -27,8 +27,9 @@ const ChatButton = ({
     async function fetchUnread() {
       if (!currentUserEmail) return;
       try {
+        const { CHAT_BASE_URL } = await import("../../utils/socketManager");
         const res = await fetch(
-          `http://localhost:8089/api/chat/unread-count/${encodeURIComponent(
+          `${CHAT_BASE_URL}/api/chat/unread-count/${encodeURIComponent(
             currentUserEmail
           )}`
         );
