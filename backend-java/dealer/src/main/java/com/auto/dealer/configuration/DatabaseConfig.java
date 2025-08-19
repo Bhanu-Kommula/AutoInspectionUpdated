@@ -1,13 +1,13 @@
 package com.auto.dealer.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
+import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 public class DatabaseConfig {
@@ -15,11 +15,20 @@ public class DatabaseConfig {
     @Value("${spring.datasource.url}")
     private String dataSourceUrl;
 
+    @Value("${spring.datasource.username}")
+    private String username;
+
+    @Value("${spring.datasource.password}")
+    private String password;
+
+    @Value("${spring.datasource.driver-class-name:org.postgresql.Driver}")
+    private String driverClassName;
+
     @Bean
     @Primary
-    @ConfigurationProperties("spring.datasource")
-    public DataSourceProperties dataSourceProperties() {
-        DataSourceProperties properties = new DataSourceProperties();
+    @ConditionalOnProperty(name = "spring.datasource.url")
+    public DataSource dataSource() {
+        HikariDataSource dataSource = new HikariDataSource();
         
         // Fix for Render: Ensure jdbc: prefix is present
         String fixedUrl = dataSourceUrl;
@@ -31,13 +40,16 @@ public class DatabaseConfig {
             }
         }
         
-        properties.setUrl(fixedUrl);
-        return properties;
-    }
-
-    @Bean
-    @Primary
-    public DataSource dataSource(DataSourceProperties properties) {
-        return properties.initializeDataSourceBuilder().build();
+        dataSource.setJdbcUrl(fixedUrl);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
+        dataSource.setDriverClassName(driverClassName);
+        
+        // Connection pool settings
+        dataSource.setMaximumPoolSize(20);
+        dataSource.setMinimumIdle(5);
+        dataSource.setConnectionTimeout(20000);
+        
+        return dataSource;
     }
 }
