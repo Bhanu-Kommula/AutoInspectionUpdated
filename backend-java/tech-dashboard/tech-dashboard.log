@@ -1,2 +1,5598 @@
-./mvnw: line 114: ./.mvn/wrapper/maven-wrapper.properties: No such file or directory
-cannot read distributionUrl property in ./.mvn/wrapper/maven-wrapper.properties
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------< com.auto.technician-dashboard:tech-dashboard >------------
+[INFO] Building tech-dashboard 1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.5.3:run (default-cli) > test-compile @ tech-dashboard >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ tech-dashboard ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.0:compile (default-compile) @ tech-dashboard ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 33 source files with javac [debug parameters release 17] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ tech-dashboard ---
+[INFO] skip non existing resourceDirectory /Users/bhanuprasadkommula/Downloads/Inspectioproject/backend-java/tech-dashboard/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.0:testCompile (default-testCompile) @ tech-dashboard ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] <<< spring-boot:3.5.3:run (default-cli) < test-compile @ tech-dashboard <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.5.3:run (default-cli) @ tech-dashboard ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.3)
+
+2025-08-19T11:17:27.619-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] c.a.t.d.TechDashboardApplication         : Starting TechDashboardApplication using Java 17.0.16 with PID 32530 (/Users/bhanuprasadkommula/Downloads/Inspectioproject/backend-java/tech-dashboard/target/classes started by bhanuprasadkommula in /Users/bhanuprasadkommula/Downloads/Inspectioproject/backend-java/tech-dashboard)
+2025-08-19T11:17:27.621-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] c.a.t.d.TechDashboardApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-08-19T11:17:27.644-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-19T11:17:27.645-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-19T11:17:28.214-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-19T11:17:28.297-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 78 ms. Found 3 JPA repository interfaces.
+2025-08-19T11:17:28.435-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=14844174-707d-304a-a94c-3b966795e21a
+2025-08-19T11:17:28.699-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8085 (http)
+2025-08-19T11:17:28.707-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-19T11:17:28.707-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-08-19T11:17:28.730-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] o.a.c.c.C.[.[localhost].[/api/v1]        : Initializing Spring embedded WebApplicationContext
+2025-08-19T11:17:28.730-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1085 ms
+2025-08-19T11:17:28.949-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-19T11:17:29.013-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1b860312
+2025-08-19T11:17:29.014-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-19T11:17:29.029-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://localhost:5432/inspection (PostgreSQL 14.19)
+2025-08-19T11:17:29.055-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.014s)
+2025-08-19T11:17:29.072-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 1
+2025-08-19T11:17:29.074-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2025-08-19T11:17:29.118-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-19T11:17:29.141-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-08-19T11:17:29.159-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-08-19T11:17:29.279-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-19T11:17:29.308-05:00  WARN 32530 --- [tech-dashboard] [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-19T11:17:29.316-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 14.19
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-19T11:17:29.865-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-19T11:17:29.893-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-19T11:17:30.028-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-19T11:17:30.851-05:00  WARN 32530 --- [tech-dashboard] [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2025-08-19T11:17:31.228-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestTemplate.
+2025-08-19T11:17:31.244-05:00  WARN 32530 --- [tech-dashboard] [  restartedMain] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2025-08-19T11:17:31.251-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2025-08-19T11:17:31.299-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2025-08-19T11:17:31.312-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2025-08-19T11:17:31.314-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2025-08-19T11:17:31.318-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2025-08-19T11:17:31.318-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2025-08-19T11:17:31.318-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2025-08-19T11:17:31.318-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2025-08-19T11:17:31.318-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2025-08-19T11:17:31.318-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2025-08-19T11:17:31.318-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2025-08-19T11:17:31.499-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2025-08-19T11:17:31.500-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2025-08-19T11:17:31.501-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2025-08-19T11:17:31.502-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1755620251502 with initial instances count: 5
+2025-08-19T11:17:31.504-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application TECH-DASHBOARD with eureka with status UP
+2025-08-19T11:17:31.504-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1755620251504, current=UP, previous=STARTING]
+2025-08-19T11:17:31.505-05:00  INFO 32530 --- [tech-dashboard] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TECH-DASHBOARD/192.168.1.192:tech-dashboard:8085: registering service...
+2025-08-19T11:17:31.517-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8085 (http) with context path '/api/v1'
+2025-08-19T11:17:31.518-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8085
+2025-08-19T11:17:31.526-05:00  INFO 32530 --- [tech-dashboard] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_TECH-DASHBOARD/192.168.1.192:tech-dashboard:8085 - registration status: 204
+2025-08-19T11:17:31.535-05:00  INFO 32530 --- [tech-dashboard] [  restartedMain] c.a.t.d.TechDashboardApplication         : Started TechDashboardApplication in 4.129 seconds (process running for 4.44)
+🔧 Tech Dashboard Service Started Successfully! 🚀
+2025-08-19T11:17:53.748-05:00  INFO 32530 --- [tech-dashboard] [nio-8085-exec-1] o.a.c.c.C.[.[localhost].[/api/v1]        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-19T11:17:53.748-05:00  INFO 32530 --- [tech-dashboard] [nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-19T11:17:53.750-05:00  INFO 32530 --- [tech-dashboard] [nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_files if1_0
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        ir1_0.id,
+        ir1_0.approved_at,
+        ir1_0.completed_at,
+        ir1_0.completed_checklist_items,
+        ir1_0.created_at,
+        ir1_0.created_by,
+        ir1_0.customer_concerns,
+        ir1_0.general_notes,
+        ir1_0.inspection_date,
+        ir1_0.inspection_end_time,
+        ir1_0.inspection_start_time,
+        ir1_0.overall_condition,
+        ir1_0.post_id,
+        ir1_0.priority_repairs,
+        ir1_0.report_number,
+        ir1_0.report_title,
+        ir1_0.safety_rating,
+        ir1_0.started_at,
+        ir1_0.status,
+        ir1_0.submitted_at,
+        ir1_0.technician_id,
+        ir1_0.technician_recommendations,
+        ir1_0.total_checklist_items,
+        ir1_0.total_files_count,
+        ir1_0.total_files_size,
+        ir1_0.updated_at,
+        ir1_0.updated_by,
+        ir1_0.vehicle_color,
+        ir1_0.vehicle_make,
+        ir1_0.vehicle_mileage,
+        ir1_0.vehicle_model,
+        ir1_0.vehicle_year,
+        ir1_0.version,
+        ir1_0.vin_number 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+2025-08-19T11:17:53.878-05:00  INFO 32530 --- [tech-dashboard] [nio-8085-exec-1] c.a.t.d.service.DashboardService         : Admin dashboard overview generated successfully
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_files if1_0
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.created_at>=? 
+        and ir1_0.created_at<?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.created_at>=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.created_at>=?
+2025-08-19T11:17:57.653-05:00  INFO 32530 --- [tech-dashboard] [nio-8085-exec-2] c.a.t.d.service.DashboardService         : System statistics generated successfully with date filtering
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_files if1_0
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        ir1_0.id,
+        ir1_0.approved_at,
+        ir1_0.completed_at,
+        ir1_0.completed_checklist_items,
+        ir1_0.created_at,
+        ir1_0.created_by,
+        ir1_0.customer_concerns,
+        ir1_0.general_notes,
+        ir1_0.inspection_date,
+        ir1_0.inspection_end_time,
+        ir1_0.inspection_start_time,
+        ir1_0.overall_condition,
+        ir1_0.post_id,
+        ir1_0.priority_repairs,
+        ir1_0.report_number,
+        ir1_0.report_title,
+        ir1_0.safety_rating,
+        ir1_0.started_at,
+        ir1_0.status,
+        ir1_0.submitted_at,
+        ir1_0.technician_id,
+        ir1_0.technician_recommendations,
+        ir1_0.total_checklist_items,
+        ir1_0.total_files_count,
+        ir1_0.total_files_size,
+        ir1_0.updated_at,
+        ir1_0.updated_by,
+        ir1_0.vehicle_color,
+        ir1_0.vehicle_make,
+        ir1_0.vehicle_mileage,
+        ir1_0.vehicle_model,
+        ir1_0.vehicle_year,
+        ir1_0.version,
+        ir1_0.vin_number 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+2025-08-19T11:18:09.280-05:00  INFO 32530 --- [tech-dashboard] [nio-8085-exec-4] c.a.t.d.service.DashboardService         : Admin dashboard overview generated successfully
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_files if1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_files if1_0
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.created_at>=? 
+        and ir1_0.created_at<?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.created_at>=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.created_at>=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+2025-08-19T11:18:57.270-05:00  INFO 32530 --- [tech-dashboard] [nio-8085-exec-7] c.a.t.d.service.DashboardService         : System statistics generated successfully with date filtering
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        ir1_0.id,
+        ir1_0.approved_at,
+        ir1_0.completed_at,
+        ir1_0.completed_checklist_items,
+        ir1_0.created_at,
+        ir1_0.created_by,
+        ir1_0.customer_concerns,
+        ir1_0.general_notes,
+        ir1_0.inspection_date,
+        ir1_0.inspection_end_time,
+        ir1_0.inspection_start_time,
+        ir1_0.overall_condition,
+        ir1_0.post_id,
+        ir1_0.priority_repairs,
+        ir1_0.report_number,
+        ir1_0.report_title,
+        ir1_0.safety_rating,
+        ir1_0.started_at,
+        ir1_0.status,
+        ir1_0.submitted_at,
+        ir1_0.technician_id,
+        ir1_0.technician_recommendations,
+        ir1_0.total_checklist_items,
+        ir1_0.total_files_count,
+        ir1_0.total_files_size,
+        ir1_0.updated_at,
+        ir1_0.updated_by,
+        ir1_0.vehicle_color,
+        ir1_0.vehicle_make,
+        ir1_0.vehicle_mileage,
+        ir1_0.vehicle_model,
+        ir1_0.vehicle_year,
+        ir1_0.version,
+        ir1_0.vin_number 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_files if1_0
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.created_at>=? 
+        and ir1_0.created_at<?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.created_at>=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.created_at>=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+2025-08-19T11:18:57.279-05:00  INFO 32530 --- [tech-dashboard] [nio-8085-exec-8] c.a.t.d.service.DashboardService         : System statistics generated successfully with date filtering
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+2025-08-19T11:18:57.286-05:00  INFO 32530 --- [tech-dashboard] [nio-8085-exec-6] c.a.t.d.service.DashboardService         : Admin dashboard overview generated successfully
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_files if1_0
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        ir1_0.id,
+        ir1_0.approved_at,
+        ir1_0.completed_at,
+        ir1_0.completed_checklist_items,
+        ir1_0.created_at,
+        ir1_0.created_by,
+        ir1_0.customer_concerns,
+        ir1_0.general_notes,
+        ir1_0.inspection_date,
+        ir1_0.inspection_end_time,
+        ir1_0.inspection_start_time,
+        ir1_0.overall_condition,
+        ir1_0.post_id,
+        ir1_0.priority_repairs,
+        ir1_0.report_number,
+        ir1_0.report_title,
+        ir1_0.safety_rating,
+        ir1_0.started_at,
+        ir1_0.status,
+        ir1_0.submitted_at,
+        ir1_0.technician_id,
+        ir1_0.technician_recommendations,
+        ir1_0.total_checklist_items,
+        ir1_0.total_files_count,
+        ir1_0.total_files_size,
+        ir1_0.updated_at,
+        ir1_0.updated_by,
+        ir1_0.vehicle_color,
+        ir1_0.vehicle_make,
+        ir1_0.vehicle_mileage,
+        ir1_0.vehicle_model,
+        ir1_0.vehicle_year,
+        ir1_0.version,
+        ir1_0.vin_number 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+2025-08-19T11:18:57.308-05:00  INFO 32530 --- [tech-dashboard] [nio-8085-exec-9] c.a.t.d.service.DashboardService         : Admin dashboard overview generated successfully
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_files if1_0
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        ir1_0.id,
+        ir1_0.approved_at,
+        ir1_0.completed_at,
+        ir1_0.completed_checklist_items,
+        ir1_0.created_at,
+        ir1_0.created_by,
+        ir1_0.customer_concerns,
+        ir1_0.general_notes,
+        ir1_0.inspection_date,
+        ir1_0.inspection_end_time,
+        ir1_0.inspection_start_time,
+        ir1_0.overall_condition,
+        ir1_0.post_id,
+        ir1_0.priority_repairs,
+        ir1_0.report_number,
+        ir1_0.report_title,
+        ir1_0.safety_rating,
+        ir1_0.started_at,
+        ir1_0.status,
+        ir1_0.submitted_at,
+        ir1_0.technician_id,
+        ir1_0.technician_recommendations,
+        ir1_0.total_checklist_items,
+        ir1_0.total_files_count,
+        ir1_0.total_files_size,
+        ir1_0.updated_at,
+        ir1_0.updated_by,
+        ir1_0.vehicle_color,
+        ir1_0.vehicle_make,
+        ir1_0.vehicle_mileage,
+        ir1_0.vehicle_model,
+        ir1_0.vehicle_year,
+        ir1_0.version,
+        ir1_0.vin_number 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+2025-08-19T11:18:57.324-05:00  INFO 32530 --- [tech-dashboard] [io-8085-exec-10] c.a.t.d.service.DashboardService         : Admin dashboard overview generated successfully
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_files if1_0
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        count(ir1_0.id) 
+    from
+        inspection_reports ir1_0 
+    where
+        ir1_0.technician_id=? 
+        and ir1_0.status=?
+Hibernate: 
+    select
+        ir1_0.id,
+        ir1_0.approved_at,
+        ir1_0.completed_at,
+        ir1_0.completed_checklist_items,
+        ir1_0.created_at,
+        ir1_0.created_by,
+        ir1_0.customer_concerns,
+        ir1_0.general_notes,
+        ir1_0.inspection_date,
+        ir1_0.inspection_end_time,
+        ir1_0.inspection_start_time,
+        ir1_0.overall_condition,
+        ir1_0.post_id,
+        ir1_0.priority_repairs,
+        ir1_0.report_number,
+        ir1_0.report_title,
+        ir1_0.safety_rating,
+        ir1_0.started_at,
+        ir1_0.status,
+        ir1_0.submitted_at,
+        ir1_0.technician_id,
+        ir1_0.technician_recommendations,
+        ir1_0.total_checklist_items,
+        ir1_0.total_files_count,
+        ir1_0.total_files_size,
+        ir1_0.updated_at,
+        ir1_0.updated_by,
+        ir1_0.vehicle_color,
+        ir1_0.vehicle_make,
+        ir1_0.vehicle_mileage,
+        ir1_0.vehicle_model,
+        ir1_0.vehicle_year,
+        ir1_0.version,
+        ir1_0.vin_number 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+2025-08-19T11:18:57.341-05:00  INFO 32530 --- [tech-dashboard] [nio-8085-exec-1] c.a.t.d.service.DashboardService         : Admin dashboard overview generated successfully
+Hibernate: 
+    select
+        ir1_0.id,
+        ir1_0.approved_at,
+        ir1_0.completed_at,
+        ir1_0.completed_checklist_items,
+        ir1_0.created_at,
+        ir1_0.created_by,
+        ir1_0.customer_concerns,
+        ir1_0.general_notes,
+        ir1_0.inspection_date,
+        ir1_0.inspection_end_time,
+        ir1_0.inspection_start_time,
+        ir1_0.overall_condition,
+        ir1_0.post_id,
+        ir1_0.priority_repairs,
+        ir1_0.report_number,
+        ir1_0.report_title,
+        ir1_0.safety_rating,
+        ir1_0.started_at,
+        ir1_0.status,
+        ir1_0.submitted_at,
+        ir1_0.technician_id,
+        ir1_0.technician_recommendations,
+        ir1_0.total_checklist_items,
+        ir1_0.total_files_count,
+        ir1_0.total_files_size,
+        ir1_0.updated_at,
+        ir1_0.updated_by,
+        ir1_0.vehicle_color,
+        ir1_0.vehicle_make,
+        ir1_0.vehicle_mileage,
+        ir1_0.vehicle_model,
+        ir1_0.vehicle_year,
+        ir1_0.version,
+        ir1_0.vin_number 
+    from
+        inspection_reports ir1_0
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        ivd1_0.id,
+        ivd1_0.accident_history,
+        ivd1_0.color_exterior,
+        ivd1_0.color_interior,
+        ivd1_0.created_at,
+        ivd1_0.engine_type,
+        ivd1_0.fuel_type,
+        ivd1_0.inspection_location,
+        ivd1_0.inspection_report_id,
+        ivd1_0.license_plate,
+        ivd1_0.make,
+        ivd1_0.mileage,
+        ivd1_0.model,
+        ivd1_0.previous_owner_count,
+        ivd1_0.service_history_available,
+        ivd1_0.transmission_type,
+        ivd1_0.trim_level,
+        ivd1_0.updated_at,
+        ivd1_0.vin_number,
+        ivd1_0.weather_conditions,
+        ivd1_0.year 
+    from
+        inspection_vehicle_details ivd1_0 
+    where
+        ivd1_0.inspection_report_id=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        inspection_reports ir1_0
+2025-08-19T11:19:03.965-05:00  INFO 32530 --- [tech-dashboard] [nio-8085-exec-2] c.a.t.d.service.DashboardService         : Retrieved 20 inspection reports for admin (page 0, size 20)
