@@ -111,7 +111,7 @@ services:
       - key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
         value: https://api-gateway.onrender.com/eureka/
 
-  # Technician Service (Missing!)
+  # Technician Service (Fixed typo)
   - type: web
     name: technician-service
     runtime: docker

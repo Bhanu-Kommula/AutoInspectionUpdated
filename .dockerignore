@@ -1,0 +1,49 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+*.txt
+*.pdf
+*.docx
+
+# IDE files
+.vscode
+.idea
+*.iml
+.project
+.classpath
+.settings
+.factorypath
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.pid
+
+# Build artifacts (will be built fresh)
+target/
+node_modules/
+build/
+dist/
+
+# Test files
+**/test/
+**/tests/
+**/*Test.java
+**/*Tests.java
+
+# Configuration files that shouldn't be in container
+.env
+.env.local
+.env.production
