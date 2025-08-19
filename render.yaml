@@ -170,7 +170,9 @@ services:
           name: autoinspect-db
           property: password
       - key: DB_NAME
-        value: inspection
+        fromDatabase:
+          name: autoinspect-db
+          property: database
       - key: DB_PORT
         value: 5432
 

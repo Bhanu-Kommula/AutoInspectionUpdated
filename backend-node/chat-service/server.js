@@ -48,6 +48,29 @@ let db;
 // Initialize database connection
 async function initializeDatabase() {
   try {
+    // First, connect to default postgres database to create our database if it doesn't exist
+    const defaultDbConfig = {
+      ...dbConfig,
+      database: 'postgres' // Connect to default postgres database first
+    };
+    
+    const defaultDb = new Pool(defaultDbConfig);
+    
+    // Check if our database exists, if not create it
+    try {
+      await defaultDb.query(`CREATE DATABASE "${process.env.DB_NAME || 'inspection'}"`);
+      console.log(`✅ Database "${process.env.DB_NAME || 'inspection'}" created successfully`);
+    } catch (dbError) {
+      if (dbError.code === '42P04') {
+        console.log(`✅ Database "${process.env.DB_NAME || 'inspection'}" already exists`);
+      } else {
+        console.log(`ℹ️ Database creation result:`, dbError.message);
+      }
+    }
+    
+    await defaultDb.end();
+    
+    // Now connect to our actual database
     db = new Pool(dbConfig);
 
     // Create tables
