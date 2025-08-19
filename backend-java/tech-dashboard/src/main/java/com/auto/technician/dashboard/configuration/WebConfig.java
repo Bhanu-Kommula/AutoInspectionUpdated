@@ -9,7 +9,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig {
 
-    // CORS configuration enabled for direct frontend access
+    // CORS configuration commented out to prevent duplicate headers
+    // Gateway handles CORS centrally for all services
+    /*
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
@@ -23,4 +25,5 @@ public class WebConfig {
             }
         };
     }
+    */
 }

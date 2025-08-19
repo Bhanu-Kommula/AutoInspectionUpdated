@@ -14,6 +14,7 @@ import {
   Tabs,
   Tab,
   ProgressBar,
+  Nav,
 } from "react-bootstrap";
 import {
   HiOutlineDocumentText,
@@ -26,6 +27,18 @@ import {
   HiOutlineUser,
   HiOutlinePencil,
 } from "react-icons/hi";
+import {
+  FaFileAlt,
+  FaCheckCircle,
+  FaTimes,
+  FaDownload,
+  FaEye,
+  FaComments,
+  FaClipboardCheck,
+  FaImage,
+  FaVideo,
+  FaMicrophone,
+} from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import Select from "react-select";
 import techDashboardService from "../../services/techDashboardService";
@@ -57,6 +70,12 @@ const TechDashboardAdmin = () => {
     dateFrom: null,
     dateTo: null,
   });
+
+  // Report viewing state
+  const [selectedReport, setSelectedReport] = useState(null);
+  const [showReportModal, setShowReportModal] = useState(false);
+  const [viewingReport, setViewingReport] = useState(false);
+  const [reportActiveTab, setReportActiveTab] = useState("summary");
 
   // Checklist state
   const [checklistItems, setChecklistItems] = useState([]);
@@ -489,12 +508,15 @@ const TechDashboardAdmin = () => {
                       <Button
                         variant="outline-info"
                         size="sm"
-                        onClick={() => {
-                          // View report details
-                          toast.info(`Viewing report #${report.id}`);
-                        }}
+                        onClick={() => viewInspectionReport(report.id)}
+                        disabled={viewingReport}
+                        title="View complete report details"
                       >
-                        <HiOutlineEye />
+                        {viewingReport ? (
+                          <Spinner animation="border" size="sm" />
+                        ) : (
+                          <HiOutlineEye />
+                        )}
                       </Button>
                     </div>
                   </td>
@@ -801,6 +823,733 @@ const TechDashboardAdmin = () => {
     }
   };
 
+  // ==================== REPORT VIEWING FUNCTIONS ====================
+
+  const viewInspectionReport = async (reportId) => {
+    try {
+      setViewingReport(true);
+      setError("");
+
+      // Load the complete inspection report data
+      const response = await techDashboardService.getInspectionReport(reportId);
+      if (response.success) {
+        const report = response.report;
+
+        // Now load the complete report data including checklist items, remarks, and files
+        try {
+          // Load checklist items for this report
+          const checklistResponse =
+            await techDashboardService.getChecklistItems({
+              reportId: reportId,
+              size: 1000, // Get all items
+            });
+
+          // Load files for this report
+          const filesResponse = await techDashboardService.getFiles({
+            reportId: reportId,
+            size: 1000, // Get all files
+          });
+
+          // Combine all the data into a complete report
+          const completeReport = {
+            ...report,
+            checklistItems: checklistResponse.checklistItems || [],
+            files: filesResponse.files || [],
+            generalNotes: report.generalNotes || report.remarks || "",
+            checklistSummary: {
+              totalItems: (checklistResponse.checklistItems || []).length,
+              checkedItems: (checklistResponse.checklistItems || []).filter(
+                (item) => item.isChecked
+              ).length,
+              filesCount: (filesResponse.files || []).length,
+              totalFilesSize: (filesResponse.files || []).reduce(
+                (total, file) => total + (file.fileSize || 0),
+                0
+              ),
+            },
+          };
+
+          setSelectedReport(completeReport);
+          setShowReportModal(true);
+          setReportActiveTab("summary");
+          toast.success(`Viewing complete report #${reportId}`);
+        } catch (detailError) {
+          console.error("Error loading report details:", detailError);
+          // Still show the basic report if detailed loading fails
+          setSelectedReport(report);
+          setShowReportModal(true);
+          setReportActiveTab("summary");
+          toast.warning(
+            `Report loaded with basic info. Some details may be missing.`
+          );
+        }
+      } else {
+        toast.error("Failed to load report details");
+        setError("Failed to load report details");
+      }
+    } catch (error) {
+      console.error("Error viewing inspection report:", error);
+      toast.error("Failed to load report details");
+      setError("Failed to load report details");
+    } finally {
+      setViewingReport(false);
+    }
+  };
+
+  // ==================== REPORT DISPLAY FUNCTIONS ====================
+
+  const getFileIcon = (type) => {
+    if (type.startsWith("image/")) return <FaImage className="text-primary" />;
+    if (type.startsWith("video/")) return <FaVideo className="text-danger" />;
+    if (type.startsWith("audio/"))
+      return <FaMicrophone className="text-warning" />;
+    return <FaFileAlt className="text-secondary" />;
+  };
+
+  const formatFileSize = (bytes) => {
+    if (bytes === 0) return "0 Bytes";
+    const k = 1024;
+    const sizes = ["Bytes", "KB", "MB", "GB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+  };
+
+  const getStatusBadge = (status) => {
+    const statusConfig = {
+      DRAFT: { variant: "secondary", text: "Draft" },
+      IN_PROGRESS: { variant: "warning", text: "In Progress" },
+      COMPLETED: { variant: "success", text: "Completed" },
+      SUBMITTED: { variant: "info", text: "Submitted" },
+      APPROVED: { variant: "success", text: "Approved" },
+      REJECTED: { variant: "danger", text: "Rejected" },
+    };
+
+    const config = statusConfig[status] || {
+      variant: "secondary",
+      text: status,
+    };
+    return <Badge bg={config.variant}>{config.text}</Badge>;
+  };
+
+  const getConditionBadge = (condition) => {
+    const conditionConfig = {
+      EXCELLENT: { variant: "success", text: "Like New", color: "#28a745" },
+      GOOD: { variant: "info", text: "Serviceable", color: "#17a2b8" },
+      FAIR: { variant: "warning", text: "Marginal", color: "#ffc107" },
+      POOR: { variant: "danger", text: "Requires Repair", color: "#dc3545" },
+      CRITICAL: { variant: "dark", text: "Not Inspected", color: "#343a40" },
+      FAILED: { variant: "dark", text: "Not Inspected", color: "#343a40" },
+    };
+
+    const config = conditionConfig[condition] || {
+      variant: "secondary",
+      text: condition || "Not Set",
+      color: "#6c757d",
+    };
+    return <Badge bg={config.variant}>{config.text}</Badge>;
+  };
+
+  const getConditionColor = (condition) => {
+    const conditionConfig = {
+      EXCELLENT: "#28a745", // Green
+      GOOD: "#17a2b8", // Blue
+      FAIR: "#ffc107", // Yellow
+      POOR: "#dc3545", // Red
+      CRITICAL: "#343a40", // Dark
+      FAILED: "#343a40", // Dark (same as CRITICAL)
+    };
+
+    return conditionConfig[condition] || "#6c757d"; // Default gray
+  };
+
+  const renderChecklistTab = () => {
+    if (
+      !selectedReport?.checklistItems ||
+      selectedReport.checklistItems.length === 0
+    ) {
+      return (
+        <div className="text-center py-4">
+          <FaClipboardCheck size={48} className="text-muted mb-3" />
+          <h5>No Checklist Data</h5>
+          <p className="text-muted">
+            No checklist items were recorded for this inspection.
+          </p>
+        </div>
+      );
+    }
+
+    // Group checklist items by category
+    const groupedItems = selectedReport.checklistItems.reduce((acc, item) => {
+      if (!acc[item.category]) {
+        acc[item.category] = [];
+      }
+      acc[item.category].push(item);
+      return acc;
+    }, {});
+
+    return (
+      <div>
+        {/* Summary Stats */}
+        <Row className="mb-4">
+          <Col md={3}>
+            <Card className="text-center bg-light">
+              <Card.Body>
+                <h4 className="text-primary mb-1">
+                  {selectedReport.checklistItems.length}
+                </h4>
+                <small className="text-muted">Total Items</small>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={3}>
+            <Card className="text-center bg-light">
+              <Card.Body>
+                <h4 className="text-success mb-1">
+                  {
+                    selectedReport.checklistItems.filter(
+                      (item) => item.isChecked
+                    ).length
+                  }
+                </h4>
+                <small className="text-muted">Checked Items</small>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={3}>
+            <Card className="text-center bg-light">
+              <Card.Body>
+                <h4 className="text-info mb-1">
+                  {
+                    selectedReport.checklistItems.filter(
+                      (item) => item.conditionRating
+                    ).length
+                  }
+                </h4>
+                <small className="text-muted">Rated Items</small>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={3}>
+            <Card className="text-center bg-light">
+              <Card.Body>
+                <h4 className="text-warning mb-1">
+                  {
+                    selectedReport.checklistItems.filter((item) => item.remarks)
+                      .length
+                  }
+                </h4>
+                <small className="text-muted">Items with Remarks</small>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+
+        {Object.entries(groupedItems).map(([category, items]) => (
+          <Card key={category} className="mb-4">
+            <Card.Header className="bg-primary text-white">
+              <h6 className="mb-0 d-flex justify-content-between align-items-center">
+                <span>{category}</span>
+                <Badge bg="light" text="dark">
+                  {items.length} items
+                </Badge>
+              </h6>
+            </Card.Header>
+            <Card.Body>
+              <Row>
+                {items.map((item, index) => (
+                  <Col key={index} md={6} lg={4} className="mb-3">
+                    <div
+                      className={`border rounded p-3 condition-card ${
+                        item.conditionRating
+                          ? `condition-${item.conditionRating.toLowerCase()}`
+                          : ""
+                      }`}
+                      style={{
+                        borderColor: item.conditionRating
+                          ? getConditionColor(item.conditionRating)
+                          : "#dee2e6",
+                        borderWidth: "2px",
+                        backgroundColor: item.isChecked ? "#f8f9fa" : "#ffffff",
+                      }}
+                    >
+                      <div className="d-flex justify-content-between align-items-start mb-2">
+                        <h6 className="mb-0">
+                          {item.isChecked && (
+                            <FaCheckCircle className="text-success me-2" />
+                          )}
+                          {item.itemName}
+                        </h6>
+                        <div className="d-flex gap-1">
+                          {item.conditionRating &&
+                            getConditionBadge(item.conditionRating)}
+                        </div>
+                      </div>
+
+                      {item.description && (
+                        <div className="mt-2 mb-2">
+                          <small className="text-muted">Description:</small>
+                          <p className="mb-0 small">{item.description}</p>
+                        </div>
+                      )}
+
+                      {item.remarks && (
+                        <div className="mt-2">
+                          <small className="text-muted">Remarks:</small>
+                          <p className="mb-0 small text-primary">
+                            {item.remarks}
+                          </p>
+                        </div>
+                      )}
+
+                      <div className="mt-2 pt-2 border-top">
+                        <small className="text-muted">
+                          <strong>Category:</strong> {item.category}
+                        </small>
+                        {item.subcategory && (
+                          <small className="text-muted d-block">
+                            <strong>Subcategory:</strong> {item.subcategory}
+                          </small>
+                        )}
+                      </div>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+            </Card.Body>
+          </Card>
+        ))}
+      </div>
+    );
+  };
+
+  const renderRemarksTab = () => {
+    const remarks = selectedReport?.generalNotes;
+    const technicianNotes = selectedReport?.technicianNotes;
+    const adminNotes = selectedReport?.adminNotes;
+
+    if (!remarks && !technicianNotes && !adminNotes) {
+      return (
+        <div className="text-center py-4">
+          <FaComments size={48} className="text-muted mb-3" />
+          <h5>No Remarks</h5>
+          <p className="text-muted">
+            No remarks or notes were provided for this inspection.
+          </p>
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        {/* General Remarks */}
+        {remarks && (
+          <Card className="mb-4">
+            <Card.Header className="bg-primary text-white">
+              <h6 className="mb-0">
+                <FaComments className="me-2" />
+                Final Remarks
+              </h6>
+            </Card.Header>
+            <Card.Body>
+              <div className="bg-light p-3 rounded">
+                <p className="mb-0">{remarks}</p>
+              </div>
+            </Card.Body>
+          </Card>
+        )}
+
+        {/* Technician Notes */}
+        {technicianNotes && (
+          <Card className="mb-4">
+            <Card.Header className="bg-info text-white">
+              <h6 className="mb-0">
+                <FaFileAlt className="me-2" />
+                Technician Notes
+              </h6>
+            </Card.Header>
+            <Card.Body>
+              <div className="bg-light p-3 rounded">
+                <p className="mb-0">{technicianNotes}</p>
+              </div>
+            </Card.Body>
+          </Card>
+        )}
+
+        {/* Admin Notes */}
+        {adminNotes && (
+          <Card className="mb-4">
+            <Card.Header className="bg-warning text-dark">
+              <h6 className="mb-0">
+                <FaClipboardCheck className="me-2" />
+                Admin Notes
+              </h6>
+            </Card.Header>
+            <Card.Body>
+              <div className="bg-light p-3 rounded">
+                <p className="mb-0">{adminNotes}</p>
+              </div>
+            </Card.Body>
+          </Card>
+        )}
+
+        {/* Additional Report Information */}
+        <Card className="mt-4">
+          <Card.Header className="bg-secondary text-white">
+            <h6 className="mb-0">
+              <FaEye className="me-2" />
+              Report Metadata
+            </h6>
+          </Card.Header>
+          <Card.Body>
+            <Row>
+              <Col md={6}>
+                <p>
+                  <strong>Inspection Date:</strong>{" "}
+                  {selectedReport?.inspectionDate
+                    ? new Date(
+                        selectedReport.inspectionDate
+                      ).toLocaleDateString()
+                    : "Not specified"}
+                </p>
+                <p>
+                  <strong>Location:</strong>{" "}
+                  {selectedReport?.location || "Not specified"}
+                </p>
+                <p>
+                  <strong>Weather Conditions:</strong>{" "}
+                  {selectedReport?.weatherConditions || "Not specified"}
+                </p>
+              </Col>
+              <Col md={6}>
+                <p>
+                  <strong>Vehicle Mileage:</strong>{" "}
+                  {selectedReport?.vehicleMileage
+                    ? `${selectedReport.vehicleMileage.toLocaleString()} miles`
+                    : "Not specified"}
+                </p>
+                <p>
+                  <strong>Inspection Duration:</strong>{" "}
+                  {selectedReport?.inspectionDuration || "Not specified"}
+                </p>
+                <p>
+                  <strong>Quality Score:</strong>{" "}
+                  {selectedReport?.qualityScore
+                    ? `${selectedReport.qualityScore}/100`
+                    : "Not specified"}
+                </p>
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
+      </div>
+    );
+  };
+
+  const renderFilesTab = () => {
+    if (!selectedReport?.files || selectedReport.files.length === 0) {
+      return (
+        <div className="text-center py-4">
+          <FaFileAlt size={48} className="text-muted mb-3" />
+          <h5>No Files</h5>
+          <p className="text-muted">
+            No files were uploaded for this inspection.
+          </p>
+        </div>
+      );
+    }
+
+    // Group files by category
+    const groupedFiles = selectedReport.files.reduce((acc, file) => {
+      if (!acc[file.category]) {
+        acc[file.category] = [];
+      }
+      acc[file.category].push(file);
+      return acc;
+    }, {});
+
+    const totalSize = selectedReport.files.reduce(
+      (total, file) => total + (file.fileSize || 0),
+      0
+    );
+
+    return (
+      <div>
+        {/* File Summary */}
+        <Row className="mb-4">
+          <Col md={3}>
+            <Card className="text-center bg-light">
+              <Card.Body>
+                <h4 className="text-primary mb-1">
+                  {selectedReport.files.length}
+                </h4>
+                <small className="text-muted">Total Files</small>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={3}>
+            <Card className="text-center bg-light">
+              <Card.Body>
+                <h4 className="text-info mb-1">{formatFileSize(totalSize)}</h4>
+                <small className="text-muted">Total Size</small>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={3}>
+            <Card className="text-center bg-light">
+              <Card.Body>
+                <h4 className="text-success mb-1">
+                  {
+                    selectedReport.files.filter((f) => f.category === "IMAGE")
+                      .length
+                  }
+                </h4>
+                <small className="text-muted">Images</small>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={3}>
+            <Card className="text-center bg-light">
+              <Card.Body>
+                <h4 className="text-warning mb-1">
+                  {Object.keys(groupedFiles).length}
+                </h4>
+                <small className="text-muted">Categories</small>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+
+        {Object.entries(groupedFiles).map(([category, files]) => (
+          <Card key={category} className="mb-4">
+            <Card.Header className="bg-info text-white">
+              <h6 className="mb-0 d-flex justify-content-between align-items-center">
+                <span>
+                  {category === "IMAGE" && <FaImage className="me-2" />}
+                  {category === "VIDEO" && <FaVideo className="me-2" />}
+                  {category === "AUDIO" && <FaMicrophone className="me-2" />}
+                  {category === "DOC" && <FaFileAlt className="me-2" />}
+                  {category}
+                </span>
+                <Badge bg="light" text="dark">
+                  {files.length} files
+                </Badge>
+              </h6>
+            </Card.Header>
+            <Card.Body>
+              <Row>
+                {files.map((file, index) => (
+                  <Col key={index} md={6} lg={4} className="mb-3">
+                    <Card className="file-card h-100">
+                      <Card.Body className="d-flex flex-column">
+                        <div className="d-flex align-items-center mb-2">
+                          <span className="file-icon me-2">
+                            {getFileIcon(file.fileType)}
+                          </span>
+                          <div className="flex-grow-1">
+                            <h6
+                              className="mb-0 small text-truncate"
+                              title={file.fileName}
+                            >
+                              {file.fileName}
+                            </h6>
+                            <small className="text-muted d-block">
+                              {formatFileSize(file.fileSize)}
+                            </small>
+                            <small className="text-muted d-block">
+                              {file.uploadedAt
+                                ? new Date(file.uploadedAt).toLocaleDateString()
+                                : "Unknown date"}
+                            </small>
+                          </div>
+                        </div>
+
+                        {file.description && (
+                          <div className="mb-3 flex-grow-1">
+                            <small className="text-muted">Description:</small>
+                            <p className="mb-0 small">{file.description}</p>
+                          </div>
+                        )}
+
+                        <div className="mt-auto">
+                          <div className="d-flex gap-2">
+                            <Button
+                              variant="outline-primary"
+                              size="sm"
+                              className="flex-grow-1"
+                              onClick={() =>
+                                window.open(file.fileUrl, "_blank")
+                              }
+                            >
+                              <FaEye className="me-1" />
+                              View
+                            </Button>
+                            <Button
+                              variant="outline-secondary"
+                              size="sm"
+                              className="flex-grow-1"
+                              onClick={() =>
+                                window.open(file.fileUrl, "_blank")
+                              }
+                            >
+                              <FaDownload className="me-1" />
+                              Download
+                            </Button>
+                          </div>
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            </Card.Body>
+          </Card>
+        ))}
+      </div>
+    );
+  };
+
+  const renderSummaryTab = () => {
+    if (!selectedReport) return null;
+
+    const summary = selectedReport.checklistSummary || {};
+    const totalItems = selectedReport.checklistItems?.length || 0;
+    const checkedItems =
+      selectedReport.checklistItems?.filter((item) => item.isChecked).length ||
+      0;
+    const filesCount = selectedReport.files?.length || 0;
+
+    return (
+      <div>
+        <Row>
+          <Col md={3} className="mb-3">
+            <Card className="text-center report-summary-card">
+              <Card.Body>
+                <h3 className="text-primary mb-1">{totalItems}</h3>
+                <small className="text-muted">Total Items</small>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={3} className="mb-3">
+            <Card className="text-center report-summary-card">
+              <Card.Body>
+                <h3 className="text-success mb-1">{checkedItems}</h3>
+                <small className="text-muted">Checked Items</small>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={3} className="mb-3">
+            <Card className="text-center report-summary-card">
+              <Card.Body>
+                <h3 className="text-info mb-1">{filesCount}</h3>
+                <small className="text-muted">Files Uploaded</small>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={3} className="mb-3">
+            <Card className="text-center report-summary-card">
+              <Card.Body>
+                <h3 className="text-warning mb-1">
+                  {totalItems > 0
+                    ? Math.round((checkedItems / totalItems) * 100)
+                    : 0}
+                  %
+                </h3>
+                <small className="text-muted">Completion</small>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+
+        <Card className="mt-3 report-details-section">
+          <Card.Header>
+            <h6 className="mb-0">Report Details</h6>
+          </Card.Header>
+          <Card.Body>
+            <Row>
+              <Col md={6}>
+                <p>
+                  <strong>Report ID:</strong> {selectedReport.id}
+                </p>
+                <p>
+                  <strong>Status:</strong>{" "}
+                  {getStatusBadge(selectedReport.status)}
+                </p>
+                <p>
+                  <strong>Technician:</strong> {selectedReport.technicianId}
+                </p>
+                <p>
+                  <strong>Created:</strong>{" "}
+                  {new Date(selectedReport.createdAt).toLocaleDateString()}
+                </p>
+              </Col>
+              <Col md={6}>
+                <p>
+                  <strong>Completed:</strong>{" "}
+                  {selectedReport.completedAt
+                    ? new Date(selectedReport.completedAt).toLocaleDateString()
+                    : "Not completed"}
+                </p>
+                <p>
+                  <strong>Overall Condition:</strong>{" "}
+                  {getConditionBadge(selectedReport.overallCondition)}
+                </p>
+                <p>
+                  <strong>Safety Rating:</strong>{" "}
+                  {getConditionBadge(selectedReport.safetyRating)}
+                </p>
+                <p>
+                  <strong>Total Files Size:</strong>{" "}
+                  {formatFileSize(selectedReport.totalFilesSize || 0)}
+                </p>
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
+
+        {/* Condition Legend */}
+        <Card className="mt-3 condition-legend">
+          <Card.Header>
+            <h6 className="mb-0">Condition Legend</h6>
+          </Card.Header>
+          <Card.Body>
+            <Row>
+              <Col md={2} className="text-center mb-2">
+                <Badge bg="success" className="mb-1">
+                  Like New
+                </Badge>
+                <small className="d-block text-muted">Excellent</small>
+              </Col>
+              <Col md={2} className="text-center mb-2">
+                <Badge bg="info" className="mb-1">
+                  Serviceable
+                </Badge>
+                <small className="d-block text-muted">Good</small>
+              </Col>
+              <Col md={2} className="text-center mb-2">
+                <Badge bg="warning" className="mb-1">
+                  Marginal
+                </Badge>
+                <small className="d-block text-muted">Fair</small>
+              </Col>
+              <Col md={2} className="text-center mb-2">
+                <Badge bg="danger" className="mb-1">
+                  Needs Repair
+                </Badge>
+                <small className="d-block text-muted">Poor</small>
+              </Col>
+              <Col md={2} className="text-center mb-2">
+                <Badge bg="dark" className="mb-1">
+                  Not Inspected
+                </Badge>
+                <small className="d-block text-muted">Critical/Failed</small>
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
+      </div>
+    );
+  };
+
   // ==================== MAIN RENDER ====================
 
   if (loading && activeTab === "overview") {
@@ -1005,6 +1754,91 @@ const TechDashboardAdmin = () => {
           </Tabs>
         </Card.Body>
       </Card>
+
+      {/* Inspection Report View Modal */}
+      <Modal
+        show={showReportModal}
+        onHide={() => setShowReportModal(false)}
+        size="xl"
+        scrollable
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>
+            Inspection Report #{selectedReport?.id} - {selectedReport?.status}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedReport ? (
+            <div>
+              <Nav variant="tabs" className="mb-3">
+                <Nav.Item>
+                  <Nav.Link
+                    active={reportActiveTab === "summary"}
+                    onClick={() => setReportActiveTab("summary")}
+                  >
+                    <FaEye className="me-1" />
+                    Summary
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link
+                    active={reportActiveTab === "checklist"}
+                    onClick={() => setReportActiveTab("checklist")}
+                  >
+                    <FaClipboardCheck className="me-1" />
+                    Checklist ({selectedReport.checklistItems?.length || 0})
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link
+                    active={reportActiveTab === "remarks"}
+                    onClick={() => setReportActiveTab("remarks")}
+                  >
+                    <FaComments className="me-1" />
+                    Remarks
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link
+                    active={reportActiveTab === "files"}
+                    onClick={() => setReportActiveTab("files")}
+                  >
+                    <FaFileAlt className="me-1" />
+                    Files ({selectedReport.files?.length || 0})
+                  </Nav.Link>
+                </Nav.Item>
+              </Nav>
+
+              <Tab.Content>
+                <Tab.Pane active={reportActiveTab === "summary"}>
+                  {renderSummaryTab()}
+                </Tab.Pane>
+                <Tab.Pane active={reportActiveTab === "checklist"}>
+                  {renderChecklistTab()}
+                </Tab.Pane>
+                <Tab.Pane active={reportActiveTab === "remarks"}>
+                  {renderRemarksTab()}
+                </Tab.Pane>
+                <Tab.Pane active={reportActiveTab === "files"}>
+                  {renderFilesTab()}
+                </Tab.Pane>
+              </Tab.Content>
+            </div>
+          ) : (
+            <div className="text-center p-4">
+              <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+              <p className="mt-2">Loading report details...</p>
+            </div>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowReportModal(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

@@ -1,1 +1,301 @@
-/* Tech Dashboard Admin Styles */ .tech-dashboard-admin { padding: 20px; } .stat-card { text-align: center; border: none; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); transition: transform 0.2s ease; } .stat-card:hover { transform: translateY(-2px); } .stat-icon { font-size: 2.5rem; color: #007bff; margin-bottom: 15px; } .stat-card h3 { font-size: 2rem; font-weight: bold; color: #333; margin-bottom: 5px; } .stat-card p { color: #666; margin: 0; font-size: 0.9rem; } .action-buttons { display: flex; gap: 5px; } .action-buttons .btn { padding: 0.25rem 0.5rem; }
+/* Tech Dashboard Admin Styles */
+
+.tech-dashboard-admin {
+  padding: 20px;
+}
+
+.nav-tabs-custom .nav-link {
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #6c757d;
+  font-weight: 500;
+  padding: 12px 20px;
+  transition: all 0.3s ease;
+}
+
+.nav-tabs-custom .nav-link.active {
+  border-bottom-color: #007bff;
+  color: #007bff;
+  background-color: transparent;
+}
+
+.nav-tabs-custom .nav-link:hover {
+  border-bottom-color: #0056b3;
+  color: #0056b3;
+}
+
+.stat-card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card .card-body {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+
+.stat-card h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+  color: #6c757d;
+  font-weight: 500;
+  margin: 0;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.action-buttons .btn {
+  padding: 0.25rem 0.5rem;
+}
+
+/* Inspection Report Modal Styles */
+.inspection-report-details {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.inspection-report-details h6 {
+  color: #495057;
+  font-weight: 600;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+}
+
+.inspection-report-details .mb-2 {
+  margin-bottom: 8px !important;
+}
+
+.inspection-report-details .border.rounded.bg-light {
+  transition: all 0.2s ease;
+}
+
+.inspection-report-details .border.rounded.bg-light:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.inspection-report-details .table-responsive {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.inspection-report-details .table th {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.inspection-report-details .table td {
+  vertical-align: middle;
+  font-size: 0.875rem;
+}
+
+.inspection-report-details .badge {
+  font-size: 0.75rem;
+  padding: 0.375rem 0.5rem;
+}
+
+/* File display styles */
+.inspection-report-details .border.rounded.p-2 {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.inspection-report-details .border.rounded.p-2:hover {
+  background-color: #f8f9fa;
+  border-color: #007bff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Condition Card Styles */
+.condition-card {
+  transition: all 0.3s ease;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.condition-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.condition-card.condition-excellent {
+  border-color: #28a745 !important;
+  background: linear-gradient(
+    135deg,
+    rgba(40, 167, 69, 0.05),
+    rgba(40, 167, 69, 0.02)
+  );
+}
+
+.condition-card.condition-good {
+  border-color: #17a2b8 !important;
+  background: linear-gradient(
+    135deg,
+    rgba(23, 162, 184, 0.05),
+    rgba(23, 162, 184, 0.02)
+  );
+}
+
+.condition-card.condition-fair {
+  border-color: #ffc107 !important;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 193, 7, 0.05),
+    rgba(255, 193, 7, 0.02)
+  );
+}
+
+.condition-card.condition-poor {
+  border-color: #dc3545 !important;
+  background: linear-gradient(
+    135deg,
+    rgba(220, 53, 69, 0.05),
+    rgba(220, 53, 69, 0.02)
+  );
+}
+
+.condition-card.condition-critical,
+.condition-card.condition-failed {
+  border-color: #343a40 !important;
+  background: linear-gradient(
+    135deg,
+    rgba(52, 58, 64, 0.05),
+    rgba(52, 58, 64, 0.02)
+  );
+}
+
+/* Report Summary Cards */
+.report-summary-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.report-summary-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.report-summary-card .card-body {
+  padding: 1.5rem;
+}
+
+.report-summary-card h3 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+/* Report Details Section */
+.report-details-section {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.report-details-section h6 {
+  color: #495057;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Condition Legend */
+.condition-legend .badge {
+  font-size: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.condition-legend small {
+  font-size: 0.7rem;
+  color: #6c757d;
+}
+
+/* File Cards */
+.file-card {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.file-card:hover {
+  border-color: #007bff;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
+}
+
+.file-card .card-body {
+  padding: 1rem;
+}
+
+.file-icon {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .inspection-report-details .row.g-2 > .col-md-2 {
+    margin-bottom: 10px;
+  }
+
+  .inspection-report-details .table-responsive {
+    font-size: 0.8rem;
+  }
+
+  .inspection-report-details .table th,
+  .inspection-report-details .table td {
+    padding: 0.5rem 0.25rem;
+  }
+
+  .condition-card {
+    margin-bottom: 1rem;
+  }
+
+  .report-summary-card .card-body {
+    padding: 1rem;
+  }
+}
+
+/* Loading states */
+.viewing-report .btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Modal size adjustments */
+.modal-xl {
+  max-width: 95%;
+}
+
+@media (max-width: 1200px) {
+  .modal-xl {
+    max-width: 98%;
+  }
+}

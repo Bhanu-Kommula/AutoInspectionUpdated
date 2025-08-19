@@ -25,7 +25,8 @@ const API_CONFIG = {
   POSTS_BASE_URL:
     process.env.REACT_APP_POSTS_BASE_URL || "http://localhost:8088/postings",
   TECH_DASHBOARD_BASE_URL:
-    process.env.REACT_APP_TECH_DASHBOARD_BASE_URL || "http://localhost:8085/api/v1",
+    process.env.REACT_APP_TECH_DASHBOARD_BASE_URL ||
+    "http://localhost:8088/tech-dashboard/api/v1",
 
   // Admin and User endpoints directly
   ADMIN_BASE_URL:
