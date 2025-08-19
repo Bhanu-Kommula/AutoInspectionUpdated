@@ -115,6 +115,32 @@ services:
       - key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
         value: https://api-gateway.onrender.com/eureka/
 
+  # Technician Service (Missing!)
+  - type: web
+    name: technician-service
+    runtime: docker
+    plan: free
+    rootDir: backend-java/techincian
+    buildCommand: ./mvnw clean package -DskipTests
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: autoinspect-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: autoinspect-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: autoinspect-db
+          property: password
+      - key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+        value: https://api-gateway.onrender.com/eureka/
+
   # Service Registry
   - type: web
     name: service-registry
