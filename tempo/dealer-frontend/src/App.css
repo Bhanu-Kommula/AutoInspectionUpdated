@@ -1,0 +1,334 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.modal-content {
+  border-radius: 1rem;
+  background: linear-gradient(to right, #f3f4f6, #e0f7fa);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Optimized animations for better performance */
+@keyframes fadeIn {
+  from {
+    transform: scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Typing animation (up to 100% width), then reset */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Cursor blink only while typing (hide afterward) */
+@keyframes blink-caret {
+  0%,
+  49% {
+    border-color: #2f5d8a;
+  }
+  50%,
+  100% {
+    border-color: transparent;
+  }
+}
+
+.typing-heading {
+  font-size: 26px;
+  font-weight: 800;
+  color: #2f5d8a;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.5px;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid #2f5d8a;
+  width: 0;
+  margin: 0 auto;
+
+  animation: typing 3s steps(35, end) 1 forwards, blink-caret 0.6s step-end 5;
+}
+
+.typing-repeat {
+  animation: none;
+}
+
+/* Optimized post animations for better performance */
+.fade-posts {
+  animation: fadePostsIn 0.2s ease-out;
+}
+
+@keyframes fadePostsIn {
+  from {
+    opacity: 0.3;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-posts-in {
+  animation: fadeInPosts 0.2s ease-out forwards;
+  opacity: 0;
+}
+
+.fade-posts-out {
+  animation: fadeOutPosts 0.2s ease-in forwards;
+  opacity: 1;
+}
+
+@keyframes fadeInPosts {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutPosts {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+.logout-modal-dialog {
+  max-width: 420px;
+  margin: auto;
+}
+
+.logout-modal-content {
+  border: none;
+  border-radius: 2rem;
+  background: linear-gradient(to bottom right, #ffffff, #f0f4f8);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.logout-modal-body {
+  padding: 2.5rem;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.logout-icon-circle {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #ffe3e3, #ffccd5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: #dc3545;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+  margin: 0 auto 1.5rem auto;
+}
+
+.logout-subtext {
+  font-size: 15px;
+}
+
+.logout-cancel-btn {
+  font-weight: 500;
+  font-size: 15px;
+  border: 1px solid #ced4da;
+}
+
+.logout-confirm-btn {
+  background: linear-gradient(90deg, #ff416c, #ff4b2b);
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(255, 77, 77, 0.4);
+}
+
+.logout-confirm-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(255, 77, 77, 0.5);
+}
+
+/* Optimized animations for better performance */
+@keyframes fadeInPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(-15px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+}
+
+@keyframes shrink {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+
+/* Performance optimizations */
+.hover-effect-card {
+  will-change: transform, box-shadow;
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate__animated {
+    animation: none !important;
+  }
+
+  .fade-posts,
+  .fade-posts-in,
+  .fade-posts-out {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Optimize for mobile devices */
+@media (max-width: 768px) {
+  .fade-posts,
+  .fade-posts-in,
+  .fade-posts-out {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hover-effect-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Smooth scrolling optimization */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optimize backdrop filters for better performance */
+.backdrop-blur {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Reduce box-shadow complexity for better performance */
+.optimized-shadow {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.optimized-shadow-hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Optimize transitions */
+.fast-transition {
+  transition: all 0.15s ease-out;
+}
+
+.medium-transition {
+  transition: all 0.2s ease-out;
+}
+
+/* Performance-friendly transforms */
+.transform-optimized {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Reduce layout thrashing */
+.layout-stable {
+  contain: layout style paint;
+}
