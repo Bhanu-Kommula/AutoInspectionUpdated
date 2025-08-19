@@ -31,19 +31,8 @@ logs/
 *.temp
 *.pid
 
-# Build artifacts (will be built fresh)
-target/
-node_modules/
-build/
-dist/
-
 # Test files
 **/test/
 **/tests/
 **/*Test.java
 **/*Tests.java
-
-# Configuration files that shouldn't be in container
-.env
-.env.local
-.env.production
