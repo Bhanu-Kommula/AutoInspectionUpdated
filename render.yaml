@@ -17,7 +17,6 @@ services:
     runtime: docker
     plan: free
     rootDir: backend-java/gateway
-    buildCommand: ./mvnw clean package -DskipTests
     healthCheckPath: /actuator/health
     envVars:
       - key: SPRING_PROFILES_ACTIVE
@@ -43,7 +42,6 @@ services:
     runtime: docker
     plan: free
     rootDir: backend-java/dealer
-    buildCommand: ./mvnw clean package -DskipTests
     healthCheckPath: /actuator/health
     envVars:
       - key: SPRING_PROFILES_ACTIVE
@@ -69,7 +67,6 @@ services:
     runtime: docker
     plan: free
     rootDir: backend-java/postings
-    buildCommand: ./mvnw clean package -DskipTests
     healthCheckPath: /actuator/health
     envVars:
       - key: SPRING_PROFILES_ACTIVE
@@ -95,7 +92,6 @@ services:
     runtime: docker
     plan: free
     rootDir: backend-java/tech-dashboard
-    buildCommand: ./mvnw clean package -DskipTests
     healthCheckPath: /actuator/health
     envVars:
       - key: SPRING_PROFILES_ACTIVE
@@ -121,7 +117,6 @@ services:
     runtime: docker
     plan: free
     rootDir: backend-java/techincian
-    buildCommand: ./mvnw clean package -DskipTests
     healthCheckPath: /actuator/health
     envVars:
       - key: SPRING_PROFILES_ACTIVE
@@ -147,7 +142,6 @@ services:
     runtime: docker
     plan: free
     rootDir: backend-java/serviceregistry
-    buildCommand: ./mvnw clean package -DskipTests
     healthCheckPath: /actuator/health
     envVars:
       - key: SPRING_PROFILES_ACTIVE
