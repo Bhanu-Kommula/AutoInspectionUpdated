@@ -1,0 +1,9 @@
+target/
+*.log
+*.md
+*.sql
+bin/
+uploads/
+temp/
+.git/
+.gitignore

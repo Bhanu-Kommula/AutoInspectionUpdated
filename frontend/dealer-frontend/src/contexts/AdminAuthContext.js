@@ -27,24 +27,9 @@ export const AdminAuthProvider = ({ children }) => {
           return;
         }
 
-        // Set up default admin user for testing
-        const defaultAdmin = {
-          id: 1,
-          email: "admin@example.com",
-          name: "System Administrator",
-          role: "ADMIN",
-        };
-
-        setAdminUser(defaultAdmin);
-        setIsAuthenticated(true);
-
-        // Store in localStorage for persistence
-        localStorage.setItem("adminUser", JSON.stringify(defaultAdmin));
-
-        // Also set currentUser for compatibility with other parts of the app
-        localStorage.setItem("currentUser", defaultAdmin.email);
-
-        console.log("✅ Admin user set up successfully:", defaultAdmin.email);
+        // No automatic login - require proper authentication
+        setIsAuthenticated(false);
+        console.log("🔒 Admin authentication required");
       } catch (error) {
         console.error("Error checking admin authentication:", error);
         setIsAuthenticated(false);

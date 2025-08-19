@@ -1,135 +1,164 @@
 services:
-  - type: web
-    name: gateway
-    runtime: docker
-    rootDir: backend-java/gateway
-    buildCommand: ./mvnw -DskipTests package
-    startCommand: java -jar target/gateway-*.jar
-    envVars:
-      - key: SPRING_DATASOURCE_URL
-        fromDatabase:
-          name: postgres
-          property: connectionString
-      - key: SPRING_DATASOURCE_USERNAME
-        fromDatabase:
-          name: postgres
-          property: user
-      - key: SPRING_DATASOURCE_PASSWORD
-        fromDatabase:
-          name: postgres
-          property: password
-
-  - type: web
-    name: postings
-    runtime: docker
-    rootDir: backend-java/postings
-    buildCommand: ./mvnw -DskipTests package
-    startCommand: java -jar target/postings-*.jar
-    envVars:
-      - key: SPRING_DATASOURCE_URL
-        fromDatabase:
-          name: postgres
-          property: connectionString
-      - key: SPRING_DATASOURCE_USERNAME
-        fromDatabase:
-          name: postgres
-          property: user
-      - key: SPRING_DATASOURCE_PASSWORD
-        fromDatabase:
-          name: postgres
-          property: password
-
-  - type: web
-    name: dealer
-    runtime: docker
-    rootDir: backend-java/dealer
-    buildCommand: ./mvnw -DskipTests package
-    startCommand: java -jar target/dealer-*.jar
-    envVars:
-      - key: SPRING_DATASOURCE_URL
-        fromDatabase:
-          name: postgres
-          property: connectionString
-      - key: SPRING_DATASOURCE_USERNAME
-        fromDatabase:
-          name: postgres
-          property: user
-      - key: SPRING_DATASOURCE_PASSWORD
-        fromDatabase:
-          name: postgres
-          property: password
-
-  - type: web
-    name: technician
-    runtime: docker
-    rootDir: backend-java/techincian
-    buildCommand: ./mvnw -DskipTests package
-    startCommand: java -jar target/techincian-*.jar
-    envVars:
-      - key: SPRING_DATASOURCE_URL
-        fromDatabase:
-          name: postgres
-          property: connectionString
-      - key: SPRING_DATASOURCE_USERNAME
-        fromDatabase:
-          name: postgres
-          property: user
-      - key: SPRING_DATASOURCE_PASSWORD
-        fromDatabase:
-          name: postgres
-          property: password
-
-  - type: web
-    name: tech-dashboard
-    runtime: docker
-    rootDir: backend-java/tech-dashboard
-    buildCommand: ./mvnw -DskipTests package
-    startCommand: java -jar target/tech-dashboard-*.jar
-    envVars:
-      - key: SPRING_DATASOURCE_URL
-        fromDatabase:
-          name: postgres
-          property: connectionString
-      - key: SPRING_DATASOURCE_USERNAME
-        fromDatabase:
-          name: postgres
-          property: user
-      - key: SPRING_DATASOURCE_PASSWORD
-        fromDatabase:
-          name: postgres
-          property: password
-
-  - type: web
-    name: chat-service
-    runtime: node
-    rootDir: backend-node/chat-service
-    buildCommand: npm install
-    startCommand: node server.js
-    envVars:
-      - key: DB_HOST
-        fromDatabase:
-          name: postgres
-          property: host
-      - key: DB_USER
-        fromDatabase:
-          name: postgres
-          property: user
-      - key: DB_PASSWORD
-        fromDatabase:
-          name: postgres
-          property: password
-      - key: DB_NAME
-        value: inspection
-      - key: DB_PORT
-        value: 5432
-
+  # Frontend React App
   - type: web
     name: dealer-frontend
     runtime: static
     rootDir: frontend/dealer-frontend
     buildCommand: npm ci && npm run build
     staticPublishPath: build
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+  # API Gateway
+  - type: web
+    name: api-gateway
+    runtime: docker
+    plan: free
+    rootDir: backend-java/gateway
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/gateway-*.jar
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: autoinspect-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: autoinspect-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: autoinspect-db
+          property: password
+      - key: FRONTEND_ORIGIN
+        value: https://dealer-frontend.onrender.com
+
+  # Dealer Service
+  - type: web
+    name: dealer-service
+    runtime: docker
+    plan: free
+    rootDir: backend-java/dealer
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/dealer-*.jar
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: autoinspect-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: autoinspect-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: autoinspect-db
+          property: password
+      - key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+        value: https://api-gateway.onrender.com/eureka/
+
+  # Postings Service
+  - type: web
+    name: postings-service
+    runtime: docker
+    plan: free
+    rootDir: backend-java/postings
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/postings-*.jar
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: autoinspect-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: autoinspect-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: autoinspect-db
+          property: password
+      - key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+        value: https://api-gateway.onrender.com/eureka/
+
+  # Tech Dashboard Service
+  - type: web
+    name: tech-dashboard-service
+    runtime: docker
+    plan: free
+    rootDir: backend-java/tech-dashboard
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/tech-dashboard-*.jar
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: autoinspect-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: autoinspect-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: autoinspect-db
+          property: password
+      - key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+        value: https://api-gateway.onrender.com/eureka/
+
+  # Service Registry
+  - type: web
+    name: service-registry
+    runtime: docker
+    plan: free
+    rootDir: backend-java/serviceregistry
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/serviceregistry-*.jar
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
+
+  # Node.js Chat Service
+  - type: web
+    name: chat-service
+    runtime: node
+    plan: free
+    rootDir: backend-node/chat-service
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /health
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: autoinspect-db
+          property: host
+      - key: DB_USER
+        fromDatabase:
+          name: autoinspect-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: autoinspect-db
+          property: password
+      - key: DB_NAME
+        value: inspection
+      - key: DB_PORT
+        value: 5432
 
 databases:
-  - name: postgres
+  - name: autoinspect-db
     plan: free

@@ -430,7 +430,17 @@ function AdminDashboard() {
   ]);
 
   const handleLogout = async () => {
-    navigate("/");
+    try {
+      // Clear admin authentication
+      localStorage.removeItem("adminUser");
+      localStorage.removeItem("currentUser");
+
+      // Navigate to admin login page
+      navigate("/admin-login");
+    } catch (error) {
+      console.error("Error during logout:", error);
+      navigate("/admin-login");
+    }
   };
 
   const handleDealerAction = async (action, dealerId, reason = "") => {
@@ -1489,6 +1499,12 @@ function AdminDashboard() {
               </p>
             </div>
             <div className="d-flex align-items-center gap-3">
+              {/* Admin User Info */}
+              <div className="admin-user-info">
+                <span className="admin-user-role">Admin</span>
+                <span className="admin-user-email">{admin?.email}</span>
+              </div>
+
               <button
                 className="btn btn-outline-primary btn-sm"
                 onClick={async () => {

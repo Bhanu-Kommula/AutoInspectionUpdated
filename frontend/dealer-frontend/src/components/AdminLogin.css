@@ -1,0 +1,220 @@
+.admin-login-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.admin-login-card {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.admin-login-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.admin-login-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: white;
+  font-size: 2rem;
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.admin-login-title {
+  color: #2c3e50;
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-size: 2.2rem;
+}
+
+.admin-login-subtitle {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}
+
+.admin-login-input {
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  padding: 15px 20px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+}
+
+.admin-login-input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+  background: white;
+}
+
+.password-input-group {
+  position: relative;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: #6c757d;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.password-toggle-btn:hover {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.admin-login-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 12px;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.admin-login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+}
+
+.admin-login-btn:disabled {
+  opacity: 0.7;
+  transform: none;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.admin-login-link {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.admin-login-link:hover {
+  color: #5a6fd8;
+  text-decoration: none;
+}
+
+/* Form labels */
+.admin-login-card .form-label {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+/* Alert styling */
+.admin-login-card .alert {
+  border-radius: 12px;
+  border: none;
+  font-weight: 500;
+}
+
+.admin-login-card .alert-danger {
+  background: #fee;
+  color: #c53030;
+  border-left: 4px solid #c53030;
+}
+
+.admin-login-card .alert-info {
+  background: #e6f3ff;
+  color: #2b6cb0;
+  border-left: 4px solid #2b6cb0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .admin-login-container {
+    padding: 10px;
+  }
+  
+  .admin-login-card .card-body {
+    padding: 2rem !important;
+  }
+  
+  .admin-login-title {
+    font-size: 1.8rem;
+  }
+  
+  .admin-login-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .admin-login-card .card-body {
+    padding: 1.5rem !important;
+  }
+  
+  .admin-login-title {
+    font-size: 1.6rem;
+  }
+  
+  .admin-login-subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* Dark mode support */
+.dark-mode .admin-login-card {
+  background: rgba(44, 62, 80, 0.95);
+  color: #ecf0f1;
+}
+
+.dark-mode .admin-login-title {
+  color: #ecf0f1;
+}
+
+.dark-mode .admin-login-subtitle {
+  color: #bdc3c7;
+}
+
+.dark-mode .admin-login-input {
+  background: #34495e;
+  border-color: #2c3e50;
+  color: #ecf0f1;
+}
+
+.dark-mode .admin-login-input:focus {
+  background: #2c3e50;
+}
+
+.dark-mode .form-label {
+  color: #ecf0f1;
+}
+
+.dark-mode .admin-login-link {
+  color: #3498db;
+}
+
+.dark-mode .admin-login-link:hover {
+  color: #2980b9;
+}

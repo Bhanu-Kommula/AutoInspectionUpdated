@@ -41,6 +41,8 @@ const TechnicianLogin = React.lazy(() =>
 const TechnicianRegister = React.lazy(() =>
   import("./components/TechnicianRegister")
 );
+const AdminLogin = React.lazy(() => import("./components/AdminLogin"));
+const ProtectedAdminRoute = React.lazy(() => import("./components/ProtectedAdminRoute"));
 
 // Loading component for lazy loaded routes
 const LoadingSpinner = () => (
@@ -122,6 +124,7 @@ function App() {
       "/dealer-register",
       "/technician-login",
       "/technician-register",
+      "/admin-login",
     ],
     []
   );
@@ -205,6 +208,7 @@ function App() {
           <Route path="/dealer-register" element={<DealerRegister />} />
           <Route path="/technician-login" element={<TechnicianLogin />} />
           <Route path="/technician-register" element={<TechnicianRegister />} />
+          <Route path="/admin-login" element={<AdminLogin />} />
 
           {/* Dashboard Routes */}
           <Route path="/postings" element={<PostingsPage />} />
@@ -213,7 +217,14 @@ function App() {
             path="/technician-dashboard"
             element={<TechnicianDashboardPage />}
           />
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route 
+            path="/admin-dashboard" 
+            element={
+              <ProtectedAdminRoute>
+                <AdminDashboard />
+              </ProtectedAdminRoute>
+            } 
+          />
         </Routes>
 
         {/* Global Call Interface */}

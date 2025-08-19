@@ -32,7 +32,15 @@ const dbConfig = {
   password: process.env.DB_PASSWORD || "Aa123123@",
   database: process.env.DB_NAME || "inspection",
   port: parseInt(process.env.DB_PORT || "5432", 10),
-  max: 10,
+  // Production connection pooling (important for free Postgres)
+  max: 5,
+  min: 1,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 2000,
+  // SSL required for Render
+  ssl: {
+    rejectUnauthorized: false
+  }
 };
 
 let db;

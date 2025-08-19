@@ -94,23 +94,30 @@ function LandingPage() {
         {/* Bottom Row - Admin (Centered) */}
         <div
           className="glass-container d-flex justify-content-center p-5 rounded-5 shadow-xl"
-          style={{ width: "100%", maxWidth: "500px", margin: "0 auto" }}
+          style={{ width: "100%", maxWidth: "600px", margin: "0 auto" }}
         >
           {/* Admin Card */}
           <div
             className="role-card p-4 text-center rounded-4"
             style={{ width: "100%" }}
           >
-            <h4 className="fw-bold mb-3 text-warning">⚙️ Admin Portal</h4>
+            <div className="admin-icon mb-3">
+              <span className="admin-icon-bg">⚙️</span>
+            </div>
+            <h4 className="fw-bold mb-3 text-warning">Admin Portal</h4>
+            <div className="security-badge mb-3">
+              <span className="badge bg-success">🔒 Secure Access</span>
+            </div>
             <p className="text-muted mb-4">
-              Manage system operations and user accounts.
+              Secure access to system administration, user management, and
+              operational controls.
             </p>
             <div className="d-flex justify-content-center gap-3 flex-wrap">
               <button
                 className="btn btn-warning px-4 py-2 rounded-pill fw-semibold glow-btn"
-                onClick={() => navigate("/admin-dashboard")}
+                onClick={() => navigate("/admin-login")}
               >
-                Access Admin Portal
+                Admin Login
               </button>
             </div>
           </div>
@@ -159,6 +166,41 @@ function LandingPage() {
         .glow-btn:hover {
           transform: scale(1.06);
           box-shadow: 0 0 12px rgba(13, 110, 253, 0.2);
+        }
+
+        .btn-warning.glow-btn:hover {
+          box-shadow: 0 0 12px rgba(255, 193, 7, 0.3);
+        }
+
+
+
+        .admin-icon {
+          display: flex;
+          justify-content: center;
+        }
+
+        .admin-icon-bg {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 60px;
+          height: 60px;
+          background: linear-gradient(135deg, #ffc107, #ff8f00);
+          border-radius: 50%;
+          font-size: 1.8rem;
+          box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+        }
+
+        .security-badge {
+          display: flex;
+          justify-content: center;
+        }
+
+        .security-badge .badge {
+          font-size: 0.8rem;
+          padding: 6px 12px;
+          border-radius: 20px;
+          font-weight: 500;
         }
 
         @media (max-width: 576px) {
