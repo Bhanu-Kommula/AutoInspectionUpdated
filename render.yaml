@@ -43,6 +43,8 @@ services:
           property: password
       - key: FRONTEND_ORIGIN
         value: https://dealer-frontend.onrender.com
+      - key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+        value: https://service-registry.onrender.com/eureka/
 
   # Dealer Service
   - type: web
@@ -75,7 +77,7 @@ services:
           name: autoinspect-db
           property: password
       - key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
-        value: https://api-gateway.onrender.com/eureka/
+        value: https://service-registry.onrender.com/eureka/
 
   # Postings Service
   - type: web
@@ -108,7 +110,7 @@ services:
           name: autoinspect-db
           property: password
       - key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
-        value: https://api-gateway.onrender.com/eureka/
+        value: https://service-registry.onrender.com/eureka/
 
   # Tech Dashboard Service
   - type: web
@@ -141,7 +143,7 @@ services:
           name: autoinspect-db
           property: password
       - key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
-        value: https://api-gateway.onrender.com/eureka/
+        value: https://service-registry.onrender.com/eureka/
 
   # Technician Service (Fixed typo)
   - type: web
@@ -174,7 +176,7 @@ services:
           name: autoinspect-db
           property: password
       - key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
-        value: https://api-gateway.onrender.com/eureka/
+        value: https://service-registry.onrender.com/eureka/
 
   # Service Registry
   - type: web
