@@ -24,42 +24,43 @@ export const CallProvider = ({ children }) => {
 
   // Initialize global socket for call notifications
   useEffect(() => {
-    // Get user info from localStorage (proper format)
+    // Determine user identity for call sockets. Prefer TECHNICIAN (tab-scoped session)
+    // before DEALER (app-wide localStorage) to ensure technician dashboard registers correctly.
     let userEmail = null;
     let userType = null;
 
-    // Check for dealer info first
-    const dealerInfo = localStorage.getItem("dealerInfo");
-    if (dealerInfo) {
-      try {
-        const parsed = JSON.parse(dealerInfo);
-        if (parsed.email) {
-          userEmail = parsed.email;
-          userType = "DEALER";
+    // Prefer technician session (sessionStorage is tab/window scoped)
+    const technicianSessionId = sessionStorage.getItem(
+      "currentTechnicianSession"
+    );
+    if (technicianSessionId) {
+      const technicianKey = `technicianInfo_${technicianSessionId}`;
+      const technicianData = sessionStorage.getItem(technicianKey);
+      if (technicianData) {
+        try {
+          const parsed = JSON.parse(technicianData);
+          if (parsed.email) {
+            userEmail = parsed.email;
+            userType = "TECHNICIAN";
+          }
+        } catch (error) {
+          console.error("Error parsing technician info:", error);
         }
-      } catch (error) {
-        console.error("Error parsing dealer info:", error);
       }
     }
 
-    // Check for technician info if no dealer found
+    // Fallback to dealer info (localStorage is shared across tabs)
     if (!userEmail) {
-      const technicianSessionId = sessionStorage.getItem(
-        "currentTechnicianSession"
-      );
-      if (technicianSessionId) {
-        const technicianKey = `technicianInfo_${technicianSessionId}`;
-        const technicianData = sessionStorage.getItem(technicianKey);
-        if (technicianData) {
-          try {
-            const parsed = JSON.parse(technicianData);
-            if (parsed.email) {
-              userEmail = parsed.email;
-              userType = "TECHNICIAN";
-            }
-          } catch (error) {
-            console.error("Error parsing technician info:", error);
+      const dealerInfo = localStorage.getItem("dealerInfo");
+      if (dealerInfo) {
+        try {
+          const parsed = JSON.parse(dealerInfo);
+          if (parsed.email) {
+            userEmail = parsed.email;
+            userType = "DEALER";
           }
+        } catch (error) {
+          console.error("Error parsing dealer info:", error);
         }
       }
     }

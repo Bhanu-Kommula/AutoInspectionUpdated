@@ -399,7 +399,10 @@ public class DashboardService {
             long totalFiles = fileUploadService.getTotalFileCount();
             
             // Performance metrics with proper date filtering
-            long reportsToday = inspectionReportRepository.countReportsToday();
+            java.time.LocalDate today = java.time.LocalDate.now();
+            java.time.LocalDateTime startOfDay = today.atStartOfDay();
+            java.time.LocalDateTime endOfDay = startOfDay.plusDays(1);
+            long reportsToday = inspectionReportRepository.countReportsBetween(startOfDay, endOfDay);
             
             // Calculate week start (Monday of current week)
             java.time.LocalDateTime now = java.time.LocalDateTime.now();

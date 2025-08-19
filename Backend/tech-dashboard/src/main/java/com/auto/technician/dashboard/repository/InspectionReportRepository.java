@@ -48,8 +48,8 @@ public interface InspectionReportRepository extends JpaRepository<InspectionRepo
             COUNT(CASE WHEN status = 'IN_PROGRESS' THEN 1 END) as inProgressReports,
             COUNT(CASE WHEN status = 'DRAFT' THEN 1 END) as draftReports,
             COUNT(CASE WHEN status = 'SUBMITTED' THEN 1 END) as submittedReports,
-            AVG(estimated_repair_cost) as avgRepairCost,
-            SUM(estimated_repair_cost) as totalRepairCost
+            NULL as avgRepairCost,
+            NULL as totalRepairCost
         FROM inspection_reports 
         WHERE technician_id = :technicianId
         """, nativeQuery = true)
@@ -75,10 +75,11 @@ public interface InspectionReportRepository extends JpaRepository<InspectionRepo
     // ==================== ADMIN DATE FILTERING METHODS ====================
 
     /**
-     * Count reports created today
+     * Count reports created between start and end timestamps (database-agnostic)
      */
-    @Query("SELECT COUNT(ir) FROM InspectionReport ir WHERE DATE(ir.createdAt) = CURDATE()")
-    long countReportsToday();
+    @Query("SELECT COUNT(ir) FROM InspectionReport ir WHERE ir.createdAt >= :startOfDay AND ir.createdAt < :endOfDay")
+    long countReportsBetween(@Param("startOfDay") java.time.LocalDateTime startOfDay,
+                             @Param("endOfDay") java.time.LocalDateTime endOfDay);
 
     /**
      * Count reports created this week

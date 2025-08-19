@@ -48,7 +48,7 @@ public class DealerService {
             dealer.setLocation(dealerDto.getLocation());
             dealer.setZipcode(dealerDto.getZipcode());
             dealer.setPhone(dealerDto.getPhone());
-            dealer.setStatus(DealerStatus.PENDING_VERIFICATION);
+            dealer.setStatus(DealerStatus.ACTIVE);
             
             if (repo.findByEmail(dealer.getEmail()).isPresent()) {
                 return ResponseEntity.badRequest()
