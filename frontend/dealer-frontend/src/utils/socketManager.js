@@ -1,6 +1,13 @@
 // Singleton Socket Manager to prevent multiple connections
 import io from "socket.io-client";
-// Keep chat connection URL unchanged (do not modify chat system)
+// Base URL for chat sockets (configurable for Render/local)
+const CHAT_BASE_URL =
+  process.env.REACT_APP_CHAT_BASE_URL ||
+  (typeof window !== "undefined" &&
+  window.location &&
+  window.location.hostname !== "localhost"
+    ? `${window.location.protocol}//${window.location.host}`
+    : "http://localhost:8089");
 
 class SocketManager {
   constructor() {
@@ -30,7 +37,7 @@ class SocketManager {
 
       console.log("🔌 Creating new chat socket connection");
 
-      this.chatSocket = io("http://localhost:8089", {
+      this.chatSocket = io(CHAT_BASE_URL, {
         transports: ["websocket", "polling"],
         forceNew: false,
         reconnection: true,
@@ -72,7 +79,7 @@ class SocketManager {
         this.globalSocket = null;
       }
 
-      this.globalSocket = io("http://localhost:8089", {
+      this.globalSocket = io(CHAT_BASE_URL, {
         transports: ["websocket", "polling"],
         forceNew: false,
         reconnection: true,
