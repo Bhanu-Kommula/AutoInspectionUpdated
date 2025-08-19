@@ -1,0 +1,100 @@
+services:
+  - type: web
+    name: gateway
+    env: java
+    rootDir: backend-java/gateway
+    buildCommand: ./mvnw -DskipTests package
+    startCommand: java -jar target/gateway-*.jar
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase: postgres
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase: postgres
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase: postgres
+
+  - type: web
+    name: postings
+    env: java
+    rootDir: backend-java/postings
+    buildCommand: ./mvnw -DskipTests package
+    startCommand: java -jar target/postings-*.jar
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase: postgres
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase: postgres
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase: postgres
+
+  - type: web
+    name: dealer
+    env: java
+    rootDir: backend-java/dealer
+    buildCommand: ./mvnw -DskipTests package
+    startCommand: java -jar target/dealer-*.jar
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase: postgres
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase: postgres
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase: postgres
+
+  - type: web
+    name: technician
+    env: java
+    rootDir: backend-java/techincian
+    buildCommand: ./mvnw -DskipTests package
+    startCommand: java -jar target/techincian-*.jar
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase: postgres
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase: postgres
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase: postgres
+
+  - type: web
+    name: tech-dashboard
+    env: java
+    rootDir: backend-java/tech-dashboard
+    buildCommand: ./mvnw -DskipTests package
+    startCommand: java -jar target/tech-dashboard-*.jar
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase: postgres
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase: postgres
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase: postgres
+
+  - type: web
+    name: chat-service
+    env: node
+    rootDir: backend-node/chat-service
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: DB_HOST
+        fromDatabase: postgres
+      - key: DB_USER
+        fromDatabase: postgres
+      - key: DB_PASSWORD
+        fromDatabase: postgres
+      - key: DB_NAME
+        value: inspection
+      - key: DB_PORT
+        value: 5432
+
+  - type: web
+    name: dealer-frontend
+    env: static
+    rootDir: frontend/dealer-frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: build
+
+databases:
+  - name: postgres
+    plan: free
+
