@@ -85,7 +85,7 @@ services:
     runtime: docker
     plan: free
     rootDir: backend-java/postings
-    healthCheckPath: /actuator/health
+    healthCheckPath: /health
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: production
@@ -118,7 +118,7 @@ services:
     runtime: docker
     plan: free
     rootDir: backend-java/tech-dashboard
-    healthCheckPath: /actuator/health
+    healthCheckPath: /health
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: production
@@ -151,7 +151,7 @@ services:
     runtime: docker
     plan: free
     rootDir: backend-java/techincian
-    healthCheckPath: /actuator/health
+    healthCheckPath: /health
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: production
