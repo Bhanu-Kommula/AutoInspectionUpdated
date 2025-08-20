@@ -426,20 +426,6 @@ public class EnhancedDashboardController {
         }
     }
 
-    // ==================== HEALTH CHECK ====================
-
-    /**
-     * Health check endpoint
-     */
-    @GetMapping("/health")
-    public Map<String, Object> healthCheck() {
-        Map<String, Object> response = new HashMap<>();
-        response.put("status", "UP");
-        response.put("service", "Tech Dashboard Service");
-        response.put("timestamp", System.currentTimeMillis());
-        return response;
-    }
-
     // ==================== HELPER METHODS ====================
 
     private String extractJwtToken(HttpServletRequest request) {

@@ -9,15 +9,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/health")
 public class HealthController {
 
-    @GetMapping
-    public ResponseEntity<Map<String, Object>> health() {
+    // Root-level health endpoint for Render health checks
+    @GetMapping("/health")
+    public ResponseEntity<Map<String, Object>> rootHealth() {
         Map<String, Object> health = new HashMap<>();
         health.put("status", "UP");
         health.put("service", "tech-dashboard-service");
         health.put("timestamp", System.currentTimeMillis());
+        health.put("endpoint", "root");
+        return ResponseEntity.ok(health);
+    }
+
+    // Context-path health endpoint for API calls
+    @GetMapping("/api/v1/health")
+    public ResponseEntity<Map<String, Object>> apiHealth() {
+        Map<String, Object> health = new HashMap<>();
+        health.put("status", "UP");
+        health.put("service", "tech-dashboard-service");
+        health.put("timestamp", System.currentTimeMillis());
+        health.put("endpoint", "api");
         return ResponseEntity.ok(health);
     }
 }
