@@ -52,7 +52,7 @@ services:
     runtime: docker
     plan: free
     rootDir: backend-java/dealer
-    healthCheckPath: /actuator/health
+    healthCheckPath: /health
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: production
