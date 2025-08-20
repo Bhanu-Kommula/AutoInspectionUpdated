@@ -830,7 +830,7 @@ public class DashboardService {
         try {
             String notes = "Bulk delete by admin: " + adminEmail + (reason != null ? " - Reason: " + reason : "");
             
-            int deletedCount = inspectionReportRepository.bulkSoftDelete(reportIds, notes);
+            int deletedCount = inspectionReportRepository.bulkSoftDelete(reportIds, notes, InspectionReport.InspectionStatus.REJECTED);
             
             log.info("Admin {} bulk deleted {} out of {} inspection reports", 
                 adminEmail, deletedCount, reportIds.size());

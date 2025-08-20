@@ -128,18 +128,20 @@ public interface InspectionReportRepository extends JpaRepository<InspectionRepo
      */
     @Modifying
     @Transactional
-    @Query("UPDATE InspectionReport ir SET ir.status = 'REJECTED', ir.generalNotes = :notes, ir.updatedAt = CURRENT_TIMESTAMP WHERE ir.id IN :reportIds")
+    @Query("UPDATE InspectionReport ir SET ir.status = :rejectedStatus, ir.generalNotes = :notes, ir.updatedAt = CURRENT_TIMESTAMP WHERE ir.id IN :reportIds")
     int bulkSoftDelete(
         @Param("reportIds") List<Long> reportIds,
-        @Param("notes") String notes);
+        @Param("notes") String notes,
+        @Param("rejectedStatus") InspectionReport.InspectionStatus rejectedStatus);
 
     /**
      * Bulk restore multiple reports
      */
     @Modifying
     @Transactional
-    @Query("UPDATE InspectionReport ir SET ir.status = 'DRAFT', ir.generalNotes = :notes, ir.updatedAt = CURRENT_TIMESTAMP WHERE ir.id IN :reportIds")
+    @Query("UPDATE InspectionReport ir SET ir.status = :draftStatus, ir.generalNotes = :notes, ir.updatedAt = CURRENT_TIMESTAMP WHERE ir.id IN :reportIds")
     int bulkRestore(
         @Param("reportIds") List<Long> reportIds,
-        @Param("notes") String notes);
+        @Param("notes") String notes,
+        @Param("draftStatus") InspectionReport.InspectionStatus draftStatus);
 }
