@@ -8,6 +8,9 @@ COPY pom.xml .
 # Copy source code
 COPY src ./src
 
+# Copy startup script
+COPY startup.sh ./startup.sh
+
 # Build the application with verbose output
 RUN mvn clean package -DskipTests -X
 
@@ -16,16 +19,10 @@ RUN ls -la target/
 RUN find target/ -name "*.jar" -type f
 
 # Expose the port (will be overridden by Render)
-EXPOSE 8083
+EXPOSE 8085
 
-# Run the application with proper environment variable handling
-CMD bash -lc '\
-  : ${PORT:=8083}; \
-  if [ -n "$DB_HOST" ] && [ -n "$DB_PORT" ] && [ -n "$DB_NAME" ]; then \
-    export SPRING_DATASOURCE_URL="jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require"; \
-  fi; \
-  echo "Using SPRING_DATASOURCE_URL=$SPRING_DATASOURCE_URL"; \
-  echo "Using PORT=$PORT"; \
-  JAR_FILE=$(find target/ -name "*.jar" -type f | head -1); \
-  echo "Using JAR: $JAR_FILE"; \
-  java ${JAVA_OPTS:-"-XX:MaxRAMPercentage=75.0"} -Dserver.port=$PORT -jar "$JAR_FILE"'
+# Make startup script executable
+RUN chmod +x startup.sh
+
+# Run the application using the startup script
+CMD ["./startup.sh"]
