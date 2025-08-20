@@ -471,14 +471,14 @@ public class CounterOfferService {
      * Get counter offers for a specific post
      */
     public List<TechCounterOffer> getCounterOffersByPostId(Long postId) {
-        return counterOfferRepository.findActiveCounterOffersByPostId(postId, LocalDateTime.now());
+        return counterOfferRepository.findActiveCounterOffersByPostId(postId, LocalDateTime.now(), TechCounterOffer.CounterOfferStatus.PENDING);
     }
 
     /**
      * Mark expired counter offers
      */
     public void markExpiredCounterOffers() {
-        List<TechCounterOffer> expiredOffers = counterOfferRepository.findExpiredCounterOffers(LocalDateTime.now());
+        List<TechCounterOffer> expiredOffers = counterOfferRepository.findExpiredCounterOffers(LocalDateTime.now(), TechCounterOffer.CounterOfferStatus.PENDING);
         for (TechCounterOffer offer : expiredOffers) {
             offer.markAsExpired();
             counterOfferRepository.save(offer);
@@ -528,7 +528,7 @@ public class CounterOfferService {
      * Withdraw all counter offers for a specific post by a technician
      */
     public void withdrawCounterOffersForPost(Long postId, String technicianEmail) {
-        List<TechCounterOffer> pendingOffers = counterOfferRepository.findActiveCounterOffersByPostId(postId, LocalDateTime.now());
+        List<TechCounterOffer> pendingOffers = counterOfferRepository.findActiveCounterOffersByPostId(postId, LocalDateTime.now(), TechCounterOffer.CounterOfferStatus.PENDING);
         int withdrawnCount = 0;
         
         for (TechCounterOffer offer : pendingOffers) {
@@ -731,7 +731,11 @@ public class CounterOfferService {
     @Transactional
     public int markExpiredCounterOffersScheduled() {
         logger.info("Marking expired counter offers");
-        int expiredCount = counterOfferRepository.markExpiredCounterOffers(LocalDateTime.now());
+        int expiredCount = counterOfferRepository.markExpiredCounterOffers(
+            LocalDateTime.now(), 
+            TechCounterOffer.CounterOfferStatus.PENDING, 
+            TechCounterOffer.CounterOfferStatus.EXPIRED
+        );
         logger.info("Marked {} counter offers as expired", expiredCount);
         return expiredCount;
     }
@@ -742,7 +746,7 @@ public class CounterOfferService {
     @Transactional
     public int cleanupOldExpiredCounterOffers(int daysOld) {
         LocalDateTime cutoffDate = LocalDateTime.now().minusDays(daysOld);
-        int deletedCount = counterOfferRepository.deleteOldExpiredCounterOffers(cutoffDate);
+        int deletedCount = counterOfferRepository.deleteOldExpiredCounterOffers(cutoffDate, TechCounterOffer.CounterOfferStatus.EXPIRED);
         logger.info("Cleaned up {} old expired counter offers older than {} days", deletedCount, daysOld);
         return deletedCount;
     }

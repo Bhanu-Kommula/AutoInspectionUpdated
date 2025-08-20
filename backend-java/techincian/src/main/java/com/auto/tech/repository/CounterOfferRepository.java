@@ -17,32 +17,32 @@ import java.util.Optional;
 public interface CounterOfferRepository extends JpaRepository<TechCounterOffer, Long> {
 
     // Find active counter offers by post ID
-    @Query("SELECT co FROM TechCounterOffer co WHERE co.postId = :postId AND co.status = 'PENDING' AND (co.expiresAt IS NULL OR co.expiresAt > :now)")
-    List<TechCounterOffer> findActiveCounterOffersByPostId(@Param("postId") Long postId, @Param("now") LocalDateTime now);
+    @Query("SELECT co FROM TechCounterOffer co WHERE co.postId = :postId AND co.status = :pendingStatus AND (co.expiresAt IS NULL OR co.expiresAt > :now)")
+    List<TechCounterOffer> findActiveCounterOffersByPostId(@Param("postId") Long postId, @Param("now") LocalDateTime now, @Param("pendingStatus") TechCounterOffer.CounterOfferStatus pendingStatus);
 
     // Find counter offers by technician email
     @Query("SELECT co FROM TechCounterOffer co WHERE co.technicianEmail = :email ORDER BY co.requestedAt DESC")
     List<TechCounterOffer> findByTechnicianEmail(@Param("email") String email);
 
     // Find pending counter offers by technician email
-    @Query("SELECT co FROM TechCounterOffer co WHERE co.technicianEmail = :email AND co.status = 'PENDING' AND (co.expiresAt IS NULL OR co.expiresAt > :now)")
-    List<TechCounterOffer> findPendingCounterOffersByTechnicianEmail(@Param("email") String email, @Param("now") LocalDateTime now);
+    @Query("SELECT co FROM TechCounterOffer co WHERE co.technicianEmail = :email AND co.status = :pendingStatus AND (co.expiresAt IS NULL OR co.expiresAt > :now)")
+    List<TechCounterOffer> findPendingCounterOffersByTechnicianEmail(@Param("email") String email, @Param("now") LocalDateTime now, @Param("pendingStatus") TechCounterOffer.CounterOfferStatus pendingStatus);
 
     // Find counter offer by post ID and technician email
-    @Query("SELECT co FROM TechCounterOffer co WHERE co.postId = :postId AND co.technicianEmail = :email AND co.status = 'PENDING'")
-    Optional<TechCounterOffer> findByPostIdAndTechnicianEmail(@Param("postId") Long postId, @Param("email") String email);
+    @Query("SELECT co FROM TechCounterOffer co WHERE co.postId = :postId AND co.technicianEmail = :email AND co.status = :pendingStatus")
+    Optional<TechCounterOffer> findByPostIdAndTechnicianEmail(@Param("postId") Long postId, @Param("email") String email, @Param("pendingStatus") TechCounterOffer.CounterOfferStatus pendingStatus);
 
     // Check if technician has pending counter offer for a post
-    @Query("SELECT COUNT(co) > 0 FROM TechCounterOffer co WHERE co.postId = :postId AND co.technicianEmail = :email AND co.status = 'PENDING' AND (co.expiresAt IS NULL OR co.expiresAt > :now)")
-    boolean existsPendingCounterOfferByPostIdAndTechnicianEmail(@Param("postId") Long postId, @Param("email") String email, @Param("now") LocalDateTime now);
+    @Query("SELECT COUNT(co) > 0 FROM TechCounterOffer co WHERE co.postId = :postId AND co.technicianEmail = :email AND co.status = :pendingStatus AND (co.expiresAt IS NULL OR co.expiresAt > :now)")
+    boolean existsPendingCounterOfferByPostIdAndTechnicianEmail(@Param("postId") Long postId, @Param("email") String email, @Param("now") LocalDateTime now, @Param("pendingStatus") TechCounterOffer.CounterOfferStatus pendingStatus);
 
     // Find expired counter offers
-    @Query("SELECT co FROM TechCounterOffer co WHERE co.status = 'PENDING' AND co.expiresAt IS NOT NULL AND co.expiresAt <= :now")
-    List<TechCounterOffer> findExpiredCounterOffers(@Param("now") LocalDateTime now);
+    @Query("SELECT co FROM TechCounterOffer co WHERE co.status = :pendingStatus AND co.expiresAt IS NOT NULL AND co.expiresAt <= :now")
+    List<TechCounterOffer> findExpiredCounterOffers(@Param("now") LocalDateTime now, @Param("pendingStatus") TechCounterOffer.CounterOfferStatus pendingStatus);
 
     // Count pending counter offers by technician email
-    @Query("SELECT COUNT(co) FROM TechCounterOffer co WHERE co.technicianEmail = :email AND co.status = 'PENDING' AND (co.expiresAt IS NULL OR co.expiresAt > :now)")
-    long countPendingCounterOffersByTechnicianEmail(@Param("email") String email, @Param("now") LocalDateTime now);
+    @Query("SELECT COUNT(co) FROM TechCounterOffer co WHERE co.technicianEmail = :email AND co.status = :pendingStatus AND (co.expiresAt IS NULL OR co.expiresAt > :now)")
+    long countPendingCounterOffersByTechnicianEmail(@Param("email") String email, @Param("now") LocalDateTime now, @Param("pendingStatus") TechCounterOffer.CounterOfferStatus pendingStatus);
 
     // Find counter offers by status
     @Query("SELECT co FROM TechCounterOffer co WHERE co.status = :status ORDER BY co.requestedAt DESC")
@@ -64,13 +64,12 @@ public interface CounterOfferRepository extends JpaRepository<TechCounterOffer, 
 
     // Mark expired requests as expired
     @Modifying
-    @Query("UPDATE TechCounterOffer co SET co.status = 'EXPIRED', co.updatedAt = :now WHERE co.status = 'PENDING' AND co.expiresAt IS NOT NULL AND co.expiresAt <= :now")
-    int markExpiredCounterOffers(@Param("now") LocalDateTime now);
+    @Query("UPDATE TechCounterOffer co SET co.status = :expiredStatus, co.updatedAt = :now WHERE co.status = :pendingStatus AND co.expiresAt IS NOT NULL AND co.expiresAt <= :now")
+    int markExpiredCounterOffers(@Param("now") LocalDateTime now, @Param("pendingStatus") TechCounterOffer.CounterOfferStatus pendingStatus, @Param("expiredStatus") TechCounterOffer.CounterOfferStatus expiredStatus);
 
     // Delete old expired requests (cleanup)
-    @Modifying
-    @Query("DELETE FROM TechCounterOffer co WHERE co.status = 'EXPIRED' AND co.expiresAt < :cutoffDate")
-    int deleteOldExpiredCounterOffers(@Param("cutoffDate") LocalDateTime cutoffDate);
+    @Query("DELETE FROM TechCounterOffer co WHERE co.status = :expiredStatus AND co.expiresAt < :cutoffDate")
+    int deleteOldExpiredCounterOffers(@Param("cutoffDate") LocalDateTime cutoffDate, @Param("expiredStatus") TechCounterOffer.CounterOfferStatus expiredStatus);
 
     // Find counter offer by posting service counter offer ID
     @Query("SELECT co FROM TechCounterOffer co WHERE co.postingServiceCounterOfferId = :postingServiceId")

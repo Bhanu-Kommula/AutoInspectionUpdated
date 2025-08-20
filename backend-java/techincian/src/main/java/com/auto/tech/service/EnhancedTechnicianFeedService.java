@@ -41,7 +41,7 @@ public class EnhancedTechnicianFeedService {
             log.info("Checking accept impact for post {} by technician {}", postId, technicianEmail);
 
             // Find pending counter offers for this post by this technician
-            Optional<TechCounterOffer> pendingOfferOpt = counterOfferRepository.findByPostIdAndTechnicianEmail(postId, technicianEmail);
+            Optional<TechCounterOffer> pendingOfferOpt = counterOfferRepository.findByPostIdAndTechnicianEmail(postId, technicianEmail, TechCounterOffer.CounterOfferStatus.PENDING);
 
             if (pendingOfferOpt.isPresent()) {
                 TechCounterOffer pendingOffer = pendingOfferOpt.get();
@@ -94,7 +94,7 @@ public class EnhancedTechnicianFeedService {
             log.info("Checking decline impact for post {} by technician {}", postId, technicianEmail);
 
             // Find pending counter offers for this post by this technician
-            Optional<TechCounterOffer> pendingOfferOpt = counterOfferRepository.findByPostIdAndTechnicianEmail(postId, technicianEmail);
+            Optional<TechCounterOffer> pendingOfferOpt = counterOfferRepository.findByPostIdAndTechnicianEmail(postId, technicianEmail, TechCounterOffer.CounterOfferStatus.PENDING);
 
             if (pendingOfferOpt.isPresent()) {
                 TechCounterOffer pendingOffer = pendingOfferOpt.get();
@@ -155,7 +155,7 @@ public class EnhancedTechnicianFeedService {
             long startTime = System.currentTimeMillis();
 
             // Find and withdraw pending counter offers
-            Optional<TechCounterOffer> pendingOfferOpt = counterOfferRepository.findByPostIdAndTechnicianEmail(postId, technicianEmail);
+            Optional<TechCounterOffer> pendingOfferOpt = counterOfferRepository.findByPostIdAndTechnicianEmail(postId, technicianEmail, TechCounterOffer.CounterOfferStatus.PENDING);
             int withdrawnCount = 0;
 
             if (pendingOfferOpt.isPresent()) {
@@ -230,7 +230,7 @@ public class EnhancedTechnicianFeedService {
             long startTime = System.currentTimeMillis();
 
             // Find and withdraw pending counter offers
-            Optional<TechCounterOffer> pendingOfferOpt = counterOfferRepository.findByPostIdAndTechnicianEmail(postId, technicianEmail);
+            Optional<TechCounterOffer> pendingOfferOpt = counterOfferRepository.findByPostIdAndTechnicianEmail(postId, technicianEmail, TechCounterOffer.CounterOfferStatus.PENDING);
             int withdrawnCount = 0;
 
             if (pendingOfferOpt.isPresent()) {
@@ -329,7 +329,7 @@ public class EnhancedTechnicianFeedService {
      */
     private Optional<TechCounterOffer> findPendingCounterOffer(Long postId, String technicianEmail) {
         try {
-            return counterOfferRepository.findByPostIdAndTechnicianEmail(postId, technicianEmail);
+            return counterOfferRepository.findByPostIdAndTechnicianEmail(postId, technicianEmail, TechCounterOffer.CounterOfferStatus.PENDING);
         } catch (Exception e) {
             log.error("Error finding pending counter offer for post {} by technician {}: {}", postId, technicianEmail, e.getMessage());
             return Optional.empty();
