@@ -32,9 +32,12 @@ public class HealthController {
             health.put("endpoint", "root");
             health.put("database", dbHealthy ? "UP" : "DOWN");
             health.put("version", "1.0.0");
+            health.put("port", System.getProperty("server.port", "unknown"));
+            health.put("profiles", System.getProperty("spring.profiles.active", "default"));
             
             if (!dbHealthy) {
                 health.put("error", "Database connection failed");
+                health.put("details", "Unable to establish database connection");
             }
             
             return ResponseEntity.ok(health);
@@ -45,6 +48,8 @@ public class HealthController {
             health.put("endpoint", "root");
             health.put("error", e.getMessage());
             health.put("database", "DOWN");
+            health.put("port", System.getProperty("server.port", "unknown"));
+            health.put("profiles", System.getProperty("spring.profiles.active", "default"));
             
             return ResponseEntity.status(503).body(health);
         }
@@ -65,9 +70,12 @@ public class HealthController {
             health.put("endpoint", "api");
             health.put("database", dbHealthy ? "UP" : "DOWN");
             health.put("version", "1.0.0");
+            health.put("port", System.getProperty("server.port", "unknown"));
+            health.put("profiles", System.getProperty("spring.profiles.active", "default"));
             
             if (!dbHealthy) {
                 health.put("error", "Database connection failed");
+                health.put("details", "Unable to establish database connection");
             }
             
             return ResponseEntity.ok(health);
@@ -78,6 +86,8 @@ public class HealthController {
             health.put("endpoint", "api");
             health.put("error", e.getMessage());
             health.put("database", "DOWN");
+            health.put("port", System.getProperty("server.port", "unknown"));
+            health.put("profiles", System.getProperty("spring.profiles.active", "default"));
             
             return ResponseEntity.status(503).body(health);
         }
@@ -90,13 +100,37 @@ public class HealthController {
         response.put("status", "OK");
         response.put("service", "tech-dashboard-service");
         response.put("timestamp", System.currentTimeMillis());
+        response.put("port", System.getProperty("server.port", "unknown"));
+        response.put("profiles", System.getProperty("spring.profiles.active", "default"));
+        return ResponseEntity.ok(response);
+    }
+
+    // Basic health check without database dependency
+    @GetMapping("/ready")
+    public ResponseEntity<Map<String, Object>> ready() {
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", "READY");
+        response.put("service", "tech-dashboard-service");
+        response.put("timestamp", System.currentTimeMillis());
+        response.put("port", System.getProperty("server.port", "unknown"));
+        response.put("profiles", System.getProperty("spring.profiles.active", "default"));
         return ResponseEntity.ok(response);
     }
 
     private boolean checkDatabaseHealth() {
         try (Connection connection = dataSource.getConnection()) {
-            return connection.isValid(5); // 5 second timeout
+            // Test with a simple query
+            boolean isValid = connection.isValid(5);
+            if (isValid) {
+                // Try a simple query to ensure database is responsive
+                try (var stmt = connection.createStatement()) {
+                    stmt.execute("SELECT 1");
+                }
+            }
+            return isValid;
         } catch (Exception e) {
+            // Log the error for debugging
+            System.err.println("Database health check failed: " + e.getMessage());
             return false;
         }
     }
