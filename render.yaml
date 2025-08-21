@@ -42,7 +42,7 @@ services:
           name: autoinspect-db
           property: password
       - key: FRONTEND_ORIGIN
-        value: https://dealer-frontend.onrender.com
+        value: https://dealer-frontend-iwor.onrender.com
       - key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
         value: https://service-registry.onrender.com/eureka/
 
