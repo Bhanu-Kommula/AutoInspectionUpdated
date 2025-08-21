@@ -9,7 +9,7 @@ import axios from "axios";
 
 // Environment variables configuration
 export const API_BASE =
-  process.env.REACT_APP_API_BASE || "https://api-gateway.onrender.com";
+  process.env.REACT_APP_API_BASE || "https://api-gateway-rn0i.onrender.com";
 
 // Debug: Log environment variables
 console.log("🔧 [API Config] Environment variables loaded:");

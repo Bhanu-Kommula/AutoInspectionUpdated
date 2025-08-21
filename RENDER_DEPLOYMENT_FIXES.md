@@ -58,13 +58,15 @@ EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=https://service-registry.onrender.com/eurek
 
 ### **Service URLs Configuration**
 
-Ensure your services are accessible at these URLs:
+Actual Render service URLs:
 
-- **API Gateway**: `https://api-gateway.onrender.com`
-- **Dealer Service**: `https://dealer-service.onrender.com`
+- **API Gateway**: `https://api-gateway-rn0i.onrender.com`
+- **Dealer Service**: `https://dealer-service-v3ir.onrender.com`
 - **Technician Service**: `https://technician-service.onrender.com`
 - **Tech Dashboard Service**: `https://tech-dashboard-service.onrender.com`
 - **Postings Service**: `https://postings-service.onrender.com`
+- **Chat Service**: `https://chat-service-5gjq.onrender.com`
+- **Service Registry**: `https://service-registry-uul6.onrender.com`
 - **Frontend**: `https://dealer-frontend-iwor.onrender.com`
 
 ## Testing CORS Fixes
