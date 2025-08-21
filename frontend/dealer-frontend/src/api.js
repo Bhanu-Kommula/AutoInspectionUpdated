@@ -8,7 +8,17 @@ import axios from "axios";
 // =====================================
 
 // Environment variables configuration
-export const API_BASE = process.env.REACT_APP_API_BASE || "https://api-gateway.onrender.com";
+export const API_BASE =
+  process.env.REACT_APP_API_BASE || "https://api-gateway.onrender.com";
+
+// Debug: Log environment variables
+console.log("🔧 [API Config] Environment variables loaded:");
+console.log("REACT_APP_API_BASE:", process.env.REACT_APP_API_BASE);
+console.log(
+  "REACT_APP_DEALER_BASE_URL:",
+  process.env.REACT_APP_DEALER_BASE_URL
+);
+console.log("API_BASE resolved to:", API_BASE);
 
 const API_CONFIG = {
   // API Gateway connection (with proper routing)
@@ -31,6 +41,12 @@ const API_CONFIG = {
     process.env.REACT_APP_WEBSOCKET_BASE_URL ||
     "https://chat-service.onrender.com",
 };
+
+// Debug: Log final API_CONFIG
+console.log("🔧 [API Config] Final configuration:");
+console.log("DEALER_BASE_URL:", API_CONFIG.DEALER_BASE_URL);
+console.log("ADMIN_BASE_URL:", API_CONFIG.ADMIN_BASE_URL);
+console.log("BASE_URL:", API_CONFIG.BASE_URL);
 
 // Create axios instance without authentication
 const api = axios.create({
