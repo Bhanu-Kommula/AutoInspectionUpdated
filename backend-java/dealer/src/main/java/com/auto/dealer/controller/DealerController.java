@@ -1,6 +1,8 @@
 package com.auto.dealer.controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -217,4 +219,14 @@ public class DealerController {
                     .body(ApiResponse.error("Search failed: " + e.getMessage()));
         }
     }
+
+	@GetMapping("/test-cors")
+	public ResponseEntity<Map<String, Object>> testCors() {
+		Map<String, Object> response = new HashMap<>();
+		response.put("status", "success");
+		response.put("message", "Dealer service CORS test successful");
+		response.put("service", "dealer-service");
+		response.put("timestamp", System.currentTimeMillis());
+		return ResponseEntity.ok(response);
+	}
 }

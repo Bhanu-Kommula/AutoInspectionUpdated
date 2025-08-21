@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.auto.technician.dashboard.dto.FeignEmailRequestDto;
 import com.auto.technician.dashboard.service.TechnicianDashboardService;
 import java.util.Map;
+import java.util.HashMap;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,6 +35,16 @@ public class TechDashboardController {
 	        "status", "UP",
 	        "timestamp", System.currentTimeMillis()
 	    ));
+	}
+
+    @GetMapping("/test-cors")
+	public ResponseEntity<Map<String, Object>> testCors() {
+		Map<String, Object> response = new HashMap<>();
+		response.put("status", "success");
+		response.put("message", "Tech Dashboard service CORS test successful");
+		response.put("service", "tech-dashboard-service");
+		response.put("timestamp", System.currentTimeMillis());
+		return ResponseEntity.ok(response);
 	}
     
     

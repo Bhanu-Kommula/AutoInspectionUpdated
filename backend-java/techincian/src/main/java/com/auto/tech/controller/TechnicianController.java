@@ -1559,4 +1559,14 @@ public class TechnicianController {
 			return ResponseEntity.status(500).body(Map.of("error", "Failed to fetch notifications"));
 		}
 	}
+
+	@GetMapping("/test-cors")
+	public ResponseEntity<Map<String, Object>> testCors() {
+		Map<String, Object> response = new HashMap<>();
+		response.put("status", "success");
+		response.put("message", "Technician service CORS test successful");
+		response.put("service", "technician-service");
+		response.put("timestamp", System.currentTimeMillis());
+		return ResponseEntity.ok(response);
+	}
 }

@@ -440,5 +440,15 @@ public class PostingController {
             return ResponseEntity.status(500).body(error);
         }
     }
+
+    @GetMapping("/test-cors")
+    public ResponseEntity<Map<String, Object>> testCors() {
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("message", "Postings service CORS test successful");
+        response.put("service", "postings-service");
+        response.put("timestamp", System.currentTimeMillis());
+        return ResponseEntity.ok(response);
+    }
     
 }

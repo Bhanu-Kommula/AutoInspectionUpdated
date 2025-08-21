@@ -4,12 +4,13 @@ import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
-// import org.springframework.stereotype.Component; - Disabled
+import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-// @Component - Disabled in favor of CorsWebFilter in CorsConfig
+@Component
 public class CorsHeaderFilter implements GlobalFilter, Ordered {
 
     @Override
@@ -17,18 +18,24 @@ public class CorsHeaderFilter implements GlobalFilter, Ordered {
         ServerHttpResponse response = exchange.getResponse();
         HttpHeaders headers = response.getHeaders();
         
-        System.out.println("🔧 [CorsHeaderFilter] Processing: " + exchange.getRequest().getMethod() + " " + exchange.getRequest().getURI());
+        String origin = exchange.getRequest().getHeaders().getFirst("Origin");
+        String method = exchange.getRequest().getMethod().name();
+        String path = exchange.getRequest().getURI().getPath();
         
-        // NO SECURITY - Add CORS headers to everything
+        System.out.println("🔧 [CorsHeaderFilter] Processing: " + method + " " + path);
+        System.out.println("🔧 [CorsHeaderFilter] Origin: " + origin);
+        
+        // Set CORS headers for all responses
         headers.add("Access-Control-Allow-Origin", "*");
-        headers.add("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS,PATCH");
-        headers.add("Access-Control-Allow-Headers", "Origin,Content-Type,Accept,Authorization,X-Requested-With");
+        headers.add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
+        headers.add("Access-Control-Allow-Headers", "Origin, Content-Type, Accept, Authorization, X-Requested-With, Cache-Control");
+        headers.add("Access-Control-Allow-Credentials", "true");
         headers.add("Access-Control-Max-Age", "3600");
         
-        // Handle OPTIONS - just return 200
-        if ("OPTIONS".equals(exchange.getRequest().getMethod().name())) {
-            System.out.println("🔧 [CorsHeaderFilter] OPTIONS detected - returning 200 immediately");
-            response.setRawStatusCode(200);
+        // Handle OPTIONS preflight request
+        if ("OPTIONS".equals(method)) {
+            System.out.println("🔧 [CorsHeaderFilter] OPTIONS preflight detected - returning 200 immediately");
+            response.setStatusCode(HttpStatus.OK);
             return Mono.empty();
         }
         
