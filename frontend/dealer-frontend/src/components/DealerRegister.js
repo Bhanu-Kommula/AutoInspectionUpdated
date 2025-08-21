@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import api, { API_CONFIG } from "../api";
 import SearchableLocationDropdown from "./SearchableLocationDropdown";
+import { testCorsConnection } from "../utils/corsTest";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function DealerRegister() {
@@ -17,6 +18,7 @@ function DealerRegister() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [corsTestResult, setCorsTestResult] = useState(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -60,7 +62,13 @@ function DealerRegister() {
       }
     } catch (err) {
       console.error("Dealer Register - Error:", err);
-      if (err.response?.status === 400) {
+      
+      // Enhanced error handling for CORS issues
+      if (err.message?.includes('CORS') || err.message?.includes('Access-Control-Allow-Origin')) {
+        setError("CORS Error: The frontend cannot connect to the backend. Please check CORS configuration.");
+        console.error("CORS Issue detected. Running CORS tests...");
+        testCorsConnection().then(result => setCorsTestResult(result));
+      } else if (err.response?.status === 400) {
         // Try to get specific error message from backend
         const errorMsg = err.response?.data?.message || 
                         err.response?.data?.error || 
@@ -68,8 +76,10 @@ function DealerRegister() {
         setError(errorMsg);
       } else if (err.response?.status === 409) {
         setError("Email or Dealer ID already exists");
+      } else if (err.code === 'ERR_NETWORK') {
+        setError("Network error: Cannot connect to server. Check if the backend is running.");
       } else {
-        setError("Registration failed. Please try again.");
+        setError(`Registration failed: ${err.message}. Please try again.`);
       }
     } finally {
       setLoading(false);
@@ -290,12 +300,30 @@ function DealerRegister() {
               </button>
             </p>
             <button
-              className="btn btn-outline-secondary mt-2"
+              className="btn btn-outline-secondary mt-2 me-2"
               onClick={() => navigate("/")}
             >
               ← Back to Home
             </button>
+            <button
+              className="btn btn-outline-info mt-2"
+              onClick={() => {
+                console.log("🧪 Running CORS tests...");
+                testCorsConnection().then(result => {
+                  setCorsTestResult(result);
+                  console.log("🧪 CORS test completed, check console for details");
+                });
+              }}
+            >
+              🧪 Test CORS
+            </button>
           </div>
+          
+          {corsTestResult && (
+            <div className="alert alert-info mt-3">
+              <strong>CORS Test Result:</strong> Check browser console for detailed results.
+            </div>
+          )}
         </div>
       </div>
     </div>
