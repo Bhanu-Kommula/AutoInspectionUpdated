@@ -19,9 +19,14 @@ public class GatewayApplication {
 	@Bean
 	public CorsWebFilter corsWebFilter() {
 		CorsConfiguration corsConfig = new CorsConfiguration();
-		// Use specific origins instead of wildcards to prevent duplicate headers
-		corsConfig.setAllowedOrigins(java.util.Arrays.asList("http://localhost:3000", "http://localhost:3001"));
-		corsConfig.setAllowedMethods(java.util.Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+		// Production CORS configuration - allow both localhost and production URLs
+		corsConfig.setAllowedOrigins(java.util.Arrays.asList(
+			"https://dealer-frontend-iwor.onrender.com",
+			"https://dealer-frontend.onrender.com", 
+			"http://localhost:3000", 
+			"http://localhost:3001"
+		));
+		corsConfig.setAllowedMethods(java.util.Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
 		corsConfig.setAllowedHeaders(java.util.Arrays.asList("*"));
 		corsConfig.setAllowCredentials(true);
 		corsConfig.setMaxAge(3600L);
