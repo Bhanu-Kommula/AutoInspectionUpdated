@@ -42,15 +42,15 @@ Make sure these are set in your Render dashboard for **ALL services** (Gateway, 
 SPRING_PROFILES_ACTIVE=production
 PORT=8080
 
-# Database configuration (same for all services)
-SPRING_DATASOURCE_URL=postgresql://autoinspect_db_user:kIO9pfH78FraPP9Z1sb1mMwHC8wERAl9@dpg-d2ic5d3uibrs73euu120-a.oregon-postgres.render.com/autoinspect_db
-SPRING_DATASOURCE_USERNAME=autoinspect_db_user
-SPRING_DATASOURCE_PASSWORD=kIO9pfH78FraPP9Z1sb1mMwHC8wERAl9
+# Database configuration (set these in Render dashboard with your actual values)
+SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
+SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
 
 # Optional environment variables (automatically set by Render for database connections)
-DB_HOST=dpg-d2ic5d3uibrs73euu120-a
-DB_NAME=autoinspect_db
-DB_PORT=5432
+DB_HOST=${DB_HOST}
+DB_NAME=${DB_NAME}
+DB_PORT=${DB_PORT}
 EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=https://service-registry.onrender.com/eureka/
 ```
 

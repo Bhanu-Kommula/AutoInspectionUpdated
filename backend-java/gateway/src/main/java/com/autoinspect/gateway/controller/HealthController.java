@@ -21,6 +21,8 @@ public class HealthController {
         return ResponseEntity.ok(response);
     }
 
+
+
     @GetMapping("/cors-test")
     public ResponseEntity<Map<String, Object>> corsTest() {
         Map<String, Object> response = new HashMap<>();
