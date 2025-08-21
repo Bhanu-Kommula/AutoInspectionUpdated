@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Technician Service Test</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .test-item {
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+      .success {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+      }
+      .error {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+      }
+      .loading {
+        background-color: #fff3cd;
+        border-color: #ffeaa7;
+      }
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🔧 Technician Service Test</h1>
+    <p>Testing technician service connectivity and registration endpoint.</p>
+
+    <div id="results"></div>
+
+    <button onclick="testTechnicianService()">
+      🚀 Test Technician Service
+    </button>
+    <button onclick="testTechnicianRegistration()">👤 Test Registration</button>
+
+    <script>
+      const API_BASE = "https://api-gateway-rn0i.onrender.com";
+      const TECHNICIAN_SERVICE_DIRECT =
+        "https://technician-service.onrender.com";
+      const resultsDiv = document.getElementById("results");
+
+      function addResult(
+        name,
+        status,
+        message,
+        data = null,
+        isLoading = false
+      ) {
+        const div = document.createElement("div");
+        let className = "test-item ";
+        if (isLoading) className += "loading";
+        else className += status ? "success" : "error";
+
+        div.className = className;
+        div.innerHTML = `
+                <h3>${isLoading ? "🔄" : status ? "✅" : "❌"} ${name}</h3>
+                <p><strong>Status:</strong> ${message}</p>
+                ${data ? `<pre>${JSON.stringify(data, null, 2)}</pre>` : ""}
+            `;
+        resultsDiv.appendChild(div);
+        return div;
+      }
+
+      async function testEndpoint(name, url, options = {}) {
+        const loadingDiv = addResult(name, false, "Testing...", null, true);
+
+        try {
+          console.log(`🔧 Testing: ${name} -> ${url}`);
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+          const response = await fetch(url, {
+            method: options.method || "GET",
+            headers: {
+              "Content-Type": "application/json",
+              ...options.headers,
+            },
+            signal: controller.signal,
+            ...options,
+          });
+
+          clearTimeout(timeoutId);
+
+          const data = await response.json();
+          loadingDiv.remove();
+          addResult(
+            name,
+            response.ok,
+            `${response.status} - ${response.statusText}`,
+            data
+          );
+          return { success: response.ok, data };
+        } catch (error) {
+          clearTimeout(timeoutId);
+          console.error(`❌ ${name}:`, error);
+          loadingDiv.remove();
+
+          let errorMessage = error.message;
+          if (error.name === "AbortError") {
+            errorMessage = "Request timed out (10 seconds)";
+          }
+
+          addResult(name, false, errorMessage);
+          return { success: false, error: errorMessage };
+        }
+      }
+
+      async function testTechnicianService() {
+        resultsDiv.innerHTML =
+          "<h2>🔄 Running Technician Service Tests...</h2>";
+
+        // Test 1: Gateway health
+        await testEndpoint("Gateway Health", `${API_BASE}/health`);
+
+        // Test 2: Direct technician service health
+        await testEndpoint(
+          "Direct Technician Service Health",
+          `${TECHNICIAN_SERVICE_DIRECT}/health`
+        );
+
+        // Test 3: Gateway routing to technician health
+        await testEndpoint(
+          "Technician Health via Gateway",
+          `${API_BASE}/api/technicians/health`
+        );
+
+        // Test 4: Admin technician health
+        await testEndpoint(
+          "Admin Technician Health",
+          `${API_BASE}/api/technicians/admin/health`
+        );
+
+        // Test 5: Check if service is reachable
+        await testEndpoint(
+          "Technician Service Ping",
+          `${TECHNICIAN_SERVICE_DIRECT}/actuator/health`
+        );
+      }
+
+      async function testTechnicianRegistration() {
+        const testData = {
+          firstName: "Test",
+          lastName: "Technician",
+          email: "test-tech@example.com",
+          phone: "+1234567890",
+          location: "Test City",
+          experience: 5,
+          dealership: "Test Dealership",
+          licenseNumber: "TEST123",
+        };
+
+        addResult(
+          "Technician Registration Test",
+          false,
+          "Starting registration test...",
+          testData,
+          true
+        );
+
+        await testEndpoint(
+          "Technician Registration",
+          `${API_BASE}/api/technicians/register`,
+          {
+            method: "POST",
+            body: JSON.stringify(testData),
+          }
+        );
+      }
+
+      // Auto-run basic tests on page load
+      setTimeout(testTechnicianService, 1000);
+    </script>
+  </body>
+</html>
