@@ -17,6 +17,8 @@ public class CorsHeaderFilter implements GlobalFilter, Ordered {
         ServerHttpResponse response = exchange.getResponse();
         HttpHeaders headers = response.getHeaders();
         
+        System.out.println("🔧 [CorsHeaderFilter] Processing: " + exchange.getRequest().getMethod() + " " + exchange.getRequest().getURI());
+        
         // NO SECURITY - Add CORS headers to everything
         headers.add("Access-Control-Allow-Origin", "*");
         headers.add("Access-Control-Allow-Methods", "*");
@@ -25,10 +27,12 @@ public class CorsHeaderFilter implements GlobalFilter, Ordered {
         
         // Handle OPTIONS - just return 200
         if ("OPTIONS".equals(exchange.getRequest().getMethod().name())) {
+            System.out.println("🔧 [CorsHeaderFilter] OPTIONS detected - returning 200 immediately");
             response.setRawStatusCode(200);
             return Mono.empty();
         }
         
+        System.out.println("🔧 [CorsHeaderFilter] Continuing with request");
         return chain.filter(exchange);
     }
 

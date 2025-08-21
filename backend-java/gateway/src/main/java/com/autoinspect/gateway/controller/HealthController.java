@@ -53,5 +53,17 @@ public class HealthController {
         return ResponseEntity.ok(response);
     }
     
+    // Direct OPTIONS handler for dealer registration
+    @RequestMapping(value = "/api/dealers/register", method = RequestMethod.OPTIONS)
+    public ResponseEntity<Void> handleDealerRegisterOptions() {
+        System.out.println("🔧 [HealthController] OPTIONS for /api/dealers/register - returning 200");
+        return ResponseEntity.ok()
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .header("Access-Control-Allow-Headers", "*")
+            .header("Access-Control-Allow-Credentials", "true")
+            .build();
+    }
+    
 
 }
