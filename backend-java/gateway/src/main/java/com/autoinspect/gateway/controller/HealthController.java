@@ -58,6 +58,15 @@ public class HealthController {
         response.put("cors_headers", "Should include Access-Control-Allow-Origin");
         response.put("cors_enabled", true);
         response.put("configured_frontend_origin", frontendOrigin);
+        
+        // Add routing information for debugging
+        Map<String, Object> routing = new HashMap<>();
+        routing.put("postings_service_pattern", "/api/v1/**");
+        routing.put("postings_service_target", "https://postings-service.onrender.com");
+        routing.put("postings_service_strip_prefix", "2 (removes /api/v1)");
+        routing.put("example_transformation", "/api/v1/posts-by-email -> /posts-by-email");
+        response.put("routing_debug", routing);
+        
         return ResponseEntity.ok(response);
     }
 }

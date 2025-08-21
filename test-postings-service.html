@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Postings Service Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-item { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .loading { background-color: #fff3cd; border-color: #ffeaa7; }
+        button { padding: 10px 20px; margin: 5px; }
+        .endpoint-test { margin: 15px 0; padding: 15px; border: 2px solid #dee2e6; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Postings Service Comprehensive Test</h1>
+    <p>Testing postings service routing, endpoints, and data flow.</p>
+    
+    <div id="results"></div>
+    
+    <button onclick="testPostingsService()">🚀 Test All Postings Endpoints</button>
+    <button onclick="testSpecificEndpoints()">📊 Test Problem Endpoints</button>
+    <button onclick="testDirectService()">🔗 Test Direct Service</button>
+    
+    <script>
+        const API_BASE = 'https://api-gateway-rn0i.onrender.com';
+        const POSTINGS_SERVICE_DIRECT = 'https://postings-service.onrender.com';
+        const TEST_DEALER_EMAIL = 'bhanuprasad@gmail.com';
+        const resultsDiv = document.getElementById('results');
+        
+        function addResult(name, status, message, data = null, isLoading = false) {
+            const div = document.createElement('div');
+            let className = 'test-item ';
+            if (isLoading) className += 'loading';
+            else className += status ? 'success' : 'error';
+            
+            div.className = className;
+            div.innerHTML = `
+                <h3>${isLoading ? '🔄' : (status ? '✅' : '❌')} ${name}</h3>
+                <p><strong>Status:</strong> ${message}</p>
+                ${data ? `<pre>${JSON.stringify(data, null, 2)}</pre>` : ''}
+            `;
+            resultsDiv.appendChild(div);
+            return div;
+        }
+        
+        async function testEndpoint(name, url, options = {}) {
+            const loadingDiv = addResult(name, false, 'Testing...', null, true);
+            
+            try {
+                console.log(`🔧 Testing: ${name} -> ${url}`);
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
+                
+                const response = await fetch(url, {
+                    method: options.method || 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    },
+                    signal: controller.signal,
+                    ...options
+                });
+                
+                clearTimeout(timeoutId);
+                
+                let data;
+                try {
+                    data = await response.json();
+                } catch (e) {
+                    // If response is not JSON, get text
+                    data = await response.text();
+                }
+                
+                loadingDiv.remove();
+                addResult(name, response.ok, `${response.status} - ${response.statusText}`, data);
+                return { success: response.ok, data, status: response.status };
+            } catch (error) {
+                clearTimeout(timeoutId);
+                console.error(`❌ ${name}:`, error);
+                loadingDiv.remove();
+                
+                let errorMessage = error.message;
+                if (error.name === 'AbortError') {
+                    errorMessage = 'Request timed out (15 seconds)';
+                }
+                
+                addResult(name, false, errorMessage);
+                return { success: false, error: errorMessage };
+            }
+        }
+        
+        async function testPostingsService() {
+            resultsDiv.innerHTML = '<h2>🔄 Running Comprehensive Postings Service Tests...</h2>';
+            
+            // 1. Gateway Health
+            await testEndpoint('Gateway Health Check', `${API_BASE}/health`);
+            
+            // 2. Direct Postings Service Health
+            await testEndpoint('Direct Postings Service Health', `${POSTINGS_SERVICE_DIRECT}/health`);
+            
+            // 3. Postings Service via Gateway (should be routing correctly now)
+            await testEndpoint('Postings Health via Gateway', `${API_BASE}/api/v1/health`);
+            
+            // 4. Test the StripPrefix routing
+            const routingDiv = document.createElement('div');
+            routingDiv.className = 'endpoint-test';
+            routingDiv.innerHTML = '<h3>🔍 Routing Analysis</h3><p>Testing how gateway strips prefixes:</p>';
+            resultsDiv.appendChild(routingDiv);
+            
+            // 5. Test posts-by-email endpoint
+            await testEndpoint('Posts by Email (StripPrefix=2)', `${API_BASE}/api/v1/posts-by-email`, {
+                method: 'POST',
+                body: JSON.stringify({ email: TEST_DEALER_EMAIL })
+            });
+            
+            // 6. Test counter-offers endpoint
+            await testEndpoint('Counter Offers Pending (StripPrefix=2)', 
+                `${API_BASE}/api/v1/counter-offers/pending/${TEST_DEALER_EMAIL}`);
+        }
+        
+        async function testSpecificEndpoints() {
+            resultsDiv.innerHTML = '<h2>📊 Testing Problem Endpoints Specifically...</h2>';
+            
+            // Test the exact failing endpoints from your logs
+            await testEndpoint('EXACT: posts-by-email', `${API_BASE}/api/v1/posts-by-email`, {
+                method: 'POST',
+                body: JSON.stringify({ email: TEST_DEALER_EMAIL })
+            });
+            
+            await testEndpoint('EXACT: counter-offers pending', 
+                `${API_BASE}/api/v1/counter-offers/pending/${TEST_DEALER_EMAIL}`);
+            
+            // Test with different prefix stripping
+            await testEndpoint('Direct posts-by-email (no gateway)', `${POSTINGS_SERVICE_DIRECT}/posts-by-email`, {
+                method: 'POST',
+                body: JSON.stringify({ email: TEST_DEALER_EMAIL })
+            });
+        }
+        
+        async function testDirectService() {
+            resultsDiv.innerHTML = '<h2>🔗 Testing Direct Postings Service...</h2>';
+            
+            // Test direct service endpoints
+            await testEndpoint('Direct Health', `${POSTINGS_SERVICE_DIRECT}/health`);
+            await testEndpoint('Direct Posts Endpoint', `${POSTINGS_SERVICE_DIRECT}/posts-by-email`, {
+                method: 'POST',
+                body: JSON.stringify({ email: TEST_DEALER_EMAIL })
+            });
+            await testEndpoint('Direct Counter Offers', 
+                `${POSTINGS_SERVICE_DIRECT}/counter-offers/pending/${TEST_DEALER_EMAIL}`);
+        }
+        
+        // Auto-run comprehensive tests on page load
+        setTimeout(testPostingsService, 1000);
+    </script>
+</body>
+</html>
