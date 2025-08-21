@@ -3,6 +3,7 @@ package com.autoinspect.gateway.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -50,5 +51,17 @@ public class HealthController {
         response.put("cors_enabled", true);
         response.put("test_endpoint", "This tests the gateway directly");
         return ResponseEntity.ok(response);
+    }
+    
+    @RequestMapping(value = "/api/dealers/**", method = RequestMethod.OPTIONS)
+    public ResponseEntity<Void> handleOptions() {
+        System.out.println("🔧 [HealthController] Handling OPTIONS request for /api/dealers/**");
+        return ResponseEntity.ok()
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .header("Access-Control-Allow-Headers", "*")
+            .header("Access-Control-Allow-Credentials", "true")
+            .header("Access-Control-Max-Age", "3600")
+            .build();
     }
 }
