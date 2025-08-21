@@ -153,6 +153,24 @@ CMD ["java", "-jar", "target/*.jar"]
 
 ## Environment Variables Setup
 
+### Frontend Configuration
+
+The frontend now uses environment-driven API base URLs:
+
+- **For CRA projects**: Use `REACT_APP_API_BASE` environment variable
+- **Default value**: `https://api-gateway.onrender.com`
+- **Location**: `frontend/dealer-frontend/.env.production`
+
+The frontend automatically builds all API URLs from this base, eliminating hardcoded localhost references.
+
+### Gateway CORS Configuration
+
+The API Gateway manages CORS for all services centrally:
+
+- **Environment variable**: `FRONTEND_ORIGIN` (defaults to `https://dealer-frontend.onrender.com`)
+- **Configuration**: Located in `backend-java/gateway/src/main/resources/application-production.properties`
+- **Important**: Individual services should NOT have `@CrossOrigin` annotations - the gateway handles CORS exclusively
+
 ### Database Connection
 
 For each service that needs database access, use these environment variables:
