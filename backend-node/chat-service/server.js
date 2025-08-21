@@ -11,7 +11,9 @@ const server = http.createServer(app);
 // Socket.IO with CORS for your frontend
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin:
+      process.env.FRONTEND_ORIGIN ||
+      "https://dealer-frontend-iwor.onrender.com",
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -19,7 +21,9 @@ const io = socketIo(server, {
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin:
+      process.env.FRONTEND_ORIGIN ||
+      "https://dealer-frontend-iwor.onrender.com",
     credentials: true,
   })
 );
@@ -39,8 +43,8 @@ const dbConfig = {
   connectionTimeoutMillis: 2000,
   // SSL required for Render
   ssl: {
-    rejectUnauthorized: false
-  }
+    rejectUnauthorized: false,
+  },
 };
 
 let db;
@@ -51,25 +55,33 @@ async function initializeDatabase() {
     // First, connect to default postgres database to create our database if it doesn't exist
     const defaultDbConfig = {
       ...dbConfig,
-      database: 'postgres' // Connect to default postgres database first
+      database: "postgres", // Connect to default postgres database first
     };
-    
+
     const defaultDb = new Pool(defaultDbConfig);
-    
+
     // Check if our database exists, if not create it
     try {
-      await defaultDb.query(`CREATE DATABASE "${process.env.DB_NAME || 'inspection'}"`);
-      console.log(`✅ Database "${process.env.DB_NAME || 'inspection'}" created successfully`);
+      await defaultDb.query(
+        `CREATE DATABASE "${process.env.DB_NAME || "inspection"}"`
+      );
+      console.log(
+        `✅ Database "${
+          process.env.DB_NAME || "inspection"
+        }" created successfully`
+      );
     } catch (dbError) {
-      if (dbError.code === '42P04') {
-        console.log(`✅ Database "${process.env.DB_NAME || 'inspection'}" already exists`);
+      if (dbError.code === "42P04") {
+        console.log(
+          `✅ Database "${process.env.DB_NAME || "inspection"}" already exists`
+        );
       } else {
         console.log(`ℹ️ Database creation result:`, dbError.message);
       }
     }
-    
+
     await defaultDb.end();
-    
+
     // Now connect to our actual database
     db = new Pool(dbConfig);
 
