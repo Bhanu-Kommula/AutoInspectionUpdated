@@ -33,42 +33,38 @@
 
 ## Render Dashboard Configuration
 
-### 1. **Environment Variables for Gateway Service**
+### **Environment Variables for ALL Services**
 
-Make sure these are set in your Render dashboard for the `api-gateway` service:
-
-```bash
-# Required Environment Variables
-PORT=8080
-SPRING_PROFILES_ACTIVE=production
-
-# Optional (if you have database)
-SPRING_DATASOURCE_URL=your_database_url
-SPRING_DATASOURCE_USERNAME=your_username
-SPRING_DATASOURCE_PASSWORD=your_password
-```
-
-### 2. **Environment Variables for Dealer Service**
-
-Make sure these are set in your Render dashboard for the `dealer-service`:
+Make sure these are set in your Render dashboard for **ALL services** (Gateway, Dealer, Technician, Tech-Dashboard, Postings):
 
 ```bash
-# Required Environment Variables
-PORT=8080
+# Required for ALL services (including Tech Dashboard)
 SPRING_PROFILES_ACTIVE=production
+PORT=8080
 
-# Database (required)
-SPRING_DATASOURCE_URL=your_database_url
-SPRING_DATASOURCE_USERNAME=your_username
-SPRING_DATASOURCE_PASSWORD=your_password
+# Database configuration (same for all services)
+SPRING_DATASOURCE_URL=postgresql://autoinspect_db_user:kIO9pfH78FraPP9Z1sb1mMwHC8wERAl9@dpg-d2ic5d3uibrs73euu120-a.oregon-postgres.render.com/autoinspect_db
+SPRING_DATASOURCE_USERNAME=autoinspect_db_user
+SPRING_DATASOURCE_PASSWORD=kIO9pfH78FraPP9Z1sb1mMwHC8wERAl9
+
+# Optional environment variables (automatically set by Render for database connections)
+DB_HOST=dpg-d2ic5d3uibrs73euu120-a
+DB_NAME=autoinspect_db
+DB_PORT=5432
+EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=https://service-registry.onrender.com/eureka/
 ```
 
-### 3. **Service URLs Configuration**
+**Important**: All services now consistently use `SPRING_PROFILES_ACTIVE=production`
+
+### **Service URLs Configuration**
 
 Ensure your services are accessible at these URLs:
 
 - **API Gateway**: `https://api-gateway.onrender.com`
 - **Dealer Service**: `https://dealer-service.onrender.com`
+- **Technician Service**: `https://technician-service.onrender.com`
+- **Tech Dashboard Service**: `https://tech-dashboard-service.onrender.com`
+- **Postings Service**: `https://postings-service.onrender.com`
 - **Frontend**: `https://dealer-frontend-iwor.onrender.com`
 
 ## Testing CORS Fixes
