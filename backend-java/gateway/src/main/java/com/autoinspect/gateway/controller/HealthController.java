@@ -53,15 +53,5 @@ public class HealthController {
         return ResponseEntity.ok(response);
     }
     
-    @RequestMapping(value = "/api/dealers/**", method = RequestMethod.OPTIONS)
-    public ResponseEntity<Void> handleOptions() {
-        System.out.println("🔧 [HealthController] Handling OPTIONS request for /api/dealers/**");
-        return ResponseEntity.ok()
-            .header("Access-Control-Allow-Origin", "*")
-            .header("Access-Control-Allow-Methods", "*")
-            .header("Access-Control-Allow-Headers", "*")
-            .header("Access-Control-Allow-Credentials", "true")
-            .header("Access-Control-Max-Age", "3600")
-            .build();
-    }
+
 }
