@@ -65,5 +65,20 @@ public class HealthController {
             .build();
     }
     
+    // Test endpoint that doesn't go through routing
+    @GetMapping("/test-cors")
+    public ResponseEntity<Map<String, Object>> testCors() {
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "CORS test - direct endpoint");
+        response.put("timestamp", System.currentTimeMillis());
+        response.put("cors_should_work", true);
+        return ResponseEntity.ok()
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .header("Access-Control-Allow-Headers", "*")
+            .header("Access-Control-Allow-Credentials", "true")
+            .body(response);
+    }
+    
 
 }
