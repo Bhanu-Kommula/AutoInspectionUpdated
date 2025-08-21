@@ -4,7 +4,7 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-const API_UPLOAD_MEDIA = "http://localhost:8085/inspection/upload-media";
+const API_UPLOAD_MEDIA = `${process.env.REACT_APP_API_BASE || "https://api-gateway.onrender.com"}/inspection/upload-media`;
 
 const UploadMediaModal = ({ show, onClose, postId }) => {
   const [mediaType, setMediaType] = useState("image");

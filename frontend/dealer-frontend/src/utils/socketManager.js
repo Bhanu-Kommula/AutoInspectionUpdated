@@ -6,8 +6,8 @@ export const CHAT_BASE_URL =
   (typeof window !== "undefined" &&
   window.location &&
   window.location.hostname !== "localhost"
-    ? `${window.location.protocol}//${window.location.host}`
-    : "http://localhost:8089");
+    ? "https://chat-service.onrender.com"
+    : process.env.REACT_APP_CHAT_BASE_URL || "https://chat-service.onrender.com");
 
 class SocketManager {
   constructor() {

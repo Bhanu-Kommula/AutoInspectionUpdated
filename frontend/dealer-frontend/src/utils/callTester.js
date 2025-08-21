@@ -19,7 +19,7 @@ export class CallTester {
       console.log("🧪 Creating real technician online:", technicianEmail);
 
       // Connect as technician to the real chat service
-      this.socket = io("http://localhost:8089", {
+      this.socket = io(process.env.REACT_APP_CHAT_BASE_URL || "https://chat-service.onrender.com", {
         transports: ["websocket", "polling"],
         forceNew: true,
       });

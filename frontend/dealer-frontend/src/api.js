@@ -8,39 +8,28 @@ import axios from "axios";
 // =====================================
 
 // Environment variables configuration
+export const API_BASE = process.env.REACT_APP_API_BASE || "https://api-gateway.onrender.com";
 
 const API_CONFIG = {
   // API Gateway connection (with proper routing)
-  API_GATEWAY_URL:
-    process.env.REACT_APP_API_GATEWAY_URL || "http://localhost:8088",
-  BASE_URL: process.env.REACT_APP_API_GATEWAY_URL || "http://localhost:8088",
+  API_GATEWAY_URL: API_BASE,
+  BASE_URL: API_BASE,
 
   // Service endpoints through gateway routing
-  DEALER_BASE_URL:
-    process.env.REACT_APP_DEALER_BASE_URL ||
-    "http://localhost:8088/dealer/api/dealers",
-  TECHNICIAN_BASE_URL:
-    process.env.REACT_APP_TECHNICIAN_BASE_URL ||
-    "http://localhost:8088/technician",
-  POSTS_BASE_URL:
-    process.env.REACT_APP_POSTS_BASE_URL || "http://localhost:8088/postings",
-  TECH_DASHBOARD_BASE_URL:
-    process.env.REACT_APP_TECH_DASHBOARD_BASE_URL ||
-    "http://localhost:8088/tech-dashboard/api/v1",
+  DEALER_BASE_URL: `${API_BASE}/api/dealers`,
+  TECHNICIAN_BASE_URL: `${API_BASE}/api/technicians`,
+  POSTS_BASE_URL: `${API_BASE}/api/v1`,
+  TECH_DASHBOARD_BASE_URL: `${API_BASE}/api/v1`,
 
-  // Admin and User endpoints directly
-  ADMIN_BASE_URL:
-    process.env.REACT_APP_ADMIN_BASE_URL || "http://localhost:8084/api/admin",
-  USER_BASE_URL:
-    process.env.REACT_APP_USER_BASE_URL || "http://localhost:8084/api/users",
-  AUTH_BASE_URL:
-    process.env.REACT_APP_AUTH_BASE_URL ||
-    "http://localhost:8084/api/users/auth",
+  // Admin and User endpoints through Gateway
+  ADMIN_BASE_URL: `${API_BASE}/api/admin`,
+  USER_BASE_URL: `${API_BASE}/api/users`,
+  AUTH_BASE_URL: `${API_BASE}/api/users/auth`,
 
   // WebSocket
   WEBSOCKET_BASE_URL:
     process.env.REACT_APP_WEBSOCKET_BASE_URL ||
-    "http://localhost:8088/tech-dashboard",
+    "https://chat-service.onrender.com",
 };
 
 // Create axios instance without authentication
