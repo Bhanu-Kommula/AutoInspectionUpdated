@@ -3,6 +3,7 @@ package com.autoinspect.gateway.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class HealthController {
+
+    @Value("${FRONTEND_ORIGIN:https://dealer-frontend-iwor.onrender.com}")
+    private String frontendOrigin;
 
     @GetMapping("/health")
     public ResponseEntity<Map<String, Object>> health() {
@@ -49,10 +53,11 @@ public class HealthController {
         Map<String, Object> response = new HashMap<>();
         response.put("service", "API Gateway");
         response.put("version", "1.0.0");
-        response.put("cors_handling", "CorsHeaderFilter");
+        response.put("cors_handling", "CorsConfig.java (CorsWebFilter)");
         response.put("timestamp", System.currentTimeMillis());
         response.put("cors_headers", "Should include Access-Control-Allow-Origin");
         response.put("cors_enabled", true);
+        response.put("configured_frontend_origin", frontendOrigin);
         return ResponseEntity.ok(response);
     }
 }

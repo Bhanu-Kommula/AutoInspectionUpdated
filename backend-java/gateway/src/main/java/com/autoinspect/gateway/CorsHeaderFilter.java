@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-@Component
+// @Component - DISABLED to prevent conflicts with CorsConfig.java
 public class CorsHeaderFilter implements GlobalFilter, Ordered {
 
     @Value("${frontend.origin:https://dealer-frontend-iwor.onrender.com}")
