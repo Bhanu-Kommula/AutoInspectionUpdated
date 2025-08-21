@@ -15,14 +15,13 @@ rm -rf build
 # Set development environment variables
 export NODE_ENV=development
 export REACT_APP_SECURITY_DISABLED=true
-export REACT_APP_API_GATEWAY_URL=http://localhost:8088
+export REACT_APP_API_BASE=http://localhost:8088
 
-# Service endpoints through Gateway (correct format)
+# Legacy environment variables (for backward compatibility)
+export REACT_APP_API_GATEWAY_URL=http://localhost:8088
 export REACT_APP_DEALER_BASE_URL=http://localhost:8088/dealer/api/dealers
 export REACT_APP_TECHNICIAN_BASE_URL=http://localhost:8088/technician/api/technicians
 export REACT_APP_POSTS_BASE_URL=http://localhost:8088/postings
-
-# Admin and User endpoints through Gateway
 export REACT_APP_ADMIN_BASE_URL=http://localhost:8088/api/admin
 export REACT_APP_USER_BASE_URL=http://localhost:8088/api/users
 export REACT_APP_AUTH_BASE_URL=http://localhost:8088/api/users/auth
@@ -33,7 +32,7 @@ export REACT_APP_WEBSOCKET_BASE_URL=http://localhost:8088
 echo "🔧 Environment variables set:"
 echo "   NODE_ENV: $NODE_ENV"
 echo "   REACT_APP_SECURITY_DISABLED: $REACT_APP_SECURITY_DISABLED"
-echo "   REACT_APP_API_GATEWAY_URL: $REACT_APP_API_GATEWAY_URL"
+echo "   REACT_APP_API_BASE: $REACT_APP_API_BASE"
 
 # Install dependencies if needed
 if [ ! -d "node_modules" ]; then
