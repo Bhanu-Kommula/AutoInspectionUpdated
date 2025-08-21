@@ -1,5 +1,6 @@
 package com.autoinspect.gateway;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -13,6 +14,9 @@ import reactor.core.publisher.Mono;
 @Component
 public class CorsHeaderFilter implements GlobalFilter, Ordered {
 
+    @Value("${frontend.origin:https://dealer-frontend-iwor.onrender.com}")
+    private String allowedOrigin;
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpResponse response = exchange.getResponse();
@@ -25,12 +29,14 @@ public class CorsHeaderFilter implements GlobalFilter, Ordered {
         System.out.println("🔧 [CorsHeaderFilter] Processing: " + method + " " + path);
         System.out.println("🔧 [CorsHeaderFilter] Origin: " + origin);
         
-        // Set CORS headers for all responses
-        headers.add("Access-Control-Allow-Origin", "*");
-        headers.add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
-        headers.add("Access-Control-Allow-Headers", "Origin, Content-Type, Accept, Authorization, X-Requested-With, Cache-Control");
-        headers.add("Access-Control-Allow-Credentials", "true");
-        headers.add("Access-Control-Max-Age", "3600");
+        // Set CORS headers for all responses - use configured origin to prevent conflicts
+        headers.set("Access-Control-Allow-Origin", allowedOrigin);
+        headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
+        headers.set("Access-Control-Allow-Headers", "Origin, Content-Type, Accept, Authorization, X-Requested-With, Cache-Control");
+        headers.set("Access-Control-Allow-Credentials", "true");
+        headers.set("Access-Control-Max-Age", "3600");
+        
+        System.out.println("🔧 [CorsHeaderFilter] Setting CORS origin: " + allowedOrigin);
         
         // Handle OPTIONS preflight request
         if ("OPTIONS".equals(method)) {
