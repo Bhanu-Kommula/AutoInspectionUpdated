@@ -19,7 +19,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="PostingDashboard")
+@Table(name="posting_dashboard")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
