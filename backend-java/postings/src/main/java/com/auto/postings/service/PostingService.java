@@ -336,24 +336,34 @@ public class PostingService {
 	            return false;
 	        }
 	        
-	        // Get technician details from technician service BEFORE starting transaction
-	        // This prevents transaction rollback if external service call fails
+	                // Get technician details from technician service BEFORE starting transaction
+        // This prevents transaction rollback if external service call fails
         String technicianName = null;
         String technicianPhone = null;
         try {
+            log.info("🔄 Attempting to fetch technician details for: {}", technicianEmail);
             Map<String, String> emailRequest = Map.of("email", technicianEmail);
             Map<String, Object> technicianData = technicianClient.getTechnicianByEmail(emailRequest);
             if (technicianData != null) {
                 technicianName = (String) technicianData.get("name");
                 technicianPhone = (String) technicianData.get("phone");
                 log.info("✅ Fetched technician details: name={}, phone={}", technicianName, technicianPhone);
+            } else {
+                log.warn("⚠️ Technician service returned null data for email: {}", technicianEmail);
             }
         } catch (Exception e) {
             log.warn("⚠️ Could not fetch technician details for email {}: {}", technicianEmail, e.getMessage());
-            // Fallback: extract name from email
+            // Continue without external data - don't fail the operation
+        }
+        
+        // Always set fallback name if none retrieved
+        if (technicianName == null || technicianName.trim().isEmpty()) {
             if (technicianEmail.contains("@")) {
                 technicianName = technicianEmail.substring(0, technicianEmail.indexOf("@"));
+            } else {
+                technicianName = "Unknown Technician";
             }
+            log.info("🔧 Using fallback technician name: {}", technicianName);
         }
         
         // Now start the database transaction
@@ -370,20 +380,32 @@ public class PostingService {
 	private boolean acceptPostDirectlyTransaction(Long postId, String technicianEmail, String newOfferAmount, 
 	                                            String technicianName, String technicianPhone) {
 	    try {
-	        log.info("Starting database transaction for post acceptance: postId={}, technicianEmail={}", postId, technicianEmail);
+	        log.info("🔄 Starting database transaction for post acceptance: postId={}, technicianEmail={}", postId, technicianEmail);
 	        
 	        // Use pessimistic locking to prevent race conditions
 	        Optional<Posting> postOpt = repo.findByIdWithLock(postId);
 	        if (postOpt.isEmpty()) {
-	            log.error("Post not found: {}", postId);
+	            log.error("❌ Post not found: {}", postId);
 	            return false;
 	        }
 
 	        Posting post = postOpt.get();
+	        log.info("📋 Found post: id={}, status={}, email={}", post.getId(), post.getStatus(), post.getEmail());
+	        
 	        if (post.getStatus() != PostStatus.PENDING) {
-	            log.error("Post is not in PENDING status. Current status: {} for post {}", post.getStatus(), postId);
+	            log.error("❌ Post is not in PENDING status. Current status: {} for post {}", post.getStatus(), postId);
 	            return false;
 	        }
+	        
+	        // ✅ RACE CONDITION CHECK: Check if post is already accepted
+	        log.info("🔍 Checking if post {} is already in accepted_posts table", postId);
+	        Optional<AcceptedPost> existingAcceptedPost = acceptedPostRepository.findByPostId(postId);
+	        if (existingAcceptedPost.isPresent()) {
+	            log.warn("❌ Post {} already exists in accepted_posts table. Accepted by: {}", 
+	                   postId, existingAcceptedPost.get().getTechnicianEmail());
+	            return false;
+	        }
+	        log.info("✅ Post {} not yet in accepted_posts table, proceeding with acceptance", postId);
 
 	                // Update post status to ACCEPTED
         post.setStatus(PostStatus.ACCEPTED);
