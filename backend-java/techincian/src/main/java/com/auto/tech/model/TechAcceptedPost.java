@@ -1,7 +1,5 @@
 package com.auto.tech.model;
 
-import java.util.Date;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +15,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "tech_accepted_post")
@@ -38,7 +37,7 @@ public class TechAcceptedPost {
 	private long postId;
 	
 	@Column(name = "accepted_at")
-	private Date acceptedAt;
+	private LocalDateTime acceptedAt;
 	
 	@CreatedDate
 	@Column(name = "created_at", nullable = false, updatable = false)

@@ -1,7 +1,6 @@
 package com.auto.tech.service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -214,7 +213,7 @@ public class TechnicianService {
 	        }
 
 	        // ✅ Step 2: Save to tech_accepted_post table (Render database)
-	        acceptedPost.setAcceptedAt(new Date());
+	        acceptedPost.setAcceptedAt(LocalDateTime.now());
 	        try {
 	            acceptedPostRepo.save(acceptedPost);
 	            System.out.println("✅ Saved to technician tech_accepted_post table: postId=" + acceptedPost.getPostId());
