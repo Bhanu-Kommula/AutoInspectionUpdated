@@ -1,5 +1,5 @@
 -- Create Technician table with phone field
-CREATE TABLE IF NOT EXISTS Technicians (
+CREATE TABLE IF NOT EXISTS technicians (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     delearship_name VARCHAR(255),
@@ -103,12 +103,12 @@ CREATE TABLE IF NOT EXISTS technician_post_interactions (
 );
 
 -- Create indexes for better performance
-CREATE INDEX IF NOT EXISTS idx_technicians_email ON Technicians(email);
-CREATE INDEX IF NOT EXISTS idx_technicians_status ON Technicians(status);
-CREATE INDEX IF NOT EXISTS idx_technicians_location ON Technicians(location);
-CREATE INDEX IF NOT EXISTS idx_technicians_zipcode ON Technicians(zipcode);
-CREATE INDEX IF NOT EXISTS idx_technicians_created_at ON Technicians(created_at);
-CREATE INDEX IF NOT EXISTS idx_technicians_last_activity ON Technicians(last_activity_at);
+CREATE INDEX IF NOT EXISTS idx_technicians_email ON technicians(email);
+CREATE INDEX IF NOT EXISTS idx_technicians_status ON technicians(status);
+CREATE INDEX IF NOT EXISTS idx_technicians_location ON technicians(location);
+CREATE INDEX IF NOT EXISTS idx_technicians_zipcode ON technicians(zipcode);
+CREATE INDEX IF NOT EXISTS idx_technicians_created_at ON technicians(created_at);
+CREATE INDEX IF NOT EXISTS idx_technicians_last_activity ON technicians(last_activity_at);
 
 -- Indexes for TechnicianAuditLog
 CREATE INDEX IF NOT EXISTS idx_audit_technician_id ON technician_audit_log(technician_id);
