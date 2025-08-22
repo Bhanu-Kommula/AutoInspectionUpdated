@@ -382,8 +382,8 @@ public class PostingService {
 	    try {
 	        log.info("🔄 Starting database transaction for post acceptance: postId={}, technicianEmail={}", postId, technicianEmail);
 	        
-	        // Use pessimistic locking to prevent race conditions
-	        Optional<Posting> postOpt = repo.findByIdWithLock(postId);
+	        // Check post availability (Render PostgreSQL compatible)
+	        Optional<Posting> postOpt = repo.findById(postId);
 	        if (postOpt.isEmpty()) {
 	            log.error("❌ Post not found: {}", postId);
 	            return false;
@@ -491,8 +491,8 @@ public class PostingService {
 	    try {
 	        log.info("Updating offer amount for post {}: {}", postId, newOfferAmount);
 	        
-	        // Use pessimistic locking to prevent race conditions during amount update
-	        Optional<Posting> postOpt = repo.findByIdWithLock(postId);
+	        // Check post availability (Render PostgreSQL compatible)
+	        Optional<Posting> postOpt = repo.findById(postId);
 	        if (postOpt.isEmpty()) {
 	            log.error("Post not found for amount update: {}", postId);
 	            return false;

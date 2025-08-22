@@ -4,11 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import jakarta.persistence.LockModeType;
 
 import com.auto.postings.model.Posting;
 import com.auto.postings.model.PostStatus;
@@ -33,15 +31,10 @@ public interface PostingRepository extends JpaRepository<Posting, Long>{
     @Query("SELECT p FROM Posting p WHERE p.email = :email ORDER BY p.id ASC")
     List<Posting> findByEmailOrderByIdDescIncludingDeleted(@Param("email") String email);
     
-    // Legacy methods (keeping for compatibility)
-    List<Posting> findAll();
+    	// Legacy methods (keeping for compatibility)
+	List<Posting> findAll();
 	void deleteById(Long id);
 	Optional<Posting> findById(Long id);
-	
-	// Find post by ID with pessimistic lock to prevent race conditions
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Query("SELECT p FROM Posting p WHERE p.id = :id")
-    Optional<Posting> findByIdWithLock(@Param("id") Long id);
 
 	// ==================== ADMIN REPOSITORY METHODS ====================
 

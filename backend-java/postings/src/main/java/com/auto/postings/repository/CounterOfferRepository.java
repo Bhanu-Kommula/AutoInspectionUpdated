@@ -2,11 +2,9 @@ package com.auto.postings.repository;
 
 import com.auto.postings.model.CounterOffer;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import jakarta.persistence.LockModeType;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -59,10 +57,8 @@ public interface CounterOfferRepository extends JpaRepository<CounterOffer, Long
     // Find counter offers by post, technician, and status
     List<CounterOffer> findByPostIdAndTechnicianEmailAndStatus(Long postId, String technicianEmail, CounterOffer.CounterOfferStatus status);
 
-    // Find counter offer by ID with pessimistic lock to prevent race conditions
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Query("SELECT c FROM CounterOffer c WHERE c.id = :id")
-    Optional<CounterOffer> findByIdWithLock(@Param("id") Long id);
+    // Find counter offer by ID (Render PostgreSQL compatible)
+    Optional<CounterOffer> findById(Long id);
 
     // Count counter offers by status
     long countByStatus(CounterOffer.CounterOfferStatus status);
