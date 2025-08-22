@@ -41,7 +41,7 @@ const TechnicianNotificationBell = ({ technicianInfo }) => {
     try {
       // Try to get notifications from technician service
       const response = await fetch(
-        `${API_CONFIG.API_GATEWAY_URL}/technician/api/technicians/${technicianInfo.id}/notifications`,
+        `${API_CONFIG.API_GATEWAY_URL}/api/technicians/${technicianInfo.id}/notifications`,
         {
           method: "GET",
           headers: {

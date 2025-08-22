@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  * Tracks counter offers submitted by technicians
  */
 @Entity
-@Table(name = "tech_counter_offers",
+@Table(name = "tech_counter_offer",
        indexes = {
            @Index(name = "idx_post_id", columnList = "post_id"),
            @Index(name = "idx_technician_email", columnList = "technician_email"),

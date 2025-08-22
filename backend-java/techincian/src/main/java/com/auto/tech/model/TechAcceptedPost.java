@@ -19,7 +19,7 @@ import jakarta.persistence.EntityListeners;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "accepted_posts")
+@Table(name = "tech_accepted_post")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
