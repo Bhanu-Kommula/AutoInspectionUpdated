@@ -32,9 +32,6 @@ public interface AcceptedPostRepository extends JpaRepository<TechAcceptedPost, 
     // ✅ NEW: Check if a post is accepted by anyone (used in atomic check)
     boolean existsByPostId(Long postId);
     
-    // ✅ Find accepted post by post ID (without locking)
-    Optional<TechAcceptedPost> findByPostId(Long postId);
-    
     // ✅ RACE CONDITION PROTECTION: Find accepted post with pessimistic lock
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT t FROM TechAcceptedPost t WHERE t.postId = :postId")
