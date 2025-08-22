@@ -34,9 +34,11 @@ import com.auto.tech.repository.TechnicianRepository;
 import com.auto.tech.service.CounterOfferService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class TechnicianService {
 
 	private final TechnicianRepository repo;
@@ -65,13 +67,35 @@ public class TechnicianService {
 	
 
 	public ResponseEntity<?> login(String email) {
-		Optional<Technician> technicianOpt = repo.findByEmailIgnoreCase(email);
-		if (technicianOpt.isPresent()) {
-			return ResponseEntity.ok(technicianOpt.get());
-		} else {
+		try {
+			log.info("🔍 [TechnicianService] Attempting login for email: {}", email);
+			
+			if (email == null || email.trim().isEmpty()) {
+				log.warn("❌ [TechnicianService] Empty email provided for login");
+				Map<String, String> error = new HashMap<>();
+				error.put("error", "Email is required");
+				return ResponseEntity.status(400).body(error);
+			}
+			
+			Optional<Technician> technicianOpt = repo.findByEmailIgnoreCase(email.trim());
+			log.info("🔍 [TechnicianService] Database query completed. Found: {}", technicianOpt.isPresent());
+			
+			if (technicianOpt.isPresent()) {
+				Technician technician = technicianOpt.get();
+				log.info("✅ [TechnicianService] Login successful for technician: {} (ID: {})", technician.getName(), technician.getId());
+				return ResponseEntity.ok(technician);
+			} else {
+				log.warn("❌ [TechnicianService] No technician found with email: {}", email);
+				Map<String, String> error = new HashMap<>();
+				error.put("error", "User not found. Please check your email.");
+				return ResponseEntity.status(401).body(error);
+			}
+		} catch (Exception e) {
+			log.error("💥 [TechnicianService] Database error during login for email {}: {}", email, e.getMessage(), e);
 			Map<String, String> error = new HashMap<>();
-			error.put("error", "User not found. Please check your email.");
-			return ResponseEntity.status(401).body(error);
+			error.put("error", "Database connection error. Please try again.");
+			error.put("details", e.getMessage());
+			return ResponseEntity.status(500).body(error);
 		}
 	}
 

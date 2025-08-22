@@ -95,14 +95,38 @@ public class TechnicianController {
 	}
 	
 	
-	@PostMapping("/login")
-	public ResponseEntity<?> login( @RequestBody LoginTechnicanDto dealer){
-	
-	
-    return service.login(dealer.getEmail());
-	
-    
-}
+		@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody LoginTechnicanDto loginRequest) {
+		try {
+			log.info("🔖 [TechnicianController] Received login request for email: {}", 
+				loginRequest != null ? loginRequest.getEmail() : "null");
+			
+			if (loginRequest == null) {
+				log.warn("❌ [TechnicianController] Null login request received");
+				Map<String, String> error = new HashMap<>();
+				error.put("error", "Invalid request body");
+				return ResponseEntity.status(400).body(error);
+			}
+			
+			if (loginRequest.getEmail() == null || loginRequest.getEmail().trim().isEmpty()) {
+				log.warn("❌ [TechnicianController] Empty email in login request");
+				Map<String, String> error = new HashMap<>();
+				error.put("error", "Email is required");
+				return ResponseEntity.status(400).body(error);
+			}
+			
+			ResponseEntity<?> response = service.login(loginRequest.getEmail());
+			log.info("🔖 [TechnicianController] Login response status: {}", response.getStatusCode());
+			return response;
+			
+		} catch (Exception e) {
+			log.error("💥 [TechnicianController] Unexpected error during login: {}", e.getMessage(), e);
+			Map<String, String> error = new HashMap<>();
+			error.put("error", "Internal server error during login");
+			error.put("details", e.getMessage());
+			return ResponseEntity.status(500).body(error);
+		}
+	}
 	@PostMapping("/technician-feed")
 	public List<PostingDTO> getTechnicianFeed(@RequestBody TechInfoToGetPostsByLocationDto dto) {
 	    return service.getFilteredFeed(dto);
