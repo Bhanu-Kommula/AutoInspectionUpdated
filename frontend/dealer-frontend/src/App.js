@@ -19,6 +19,7 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import { optimizeAnimations } from "./utils/performanceUtils";
 import globalCallManager from "./utils/globalCallManager";
 import socketManager from "./utils/socketManager";
+import { backgroundWarmup } from "./utils/serviceWarmup";
 import GlobalCallInterface from "./components/GlobalCallInterface";
 
 // Lazy load components for better performance
@@ -102,6 +103,9 @@ function App() {
     optimizeAnimations();
     // Initialize global call manager for the entire app
     globalCallManager.initialize();
+    
+    // Warm up services in background to reduce cold start delays
+    backgroundWarmup();
 
     // Cleanup on app unmount
     return () => {

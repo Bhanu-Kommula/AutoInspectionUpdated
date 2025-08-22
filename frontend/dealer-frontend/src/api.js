@@ -51,7 +51,7 @@ console.log("BASE_URL:", API_CONFIG.BASE_URL);
 // Create axios instance without authentication
 const api = axios.create({
   baseURL: API_CONFIG.BASE_URL,
-  timeout: 30000, // 30 second timeout
+  timeout: 60000, // 60 second timeout for Render free tier wake-up
   headers: {
     "Content-Type": "application/json",
   },
@@ -68,12 +68,28 @@ api.interceptors.request.use(
   }
 );
 
-// Response interceptor - simplified without authentication
+// Response interceptor with retry logic for timeouts
 api.interceptors.response.use(
   (response) => {
     return response;
   },
   async (error) => {
+    const originalRequest = error.config;
+    
+    // Retry logic for timeout errors (Render wake-up)
+    if (error.code === 'ECONNABORTED' && !originalRequest._retry) {
+      console.log("🔄 [API] Request timed out, retrying once for service wake-up...");
+      originalRequest._retry = true;
+      originalRequest.timeout = 90000; // Extend timeout for retry
+      
+      try {
+        return await api(originalRequest);
+      } catch (retryError) {
+        console.error("🔄 [API] Retry also failed:", retryError.message);
+        return Promise.reject(retryError);
+      }
+    }
+    
     return Promise.reject(error);
   }
 );
