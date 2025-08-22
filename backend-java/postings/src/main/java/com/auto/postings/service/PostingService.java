@@ -321,7 +321,6 @@ public class PostingService {
 	 * Accept post directly by technician (for counter offers) - ATOMIC operation
 	 * Enhanced with better validation and error handling
 	 */
-	@Transactional(rollbackFor = Exception.class)
 	public boolean acceptPostDirectly(Long postId, String technicianEmail, String newOfferAmount) {
 	    try {
 	        log.info("Accepting post directly: postId={}, technicianEmail={}, newOfferAmount={}", 
@@ -337,20 +336,8 @@ public class PostingService {
 	            return false;
 	        }
 	        
-	        // Use pessimistic locking to prevent race conditions
-	        Optional<Posting> postOpt = repo.findByIdWithLock(postId);
-	        if (postOpt.isEmpty()) {
-	            log.error("Post not found: {}", postId);
-	            return false;
-	        }
-
-	        Posting post = postOpt.get();
-	        if (post.getStatus() != PostStatus.PENDING) {
-	            log.error("Post is not in PENDING status. Current status: {} for post {}", post.getStatus(), postId);
-	            return false;
-	        }
-
-	                // Get technician details from technician service
+	        // Get technician details from technician service BEFORE starting transaction
+	        // This prevents transaction rollback if external service call fails
         String technicianName = null;
         String technicianPhone = null;
         try {
@@ -368,6 +355,35 @@ public class PostingService {
                 technicianName = technicianEmail.substring(0, technicianEmail.indexOf("@"));
             }
         }
+        
+        // Now start the database transaction
+        return acceptPostDirectlyTransaction(postId, technicianEmail, newOfferAmount, technicianName, technicianPhone);
+        
+	    } catch (Exception e) {
+	        log.error("Error accepting post directly: postId={}, technicianEmail={}, error={}", 
+	                 postId, technicianEmail, e.getMessage(), e);
+	        return false;
+	    }
+	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	private boolean acceptPostDirectlyTransaction(Long postId, String technicianEmail, String newOfferAmount, 
+	                                            String technicianName, String technicianPhone) {
+	    try {
+	        log.info("Starting database transaction for post acceptance: postId={}, technicianEmail={}", postId, technicianEmail);
+	        
+	        // Use pessimistic locking to prevent race conditions
+	        Optional<Posting> postOpt = repo.findByIdWithLock(postId);
+	        if (postOpt.isEmpty()) {
+	            log.error("Post not found: {}", postId);
+	            return false;
+	        }
+
+	        Posting post = postOpt.get();
+	        if (post.getStatus() != PostStatus.PENDING) {
+	            log.error("Post is not in PENDING status. Current status: {} for post {}", post.getStatus(), postId);
+	            return false;
+	        }
 
 	                // Update post status to ACCEPTED
         post.setStatus(PostStatus.ACCEPTED);

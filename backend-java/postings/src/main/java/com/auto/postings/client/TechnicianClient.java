@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Map;
 
-@FeignClient(name = "technician", url = "${technician-service.url:https://tech-service-5m7b.onrender.com}")
+@FeignClient(name = "technician", url = "${technician-service.url:https://api-gateway-rn0i.onrender.com}")
 public interface TechnicianClient {
 
     /**
