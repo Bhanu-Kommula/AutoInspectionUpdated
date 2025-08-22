@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +31,7 @@ import com.auto.tech.repository.AcceptedPostRepository;
 import com.auto.tech.repository.DeclinedPostsRepository;
 import com.auto.tech.repository.TechnicianAuditLogRepository;
 import com.auto.tech.repository.TechnicianRepository;
-import com.auto.tech.service.CounterOfferService;
+
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -193,6 +193,7 @@ public class TechnicianService {
 
 	
 	
+	@Transactional
 	public void techAcceptedPosts(TechAcceptedPost acceptedPost) {
 	    try {
 	        System.out.println("🔄 Processing technician post acceptance: postId=" + acceptedPost.getPostId() + 
