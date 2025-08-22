@@ -230,13 +230,18 @@ public class TechnicianService {
 	    try {
 	        System.out.println("🔄 Starting database transaction for post acceptance: postId=" + acceptedPost.getPostId());
 	        
-	        // RACE CONDITION PROTECTION: Use pessimistic locking to prevent multiple acceptances
-	        Optional<TechAcceptedPost> existingAcceptance = acceptedPostRepo.findByPostIdWithLock(acceptedPost.getPostId());
-	        if (existingAcceptance.isPresent()) {
-	            String errorMsg = "This post has already been accepted by another technician: " + existingAcceptance.get().getEmail();
+	        // RACE CONDITION PROTECTION: Check if post is already accepted using simple exists check
+	        // This avoids the PostgreSQL pessimistic locking issues in cloud environments
+	        boolean isAlreadyAccepted = acceptedPostRepo.existsByPostId(acceptedPost.getPostId());
+	        if (isAlreadyAccepted) {
+	            // Get the existing acceptance details for better error message
+	            Optional<TechAcceptedPost> existingAcceptance = acceptedPostRepo.findByPostId(acceptedPost.getPostId());
+	            String technicianEmail = existingAcceptance.map(TechAcceptedPost::getEmail).orElse("unknown");
+	            String errorMsg = "This post has already been accepted by another technician: " + technicianEmail;
 	            System.err.println("❌ " + errorMsg);
 	            throw new IllegalStateException(errorMsg);
 	        }
+	        System.out.println("✅ Post " + acceptedPost.getPostId() + " not yet accepted, proceeding with acceptance");
 
 	        // ✅ Step 1: Withdraw any pending counter offers for this post by this technician
 	        try {
@@ -249,8 +254,15 @@ public class TechnicianService {
 
 	        // ✅ Step 2: Save to tech_accepted_post table
 	        acceptedPost.setAcceptedAt(new Date());
-	        acceptedPostRepo.save(acceptedPost);
-	        System.out.println("✅ Saved to technician tech_accepted_post table: postId=" + acceptedPost.getPostId());
+	        
+	        try {
+	            acceptedPostRepo.save(acceptedPost);
+	            System.out.println("✅ Saved to technician tech_accepted_post table: postId=" + acceptedPost.getPostId());
+	        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+	            // Handle the case where another transaction saved the same post ID simultaneously
+	            System.err.println("❌ Database constraint violation - post may have been accepted by another technician: " + e.getMessage());
+	            throw new IllegalStateException("This post has already been accepted by another technician");
+	        }
 	        
 	    } catch (IllegalStateException e) {
 	        // Re-throw validation errors

@@ -19,7 +19,8 @@ import jakarta.persistence.EntityListeners;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "tech_accepted_post")
+@Table(name = "tech_accepted_post", 
+       uniqueConstraints = @jakarta.persistence.UniqueConstraint(columnNames = "postId"))
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -34,6 +35,7 @@ public class TechAcceptedPost {
 	@Column(name = "technician_email")
 	private String email;
 	
+	@Column(unique = true)
 	private long postId;
 	
 	private Date acceptedAt;
