@@ -12,7 +12,7 @@ import com.auto.tech.dto.PostingDTO;
 import com.auto.tech.dto.PostStatusUpdateRequest;
 
 // @FeignClient(name = "postings")
-@FeignClient(name = "postings", url = "${gateway.url:https://api-gateway.onrender.com}/postings")
+@FeignClient(name = "postings", url = "${gateway.url:https://api-gateway-rn0i.onrender.com}/api/v1")
 public interface PostingClient {
 
     // ✅ Existing - Get all posts

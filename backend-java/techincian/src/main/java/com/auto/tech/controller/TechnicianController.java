@@ -161,8 +161,29 @@ public class TechnicianController {
 		}
 	}
 	@PostMapping("/technician-feed")
-	public List<PostingDTO> getTechnicianFeed(@RequestBody TechInfoToGetPostsByLocationDto dto) {
-	    return service.getFilteredFeed(dto);
+	public ResponseEntity<?> getTechnicianFeed(@RequestBody TechInfoToGetPostsByLocationDto dto) {
+		try {
+			log.info("🔖 [TechnicianController] Received technician feed request for email: {}", 
+				dto != null ? dto.getEmail() : "null");
+			
+			if (dto == null || dto.getEmail() == null || dto.getEmail().trim().isEmpty()) {
+				log.warn("❌ [TechnicianController] Invalid feed request - missing email");
+				Map<String, String> error = new HashMap<>();
+				error.put("error", "Email is required");
+				return ResponseEntity.status(400).body(error);
+			}
+			
+			List<PostingDTO> feed = service.getFilteredFeed(dto);
+			log.info("✅ [TechnicianController] Successfully retrieved {} posts for technician feed", feed.size());
+			return ResponseEntity.ok(feed);
+			
+		} catch (Exception e) {
+			log.error("💥 [TechnicianController] Error retrieving technician feed: {}", e.getMessage(), e);
+			Map<String, String> error = new HashMap<>();
+			error.put("error", "Failed to retrieve technician feed");
+			error.put("details", e.getMessage());
+			return ResponseEntity.status(500).body(error);
+		}
 	}
 	
 	
@@ -333,7 +354,18 @@ public class TechnicianController {
     @GetMapping("/counter-offers/status")
     public ResponseEntity<?> getCounterOfferStatus(@RequestParam String technicianEmail) {
         try {
-            Map<String, Object> result = counterOfferService.getCounterOfferStatus(technicianEmail);
+            log.info("🔖 [TechnicianController] Received counter offer status request for email: {}", technicianEmail);
+            
+            if (technicianEmail == null || technicianEmail.trim().isEmpty()) {
+                log.warn("❌ [TechnicianController] Invalid counter offer status request - missing email");
+                Map<String, Object> error = new HashMap<>();
+                error.put("success", false);
+                error.put("message", "Technician email is required");
+                return ResponseEntity.status(400).body(error);
+            }
+            
+            Map<String, Object> result = counterOfferService.getCounterOfferStatus(technicianEmail.trim());
+            log.info("✅ [TechnicianController] Successfully retrieved counter offer status");
             
             if ((Boolean) result.get("success")) {
                 return ResponseEntity.ok(result);
@@ -341,9 +373,11 @@ public class TechnicianController {
                 return ResponseEntity.badRequest().body(result);
             }
         } catch (Exception e) {
+            log.error("💥 [TechnicianController] Error retrieving counter offer status: {}", e.getMessage(), e);
             Map<String, Object> error = new HashMap<>();
             error.put("success", false);
             error.put("message", "Failed to get counter offer status: " + e.getMessage());
+            error.put("details", e.getMessage());
             return ResponseEntity.internalServerError().body(error);
         }
     }
