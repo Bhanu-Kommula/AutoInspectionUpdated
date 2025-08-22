@@ -106,26 +106,29 @@ export const acceptPost = async (
 
     console.log("Accept post request body:", requestBody);
 
-    // Use the new posting service accept endpoint
+    // Use the technician service accept endpoint
     const response = await api.post(
-      `${API_CONFIG.POSTS_BASE_URL}/accept`,
-      requestBody
+      `${API_CONFIG.TECHNICIAN_BASE_URL}/save-accepted-posts`,
+      {
+        email: technicianEmail,
+        postId: postId
+      }
     );
 
     console.log("Accept post response:", response.data);
 
-    // New posting service returns success object
-    if (response.status === 200 && response.data?.success) {
-      toast.success(response.data.message || "Post accepted successfully!");
+    // Technician service returns simple text response on success
+    if (response.status === 200) {
+      const successMsg = response.data === "Accepted successfully" ? "Post accepted successfully!" : "Post accepted successfully!";
+      toast.success(successMsg);
       return {
         success: true,
-        message: response.data.message || "Post accepted successfully",
+        message: successMsg,
         data: response.data,
         postId: postId,
-        acceptedAt: response.data.acceptedAt || new Date().toISOString(),
+        acceptedAt: new Date().toISOString(),
         technicianEmail: technicianEmail,
         technicianName: technicianName,
-        offerAmount: response.data.offerAmount,
       };
     } else {
       const errorMsg = response.data?.message || "Failed to accept post";
@@ -138,7 +141,7 @@ export const acceptPost = async (
   } catch (error) {
     console.error("Error accepting post:", error);
 
-    // Handle specific error cases from new posting service
+    // Handle specific error cases from technician service
     if (error.response?.status === 400) {
       const errorData = error.response.data;
       const errorMsg = errorData?.message || "Invalid request to accept post";
