@@ -193,11 +193,32 @@ public class TechnicianService {
 
 	
 	
-	@Transactional
 	public void techAcceptedPosts(TechAcceptedPost acceptedPost) {
 	    try {
 	        System.out.println("🔄 Processing technician post acceptance: postId=" + acceptedPost.getPostId() + 
 	                         ", technicianEmail=" + acceptedPost.getEmail());
+	        
+	        // First save to database in transaction
+	        techAcceptedPostsTransaction(acceptedPost);
+	        
+	        // Then handle external service calls outside transaction
+	        handlePostAcceptanceExternalCalls(acceptedPost);
+	        
+	        System.out.println("✅ Successfully processed technician post acceptance for post " + acceptedPost.getPostId());
+	        
+	    } catch (IllegalStateException e) {
+	        // Re-throw validation errors
+	        throw e;
+	    } catch (Exception e) {
+	        System.err.println("❌ Unexpected error processing technician post acceptance: " + e.getMessage());
+	        throw new RuntimeException("Failed to process technician post acceptance: " + e.getMessage(), e);
+	    }
+	}
+	
+	@Transactional
+	private void techAcceptedPostsTransaction(TechAcceptedPost acceptedPost) {
+	    try {
+	        System.out.println("🔄 Starting database transaction for post acceptance: postId=" + acceptedPost.getPostId());
 	        
 	        // RACE CONDITION PROTECTION: Use pessimistic locking to prevent multiple acceptances
 	        Optional<TechAcceptedPost> existingAcceptance = acceptedPostRepo.findByPostIdWithLock(acceptedPost.getPostId());
@@ -216,12 +237,25 @@ public class TechnicianService {
 	            // Don't fail the entire operation if counter offer withdrawal fails
 	        }
 
-	        // ✅ Step 2: Save to accepted_posts table
+	        // ✅ Step 2: Save to tech_accepted_post table
 	        acceptedPost.setAcceptedAt(new Date());
 	        acceptedPostRepo.save(acceptedPost);
-	        System.out.println("✅ Saved to technician accepted_posts table: postId=" + acceptedPost.getPostId());
-
-	        // ✅ Step 3: Update post status to ACCEPTED in posts service (NEW: Use posting service directly)
+	        System.out.println("✅ Saved to technician tech_accepted_post table: postId=" + acceptedPost.getPostId());
+	        
+	    } catch (IllegalStateException e) {
+	        // Re-throw validation errors
+	        throw e;
+	    } catch (Exception e) {
+	        System.err.println("❌ Database transaction error: " + e.getMessage());
+	        throw new RuntimeException("Database transaction failed: " + e.getMessage(), e);
+	    }
+	}
+	
+	private void handlePostAcceptanceExternalCalls(TechAcceptedPost acceptedPost) {
+	    try {
+	        System.out.println("🔄 Starting external service calls for post acceptance: postId=" + acceptedPost.getPostId());
+	        
+	        // ✅ Step 3: Update post status to ACCEPTED in posts service
 	        try {
 	            // Get technician details for the update
 	            Optional<Technician> technicianOpt = repo.findByEmailIgnoreCase(acceptedPost.getEmail());
@@ -289,14 +323,11 @@ public class TechnicianService {
 	            System.err.println("❌ Dealer update via Feign failed: " + e.getMessage());
 	        }
 	        
-	        System.out.println("✅ Successfully processed technician post acceptance for post " + acceptedPost.getPostId());
+	        System.out.println("✅ Successfully completed external service calls for post " + acceptedPost.getPostId());
 	        
-	    } catch (IllegalStateException e) {
-	        // Re-throw validation errors
-	        throw e;
 	    } catch (Exception e) {
-	        System.err.println("❌ Unexpected error processing technician post acceptance: " + e.getMessage());
-	        throw new RuntimeException("Failed to process technician post acceptance: " + e.getMessage(), e);
+	        System.err.println("❌ External service calls failed (but post is already saved): " + e.getMessage());
+	        // Don't throw exception since the main database operation already succeeded
 	    }
 	}
 	
