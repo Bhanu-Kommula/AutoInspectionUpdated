@@ -6,11 +6,9 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import jakarta.persistence.LockModeType;
 import java.util.Optional;
 
 import com.auto.tech.model.TechAcceptedPost;
@@ -18,8 +16,8 @@ import com.auto.tech.model.TechAcceptedPost;
 @Repository
 public interface AcceptedPostRepository extends JpaRepository<TechAcceptedPost, Long> {
 
-    // ✅ All posts accepted by this technician
-    @Query("SELECT t.postId FROM TechAcceptedPost t WHERE TRIM(LOWER(t.email)) = TRIM(LOWER(:email))")
+    // ✅ All posts accepted by this technician - need custom method
+    @Query("SELECT t.postId FROM TechAcceptedPost t WHERE LOWER(t.email) = LOWER(:email)")
     List<Long> findAllAcceptedPostIdsByEmail(@Param("email") String email);
 
     // ✅ All accepted posts (used to filter out accepted ones globally)
@@ -32,10 +30,8 @@ public interface AcceptedPostRepository extends JpaRepository<TechAcceptedPost, 
     // ✅ NEW: Check if a post is accepted by anyone (used in atomic check)
     boolean existsByPostId(Long postId);
     
-    // ✅ RACE CONDITION PROTECTION: Find accepted post with pessimistic lock
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @Query("SELECT t FROM TechAcceptedPost t WHERE t.postId = :postId")
-    Optional<TechAcceptedPost> findByPostIdWithLock(@Param("postId") Long postId);
+    // ✅ SIMPLE QUERY: Find accepted post by post ID (no locking for Render compatibility)
+    Optional<TechAcceptedPost> findByPostId(Long postId);
     
     // Admin controller methods
     Page<TechAcceptedPost> findByEmail(String email, Pageable pageable);

@@ -197,10 +197,9 @@ public class TechnicianService {
 	        System.out.println("🔄 Processing technician post acceptance: postId=" + acceptedPost.getPostId() + 
 	                         ", technicianEmail=" + acceptedPost.getEmail());
 	        
-	        // RACE CONDITION PROTECTION: Use pessimistic locking to prevent multiple acceptances
-	        Optional<TechAcceptedPost> existingAcceptance = acceptedPostRepo.findByPostIdWithLock(acceptedPost.getPostId());
-	        if (existingAcceptance.isPresent()) {
-	            String errorMsg = "This post has already been accepted by another technician: " + existingAcceptance.get().getEmail();
+	        // RACE CONDITION PROTECTION: Check without locking (Render PostgreSQL compatibility)
+	        if (acceptedPostRepo.existsByPostId(acceptedPost.getPostId())) {
+	            String errorMsg = "This post has already been accepted by another technician";
 	            System.err.println("❌ " + errorMsg);
 	            throw new IllegalStateException(errorMsg);
 	        }
@@ -216,8 +215,16 @@ public class TechnicianService {
 
 	        // ✅ Step 2: Save to tech_accepted_post table (Render database)
 	        acceptedPost.setAcceptedAt(new Date());
-	        acceptedPostRepo.save(acceptedPost);
-	        System.out.println("✅ Saved to technician tech_accepted_post table: postId=" + acceptedPost.getPostId());
+	        try {
+	            acceptedPostRepo.save(acceptedPost);
+	            System.out.println("✅ Saved to technician tech_accepted_post table: postId=" + acceptedPost.getPostId());
+	        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+	            System.err.println("❌ Post already accepted by another technician (database constraint): " + e.getMessage());
+	            throw new IllegalStateException("This post has already been accepted by another technician");
+	        } catch (Exception e) {
+	            System.err.println("❌ Database error saving accepted post: " + e.getMessage());
+	            throw new RuntimeException("Failed to save post acceptance: " + e.getMessage(), e);
+	        }
 
 	        // ✅ Step 3: Update post status to ACCEPTED in posts service (Render URLs)
 	        try {
