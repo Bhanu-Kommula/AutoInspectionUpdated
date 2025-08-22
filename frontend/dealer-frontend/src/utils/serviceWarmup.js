@@ -21,7 +21,7 @@ export const warmupServices = async () => {
     },
     {
       name: "Dealer Service Health",
-      url: `${API_CONFIG.DEALER_BASE_URL}/health`, 
+      url: `https://dealer-service-v3ir.onrender.com/health`, 
       timeout: 30000
     }
   ];

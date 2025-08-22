@@ -76,8 +76,20 @@ public class PostingController {
     
     
     @PostMapping("/posts-by-email")
-    public List<Posting> getAllPostsbyEmail(@RequestBody GetAllPostsByEmailRequestDto email) {
-        return service.getAllPosts(email);
+    public ResponseEntity<?> getAllPostsbyEmail(@RequestBody GetAllPostsByEmailRequestDto email) {
+        try {
+            log.info("📧 [PostingController] Received request for posts by email: {}", email.getEmail());
+            List<Posting> posts = service.getAllPosts(email);
+            log.info("📧 [PostingController] Successfully retrieved {} posts", posts.size());
+            return ResponseEntity.ok(posts);
+        } catch (Exception e) {
+            log.error("❌ [PostingController] Error fetching posts by email: {}", e.getMessage(), e);
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("success", false);
+            errorResponse.put("message", "Error fetching posts: " + e.getMessage());
+            errorResponse.put("timestamp", System.currentTimeMillis());
+            return ResponseEntity.status(500).body(errorResponse);
+        }
     }
     
 
