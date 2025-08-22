@@ -31,11 +31,13 @@ public class TechAcceptedPost {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(name = "technician_email")
+	@Column(name = "email")
 	private String email;
 	
+	@Column(name = "post_id")
 	private long postId;
 	
+	@Column(name = "accepted_at")
 	private Date acceptedAt;
 	
 	@CreatedDate
