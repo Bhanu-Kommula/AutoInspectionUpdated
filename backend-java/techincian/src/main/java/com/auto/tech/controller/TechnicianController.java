@@ -711,7 +711,7 @@ public class TechnicianController {
      * Handle counter offer rejection notification from posting service
      * PUT /api/technicians/counter-offer/{counterOfferId}/reject
      */
-    @PutMapping("/counter-offer/{counterOfferId}/reject")
+    @PutMapping("/api/technicians/counter-offer/{counterOfferId}/reject")
     public ResponseEntity<?> handleCounterOfferRejection(@PathVariable Long counterOfferId,
                                                        @RequestBody Map<String, Object> rejectionData) {
         try {
@@ -763,7 +763,7 @@ public class TechnicianController {
      * Handle counter offer acceptance notification from posting service
      * PUT /api/technicians/counter-offer/{counterOfferId}/accept
      */
-    @PutMapping("/counter-offer/{counterOfferId}/accept")
+    @PutMapping("/api/technicians/counter-offer/{counterOfferId}/accept")
     public ResponseEntity<?> handleCounterOfferAcceptance(@PathVariable Long counterOfferId,
                                                         @RequestBody Map<String, Object> acceptanceData) {
         try {
@@ -811,7 +811,7 @@ public class TechnicianController {
      * Notify technician service about counter offer withdrawal (called by posting service)
      * PUT /api/technicians/counter-offer/withdraw
      */
-    @PutMapping("/counter-offer/withdraw")
+    @PutMapping("/api/technicians/counter-offer/withdraw")
     public ResponseEntity<Map<String, Object>> notifyCounterOfferWithdrawal(
         @RequestBody Map<String, Object> withdrawalData
     ) {
