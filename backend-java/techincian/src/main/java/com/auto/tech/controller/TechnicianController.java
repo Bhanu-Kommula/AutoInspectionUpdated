@@ -87,11 +87,44 @@ public class TechnicianController {
 	
 	@PostMapping("/register")
 	public ResponseEntity<?> register(@Valid @RequestBody Technician technician) {
-		
-		service.register(technician);
-		
-		return ResponseEntity.status(201).body(technician);
-		
+		try {
+			log.info("🔖 [TechnicianController] Received registration request for email: {}", 
+				technician != null ? technician.getEmail() : "null");
+			
+			if (technician == null) {
+				log.warn("❌ [TechnicianController] Null registration request received");
+				Map<String, String> error = new HashMap<>();
+				error.put("error", "Invalid request body");
+				return ResponseEntity.status(400).body(error);
+			}
+			
+			if (technician.getEmail() == null || technician.getEmail().trim().isEmpty()) {
+				log.warn("❌ [TechnicianController] Empty email in registration request");
+				Map<String, String> error = new HashMap<>();
+				error.put("error", "Email is required");
+				return ResponseEntity.status(400).body(error);
+			}
+			
+			Technician savedTechnician = service.register(technician);
+			log.info("✅ [TechnicianController] Registration successful for technician: {} (ID: {})", 
+				savedTechnician.getName(), savedTechnician.getId());
+			
+			return ResponseEntity.status(201).body(savedTechnician);
+			
+		} catch (org.springframework.dao.DataIntegrityViolationException e) {
+			log.warn("❌ [TechnicianController] Email already exists: {}", 
+				technician != null ? technician.getEmail() : "unknown");
+			Map<String, String> error = new HashMap<>();
+			error.put("error", "Email already exists. Please try to login instead.");
+			return ResponseEntity.status(400).body(error);
+		} catch (Exception e) {
+			log.error("💥 [TechnicianController] Unexpected error during registration for email {}: {}", 
+				technician != null ? technician.getEmail() : "null", e.getMessage(), e);
+			Map<String, String> error = new HashMap<>();
+			error.put("error", "Registration failed. Please try again.");
+			error.put("details", e.getMessage());
+			return ResponseEntity.status(500).body(error);
+		}
 	}
 	
 	

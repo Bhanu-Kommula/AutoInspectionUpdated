@@ -61,8 +61,58 @@ public class TechnicianService {
 	}
 	
 	public Technician register(Technician technician) {
-		technician.setName(capitalizeEachWord(technician.getName())); 
-		return repo.save(technician);
+		try {
+			log.info("🔍 [TechnicianService] Attempting registration for email: {}", technician.getEmail());
+			
+			// Validate required fields
+			if (technician.getName() == null || technician.getName().trim().isEmpty()) {
+				throw new IllegalArgumentException("Name is required");
+			}
+			if (technician.getEmail() == null || technician.getEmail().trim().isEmpty()) {
+				throw new IllegalArgumentException("Email is required");
+			}
+			if (technician.getPhone() == null || technician.getPhone().trim().isEmpty()) {
+				throw new IllegalArgumentException("Phone is required");
+			}
+			if (technician.getPassword() == null || technician.getPassword().trim().isEmpty()) {
+				throw new IllegalArgumentException("Password is required");
+			}
+			if (technician.getLocation() == null || technician.getLocation().trim().isEmpty()) {
+				throw new IllegalArgumentException("Location is required");
+			}
+			if (technician.getZipcode() == null || technician.getZipcode().trim().isEmpty()) {
+				throw new IllegalArgumentException("Zipcode is required");
+			}
+			if (technician.getYearsOfExperience() == null || technician.getYearsOfExperience().trim().isEmpty()) {
+				throw new IllegalArgumentException("Years of experience is required");
+			}
+			
+			// Check if email already exists
+			Optional<Technician> existingTech = repo.findByEmailIgnoreCase(technician.getEmail().trim());
+			if (existingTech.isPresent()) {
+				log.warn("❌ [TechnicianService] Email already exists: {}", technician.getEmail());
+				throw new IllegalArgumentException("Email already exists. Please try to login instead.");
+			}
+			
+			// Process the data
+			technician.setName(capitalizeEachWord(technician.getName()));
+			technician.setEmail(technician.getEmail().trim().toLowerCase());
+			
+			// Set default status if not provided
+			if (technician.getStatus() == null || technician.getStatus().trim().isEmpty()) {
+				technician.setStatus("ACTIVE");
+			}
+			
+			Technician saved = repo.save(technician);
+			log.info("✅ [TechnicianService] Registration successful for technician: {} (ID: {})", 
+				saved.getName(), saved.getId());
+			
+			return saved;
+		} catch (Exception e) {
+			log.error("💥 [TechnicianService] Database error during registration for email {}: {}", 
+				technician.getEmail(), e.getMessage(), e);
+			throw e; // Re-throw to be handled by controller
+		}
 	}
 	
 
