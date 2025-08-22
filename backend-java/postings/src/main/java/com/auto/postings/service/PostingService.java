@@ -44,20 +44,30 @@ public class PostingService {
 
 	    public Posting savePosting(String email, String content, String location, String offerAmount, PostStatus status, String vin, String auctionLot) {
         // Fetch full dealer profile to get phone number
-        Map<String, Object> dealerProfile = dealerClient.getDealerProfile(email);
+        log.info("🔖 [PostingService] Fetching dealer profile for email: {}", email);
+        Map<String, Object> dealerProfile = null;
         String dealerPhone = null;
-        
         String dealerName = null;
-        if (dealerProfile != null && dealerProfile.containsKey("data")) {
-            Map<String, Object> dealerData = (Map<String, Object>) dealerProfile.get("data");
-            if (dealerData != null) {
-                if (dealerData.containsKey("phone")) {
-                    dealerPhone = (String) dealerData.get("phone");
-                }
-                if (dealerData.containsKey("name")) {
-                    dealerName = (String) dealerData.get("name");
+        
+        try {
+            dealerProfile = dealerClient.getDealerProfile(email);
+            log.info("🔖 [PostingService] Dealer profile response: {}", dealerProfile);
+            
+            if (dealerProfile != null && dealerProfile.containsKey("data")) {
+                Map<String, Object> dealerData = (Map<String, Object>) dealerProfile.get("data");
+                if (dealerData != null) {
+                    if (dealerData.containsKey("phone")) {
+                        dealerPhone = (String) dealerData.get("phone");
+                    }
+                    if (dealerData.containsKey("name")) {
+                        dealerName = (String) dealerData.get("name");
+                    }
                 }
             }
+            log.info("🔖 [PostingService] Extracted dealer info - Name: {}, Phone: {}", dealerName, dealerPhone);
+        } catch (Exception e) {
+            log.warn("⚠️ [PostingService] Failed to fetch dealer profile, proceeding without: {}", e.getMessage());
+            // Continue without dealer profile - post will still be saved
         }
 
 	        Posting posting = new Posting();

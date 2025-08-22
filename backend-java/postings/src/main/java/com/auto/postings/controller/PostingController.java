@@ -44,16 +44,28 @@ public class PostingController {
     private final TechnicianClient technicianClient;
 
     @PostMapping("/submit-post")
-    public Posting submitPost(@RequestBody PostRequestDto request) {
-        return service.savePosting(
-                request.getEmail(),
-                request.getContent(),
-                request.getLocation(),
-                request.getOfferAmount(),
-                request.getStatus(),
-                request.getVin(),
-                request.getAuctionLot()
-        );
+    public ResponseEntity<?> submitPost(@RequestBody PostRequestDto request) {
+        try {
+            log.info("🔖 [PostingController] Received submit-post request for email: {}", request.getEmail());
+            Posting saved = service.savePosting(
+                    request.getEmail(),
+                    request.getContent(),
+                    request.getLocation(),
+                    request.getOfferAmount(),
+                    request.getStatus(),
+                    request.getVin(),
+                    request.getAuctionLot()
+            );
+            log.info("🔖 [PostingController] Successfully saved post with ID: {}", saved.getId());
+            return ResponseEntity.ok(saved);
+        } catch (Exception e) {
+            log.error("❌ [PostingController] Error saving post: {}", e.getMessage(), e);
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("success", false);
+            errorResponse.put("message", "Error saving post: " + e.getMessage());
+            errorResponse.put("timestamp", System.currentTimeMillis());
+            return ResponseEntity.status(500).body(errorResponse);
+        }
     }
     
     @PostMapping("/update-multiple-acceptedpost-from-Techdash")
