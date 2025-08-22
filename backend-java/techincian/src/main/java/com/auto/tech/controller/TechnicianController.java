@@ -209,9 +209,11 @@ public class TechnicianController {
 
             return ResponseEntity.ok("Accepted successfully");
         } catch (IllegalStateException e) {
+            log.warn("❌ [TechnicianController] IllegalStateException during post acceptance: {}", e.getMessage());
             return ResponseEntity.status(409).body(Map.of("message", e.getMessage()));
         } catch (Exception e) {
-            return ResponseEntity.status(500).body(Map.of("message", "Something went wrong"));
+            log.error("💥 [TechnicianController] Unexpected error during post acceptance: {}", e.getMessage(), e);
+            return ResponseEntity.status(500).body(Map.of("message", "Failed to accept post: " + e.getMessage()));
         }
     }
     

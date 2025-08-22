@@ -198,20 +198,29 @@ public class TechnicianService {
 	        System.out.println("🔄 Processing technician post acceptance: postId=" + acceptedPost.getPostId() + 
 	                         ", technicianEmail=" + acceptedPost.getEmail());
 	        
-	        // First save to database in transaction
+	        // First save to database in transaction - this is the critical operation
 	        techAcceptedPostsTransaction(acceptedPost);
+	        System.out.println("✅ Database transaction completed successfully for post " + acceptedPost.getPostId());
 	        
-	        // Then handle external service calls outside transaction
-	        handlePostAcceptanceExternalCalls(acceptedPost);
+	        // Then handle external service calls outside transaction - failures here should not break the operation
+	        try {
+	            handlePostAcceptanceExternalCalls(acceptedPost);
+	            System.out.println("✅ External service calls completed successfully for post " + acceptedPost.getPostId());
+	        } catch (Exception externalException) {
+	            System.err.println("⚠️ External service calls failed but post is already accepted: " + externalException.getMessage());
+	            // Don't throw exception - the main operation (saving to database) succeeded
+	        }
 	        
 	        System.out.println("✅ Successfully processed technician post acceptance for post " + acceptedPost.getPostId());
 	        
 	    } catch (IllegalStateException e) {
-	        // Re-throw validation errors
+	        // Re-throw validation errors (these are database-level issues)
+	        System.err.println("❌ Validation error during post acceptance: " + e.getMessage());
 	        throw e;
 	    } catch (Exception e) {
-	        System.err.println("❌ Unexpected error processing technician post acceptance: " + e.getMessage());
-	        throw new RuntimeException("Failed to process technician post acceptance: " + e.getMessage(), e);
+	        // Only throw if the database transaction itself failed
+	        System.err.println("❌ Database transaction failed during post acceptance: " + e.getMessage());
+	        throw new RuntimeException("Failed to save post acceptance to database: " + e.getMessage(), e);
 	    }
 	}
 	
