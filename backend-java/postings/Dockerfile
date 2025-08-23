@@ -1,5 +1,6 @@
 FROM maven:3.9.6
 
+# FORCE REBUILD - Counter Offer Fix v1.2 - 2025-08-23
 WORKDIR /app
 
 # Copy pom.xml first for better layer caching
