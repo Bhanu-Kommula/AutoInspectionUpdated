@@ -380,14 +380,14 @@ public class PostingService {
 	private boolean acceptPostDirectlyTransaction(Long postId, String technicianEmail, String newOfferAmount, 
 	                                            String technicianName, String technicianPhone) {
 	    try {
-	        log.info("🔄 Starting database transaction for post acceptance: postId={}, technicianEmail={}", postId, technicianEmail);
-	        
-	        // Check post availability (Render PostgreSQL compatible)
-	        Optional<Posting> postOpt = repo.findById(postId);
-	        if (postOpt.isEmpty()) {
-	            log.error("❌ Post not found: {}", postId);
-	            return false;
-	        }
+	                log.info("🔄 Starting database transaction for post acceptance: postId={}, technicianEmail={}", postId, technicianEmail);
+        
+        // Check post availability with pessimistic lock to prevent race conditions
+        Optional<Posting> postOpt = repo.findByIdWithLock(postId);
+        if (postOpt.isEmpty()) {
+            log.error("❌ Post not found: {}", postId);
+            return false;
+        }
 
 	        Posting post = postOpt.get();
 	        log.info("📋 Found post: id={}, status={}, email={}", post.getId(), post.getStatus(), post.getEmail());
