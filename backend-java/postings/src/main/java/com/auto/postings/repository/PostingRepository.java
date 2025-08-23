@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import jakarta.persistence.LockModeType;
+
 import com.auto.postings.model.Posting;
 import com.auto.postings.model.PostStatus;
 
@@ -39,7 +41,7 @@ public interface PostingRepository extends JpaRepository<Posting, Long>{
 	
 	// ✅ PESSIMISTIC LOCKING: Find post by ID with lock to prevent race conditions
 	@Query("SELECT p FROM Posting p WHERE p.id = :id")
-	@Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
+	@Lock(LockModeType.PESSIMISTIC_WRITE)
 	Optional<Posting> findByIdWithLock(@Param("id") Long id);
 
 	// ==================== ADMIN REPOSITORY METHODS ====================
