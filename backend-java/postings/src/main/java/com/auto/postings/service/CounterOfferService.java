@@ -257,8 +257,8 @@ public class CounterOfferService {
                 throw new IllegalArgumentException("Counter offer requested amount cannot be null or empty");
             }
 
-            // ENHANCED RACE CONDITION CHECK: Re-verify post is still available (Render PostgreSQL compatible)
-            Optional<Posting> postOpt = postingRepository.findById(acceptedOffer.getPostId());
+            // ENHANCED RACE CONDITION CHECK: Re-verify post is still available with pessimistic lock
+            Optional<Posting> postOpt = postingRepository.findByIdWithLock(acceptedOffer.getPostId());
             if (postOpt.isEmpty()) {
                 throw new IllegalStateException("Post not found for counter offer acceptance: " + acceptedOffer.getPostId());
             }

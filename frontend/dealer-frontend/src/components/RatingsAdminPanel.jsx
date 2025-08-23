@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Card, 
-  Table, 
-  Badge, 
-  Button, 
-  Row, 
-  Col, 
-  Form, 
-  Alert, 
+import React, { useState, useEffect } from "react";
+import {
+  Card,
+  Table,
+  Badge,
+  Button,
+  Row,
+  Col,
+  Form,
+  Alert,
   Spinner,
   Modal,
   Pagination,
-  InputGroup
-} from 'react-bootstrap';
-import { 
-  FaStar, 
-  FaStarHalfAlt, 
-  FaSearch, 
-  FaFilter, 
+  InputGroup,
+} from "react-bootstrap";
+import {
+  FaStar,
+  FaStarHalfAlt,
+  FaSearch,
+  FaFilter,
   FaDownload,
   FaTrash,
   FaEye,
   FaSort,
   FaSortUp,
-  FaSortDown
-} from 'react-icons/fa';
-import api from '../api';
-import { toast } from 'react-toastify';
+  FaSortDown,
+} from "react-icons/fa";
+import api from "../api";
+import { toast } from "react-toastify";
 
 const RatingsAdminPanel = () => {
   // State management
@@ -35,27 +35,27 @@ const RatingsAdminPanel = () => {
   const [lowRatings, setLowRatings] = useState([]);
   const [recentRatings, setRecentRatings] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  
+  const [error, setError] = useState("");
+
   // Pagination and filtering
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [pageSize] = useState(20);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [ratingFilter, setRatingFilter] = useState('');
-  const [sortBy, setSortBy] = useState('createdAt');
-  const [sortOrder, setSortOrder] = useState('desc');
-  
+  const [searchTerm, setSearchTerm] = useState("");
+  const [ratingFilter, setRatingFilter] = useState("");
+  const [sortBy, setSortBy] = useState("createdAt");
+  const [sortOrder, setSortOrder] = useState("desc");
+
   // Modal states
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedRating, setSelectedRating] = useState(null);
   const [showRatingDetails, setShowRatingDetails] = useState(false);
-  
+
   // Statistics
   const [stats, setStats] = useState({
     totalRatings: 0,
     averageRating: 0,
-    ratingDistribution: {}
+    ratingDistribution: {},
   });
 
   useEffect(() => {
@@ -69,17 +69,17 @@ const RatingsAdminPanel = () => {
   const fetchRatingsData = async () => {
     try {
       setLoading(true);
-      const response = await api.get('/api/ratings/admin/all', {
+      const response = await api.get("/api/ratings/admin/all", {
         params: {
           page: currentPage,
           size: pageSize,
           search: searchTerm,
           rating: ratingFilter,
           sortBy: sortBy,
-          sortOrder: sortOrder
-        }
+          sortOrder: sortOrder,
+        },
       });
-      
+
       if (response.data.content) {
         setRatings(response.data.content);
         setTotalPages(response.data.totalPages);
@@ -87,8 +87,8 @@ const RatingsAdminPanel = () => {
         setRatings(response.data);
       }
     } catch (error) {
-      console.error('Error fetching ratings:', error);
-      setError('Failed to load ratings data');
+      console.error("Error fetching ratings:", error);
+      setError("Failed to load ratings data");
     } finally {
       setLoading(false);
     }
@@ -100,68 +100,69 @@ const RatingsAdminPanel = () => {
       // For now, calculate from current data
       if (ratings.length > 0) {
         const totalRatings = ratings.length;
-        const averageRating = ratings.reduce((sum, r) => sum + r.rating, 0) / totalRatings;
+        const averageRating =
+          ratings.reduce((sum, r) => sum + r.rating, 0) / totalRatings;
         const distribution = ratings.reduce((acc, r) => {
           acc[r.rating] = (acc[r.rating] || 0) + 1;
           return acc;
         }, {});
-        
+
         setStats({
           totalRatings,
           averageRating: averageRating.toFixed(2),
-          ratingDistribution: distribution
+          ratingDistribution: distribution,
         });
       }
     } catch (error) {
-      console.error('Error calculating statistics:', error);
+      console.error("Error calculating statistics:", error);
     }
   };
 
   const fetchTopRatedTechnicians = async () => {
     try {
-      const response = await api.get('/api/ratings/top-rated', {
-        params: { minRatings: 3, limit: 10 }
+      const response = await api.get("/api/ratings/top-rated", {
+        params: { minRatings: 3, limit: 10 },
       });
       setTopRatedTechnicians(response.data);
     } catch (error) {
-      console.error('Error fetching top rated technicians:', error);
+      console.error("Error fetching top rated technicians:", error);
     }
   };
 
   const fetchLowRatings = async () => {
     try {
-      const response = await api.get('/api/ratings/low-ratings', {
-        params: { maxRating: 2, limit: 10 }
+      const response = await api.get("/api/ratings/low-ratings", {
+        params: { maxRating: 2, limit: 10 },
       });
       setLowRatings(response.data);
     } catch (error) {
-      console.error('Error fetching low ratings:', error);
+      console.error("Error fetching low ratings:", error);
     }
   };
 
   const fetchRecentRatings = async () => {
     try {
-      const response = await api.get('/api/ratings/recent', {
-        params: { limit: 10 }
+      const response = await api.get("/api/ratings/recent", {
+        params: { limit: 10 },
       });
       setRecentRatings(response.data);
     } catch (error) {
-      console.error('Error fetching recent ratings:', error);
+      console.error("Error fetching recent ratings:", error);
     }
   };
 
   const handleDeleteRating = async () => {
     if (!selectedRating) return;
-    
+
     try {
       await api.delete(`/api/ratings/admin/${selectedRating.id}`);
-      toast.success('Rating deleted successfully');
+      toast.success("Rating deleted successfully");
       setShowDeleteModal(false);
       setSelectedRating(null);
       fetchRatingsData();
     } catch (error) {
-      console.error('Error deleting rating:', error);
-      toast.error('Failed to delete rating');
+      console.error("Error deleting rating:", error);
+      toast.error("Failed to delete rating");
     }
   };
 
@@ -169,56 +170,68 @@ const RatingsAdminPanel = () => {
     const stars = [];
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
-    
+
     for (let i = 1; i <= 5; i++) {
       if (i <= fullStars) {
         stars.push(
-          <FaStar key={i} size={size} style={{ color: '#ffc107', marginRight: '2px' }} />
+          <FaStar
+            key={i}
+            size={size}
+            style={{ color: "#ffc107", marginRight: "2px" }}
+          />
         );
       } else if (i === fullStars + 1 && hasHalfStar) {
         stars.push(
-          <FaStarHalfAlt key={i} size={size} style={{ color: '#ffc107', marginRight: '2px' }} />
+          <FaStarHalfAlt
+            key={i}
+            size={size}
+            style={{ color: "#ffc107", marginRight: "2px" }}
+          />
         );
       } else {
         stars.push(
-          <FaStar key={i} size={size} style={{ color: '#e4e5e9', marginRight: '2px' }} />
+          <FaStar
+            key={i}
+            size={size}
+            style={{ color: "#e4e5e9", marginRight: "2px" }}
+          />
         );
       }
     }
-    
+
     return stars;
   };
 
   const getRatingColor = (rating) => {
-    if (rating >= 4.5) return 'success';
-    if (rating >= 4.0) return 'primary';
-    if (rating >= 3.5) return 'info';
-    if (rating >= 3.0) return 'warning';
-    return 'danger';
+    if (rating >= 4.5) return "success";
+    if (rating >= 4.0) return "primary";
+    if (rating >= 3.5) return "info";
+    if (rating >= 3.0) return "warning";
+    return "danger";
   };
 
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
   const handleSort = (field) => {
     if (sortBy === field) {
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
       setSortBy(field);
-      setSortOrder('desc');
+      setSortOrder("desc");
     }
   };
 
   const getSortIcon = (field) => {
     if (sortBy !== field) return <FaSort className="text-muted" />;
-    return sortOrder === 'asc' ? <FaSortUp /> : <FaSortDown />;
+    return sortOrder === "asc" ? <FaSortUp /> : <FaSortDown />;
   };
 
   if (loading && ratings.length === 0) {
@@ -237,7 +250,9 @@ const RatingsAdminPanel = () => {
       <Row className="mb-4">
         <Col>
           <h2>Ratings Management</h2>
-          <p className="text-muted">Manage and monitor technician ratings across the platform</p>
+          <p className="text-muted">
+            Manage and monitor technician ratings across the platform
+          </p>
         </Col>
       </Row>
 
@@ -334,17 +349,26 @@ const RatingsAdminPanel = () => {
           <Table responsive hover>
             <thead className="table-light">
               <tr>
-                <th style={{ cursor: 'pointer' }} onClick={() => handleSort('id')}>
-                  ID {getSortIcon('id')}
+                <th
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleSort("id")}
+                >
+                  ID {getSortIcon("id")}
                 </th>
-                <th style={{ cursor: 'pointer' }} onClick={() => handleSort('rating')}>
-                  Rating {getSortIcon('rating')}
+                <th
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleSort("rating")}
+                >
+                  Rating {getSortIcon("rating")}
                 </th>
                 <th>Technician</th>
                 <th>Dealer</th>
                 <th>Job</th>
-                <th style={{ cursor: 'pointer' }} onClick={() => handleSort('createdAt')}>
-                  Date {getSortIcon('createdAt')}
+                <th
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleSort("createdAt")}
+                >
+                  Date {getSortIcon("createdAt")}
                 </th>
                 <th>Actions</th>
               </tr>
@@ -356,20 +380,29 @@ const RatingsAdminPanel = () => {
                   <td>
                     <div className="d-flex align-items-center">
                       {renderStars(rating.rating, 14)}
-                      <Badge bg={getRatingColor(rating.rating)} className="ms-2">
+                      <Badge
+                        bg={getRatingColor(rating.rating)}
+                        className="ms-2"
+                      >
                         {rating.rating}
                       </Badge>
                     </div>
                   </td>
                   <td>
                     <div>
-                      <div className="fw-semibold">{rating.technicianName || 'N/A'}</div>
-                      <small className="text-muted">{rating.technicianEmail}</small>
+                      <div className="fw-semibold">
+                        {rating.technicianName || "N/A"}
+                      </div>
+                      <small className="text-muted">
+                        {rating.technicianEmail}
+                      </small>
                     </div>
                   </td>
                   <td>
                     <div>
-                      <div className="fw-semibold">{rating.dealerName || 'N/A'}</div>
+                      <div className="fw-semibold">
+                        {rating.dealerName || "N/A"}
+                      </div>
                       <small className="text-muted">{rating.dealerEmail}</small>
                     </div>
                   </td>
@@ -410,19 +443,19 @@ const RatingsAdminPanel = () => {
               ))}
             </tbody>
           </Table>
-          
+
           {ratings.length === 0 && !loading && (
             <div className="text-center py-4">
               <p className="text-muted">No ratings found</p>
             </div>
           )}
         </Card.Body>
-        
+
         {/* Pagination */}
         {totalPages > 1 && (
           <Card.Footer>
             <Pagination className="justify-content-center mb-0">
-              <Pagination.Prev 
+              <Pagination.Prev
                 disabled={currentPage === 0}
                 onClick={() => setCurrentPage(currentPage - 1)}
               />
@@ -435,7 +468,7 @@ const RatingsAdminPanel = () => {
                   {index + 1}
                 </Pagination.Item>
               ))}
-              <Pagination.Next 
+              <Pagination.Next
                 disabled={currentPage === totalPages - 1}
                 onClick={() => setCurrentPage(currentPage + 1)}
               />
@@ -445,7 +478,11 @@ const RatingsAdminPanel = () => {
       </Card>
 
       {/* Rating Details Modal */}
-      <Modal show={showRatingDetails} onHide={() => setShowRatingDetails(false)} size="lg">
+      <Modal
+        show={showRatingDetails}
+        onHide={() => setShowRatingDetails(false)}
+        size="lg"
+      >
         <Modal.Header closeButton>
           <Modal.Title>Rating Details</Modal.Title>
         </Modal.Header>
@@ -457,7 +494,10 @@ const RatingsAdminPanel = () => {
                   <strong>Rating:</strong>
                   <div className="mt-1">
                     {renderStars(selectedRating.rating, 20)}
-                    <Badge bg={getRatingColor(selectedRating.rating)} className="ms-2">
+                    <Badge
+                      bg={getRatingColor(selectedRating.rating)}
+                      className="ms-2"
+                    >
                       {selectedRating.rating}/5
                     </Badge>
                   </div>
@@ -467,27 +507,33 @@ const RatingsAdminPanel = () => {
                   <div>{formatDate(selectedRating.createdAt)}</div>
                 </Col>
               </Row>
-              
+
               <Row className="mb-3">
                 <Col md={6}>
                   <strong>Technician:</strong>
-                  <div>{selectedRating.technicianName || 'N/A'}</div>
-                  <small className="text-muted">{selectedRating.technicianEmail}</small>
+                  <div>{selectedRating.technicianName || "N/A"}</div>
+                  <small className="text-muted">
+                    {selectedRating.technicianEmail}
+                  </small>
                 </Col>
                 <Col md={6}>
                   <strong>Dealer:</strong>
-                  <div>{selectedRating.dealerName || 'N/A'}</div>
-                  <small className="text-muted">{selectedRating.dealerEmail}</small>
+                  <div>{selectedRating.dealerName || "N/A"}</div>
+                  <small className="text-muted">
+                    {selectedRating.dealerEmail}
+                  </small>
                 </Col>
               </Row>
-              
+
               <div className="mb-3">
                 <strong>Job Details:</strong>
                 <div>Post #{selectedRating.postId}</div>
                 <div>{selectedRating.postTitle}</div>
-                <small className="text-muted">{selectedRating.postLocation}</small>
+                <small className="text-muted">
+                  {selectedRating.postLocation}
+                </small>
               </div>
-              
+
               {selectedRating.reviewComment && (
                 <div>
                   <strong>Review Comment:</strong>
@@ -500,7 +546,10 @@ const RatingsAdminPanel = () => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowRatingDetails(false)}>
+          <Button
+            variant="secondary"
+            onClick={() => setShowRatingDetails(false)}
+          >
             Close
           </Button>
         </Modal.Footer>
@@ -512,11 +561,14 @@ const RatingsAdminPanel = () => {
           <Modal.Title>Confirm Delete</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you sure you want to delete this rating? This action cannot be undone.
+          Are you sure you want to delete this rating? This action cannot be
+          undone.
           {selectedRating && (
             <div className="mt-3 p-3 bg-light rounded">
-              <strong>Rating:</strong> {selectedRating.rating}/5 stars<br />
-              <strong>Technician:</strong> {selectedRating.technicianEmail}<br />
+              <strong>Rating:</strong> {selectedRating.rating}/5 stars
+              <br />
+              <strong>Technician:</strong> {selectedRating.technicianEmail}
+              <br />
               <strong>Date:</strong> {formatDate(selectedRating.createdAt)}
             </div>
           )}
@@ -534,21 +586,21 @@ const RatingsAdminPanel = () => {
       <style jsx>{`
         .stat-card {
           border: none;
-          box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+          box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
           border-radius: 12px;
           transition: transform 0.2s ease-in-out;
         }
-        
+
         .stat-card:hover {
           transform: translateY(-2px);
         }
-        
+
         .ratings-admin-panel .table th {
           border-top: none;
           font-weight: 600;
           color: #495057;
         }
-        
+
         .ratings-admin-panel .pagination {
           margin: 0;
         }

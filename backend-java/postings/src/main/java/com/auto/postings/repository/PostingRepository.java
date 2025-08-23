@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -35,6 +36,11 @@ public interface PostingRepository extends JpaRepository<Posting, Long>{
 	List<Posting> findAll();
 	void deleteById(Long id);
 	Optional<Posting> findById(Long id);
+	
+	// ✅ PESSIMISTIC LOCKING: Find post by ID with lock to prevent race conditions
+	@Query("SELECT p FROM Posting p WHERE p.id = :id")
+	@Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
+	Optional<Posting> findByIdWithLock(@Param("id") Long id);
 
 	// ==================== ADMIN REPOSITORY METHODS ====================
 

@@ -566,10 +566,14 @@ const PostCard = ({
                         </div>
                       )}
                       {/* Technician Rating Display */}
-                      {(post.technicianEmail || post.assignedTechnicianEmail) && (
+                      {(post.technicianEmail ||
+                        post.assignedTechnicianEmail) && (
                         <div className="mt-2">
-                          <TechnicianRatingDisplay 
-                            technicianEmail={post.technicianEmail || post.assignedTechnicianEmail}
+                          <TechnicianRatingDisplay
+                            technicianEmail={
+                              post.technicianEmail ||
+                              post.assignedTechnicianEmail
+                            }
                             showDetailed={false}
                             className="small"
                           />
@@ -656,7 +660,7 @@ const PostCard = ({
                   📋 View Report
                 </button>
               )}
-              
+
               {/* Rate Technician Button - Only for completed posts */}
               {post.status === "COMPLETED" && post.technicianEmail && (
                 <button
@@ -982,7 +986,7 @@ const PostCard = ({
         dealerEmail={dealerInfo?.email}
         onRatingSubmitted={(rating) => {
           // Optionally refresh post data or show success message
-          console.log('Rating submitted:', rating);
+          console.log("Rating submitted:", rating);
         }}
       />
     </div>
