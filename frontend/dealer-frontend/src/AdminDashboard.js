@@ -34,6 +34,7 @@ import {
   FaBell,
   FaShieldAlt,
   FaEdit,
+  FaStar,
 } from "react-icons/fa";
 import {
   HiOutlineStatusOnline,
@@ -86,6 +87,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./AdminDashboard.css";
 import TechDashboardAdmin from "./components/TechDashboardAdmin/TechDashboardAdmin";
+import RatingsAdminPanel from "./components/RatingsAdminPanel";
 
 function AdminDashboard() {
   const navigate = useNavigate();
@@ -1458,6 +1460,15 @@ function AdminDashboard() {
           </button>
 
           <button
+            className={`nav-item ${activeTab === "ratings" ? "active" : ""}`}
+            onClick={() => setActiveTab("ratings")}
+            title="Manage and monitor technician ratings"
+          >
+            <FaStar />
+            {!sidebarCollapsed && <span>Ratings</span>}
+          </button>
+
+          <button
             className={`nav-item ${activeTab === "settings" ? "active" : ""}`}
             onClick={() => setActiveTab("settings")}
             title="Configure system settings and monitor system health"
@@ -1492,6 +1503,7 @@ function AdminDashboard() {
                 {activeTab === "posts" && "Post Management"}
                 {activeTab === "audit" && "Audit Trail"}
                 {activeTab === "techDashboard" && "Tech Dashboard Admin"}
+                {activeTab === "ratings" && "Ratings Management"}
                 {activeTab === "settings" && "Settings"}
               </h1>
               <p className="text-muted mb-0">
@@ -3462,6 +3474,13 @@ function AdminDashboard() {
           {activeTab === "techDashboard" && (
             <div className="tech-dashboard-admin-tab">
               <TechDashboardAdmin />
+            </div>
+          )}
+
+          {/* Ratings Tab */}
+          {activeTab === "ratings" && (
+            <div className="ratings-tab">
+              <RatingsAdminPanel />
             </div>
           )}
 

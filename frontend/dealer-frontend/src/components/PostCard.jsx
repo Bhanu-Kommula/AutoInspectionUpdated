@@ -16,6 +16,8 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import InspectionReportViewer from "./InspectionReportViewer";
 import ChatButton from "./chat/ChatButton";
+import RatingModal from "./RatingModal";
+import TechnicianRatingDisplay from "./TechnicianRatingDisplay";
 
 // Performance: Memoized utility functions
 const capitalize = (str) => {
@@ -132,6 +134,7 @@ const PostCard = ({
   const [previewAttachment, setPreviewAttachment] = useState(null);
   const [saving, setSaving] = useState(false);
   const [showInspectionReport, setShowInspectionReport] = useState(false);
+  const [showRatingModal, setShowRatingModal] = useState(false);
 
   // Memoized values for better performance
   const borderColor = useMemo(() => {
@@ -562,6 +565,16 @@ const PostCard = ({
                           📞 {post.technicianPhone}
                         </div>
                       )}
+                      {/* Technician Rating Display */}
+                      {(post.technicianEmail || post.assignedTechnicianEmail) && (
+                        <div className="mt-2">
+                          <TechnicianRatingDisplay 
+                            technicianEmail={post.technicianEmail || post.assignedTechnicianEmail}
+                            showDetailed={false}
+                            className="small"
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
                   {/* Communication Buttons */}
@@ -641,6 +654,20 @@ const PostCard = ({
                   title="View inspection report"
                 >
                   📋 View Report
+                </button>
+              )}
+              
+              {/* Rate Technician Button - Only for completed posts */}
+              {post.status === "COMPLETED" && post.technicianEmail && (
+                <button
+                  className="btn btn-sm btn-outline-warning fw-semibold"
+                  style={{
+                    transition: "all 0.15s ease-in-out",
+                  }}
+                  onClick={() => setShowRatingModal(true)}
+                  title="Rate technician's work"
+                >
+                  ⭐ Rate Work
                 </button>
               )}
 
@@ -945,6 +972,18 @@ const PostCard = ({
         onHide={() => setShowInspectionReport(false)}
         postId={post.id}
         post={post}
+      />
+
+      {/* Rating Modal */}
+      <RatingModal
+        show={showRatingModal}
+        onHide={() => setShowRatingModal(false)}
+        post={post}
+        dealerEmail={dealerInfo?.email}
+        onRatingSubmitted={(rating) => {
+          // Optionally refresh post data or show success message
+          console.log('Rating submitted:', rating);
+        }}
       />
     </div>
   );

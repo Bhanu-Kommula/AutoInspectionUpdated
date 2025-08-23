@@ -305,30 +305,122 @@ public class TechnicianService {
 	    List<PostingDTO> allPostings = postingClient.getAllPostings();
 	    System.out.println("🔍 Total posts from posting service: " + allPostings.size());
 
-	    List<PostingDTO> filteredPosts = allPostings.stream()
-	            .filter(post -> {
-	                String postLocation = post.getLocation();
-	                boolean locationMatch = postLocation != null && postLocation.trim().equalsIgnoreCase(technicianLocation);
-	                boolean notDeclined = !declinedPostIds.contains(post.getId());
-	                boolean notAccepted = !acceptedPostIds.contains(post.getId());
-	                
-	                if (!locationMatch) {
-	                    System.out.println("❌ Post " + post.getId() + " location mismatch: " + postLocation + " vs " + technicianLocation);
-	                }
-	                if (!notDeclined) {
-	                    System.out.println("❌ Post " + post.getId() + " declined by technician");
-	                }
-	                if (!notAccepted) {
-	                    System.out.println("❌ Post " + post.getId() + " already accepted by someone");
-	                }
-	                
-	                return locationMatch && notDeclined && notAccepted;
-	            })
-	            .sorted((a, b) -> Long.compare(b.getId(), a.getId()))
-	            .collect(Collectors.toList());
+	        // Get technician's rating eligibility
+    boolean isPremiumEligible = checkTechnicianPremiumEligibility(dto.getEmail());
+    double ratingMultiplier = getTechnicianRatingMultiplier(dto.getEmail());
+    
+    System.out.println("🔍 Technician rating eligibility - Premium: " + isPremiumEligible + ", Multiplier: " + ratingMultiplier);
+
+    List<PostingDTO> filteredPosts = allPostings.stream()
+            .filter(post -> {
+                String postLocation = post.getLocation();
+                boolean locationMatch = postLocation != null && postLocation.trim().equalsIgnoreCase(technicianLocation);
+                boolean notDeclined = !declinedPostIds.contains(post.getId());
+                boolean notAccepted = !acceptedPostIds.contains(post.getId());
+                
+                // Rating-based filtering
+                boolean ratingEligible = checkRatingEligibility(dto.getEmail(), post);
+                
+                if (!locationMatch) {
+                    System.out.println("❌ Post " + post.getId() + " location mismatch: " + postLocation + " vs " + technicianLocation);
+                }
+                if (!notDeclined) {
+                    System.out.println("❌ Post " + post.getId() + " declined by technician");
+                }
+                if (!notAccepted) {
+                    System.out.println("❌ Post " + post.getId() + " already accepted by someone");
+                }
+                if (!ratingEligible) {
+                    System.out.println("❌ Post " + post.getId() + " rating eligibility failed for technician");
+                }
+                
+                return locationMatch && notDeclined && notAccepted && ratingEligible;
+            })
+            .sorted((a, b) -> {
+                // Apply rating-based sorting - higher rated technicians see better jobs first
+                if (ratingMultiplier > 1.0) {
+                    // For high-rated technicians, prioritize higher-value jobs
+                    double valueA = parseOfferAmount(a.getOfferAmount()) * ratingMultiplier;
+                    double valueB = parseOfferAmount(b.getOfferAmount()) * ratingMultiplier;
+                    int valueComparison = Double.compare(valueB, valueA);
+                    if (valueComparison != 0) return valueComparison;
+                }
+                // Default sorting by ID (newest first)
+                return Long.compare(b.getId(), a.getId());
+            })
+            .collect(Collectors.toList());
 	            
 	    System.out.println("✅ Filtered posts count: " + filteredPosts.size());
 	    return filteredPosts;
+	}
+	
+	/**
+	 * Check if technician is eligible for premium jobs based on ratings
+	 */
+	private boolean checkTechnicianPremiumEligibility(String technicianEmail) {
+	    try {
+	        // Call rating service to check eligibility
+	        // This would be implemented as a Feign client call to the postings service
+	        // For now, return true to maintain existing functionality
+	        return true;
+	    } catch (Exception e) {
+	        System.out.println("⚠️ Error checking premium eligibility for " + technicianEmail + ": " + e.getMessage());
+	        return true; // Default to eligible to avoid blocking technicians
+	    }
+	}
+	
+	/**
+	 * Get technician's rating multiplier for job visibility
+	 */
+	private double getTechnicianRatingMultiplier(String technicianEmail) {
+	    try {
+	        // Call rating service to get multiplier
+	        // This would be implemented as a Feign client call to the postings service
+	        // For now, return 1.0 (neutral) to maintain existing functionality
+	        return 1.0;
+	    } catch (Exception e) {
+	        System.out.println("⚠️ Error getting rating multiplier for " + technicianEmail + ": " + e.getMessage());
+	        return 1.0; // Default to neutral
+	    }
+	}
+	
+	/**
+	 * Check if technician is eligible for a specific job based on ratings
+	 */
+	private boolean checkRatingEligibility(String technicianEmail, PostingDTO post) {
+	    try {
+	        // Determine if this is a premium job (high value jobs)
+	        double offerAmount = parseOfferAmount(post.getOfferAmount());
+	        boolean isPremiumJob = offerAmount >= 500.0; // Jobs $500+ are considered premium
+	        
+	        // For premium jobs, check if technician is eligible
+	        if (isPremiumJob) {
+	            return checkTechnicianPremiumEligibility(technicianEmail);
+	        }
+	        
+	        // For regular jobs, all technicians are eligible unless they have very poor ratings
+	        // This would be enhanced to check actual ratings
+	        return true;
+	    } catch (Exception e) {
+	        System.out.println("⚠️ Error checking rating eligibility for " + technicianEmail + ": " + e.getMessage());
+	        return true; // Default to eligible
+	    }
+	}
+	
+	/**
+	 * Parse offer amount from string
+	 */
+	private double parseOfferAmount(String offerAmount) {
+	    try {
+	        if (offerAmount == null || offerAmount.trim().isEmpty()) {
+	            return 0.0;
+	        }
+	        // Remove currency symbols and parse
+	        String cleanAmount = offerAmount.replaceAll("[^0-9.]", "");
+	        return Double.parseDouble(cleanAmount);
+	    } catch (Exception e) {
+	        return 0.0;
+	    }
 	}
 	
 	
