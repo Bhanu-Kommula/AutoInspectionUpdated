@@ -17,8 +17,8 @@ public class HealthController {
     @Autowired
     private DataSource dataSource;
 
-    // Root-level health endpoint for Render health checks
-    @GetMapping("/health")
+    // Root-level health endpoint for Render health checks (bypasses context path)
+    @GetMapping(value = {"/health", "/../health"})
     public ResponseEntity<Map<String, Object>> rootHealth() {
         Map<String, Object> health = new HashMap<>();
         
