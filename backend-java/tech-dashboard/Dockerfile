@@ -18,8 +18,8 @@ RUN mvn clean package -DskipTests -X
 RUN ls -la target/
 RUN find target/ -name "*.jar" -type f
 
-# Expose the port (will be overridden by Render)
-EXPOSE 8085
+# Expose the port (Render expects 10000 based on logs)
+EXPOSE 10000
 
 # Make startup script executable
 RUN chmod +x startup.sh

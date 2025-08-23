@@ -68,7 +68,10 @@
     <div class="test-section">
       <h3>5. Test Tech Dashboard CORS</h3>
       <button onclick="testTechDashboardCors()">
-        Test Tech Dashboard CORS
+        Test Tech Dashboard Health (Direct)
+      </button>
+      <button onclick="testTechDashboardViaGateway()">
+        Test Tech Dashboard via Gateway
       </button>
       <div id="tech-dashboard-result" class="result"></div>
     </div>
@@ -254,7 +257,7 @@
       async function testTechDashboardCors() {
         try {
           const response = await fetch(
-            `${API_BASE}/tech-dashboard/accepted-posts/test-cors`,
+            "https://tech-dashboard-service.onrender.com/health",
             {
               method: "GET",
               headers: {
@@ -283,6 +286,42 @@
             "tech-dashboard-result",
             false,
             `Tech Dashboard service CORS test error: ${error.message}`
+          );
+        }
+      }
+
+      async function testTechDashboardViaGateway() {
+        try {
+          const response = await fetch(
+            `${API_BASE}/api/v1/tech-dashboard/health`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+
+          if (response.ok) {
+            const data = await response.json();
+            displayResult(
+              "tech-dashboard-result",
+              true,
+              "Tech Dashboard via Gateway test successful",
+              data
+            );
+          } else {
+            displayResult(
+              "tech-dashboard-result",
+              false,
+              `Tech Dashboard via Gateway test failed: ${response.status} ${response.statusText}`
+            );
+          }
+        } catch (error) {
+          displayResult(
+            "tech-dashboard-result",
+            false,
+            `Tech Dashboard via Gateway test error: ${error.message}`
           );
         }
       }

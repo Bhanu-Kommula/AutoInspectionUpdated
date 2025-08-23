@@ -767,13 +767,13 @@ const TechnicianDashboardPage = () => {
         setAcceptedPosts((prevPosts) =>
           prevPosts.map((post) =>
             post.id === selectedPost.id
-              ? { ...post, status: "inprogress" }
+              ? { ...post, status: "INPROGRESS" }
               : post
           )
         );
 
         // Update the selected post for the modal
-        setSelectedPost((prev) => ({ ...prev, status: "inprogress" }));
+        setSelectedPost((prev) => ({ ...prev, status: "INPROGRESS" }));
 
         // Close the modal
         setShowPostModal(false);

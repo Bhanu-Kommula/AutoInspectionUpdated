@@ -13,7 +13,7 @@ export JAVA_OPTS=${JAVA_OPTS:-"-XX:MaxRAMPercentage=75.0"}
 echo "Environment Configuration:"
 echo "  PORT: $PORT"
 echo "  JAVA_OPTS: $JAVA_OPTS"
-echo "  SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-default}"
+echo "  SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-render}"
 echo "  SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL:-not set}"
 
 # Check if we're in production mode and fix database URL if needed
@@ -65,6 +65,7 @@ if [ -n "$SPRING_DATASOURCE_URL" ]; then
     fi
 else
     echo "  Development mode - using local database"
+    export SPRING_PROFILES_ACTIVE=default
 fi
 
 # Find the JAR file
@@ -83,5 +84,5 @@ echo "📦 Using JAR file: $JAR_FILE"
 echo "🔧 Starting application on port $PORT..."
 exec java $JAVA_OPTS \
     -Dserver.port=$PORT \
-    -Dspring.profiles.active=${SPRING_PROFILES_ACTIVE:-default} \
+    -Dspring.profiles.active=${SPRING_PROFILES_ACTIVE:-render} \
     -jar "$JAR_FILE"
