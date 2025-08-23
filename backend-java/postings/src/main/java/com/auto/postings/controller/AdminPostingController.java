@@ -677,6 +677,7 @@ public class AdminPostingController {
         response.put("message", "Admin posting service is healthy");
         response.put("timestamp", new Date());
         response.put("service", "AdminPostingController");
+        response.put("deploymentVersion", "COUNTER_OFFER_FIX_v1.2_ACTIVE");
         
         return ResponseEntity.ok(response);
     }
