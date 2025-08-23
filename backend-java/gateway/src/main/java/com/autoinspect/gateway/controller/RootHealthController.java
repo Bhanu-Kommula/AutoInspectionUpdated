@@ -16,7 +16,7 @@ public class RootHealthController {
         Map<String, Object> response = new HashMap<>();
         response.put("status", "UP");
         response.put("service", "API Gateway");
-        response.put("message", "Gateway is running");
+        response.put("message", "Gateway is running - StripPrefix=3 for tech-dashboard");
         response.put("timestamp", System.currentTimeMillis());
         return ResponseEntity.ok(response);
     }
